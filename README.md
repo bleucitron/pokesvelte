@@ -1,25 +1,23 @@
 # Atelier de démo SvelteKit
 
-Ce projet a pour objectif de montrer les fonctionnalités principales de [SvelteKit](kit.svelte.dev).
+Ce projet a pour objectif de montrer les fonctionnalités principales de [Svelte](https://svelte.dev) et [SvelteKit](https://kit.svelte.dev).
 
 ## Contenu
 
-Il a été construit en utilisant les outils mis à disposition par l'équipe de Svelte pour créer un projet SvelteKit facilement.
+Les différents contenus de formation sont disponibles dans le dossier [`course/`](./course/).
 
-> **Vous n'avez pas besoin de lancer l'une des commandes suivantes**, nous l'avons déjà fait pour vous.
+Vous pouvez retrouver la table de matières [ici](./course/content.md).
 
-```bash
-# créer un nouveau projet dans le dossier courant
-npm create svelte@latest
-# créer un nouveau projet dans un nouveau dossier
-npm create svelte@latest my-app
-```
+## Matière première
 
-Afin de fluidifier le déroulement de l'atelier, nous avons ajouté quelques fichiers au projet de base fourni. Il s'agit principalement de fichiers utilitaires – notamment pour simuler une base de données – ainsi que quelques feuilles de style. Vous les trouverez dans :
+Ce projet pédagogique a été construit à partir du template de base mis à disposition par l'équipe de Svelte pour [créer un projet SvelteKit facilement](https://svelte.dev/docs/introduction#start-a-new-project).
 
-- `data`
+Afin de fluidifier le déroulement de l'atelier, quelques fichiers ont été modifiés ou ajoutés. Il s'agit principalement de fichiers utilitaires – notamment pour simuler une base de données – ainsi que quelques feuilles de style. Vous les trouverez pour la plupart dans :
+
 - `src/lib`
 - `static`
+
+> Vous pouvez trouver le détail de ces modifications [ici](https://github.com/bleucitron/pokesvelte/commit/05e6c524850af9f447828050c30ea22e3c167c4f)
 
 ## Démarrer le projet
 
@@ -31,6 +29,8 @@ npm install
 pnpm install
 # ou encore
 yarn
+# ou si vous vous sentez l'âme hipster
+bun install
 ```
 
 > Une fois l'installation réussie, vous n'aurez plus à lancer cette commande.
@@ -41,4 +41,4 @@ Puis, vous pouvez lancer votre serveur de développement...
 npm run dev
 ```
 
-...et ouvrir votre navigateur sur la page http://localhost:5173
+...et ouvrir votre navigateur sur la page [http://localhost:5173](http://localhost:5173)
