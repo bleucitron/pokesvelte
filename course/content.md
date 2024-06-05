@@ -8,116 +8,118 @@
 
 ### Introduction
 
-- Historique frameworks front-end
-- Frameworks de composants, frameworks d'application
-- C'est quoi Svelte(kit) ?
-- Installer Svelte(kit)
-- Présentation du projet fil-rouge
-
-### Rappels Javascript
-
-- Méthodes fonctionnelles des tableaux
-- Modules
-- Asynchrone
-- Typescript
+- [x] Historique frameworks front-end
+- [x] Frameworks
+- [x] C'est quoi Svelte(kit) ?
+- [x] Installer Svelte(kit)
+- [x] Liens utiles
+- [x] Rappels JavaScript
 
 ### Bases de SvelteKit
 
-- Routing statique
-- Layout
-- Store de page
-- Routing dynamique
-- Chargement des données de page et de layout
-- Routing client (vs routing serveur)
-- Préchargement des liens
-- Store de navigation
-- Pages d'erreur
+- [x] Structure de projet
+- [x] Point d'entrée
+- [x] Routing statique
+- [x] Layout
+- [x] Store de page
+- [x] Données de page
+- [x] Données de layout
+- [x] Routing dynamique
+- [x] Philosophie de routing
+- [x] Pages d'erreur
 
 ## Jour 2 : Composants et syntaxe Svelte
 
 ### Rappels
 
-- C'est quoi Svelte ?
-- Différences avec SvelteKit
+- [ ] Svelte vs SvelteKit
 
-### Composants
+### Base des composants
 
-- Définition générique
-- Hydratation
-- Script, Markup, Styles
-- Blocs de compilation `#if`, `#else`, `#await`
-- Props
-- Classes et styles
-- Gérer les évènements
-- Snippets
+- [-] Définition générique
+- [x] Bases de la syntaxe
+- [x] Blocs de compilation `#if`, `#each`
+- [x] `$props`
+- [x] Directives de classe
+- [x] Gérer les évènements
+- [x] Warnings d'accessibilité
+- [ ] Svelte vs React
 
 ### Gérer l'état
 
-- Définir et mettre à jour un `state`
-- Réactivité et états dérivés
-- Cas des tableaux
-- Réactivité générale ("stores")
-- `$inspect`
+- [ ] Réactivité, signaux
+- [x] `$state`
+- [x] Cas des objets et tableaux
+- [x] `$inspect`
+- [x] États dérivés
+- [x] Réactivité générale ("stores")
+- [x] Runes
 
-### Cycle de vie
+### Effets
 
-- Montage
-- Démontage
-- Effets
-- Nettoyage des effets
-
-### Bindings
-
-- Gérer les éléments de formulaire
+- [ ] Cycle de vie
+- [x] `$effect`
+- [x] Nettoyage des effets
 
 ## Jour 3 : Fonctionnalités avancées
 
-### [SvelteKit] Routing avancé
-
-- Redirections
-- Paramètres de reste
-- Matching de route
-- Groupes de layout
-
 ### [SvelteKit] Chargement de données avancé
 
-- Fonctions `load` de serveur
-- Fonctions `load` universelles
-- Streaming de promesses
-- Construction d'une API
+- [x] Construction d'une API
+- [x] Travailler sur le serveur
+- [x] Fonctions `load`
+- [x] Chargement asynchrone
 
-### [SvelteKit] Formulaires
+### [Svelte] Bindings and stuff
 
-- Actions de formulaire
-- Validation
-- Chargement des données
-- Amélioration progressive
+- [ ] Flux de données descendant
+- [x] Gérer les éléments de formulaire
+- [x] Bindings de boucle
+- [x] Autres bindings
+- [x] Directives de style
 
-### [Svelte] Fonctionnalités avancées des composants
+### [SvelteKit] Gérer les formulaires
 
-- Transitions
-- Animations
-- Actions
-- Contexte
-- Composants spéciaux
+- [x] Formulaires HTML
+- [x] Actions de formulaire
+- [x] Validation
+- [x] Actions nomméees de formulaire
+- [x] Amélioration progressive
+
+### [SvelteKit] Routing avancé
+
+- [x] Redirections
+- [x] Erreurs attendues
+- [x] Matching de route
+- [x] Layout imbriqués
+- [x] S'échapper des layouts
+
+### [Svelte] Syntaxe avancée
+
+- [x] `#each` keys
+- [x] Snippets
+- [x] Les snippets comme props
+- [x] Transitions
+- [x] Crossfade
+- [x] Animation FLIP
 
 ## Jour 4 : Finaliser une application SvelteKit
 
 ### Authentification
 
-- Principes génériques
-- Hooks
-- Gérer l'authentification avec SvelteKit
-- Restrictions d'accès
+- [ ] Principes génériques
+- [x] Cookies
+- [-] Pièges
+- [x] Hooks
 
-### Stratégies de build et déploiement
+### Livraison
 
-- Différences entre SPA, MPA, SSR, SSG
-- Options de page
-- Adapteurs de déploiements
-  - auto, node, vercel
+- [ ] Différences entre SPA, MPA, SSR, SSG
+- [x] Options de page
+- [-] Adapteurs de déploiements
 
-### Bonus
+## Aller plus loin
 
-- Gestion des images
-- Transitions de pages
+- [ ] Svelte
+- [ ] SvelteKit
+- [ ] Autres frameworks
