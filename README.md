@@ -1,38 +1,55 @@
-# sv
+# Atelier de démo SvelteKit
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Ce projet a pour objectif de montrer les fonctionnalités principales de
+[Svelte](https://svelte.dev/docs/svelte/svelte) et
+[SvelteKit](https://svelte.dev/docs/kit/introduction).
 
-## Creating a project
+## Contenu
 
-If you're seeing this, you've probably already done this step. Congrats!
+Les différents contenus de formation sont disponibles dans le dossier [`course/`](./course/).
 
-```sh
-# create a new project in the current directory
-npx sv create
+Un déploiement du contenu est également disponible [ici](https://pokesvelte.bleucitron.dev/), vous
+pourrez notamment y retrouver [la table de matières](https://pokesvelte.bleucitron.dev/contents).
 
-# create a new project in my-app
-npx sv create my-app
+## Matière première
+
+Ce projet pédagogique a été construit à partir du template de base mis à disposition par l'équipe de
+Svelte pour [créer un projet SvelteKit
+facilement](https://svelte.dev/docs/kit/creating-a-project).
+
+Afin de fluidifier le déroulement de l'atelier, quelques fichiers ont été modifiés ou ajoutés. Il
+s'agit principalement de fichiers utilitaires – notamment pour simuler une base de données – ainsi
+que quelques feuilles de style. Vous les trouverez pour la plupart dans :
+
+- `src/lib`
+- `static`
+
+> Vous pouvez trouver le détail de ces modifications
+> [ici](https://github.com/bleucitron/pokesvelte/commit/56fb458424776eda7b9f0e9c728d12b59ab07fc2)
+
+## Démarrer le projet
+
+La première fois que vous démarrez ce projet, vous avez besoin d'installer ses dépendances.
+
+```bash
+pnpm install
+
+# ou alternativement
+yarn
+
+# ou si vous vous sentez l'âme hipster
+bun install
+
+# ou si vraiment vous y tenez...
+npm install
 ```
 
-## Developing
+> Une fois l'installation réussie, vous n'aurez plus à lancer cette commande.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+Puis, vous pouvez lancer votre serveur de développement...
 
 ```sh
-npm run build
+pnpm dev # ou l'équivalent pour votre package manager
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+...et ouvrir votre navigateur sur la page [http://localhost:5173](http://localhost:5173)
