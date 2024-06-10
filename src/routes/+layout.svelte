@@ -1,14 +1,18 @@
 <script>
+	import { page } from '$app/stores';
+
 	const { children } = $props();
 </script>
 
 <header>
 	<nav>
 		<ul>
-			<li><a href="/">Accueil</a></li>
-			<li><a href="/pokedex">Pokédex</a></li>
-			<li><a href="/team">Équipe</a></li>
-			<li><a href="/faq">À propos</a></li>
+			<li><a href="/" class={$page.url.pathname === '/' ? 'current' : ''}>Accueil</a></li>
+			<li>
+				<a href="/pokedex" class={$page.url.pathname === '/pokedex' ? 'current' : ''}>Pokédex</a>
+			</li>
+			<li><a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}>Équipe</a></li>
+			<li><a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>À propos</a></li>
 		</ul>
 	</nav>
 </header>
