@@ -18,6 +18,9 @@
 					>Équipe({data.teamSize})</a
 				>
 			</li>
+			<li>
+				<a href="/trainer" class={$page.url.pathname === '/trainer' ? 'current' : ''}>Dresseur</a>
+			</li>
 			<li><a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>À propos</a></li>
 		</ul>
 	</nav>
