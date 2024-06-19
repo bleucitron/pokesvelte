@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 
-	const { children } = $props();
+	const { children, data } = $props();
 </script>
 
 <header>
@@ -9,9 +9,15 @@
 		<ul>
 			<li><a href="/" class={$page.url.pathname === '/' ? 'current' : ''}>Accueil</a></li>
 			<li>
-				<a href="/pokedex" class={$page.url.pathname === '/pokedex' ? 'current' : ''}>Pokédex</a>
+				<a href="/pokedex" class={$page.url.pathname.startsWith('/pokedex') ? 'current' : ''}
+					>Pokédex({data.found}/{data.total})</a
+				>
 			</li>
-			<li><a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}>Équipe</a></li>
+			<li>
+				<a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}
+					>Équipe({data.teamSize})</a
+				>
+			</li>
 			<li><a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>À propos</a></li>
 		</ul>
 	</nav>
