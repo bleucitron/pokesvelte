@@ -1,7 +1,7 @@
 <script lang="ts">
-	const id = 25;
-	const name = 'Pikachu';
-	const src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png';
+	type PokemonProps = { id: number; name: string; src: string };
+
+	const { id, name, src }: PokemonProps = $props();
 </script>
 
 <div class="Pokemon">
