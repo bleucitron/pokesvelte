@@ -4,4 +4,4 @@
 	const { data } = $props();
 </script>
 
-<Pokemon id={data.id} name={data.name} src={data.src} />
+<Pokemon id={data.id} name={data.name} src={data.src} found={data.id % 2 === 1} />
