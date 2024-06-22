@@ -1,14 +1,23 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 
-	const started = false;
 	const choices = [1, 4, 7];
 
 	const { data } = $props();
+
+	let started = $state(false);
 </script>
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
+
+<button onclick={() => (started = !started)}>
+	{#if !started}
+		Start
+	{:else}
+		Restart
+	{/if}
+</button>
 
 <div class="grass">
 	{#if !started}
