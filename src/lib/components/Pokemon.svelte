@@ -1,10 +1,10 @@
 <script lang="ts">
-	type PokemonProps = { id: number; name: string; src: string };
+	type PokemonProps = { id: number; name: string; src: string; found: boolean };
 
-	const { id, name, src }: PokemonProps = $props();
+	const { id, name, src, found }: PokemonProps = $props();
 </script>
 
-<div class="Pokemon">
+<div class="Pokemon" class:found>
 	<p>#{id}</p>
 	<img {src} alt={name} />
 	<p>{name}</p>
@@ -28,5 +28,10 @@
 	img {
 		height: 15rem;
 		object-fit: cover;
+		filter: contrast(0%) brightness(200%);
+	}
+
+	.found img {
+		filter: none;
 	}
 </style>

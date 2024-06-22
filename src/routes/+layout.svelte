@@ -7,21 +7,19 @@
 <header>
 	<nav>
 		<ul>
-			<li><a href="/" class={$page.url.pathname === '/' ? 'current' : ''}>Accueil</a></li>
+			<li><a href="/" class:current={$page.url.pathname === '/'}>Accueil</a></li>
 			<li>
-				<a href="/pokedex" class={$page.url.pathname.startsWith('/pokedex') ? 'current' : ''}
+				<a href="/pokedex" class:current={$page.url.pathname.startsWith('/pokedex')}
 					>Pokédex({data.found}/{data.total})</a
 				>
 			</li>
 			<li>
-				<a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}
-					>Équipe({data.teamSize})</a
-				>
+				<a href="/team" class:current={$page.url.pathname === '/team'}>Équipe({data.teamSize})</a>
 			</li>
 			<li>
-				<a href="/trainer" class={$page.url.pathname === '/trainer' ? 'current' : ''}>Dresseur</a>
+				<a href="/trainer" class:current={$page.url.pathname === '/trainer'}>Dresseur</a>
 			</li>
-			<li><a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>À propos</a></li>
+			<li><a href="/faq" class:current={$page.url.pathname === '/faq'}>À propos</a></li>
 		</ul>
 	</nav>
 </header>
