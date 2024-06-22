@@ -1,14 +1,15 @@
 <script lang="ts">
 	type WildProps = {
+		name: string;
 		src: string;
 		catchPokemon: () => void;
 	};
 
-	const { src, catchPokemon }: WildProps = $props();
+	const { name, src, catchPokemon }: WildProps = $props();
 </script>
 
 <button onclick={catchPokemon}>
-	<img {src} />
+	<img {src} alt="Un {name} sauvage apparaît !" />
 </button>
 
 <style>
