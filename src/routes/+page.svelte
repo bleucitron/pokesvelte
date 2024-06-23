@@ -8,6 +8,8 @@
 	let started = $state(false);
 	let foundSpecies = $state<number[]>([]);
 
+	$inspect(found);
+
 	function catchPokemon(id: number, name: string) {
 		if (!foundSpecies.includes(id)) foundSpecies.push(id);
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
