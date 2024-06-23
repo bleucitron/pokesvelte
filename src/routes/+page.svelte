@@ -1,18 +1,19 @@
 <script lang="ts">
+	import { pokedex } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 
 	const choices = [1, 4, 7];
 
+	const { found } = pokedex;
+	const started = $derived(!!found.length);
+
 	const { data } = $props();
 	const pokemons = $derived(data.pokemons);
-
-	let found = $state<number[]>([]);
-	const started = $derived(!!found.length);
 
 	$inspect(found);
 
 	function catchPokemon(id: number, name: string) {
-		if (!found.includes(id)) found.push(id);
+		if (!found.includes(id)) pokedex.discover(id);
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>
