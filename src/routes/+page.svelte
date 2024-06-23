@@ -6,6 +6,12 @@
 	const { data } = $props();
 
 	let started = $state(false);
+	let found = $state<number[]>([]);
+
+	function catchPokemon(id: number, name: string) {
+		if (!found.includes(id)) found.push(id);
+		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
+	}
 </script>
 
 <h1>Pokésvelte</h1>
@@ -26,16 +32,11 @@
 			{#each choices as choice}
 				{@const { id, name, sprites } = data.pokemons[choice - 1]}
 				<li>
-					<Wild
-						{name}
-						src={sprites.front_default}
-						catchPokemon={() => {
-							console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
-						}}
-					/>
+					<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id, name)} />
 				</li>
 			{/each}
 		</ul>
+		<p>Découverts : {found.length}</p>
 	{:else}
 		<p>Work in progress</p>
 	{/if}
