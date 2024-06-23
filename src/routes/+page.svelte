@@ -4,9 +4,10 @@
 	const choices = [1, 4, 7];
 
 	const { data } = $props();
+	const pokemons = $derived(data.pokemons);
 
-	let started = $state(false);
 	let found = $state<number[]>([]);
+	const started = $derived(!!found.length);
 
 	$inspect(found);
 
@@ -19,26 +20,17 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
-<button onclick={() => (started = !started)}>
-	{#if !started}
-		Start
-	{:else}
-		Restart
-	{/if}
-</button>
-
 <div class="grass">
 	{#if !started}
 		<p>Choisissez un Pokémon</p>
 		<ul>
 			{#each choices as choice}
-				{@const { id, name, sprites } = data.pokemons[choice - 1]}
+				{@const { id, name, sprites } = pokemons[choice - 1]}
 				<li>
 					<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id, name)} />
 				</li>
 			{/each}
 		</ul>
-		<p>Découverts : {found.length}</p>
 	{:else}
 		<p>Work in progress</p>
 	{/if}
