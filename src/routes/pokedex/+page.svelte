@@ -1,11 +1,13 @@
 <script lang="ts">
 	const { data } = $props();
+
+	const pokemons = $derived(data.pokemons);
 </script>
 
 <h1>Pokédex</h1>
 
 <ul>
-	{#each data.pokemons as pokemon, i}
+	{#each pokemons as pokemon, i}
 		{@const { id, name, sprites } = pokemon}
 		{@const src = sprites.front_default}
 
