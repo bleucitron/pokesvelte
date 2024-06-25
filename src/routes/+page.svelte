@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { pokedex } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
+	import { getRandomNb } from '$lib/utils';
 
 	const choices = [1, 4, 7];
 
@@ -11,6 +12,17 @@
 	const pokemons = $derived(data.pokemons);
 
 	$inspect(found);
+
+	let wildId = $state(25);
+	$effect(() => {
+		if (started) {
+			setInterval(() => {
+				const id = getRandomNb(pokemons.length) + 1;
+				wildId = id;
+				console.log(`Un ${pokemons[id - 1].name} sauvage apparaît`);
+			}, 2_000);
+		}
+	});
 
 	function catchPokemon(id: number, name: string) {
 		if (!found.includes(id)) pokedex.discover(id);
@@ -33,7 +45,11 @@
 			{/each}
 		</ul>
 	{:else}
-		<p>Work in progress</p>
+		<p>Attrapez les Pokémons !!!</p>
+		{@const wildPokemon = pokemons[wildId - 1]}
+		{@const name = wildPokemon.name}
+		{@const src = wildPokemon.sprites.front_default}
+		<Wild {name} {src} catchPokemon={() => catchPokemon(wildId, name)} />
 	{/if}
 </div>
 
