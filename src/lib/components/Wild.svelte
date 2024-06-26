@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	type WildProps = {
 		name: string;
 		src: string;
 		catchPokemon: () => void;
+		escape?: () => void;
 	};
 
-	const { name, src, catchPokemon }: WildProps = $props();
+	const { name, src, escape, catchPokemon }: WildProps = $props();
+
+	onMount(() => {
+		const timeout = escape && setTimeout(escape, 1000);
+		return () => clearTimeout(timeout);
+	});
 </script>
 
 <button onclick={catchPokemon}>
