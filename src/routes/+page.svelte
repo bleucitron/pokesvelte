@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pokedex } from '$lib/stores/index.svelte';
+	import { pokedex, team } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
@@ -13,7 +13,7 @@
 
 	$inspect(found);
 
-	let wildId = $state(25);
+	let wildId = $state<number | undefined>(25);
 	$effect(() => {
 		const interval = started
 			? setInterval(() => {
@@ -28,6 +28,8 @@
 
 	function catchPokemon(id: number, name: string) {
 		if (!found.includes(id)) pokedex.discover(id);
+
+		team.recruit({ id, uuid: Date.now() });
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>
@@ -48,10 +50,17 @@
 		</ul>
 	{:else}
 		<p>Attrapez les Pokémons !!!</p>
-		{@const wildPokemon = pokemons[wildId - 1]}
-		{@const name = wildPokemon.name}
-		{@const src = wildPokemon.sprites.front_default}
-		<Wild {name} {src} catchPokemon={() => catchPokemon(wildId, name)} />
+		{#if wildId}
+			{@const wildPokemon = pokemons[wildId - 1]}
+			{@const { id, name, sprites } = wildPokemon}
+			{@const src = sprites.front_default}
+			<Wild
+				{name}
+				{src}
+				catchPokemon={() => catchPokemon(id, name)}
+				escape={() => (wildId = undefined)}
+			/>
+		{/if}
 	{/if}
 </div>
 
@@ -59,7 +68,6 @@
 	.grass {
 		display: flex;
 		flex-flow: column;
-		justify-content: center;
 		flex: 1 0;
 	}
 
