@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pokedex, team } from '$lib/stores/index.svelte';
+	import { pokedex } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
@@ -26,10 +26,8 @@
 		return () => clearInterval(interval);
 	});
 
-	function catchPokemon(id: number, name: string) {
-		if (!found.includes(id)) pokedex.discover(id);
-
-		team.recruit(id);
+	async function catchPokemon(id: number, name: string) {
+		await fetch(`/team`, { method: 'POST', body: JSON.stringify({ id }) });
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>
