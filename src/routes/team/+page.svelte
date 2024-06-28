@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { team } from '$lib/stores/index.svelte';
-
 	const { data } = $props();
 
-	const pokemons = $derived(data.pokemons);
+	const { pokemons, team } = $derived(data);
 </script>
 
 <h1>Mon équipe</h1>
 
 <ul>
-	{#each team.members as member}
+	{#each team as member}
 		{@const { id, uuid } = member}
 		{@const { name, sprites } = pokemons[id - 1]}
 		{@const src = sprites.front_default}

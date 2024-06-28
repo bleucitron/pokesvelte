@@ -1,5 +1,9 @@
 import { fetchPokemons } from '$lib/pokemons';
+import { readTeam } from '$lib/server/team';
 
 export async function load() {
-	return { pokemons: await fetchPokemons() };
+	const pokemons = await fetchPokemons();
+	const team = await readTeam();
+
+	return { pokemons, team };
 }

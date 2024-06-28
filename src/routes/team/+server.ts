@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { addToTeam } from '$lib/team';
+import { addToTeam } from '$lib/server/team';
 
 export async function POST({ request }) {
 	const { id } = await request.json();

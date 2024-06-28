@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { readTeam, removeFromTeam } from '$lib/team';
+import { readTeam, removeFromTeam } from '$lib/server/team';
 
 export function GET() {
 	const team = readTeam();

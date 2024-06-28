@@ -1,16 +1,12 @@
 <script>
-	import { pokedex, team } from '$lib/stores/index.svelte';
 	import { page } from '$app/stores';
 
 	const { children, data } = $props();
 
-	const { total } = $derived(data);
+	const { total, teamSize, found } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived($page);
-
-	const found = $derived(pokedex.found.length);
-	const teamSize = $derived(team.members.length);
 </script>
 
 <header>

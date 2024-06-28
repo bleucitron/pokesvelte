@@ -1,17 +1,13 @@
 <script lang="ts">
-	import { pokedex } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const choices = [1, 4, 7];
 
-	const { found } = pokedex;
-	const started = $derived(!!found.length);
-
 	const { data } = $props();
-	const pokemons = $derived(data.pokemons);
+	const { pokemons, teamSize } = $derived(data);
 
-	$inspect(found);
+	const started = $derived(teamSize > 0);
 
 	let wildId = $state<number | undefined>(25);
 	$effect(() => {
