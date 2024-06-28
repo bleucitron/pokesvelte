@@ -19,7 +19,7 @@
 			<li>
 				<img {src} alt={name} width="96" height="96" loading="lazy" />
 				<p>{uuid}</p>
-				<button onclick={() => team.release(uuid)}>x</button>
+				<button onclick={() => fetch(`/team/${uuid}`, { method: 'DELETE' })}>x</button>
 			</li>
 		{/if}
 	{/each}
