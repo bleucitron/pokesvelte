@@ -1,17 +1,15 @@
 <script lang="ts">
-	import { pokedex } from '$lib/stores/index.svelte';
 	import Wild from '$lib/components/Wild.svelte';
+	import type { TeamMember } from '$lib/server/team';
+	import { recent } from '$lib/stores/index.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const choices = [1, 4, 7];
 
-	const { found } = pokedex;
-	const started = $derived(!!found.length);
-
 	const { data } = $props();
-	const pokemons = $derived(data.pokemons);
+	const { pokemons, teamSize } = $derived(data);
 
-	$inspect(found);
+	const started = $derived(teamSize > 0);
 
 	let wildId = $state<number | undefined>(25);
 	$effect(() => {
@@ -27,7 +25,11 @@
 	});
 
 	async function catchPokemon(id: number, name: string) {
-		await fetch(`/team`, { method: 'POST', body: JSON.stringify({ id }) });
+		const member = (await fetch(`/team`, { method: 'POST', body: JSON.stringify({ id }) }).then(
+			(r) => r.json()
+		)) as TeamMember;
+
+		recent.add({ id, uuid: member.uuid });
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>

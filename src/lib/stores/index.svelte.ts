@@ -1,38 +1,27 @@
-function createPokedex() {
-	let foundSpecies = $state<number[]>([]);
+// we could have created two different functions to handle
+// these, but since these two arrays work together, it makes
+// a lot of sense to handle them in the same instance
+function createRecentStore() {
+	let species = $state<number[]>([]);
+	let members = $state<string[]>([]);
 
 	return {
-		get found() {
-			return foundSpecies;
+		get species() {
+			return species;
 		},
-		discover(id: number) {
-			foundSpecies.push(id);
-		}
-	};
-}
-
-export const pokedex = createPokedex();
-
-export type TeamMember = {
-	id: number;
-	uuid: number;
-};
-
-function createTeam() {
-	let team = $state<TeamMember[]>([]);
-
-	return {
 		get members() {
-			return team;
+			return members;
 		},
-		recruit(member: TeamMember) {
-			team.push(member);
-		},
-		release(uuid: number) {
-			const position = team.findIndex((member) => member.uuid === uuid);
-			team.splice(position, 1);
+		add({ id, uuid }: { id: number; uuid: string }) {
+			if (!species.includes(id)) {
+				// there is a subtle bug here, since an already discovered species could be considered as recent
+				species.push(id);
+			}
+			if (!members.includes(uuid)) {
+				members.push(uuid);
+			}
 		}
 	};
 }
 
-export const team = createTeam();
+export const recent = createRecentStore();

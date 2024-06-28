@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 
 import { flush, read, write } from './io';
 import * as seen from './seen';
-import pokemons from '../pokemons.json';
+import pokemons from '../../pokemons.json';
 
 export type TeamMember = {
 	id: number;
