@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
@@ -24,6 +25,7 @@
 
 	async function catchPokemon(id: number, name: string) {
 		await fetch(`/team`, { method: 'POST', body: JSON.stringify({ id }) });
+		invalidate('team:update');
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>
