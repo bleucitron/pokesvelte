@@ -8,7 +8,7 @@
 	const choices = [1, 4, 7];
 
 	const { data } = $props();
-	const { pokemons, teamSize } = $derived(data);
+	const { pokemons, teamSize, population } = $derived(data);
 
 	const started = $derived(teamSize > 0);
 
@@ -69,6 +69,13 @@
 			{/if}
 		{/if}
 	{/if}
+	<section>
+		{#await population}
+			<p>Scan de la zone...</p>
+		{:then nb}
+			<p>{nb} pokémons présents</p>
+		{/await}
+	</section>
 </div>
 
 <style>
@@ -81,6 +88,12 @@
 	ul {
 		display: flex;
 		justify-content: center;
+	}
+
+	section {
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
 	}
 </style>
 
