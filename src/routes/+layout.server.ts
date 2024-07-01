@@ -4,10 +4,7 @@ import { fetchPokemons } from '$lib/pokemons';
 export async function load({ depends }) {
 	depends('team:update');
 
-	const pokemons = await fetchPokemons();
-
-	const team = await db.team.get();
-	const seen = await db.seen.get();
+	const [pokemons, team, seen] = await Promise.all([fetchPokemons(), db.team.get(), db.seen.get()]);
 
 	return {
 		total: pokemons.length,
