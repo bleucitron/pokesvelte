@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import Wild from '$lib/components/Wild.svelte';
 	import type { TeamMember } from '$lib/server/team';
 	import { recent } from '$lib/stores/index.svelte';
@@ -30,6 +31,7 @@
 		)) as TeamMember;
 
 		recent.add({ id, uuid: member.uuid });
+		invalidate('team:update');
 		console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
 	}
 </script>
@@ -81,3 +83,4 @@
 		justify-content: center;
 	}
 </style>
+
