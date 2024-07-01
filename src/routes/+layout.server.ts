@@ -1,7 +1,9 @@
 import db from '$lib/server/db';
 import { fetchPokemons } from '$lib/pokemons';
 
-export async function load() {
+export async function load({ depends }) {
+	depends('team:update');
+
 	const pokemons = await fetchPokemons();
 
 	const team = await db.team.get();
