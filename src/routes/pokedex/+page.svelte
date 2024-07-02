@@ -4,12 +4,17 @@
 	const { data } = $props();
 
 	const { pokemons, seen } = $derived(data);
+	let search = $state('');
+
+	const filtered = $derived(pokemons.filter((pokemon) => pokemon.name.includes(search)));
+	const toDisplay = $derived(search ? filtered : pokemons);
 </script>
 
 <h1>Pokédex</h1>
 
+<input bind:value={search} placeholder="recherche..." />
 <ul>
-	{#each pokemons as pokemon}
+	{#each toDisplay as pokemon}
 		{@const { id, name, sprites } = pokemon}
 		{@const src = sprites.front_default}
 
