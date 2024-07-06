@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
 
 	const { form } = $props();
 
@@ -14,7 +15,7 @@
 		<div>
 			<h2>Inscription</h2>
 
-			<form action="?/signup" method="POST">
+			<form action="?/signup" method="POST" use:enhance>
 				<label class:error={name === 'name'}>Nom<input name="name" value={form?.name} /></label>
 				<label class:error={name === 'password'}
 					>Mot de passe<input type="password" name="password" /></label
@@ -28,7 +29,7 @@
 		<div>
 			<h2>Connexion</h2>
 
-			<form action="?/login" method="POST">
+			<form action="?/login" method="POST" use:enhance>
 				<label class:error={name === 'login'}>Nom<input name="login" value={form?.login} /></label>
 				<label class:error={name === 'pass'}
 					>Mot de passe<input type="password" name="pass" /></label
