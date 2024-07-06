@@ -7,7 +7,7 @@ export async function load() {
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	signup: async ({ request }) => {
 		const data = await request.formData();
 
 		const name = data.get('name')?.toString();
@@ -41,6 +41,29 @@ export const actions = {
 		}
 
 		const trainer = await db.trainer.register(name, password);
+
+		return { success: true, trainer };
+	},
+	login: async ({ request }) => {
+		const data = await request.formData();
+
+		const login = data.get('login')?.toString();
+		const password = data.get('pass')?.toString();
+
+		if (!login) {
+			return fail(400, { login, inputName: 'login', message: 'Des champs sont manquants.' });
+		}
+		if (!password) {
+			return fail(400, { login, inputName: 'pass', message: 'Des champs sont manquants.' });
+		}
+
+		const isValid = await db.trainer.checkPassword(login, password);
+
+		if (!isValid) {
+			return fail(401, { login, message: 'Mot de passe invalide.' });
+		}
+
+		const trainer = await db.trainer.get(login);
 
 		return { success: true, trainer };
 	}
