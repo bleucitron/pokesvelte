@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recent } from '$lib/stores/index.svelte';
+	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 
 	const { data } = $props();
@@ -29,7 +30,7 @@
 
 			<li>
 				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
-				<form action="?/rename" method="POST">
+				<form action="?/rename" method="POST" use:enhance>
 					<input name="name" value={name} />
 					<input name="uuid" type="hidden" value={uuid} />
 					<button>Renommer</button>
@@ -56,7 +57,7 @@
 
 			<li>
 				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
-				<form action="?/rename" method="POST">
+				<form action="?/rename" method="POST" use:enhance>
 					<input name="name" value={name} />
 					<input name="uuid" type="hidden" value={uuid} />
 					<button>Renommer</button>
