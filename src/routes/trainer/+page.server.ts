@@ -1,12 +1,12 @@
 import { fail } from '@sveltejs/kit';
-import { readTrainer, saveTrainer } from '$lib/server/trainer';
+import { readTrainer, saveTrainer, checkTrainerPassword } from '$lib/server/trainer';
 
 export async function load() {
 	console.log('Loading trainer');
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	signup: async ({ request }) => {
 		const data = await request.formData();
 
 		const name = data.get('name');
@@ -40,6 +40,29 @@ export const actions = {
 		}
 
 		const trainer = await saveTrainer(name, password);
+
+		return { success: true, trainer };
+	},
+	login: async ({ request }) => {
+		const data = await request.formData();
+
+		const login = data.get('login');
+		const password = data.get('pass');
+
+		if (!login) {
+			return fail(400, { login, inputName: 'login', message: 'Des champs sont manquants.' });
+		}
+		if (!password) {
+			return fail(400, { login, inputName: 'pass', message: 'Des champs sont manquants.' });
+		}
+
+		const isValid = await checkTrainerPassword(login, password);
+
+		if (!isValid) {
+			return fail(401, { login, message: 'Mot de passe invalide.' });
+		}
+
+		const trainer = await readTrainer(login);
 
 		return { success: true, trainer };
 	}
