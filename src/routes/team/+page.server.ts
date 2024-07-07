@@ -1,6 +1,6 @@
 import { fetchPokemons } from '$lib/pokemons';
 import { readTeam, rename, toggleFromTeam } from '$lib/server/team';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
 	rename: async ({ request }) => {
@@ -30,6 +30,9 @@ export async function load({ depends }) {
 	depends('team:update');
 
 	const [pokemons, team] = await Promise.all([fetchPokemons(), readTeam()]);
+	if (!team.length) {
+		redirect(307, '/');
+	}
 
 	return { pokemons, team };
 }
