@@ -20,6 +20,13 @@ function createRecentStore() {
 			if (!members.includes(uuid)) {
 				members.push(uuid);
 			}
+		},
+		check(id: number | string) {
+			if (typeof id === 'number') {
+				species = species.filter((sId) => sId !== id);
+			} else {
+				members = members.filter((mId) => mId !== id);
+			}
 		}
 	};
 }
