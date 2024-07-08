@@ -39,7 +39,7 @@
 
 <div class="Grass">
 	<p>Attrapez les Pokémons !!!</p>
-	{#each wilds as { id, name, appeared, sprite }}
+	{#each wilds as { id, name, appeared, sprite } (appeared)}
 		<Wild
 			{name}
 			src={sprite}
