@@ -29,7 +29,14 @@
 			{@const src = sprites.front_default}
 
 			<li>
-				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
+				<img
+					{src}
+					alt={speciesName}
+					width="96"
+					height="96"
+					loading="lazy"
+					onmouseenter={() => recent.check(uuid)}
+				/>
 				<form action="?/rename" method="POST" use:enhance>
 					<input name="name" value={name} />
 					<input name="uuid" type="hidden" value={uuid} />
@@ -56,7 +63,14 @@
 			{@const src = sprites.front_default}
 
 			<li>
-				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
+				<img
+					{src}
+					alt={speciesName}
+					width="96"
+					height="96"
+					loading="lazy"
+					onmouseenter={() => recent.check(uuid)}
+				/>
 				<form action="?/rename" method="POST" use:enhance>
 					<input name="name" value={name} />
 					<input name="uuid" type="hidden" value={uuid} />

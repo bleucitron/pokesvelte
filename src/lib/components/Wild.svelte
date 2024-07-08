@@ -19,7 +19,8 @@
 	let left = $state(0);
 
 	onMount(() => {
-		const timeout = escape && setTimeout(escape, 1000);
+		const lifespan = getRandomNb(1_000, 3_000);
+		const timeout = escape && setTimeout(escape, lifespan);
 
 		if (escape) {
 			top = getRandomNb(MARGIN, height - MARGIN);

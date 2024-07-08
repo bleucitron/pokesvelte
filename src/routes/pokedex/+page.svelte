@@ -20,7 +20,16 @@
 		{@const recentSpecies = recent.species.includes(id)}
 
 		<li class:found>
-			<a href="/pokedex/{id}"><img {src} alt={name} width="96" height="96" loading="lazy" /></a>
+			<a href="/pokedex/{id}"
+				><img
+					{src}
+					alt={name}
+					width="96"
+					height="96"
+					loading="lazy"
+					onmouseenter={() => recent.check(id)}
+				/></a
+			>
 			{#if recentSpecies}
 				<div class="new">new</div>
 			{/if}
