@@ -18,72 +18,50 @@
 
 <h1>Mon équipe</h1>
 
+{#snippet teamMember(member)}
+	{@const { id, uuid, main, name } = member}
+	{@const pokemon = pokemons[id - 1]}
+
+	{#if pokemon}
+		{@const { sprites, name: speciesName } = pokemon}
+
+		{@const recentMember = recent.members.includes(uuid)}
+		{@const src = sprites.front_default}
+
+		<li>
+			<img
+				{src}
+				alt={speciesName}
+				width="96"
+				height="96"
+				loading="lazy"
+				onmouseenter={() => recent.check(uuid)}
+			/>
+			<form action="?/rename" method="POST" use:enhance>
+				<input name="name" value={name} />
+				<input name="uuid" type="hidden" value={uuid} />
+				<button>Renommer</button>
+				<button class:main formaction="?/toggle">Titulariser</button>
+			</form>
+			<button onclick={() => release(uuid)}>x</button>
+
+			{#if recentMember}
+				<div class="new">new</div>
+			{/if}
+		</li>
+	{/if}
+{/snippet}
+
 <h2>Titulaires</h2>
 <ul>
 	{#each main as member}
-		{@const { id, uuid, main, name } = member}
-		{@const pokemon = pokemons[id - 1]}
-		{@const recentMember = recent.members.includes(uuid)}
-		{#if pokemon}
-			{@const { sprites, name: speciesName } = pokemon}
-			{@const src = sprites.front_default}
-
-			<li>
-				<img
-					{src}
-					alt={speciesName}
-					width="96"
-					height="96"
-					loading="lazy"
-					onmouseenter={() => recent.check(uuid)}
-				/>
-				<form action="?/rename" method="POST" use:enhance>
-					<input name="name" value={name} />
-					<input name="uuid" type="hidden" value={uuid} />
-					<button>Renommer</button>
-					<button class:main formaction="?/toggle">Titulariser</button>
-				</form>
-				<button onclick={() => release(uuid)}>x</button>
-
-				{#if recentMember}
-					<div class="new">new</div>
-				{/if}
-			</li>
-		{/if}
+		{@render teamMember(member)}
 	{/each}
 </ul>
 <h2>Remplaçants</h2>
 <ul>
 	{#each other as member}
-		{@const { id, uuid, main, name } = member}
-		{@const pokemon = pokemons[id - 1]}
-		{@const recentMember = recent.members.includes(uuid)}
-		{#if pokemon}
-			{@const { sprites, name: speciesName } = pokemon}
-			{@const src = sprites.front_default}
-
-			<li>
-				<img
-					{src}
-					alt={speciesName}
-					width="96"
-					height="96"
-					loading="lazy"
-					onmouseenter={() => recent.check(uuid)}
-				/>
-				<form action="?/rename" method="POST" use:enhance>
-					<input name="name" value={name} />
-					<input name="uuid" type="hidden" value={uuid} />
-					<button>Renommer</button>
-					<button class:main formaction="?/toggle">Titulariser</button>
-				</form>
-				<button onclick={() => release(uuid)}>x</button>
-
-				{#if recentMember}
-					<div class="new">new</div>
-				{/if}
-			</li>
-		{/if}
+		{@render teamMember(member)}
 	{/each}
 </ul>
 
@@ -137,3 +115,4 @@
 		line-height: 0.8rem;
 	}
 </style>
+
