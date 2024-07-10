@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recent } from '$lib/stores/index.svelte';
+	import { crossfade } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 	import { scale } from 'svelte/transition';
@@ -15,6 +16,8 @@
 		await fetch(`/team/${uuid}`, { method: 'DELETE' });
 		invalidate('team:update');
 	}
+
+	const [send, receive] = crossfade({ duration: 200 });
 </script>
 
 <h1>Mon équipe</h1>
@@ -55,14 +58,18 @@
 
 <h2>Titulaires</h2>
 <ul>
-	{#each main as member}
-		{@render teamMember(member)}
+	{#each main as member (member.uuid)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render teamMember(member)}
+		</div>
 	{/each}
 </ul>
 <h2>Remplaçants</h2>
 <ul>
-	{#each other as member}
-		{@render teamMember(member)}
+	{#each other as member (member.uuid)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render teamMember(member)}
+		</div>
 	{/each}
 </ul>
 
