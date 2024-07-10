@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recent } from '$lib/stores/index.svelte';
+	import { crossfade } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 
@@ -14,6 +15,8 @@
 		await fetch(`/team/${uuid}`, { method: 'DELETE' });
 		invalidate('team:update');
 	}
+
+	const [send, receive] = crossfade({ duration: 200 });
 </script>
 
 <h1>Mon équipe</h1>
@@ -28,7 +31,7 @@
 		{@const recentMember = recent.members.includes(uuid)}
 		{@const src = sprites.front_default}
 
-			<li class:recent={recentMember}>
+		<li class:recent={recentMember}>
 			<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
 			<form action="?/rename" method="POST" use:enhance>
 				<input name="name" value={name} />
@@ -43,14 +46,18 @@
 
 <h2>Titulaires</h2>
 <ul>
-	{#each main as member}
-		{@render teamMember(member)}
+	{#each main as member (member.uuid)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render teamMember(member)}
+		</div>
 	{/each}
 </ul>
 <h2>Remplaçants</h2>
 <ul>
-	{#each other as member}
-		{@render teamMember(member)}
+	{#each other as member (member.uuid)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render teamMember(member)}
+		</div>
 	{/each}
 </ul>
 
@@ -104,4 +111,3 @@
 		line-height: 0.8rem;
 	}
 </style>
-
