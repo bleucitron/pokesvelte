@@ -3,6 +3,7 @@
 	import { crossfade } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
+	import { flip } from 'svelte/animate';
 
 	const { data } = $props();
 
@@ -16,7 +17,8 @@
 		invalidate('team:update');
 	}
 
-	const [send, receive] = crossfade({ duration: 200 });
+	const FAST = 200;
+	const [send, receive] = crossfade({ duration: FAST });
 </script>
 
 <h1>Mon équipe</h1>
@@ -47,7 +49,11 @@
 <h2>Titulaires</h2>
 <ul>
 	{#each main as member (member.uuid)}
-		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+		<div
+			in:send={{ key: member.uuid }}
+			out:receive={{ key: member.uuid }}
+			animate:flip={{ duration: FAST }}
+		>
 			{@render teamMember(member)}
 		</div>
 	{/each}
@@ -55,7 +61,11 @@
 <h2>Remplaçants</h2>
 <ul>
 	{#each other as member (member.uuid)}
-		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+		<div
+			in:send={{ key: member.uuid }}
+			out:receive={{ key: member.uuid }}
+			animate:flip={{ duration: FAST }}
+		>
 			{@render teamMember(member)}
 		</div>
 	{/each}
