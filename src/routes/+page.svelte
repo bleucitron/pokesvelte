@@ -29,6 +29,16 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
+{#snippet infos()}
+	<section>
+		{#await population}
+			<p>Scan de la zone...</p>
+		{:then nb}
+			<p>{nb} pokémons présents</p>
+		{/await}
+	</section>
+{/snippet}
+
 <div class="home">
 	{#if !started}
 		<p>Choisissez un Pokémon</p>
@@ -45,15 +55,8 @@
 			{/each}
 		</ul>
 	{:else}
-		<Grass {pokemons} {catchPokemon} />
+		<Grass {pokemons} {catchPokemon} {infos} />
 	{/if}
-	<section>
-		{#await population}
-			<p>Scan de la zone...</p>
-		{:then nb}
-			<p>{nb} pokémons présents</p>
-		{/await}
-	</section>
 </div>
 
 <style>
