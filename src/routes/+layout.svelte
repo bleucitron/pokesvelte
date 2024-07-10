@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { recent } from '$lib/stores/index.svelte';
+	import { scale } from 'svelte/transition';
 
 	const { children, data } = $props();
 
@@ -19,13 +20,13 @@
 					>Pokédex({found}/{total})</a
 				>
 				{#if recent.species.length > 0}
-					<div class="new"></div>
+					<div class="new" transition:scale={{ duration: 300 }}></div>
 				{/if}
 			</li>
 			<li>
 				<a href="/team" class:current={pathname === '/team'}>Équipe({teamSize})</a>
 				{#if recent.members.length > 0}
-					<div class="new"></div>
+					<div class="new" transition:scale={{ duration: 300 }}></div>
 				{/if}
 			</li>
 			<li>

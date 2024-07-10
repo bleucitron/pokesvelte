@@ -2,6 +2,7 @@
 	import { recent } from '$lib/stores/index.svelte';
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
+	import { scale } from 'svelte/transition';
 
 	const { data } = $props();
 
@@ -46,7 +47,7 @@
 			<button onclick={() => release(uuid)}>x</button>
 
 			{#if recentMember}
-				<div class="new">new</div>
+				<div class="new" transition:scale>new</div>
 			{/if}
 		</li>
 	{/if}
