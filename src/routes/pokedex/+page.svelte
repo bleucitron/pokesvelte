@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recent } from '$lib/stores/index.svelte';
+	import { scale } from 'svelte/transition';
 
 	const { data } = $props();
 
@@ -31,7 +32,7 @@
 				/></a
 			>
 			{#if recentSpecies}
-				<div class="new">new</div>
+				<div class="new" transition:scale>new</div>
 			{/if}
 		</li>
 	{/each}
