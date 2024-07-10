@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { Pokemon } from '$lib/types';
 
+	import { fade } from 'svelte/transition';
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
@@ -45,15 +46,17 @@
 <div class="Grass">
 	<p>Attrapez les Pokémons !!!</p>
 	{#each wilds as { id, name, appeared, sprite } (appeared)}
-		<Wild
-			{name}
-			src={sprite}
-			catchPokemon={() => {
-				removeFromWildList(appeared);
-				catchPokemon(id);
-			}}
-			escape={() => removeFromWildList(appeared)}
-		/>
+		<div transition:fade={{ duration: 300 }}>
+			<Wild
+				{name}
+				src={sprite}
+				catchPokemon={() => {
+					removeFromWildList(appeared);
+					catchPokemon(id);
+				}}
+				escape={() => removeFromWildList(appeared)}
+			/>
+		</div>
 	{/each}
 	{@render infos()}
 </div>
