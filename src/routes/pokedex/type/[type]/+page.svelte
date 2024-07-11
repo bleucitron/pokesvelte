@@ -1,7 +1,7 @@
 <script lang="ts">
-	const { data } = $props();
+	let { data } = $props();
 
-	const { pokemons, seen } = $derived(data);
+	let { pokemons, seen } = $derived(data);
 	let search = $state('');
 
 	const filtered = $derived(pokemons.filter((pokemon) => pokemon.name.includes(search)));
@@ -9,6 +9,7 @@
 </script>
 
 <input bind:value={search} placeholder="recherche..." />
+
 <ul>
 	{#each toDisplay as pokemon}
 		{@const { id, name, sprites } = pokemon}
