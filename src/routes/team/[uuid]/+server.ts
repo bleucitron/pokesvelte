@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 import db from '$lib/server/db';
 
 export async function GET() {
@@ -8,7 +8,11 @@ export async function GET() {
 	return json(team);
 }
 
-export async function DELETE({ params: { uuid } }) {
+export async function DELETE({ params: { uuid }, locals }) {
+	if (!locals.user) {
+		error(403, "Vous n'avez pas le droit de faire ça");
+	}
+
 	await db.team.removeMember(uuid);
 
 	return json({ uuid });
