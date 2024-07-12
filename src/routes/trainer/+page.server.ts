@@ -7,7 +7,7 @@ export async function load() {
 }
 
 export const actions = {
-	signup: async ({ request }) => {
+	signup: async ({ request, cookies }) => {
 		const data = await request.formData();
 
 		const name = data.get('name')?.toString();
@@ -42,9 +42,12 @@ export const actions = {
 
 		const trainer = await db.trainer.register(name, password);
 
+		const cookie = await db.cookies.register(trainer.id);
+		cookies.set('session', cookie, { path: '/' });
+
 		return { success: true, trainer };
 	},
-	login: async ({ request }) => {
+	login: async ({ request, cookies }) => {
 		const data = await request.formData();
 
 		const login = data.get('login')?.toString();
@@ -58,12 +61,14 @@ export const actions = {
 		}
 
 		const isValid = await db.trainer.checkPassword(login, password);
+		const trainer = await db.trainer.get(login);
 
-		if (!isValid) {
+		if (!isValid || !trainer) {
 			return fail(401, { login, message: 'Mot de passe invalide.' });
 		}
 
-		const trainer = await db.trainer.get(login);
+		const cookie = await db.cookies.register(trainer.id);
+		cookies.set('session', cookie, { path: '/' });
 
 		return { success: true, trainer };
 	}
