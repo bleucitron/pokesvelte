@@ -1,9 +1,13 @@
 import { fetchPokemons } from '$lib/pokemons';
 import db from '$lib/server/db';
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
-	rename: async ({ request }) => {
+	rename: async ({ request, locals }) => {
+		if (!locals.user) {
+			error(403, "Vous n'avez pas le droit de faire ça");
+		}
+
 		const data = await request.formData();
 		const uuid = data.get('uuid')?.toString();
 		const name = data.get('name')?.toString();
@@ -14,7 +18,11 @@ export const actions = {
 
 		await db.team.renameMember(uuid, name);
 	},
-	toggle: async ({ request }) => {
+	toggle: async ({ request, locals }) => {
+		if (!locals.user) {
+			error(403, "Vous n'avez pas le droit de faire ça");
+		}
+
 		const data = await request.formData();
 		const uuid = data.get('uuid')?.toString();
 
@@ -26,14 +34,14 @@ export const actions = {
 	}
 };
 
-export async function load({ depends }) {
+export async function load({ depends, locals }) {
+	if (!locals.user) {
+		redirect(307, '/');
+	}
+
 	depends('team:update');
 
 	const [pokemons, team] = await Promise.all([fetchPokemons(), db.team.get()]);
-
-	if (!team.length) {
-		redirect(307, '/');
-	}
 
 	return { pokemons, team };
 }
