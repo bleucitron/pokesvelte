@@ -15,6 +15,7 @@
 				<a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}
 					>Team({data.members})</a
 				>
+				<a href="/trainer" class={$page.url.pathname === '/trainer' ? 'current' : ''}>Dresseur</a>
 				<a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>FAQ</a>
 			</li>
 		</ul>
