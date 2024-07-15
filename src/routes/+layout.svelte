@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	const { children } = $props();
 </script>
 
@@ -6,10 +8,10 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/">Accueil</a>
-				<a href="/pokedex">Pokédex</a>
-				<a href="/team">Team</a>
-				<a href="/faq">FAQ</a>
+				<a href="/" class={$page.url.pathname === '/' ? 'current' : ''}>Accueil</a>
+				<a href="/pokedex" class={$page.url.pathname === '/pokedex' ? 'current' : ''}>Pokédex</a>
+				<a href="/team" class={$page.url.pathname === '/team' ? 'current' : ''}>Team</a>
+				<a href="/faq" class={$page.url.pathname === '/faq' ? 'current' : ''}>FAQ</a>
 			</li>
 		</ul>
 	</nav>
