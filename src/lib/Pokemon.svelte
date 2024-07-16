@@ -1,5 +1,14 @@
-<p>#25</p>
+<script lang="ts">
+	type PokemonProps = {
+		name: string | undefined;
+		id: number;
+		src: string | undefined;
+	};
+	const { name, id, src }: PokemonProps = $props();
+</script>
 
-<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" />
+<p>#{id}</p>
 
-<h1>Pikachu</h1>
+<img {src} />
+
+<h1>{name}</h1>
