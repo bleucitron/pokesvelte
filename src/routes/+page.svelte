@@ -2,7 +2,8 @@
 	import Wild from '$lib/Wild.svelte';
 
 	const { data } = $props();
-	let started = false;
+
+	let started = $state(false);
 
 	function logName(name?: string) {
 		console.log('attrapé', name);
@@ -12,6 +13,7 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
+<button onclick={() => (started = !started)}>Commencer</button>
 {#if !started}
 	<div class="house">
 		{#each [1, 4, 7] as wildId}
