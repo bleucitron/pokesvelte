@@ -4,8 +4,12 @@
 	const { data } = $props();
 
 	let started = $state(false);
+	let found = $state<number[]>([]);
 
-	function logName(name?: string) {
+	function catchPokemon(id: number, name?: string) {
+		if (!found.includes(id)) {
+			found.push(id);
+		}
 		console.log('attrapé', name);
 	}
 </script>
@@ -14,6 +18,8 @@
 <p>Gotta svelt'em all!</p>
 
 <button onclick={() => (started = !started)}>Commencer</button>
+<p>Trouvés: {found.length}</p>
+
 {#if !started}
 	<div class="house">
 		{#each [1, 4, 7] as wildId}
@@ -21,7 +27,7 @@
 			{@const src = pokemon?.sprites?.front_default}
 			{@const name = pokemon?.name}
 
-			<Wild {src} {name} catchPokemon={() => logName(name)} />
+			<Wild {src} {name} catchPokemon={() => catchPokemon(wildId, name)} />
 		{/each}
 	</div>
 {:else}
