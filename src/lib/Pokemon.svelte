@@ -11,7 +11,7 @@
 <div class="Pokemon" class:found>
 	<p>#{id}</p>
 
-	<img {src} />
+	<img {src} alt={name} />
 
 	<h1>{found ? name : '???'}</h1>
 </div>

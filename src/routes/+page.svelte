@@ -19,7 +19,7 @@
 			{@const src = pokemon?.sprites?.front_default}
 			{@const name = pokemon?.name}
 
-			<Wild catchPokemon={() => logName(name)} {src} />
+			<Wild {src} {name} catchPokemon={() => logName(name)} />
 		{/each}
 	</div>
 {:else}

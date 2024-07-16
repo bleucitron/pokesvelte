@@ -7,7 +7,9 @@
 <ul>
 	{#each data.pokemons as pokemon}
 		<li class:found={pokemon.id % 2 === 0}>
-			<a href="/pokedex/{pokemon.id}"><img src={pokemon?.sprites.front_default} /></a>
+			<a href="/pokedex/{pokemon.id}"
+				><img src={pokemon?.sprites.front_default} alt={pokemon.name} /></a
+			>
 		</li>
 	{/each}
 </ul>
