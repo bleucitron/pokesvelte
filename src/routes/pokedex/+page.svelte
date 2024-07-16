@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { pokedex } from '$lib/stores/index.svelte.js';
+
 	const { data } = $props();
 	const { pokemons } = $derived(data);
 </script>
@@ -7,7 +9,9 @@
 
 <ul>
 	{#each pokemons as pokemon}
-		<li class:found={pokemon.id % 2 === 0}>
+		{@const found = pokedex.found.includes(pokemon.id)}
+
+		<li class:found>
 			<a href="/pokedex/{pokemon.id}"
 				><img src={pokemon?.sprites.front_default} alt={pokemon.name} /></a
 			>

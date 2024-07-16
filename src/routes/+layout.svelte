@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { pokedex } from '$lib/stores/index.svelte.js';
 
 	const { data, children } = $props();
 	const pathname = $derived($page.url.pathname);
@@ -11,7 +12,7 @@
 			<li>
 				<a href="/" class:current={pathname === '/'}>Accueil</a>
 				<a href="/pokedex" class:current={pathname === '/pokedex'}
-					>Pokédex({data.found}/{data.total})</a
+					>Pokédex({pokedex.found.length}/{data.total})</a
 				>
 				<a href="/team" class:current={pathname === '/team'}>Team({data.members})</a>
 				<a href="/trainer" class:current={pathname === '/trainer'}>Dresseur</a>
