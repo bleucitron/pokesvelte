@@ -2,11 +2,7 @@
 	import Pokemon from '$lib/Pokemon.svelte';
 
 	const { data } = $props();
+	const { name, id, src } = $derived(data);
 </script>
 
-<Pokemon
-	name={data.name}
-	id={parseInt(data.id)}
-	src={data.src}
-	found={parseInt(data.id) % 2 === 0}
-/>
+<Pokemon {name} id={parseInt(id)} {src} found={parseInt(id) % 2 === 0} />
