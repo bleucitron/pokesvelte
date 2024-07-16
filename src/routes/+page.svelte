@@ -12,6 +12,8 @@
 		}
 		console.log('attrapé', name);
 	}
+
+	$inspect(found);
 </script>
 
 <h1>Pokésvelte</h1>
