@@ -1,12 +1,16 @@
 <script lang="ts">
 	const { data } = $props();
 	const { pokemons } = $derived(data);
+
+	let search = $state('');
+	const filtered = $derived(search ? pokemons.filter((p) => p.name.includes(search)) : pokemons);
 </script>
 
 <h1>Pokédex</h1>
 
+<input bind:value={search} />
 <ul>
-	{#each pokemons as pokemon}
+	{#each filtered as pokemon}
 		{@const found = data.found.includes(pokemon.id)}
 
 		<li class:found>
