@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { getRandomNb } from './utils';
+
 	type WildProps = {
 		name: string | undefined;
 		src: string | undefined;
@@ -9,9 +12,13 @@
 
 	let width = $state(0);
 	let height = $state(0);
-	$inspect(width, height);
+	let top = $state('');
+	let left = $state('');
 
-	$effect(() => {
+	onMount(() => {
+		top = `${getRandomNb(height - 50)}px`;
+		left = `${getRandomNb(width - 50)}px`;
+
 		const timeoutId = escape
 			? setTimeout(() => {
 					escape();
@@ -24,9 +31,12 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
-<button class="Wild" onclick={catchPokemon}>
+<button class="Wild" style:top style:left onclick={catchPokemon}>
 	<img {src} alt={name} />
 </button>
 
 <style>
+	.Wild {
+		position: fixed;
+	}
 </style>
