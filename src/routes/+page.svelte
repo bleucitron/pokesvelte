@@ -26,7 +26,10 @@
 
 	function catchPokemon(id: number, name?: string) {
 		pokedex.discover(id);
-		team.recruit(id);
+		fetch('/team/', {
+			method: 'POST',
+			body: JSON.stringify({ id })
+		});
 		console.log('attrapé', name);
 	}
 

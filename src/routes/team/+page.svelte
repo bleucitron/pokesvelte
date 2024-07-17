@@ -2,6 +2,13 @@
 	import { team } from '$lib/stores/index.svelte';
 
 	const { data } = $props();
+
+	async function fire(uuid: number) {
+		await fetch('/team/' + uuid, {
+			method: 'DELETE'
+		});
+		console.log('Le pokemon a été supprimé');
+	}
 </script>
 
 <h1>Team</h1>
@@ -12,7 +19,7 @@
 		<li>
 			<img src={pokemon?.sprites.front_default} alt={pokemon?.name} />
 			<p>{uuid}</p>
-			<button onclick={() => team.fire(uuid)}>x</button>
+			<button onclick={() => fire(uuid)}>x</button>
 		</li>
 	{/each}
 </ul>

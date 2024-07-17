@@ -1,4 +1,4 @@
-import { read, write, flush } from './server/io';
+import { read, write, flush } from './io';
 
 readSeen().then((data) => {
 	console.log('Initial seen size', data.length);
