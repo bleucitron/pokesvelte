@@ -1,10 +1,8 @@
-import type { PageServerLoad } from './$types';
-
 import { fetchPokemon } from '$lib/server/pokemons';
 import { readSeen } from '$lib/server/seen';
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export async function load({ params }) {
 	const id = parseInt(params.id);
 
 	const pokemon = await fetchPokemon(id);
@@ -19,4 +17,4 @@ export const load: PageServerLoad = async ({ params }) => {
 		src: pokemon?.sprites?.front_default,
 		found: seen.includes(id)
 	};
-};
+}
