@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Wild from '$lib/Wild.svelte';
-	import { pokedex } from '$lib/stores/index.svelte';
+	import { pokedex, team } from '$lib/stores/index.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
@@ -9,7 +9,7 @@
 	const found = $derived(pokedex.found);
 	const started = $derived(found.length > 0);
 
-	let wild = $state(25);
+	let wild = $state<number | undefined>();
 
 	$effect(() => {
 		const intervalId = started
@@ -18,7 +18,7 @@
 					console.log('interval', randomId, pokemons?.[randomId - 1]?.name);
 
 					wild = randomId;
-				}, 2000)
+				}, 4000)
 			: undefined;
 
 		return () => clearInterval(intervalId);
@@ -26,6 +26,7 @@
 
 	function catchPokemon(id: number, name?: string) {
 		pokedex.discover(id);
+		team.recruit(id);
 		console.log('attrapé', name);
 	}
 
@@ -47,12 +48,19 @@
 			<Wild {src} {name} catchPokemon={() => catchPokemon(starterId, name)} />
 		{/each}
 	</div>
-{:else}
+{:else if wild}
 	{@const pokemon = pokemons[wild - 1]}
 	{@const src = pokemon?.sprites?.front_default}
 	{@const name = pokemon?.name}
 
-	<Wild {src} {name} catchPokemon={() => catchPokemon(wild, name)} />
+	<Wild
+		{src}
+		{name}
+		escape={() => {
+			wild = undefined;
+		}}
+		catchPokemon={() => catchPokemon(wild, name)}
+	/>
 {/if}
 
 <style>
