@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+
 	const { form } = $props();
 	$inspect(form);
 </script>
 
 <h1>Trainer</h1>
 
-<form method="POST" action="?/signup">
+<form method="POST" action="?/signup" use:enhance>
 	<label class:error={form?.inputName === 'name'}>
 		Nom
 		<input value={form?.name} name="name" />
@@ -21,7 +23,7 @@
 	<button>Inscription</button>
 </form>
 
-<form method="POST" action="?/login">
+<form method="POST" action="?/login" use:enhance>
 	<label class:error={form?.inputName === 'name'}>
 		Nom
 		<input value={form?.login} name="login" />
