@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import Wild from '$lib/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
@@ -22,11 +23,12 @@
 		return () => clearInterval(intervalId);
 	});
 
-	function catchPokemon(id: number, name?: string) {
-		fetch('/team/', {
+	async function catchPokemon(id: number, name?: string) {
+		await fetch('/team/', {
 			method: 'POST',
 			body: JSON.stringify({ id })
 		});
+		invalidateAll();
 		console.log('attrapé', name);
 	}
 </script>

@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
+
 	const { data } = $props();
 
 	async function fire(uuid: number) {
 		await fetch('/team/' + uuid, {
 			method: 'DELETE'
 		});
+		invalidateAll();
 		console.log('Le pokemon a été supprimé');
 	}
 </script>
