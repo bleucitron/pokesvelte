@@ -1,14 +1,18 @@
-import { fetchPokemon } from '$lib/pokemons';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params }) => {
-	const { id } = params;
+import { fetchPokemon } from '$lib/server/pokemons';
+import { readSeen } from '$lib/server/seen';
 
-	const pokemon = await fetchPokemon(parseInt(id));
+export const load: PageServerLoad = async ({ params }) => {
+	const id = parseInt(params.id);
+
+	const pokemon = await fetchPokemon(id);
+	const seen = await readSeen();
 
 	return {
-		name: pokemon?.name,
 		id,
-		src: pokemon?.sprites?.front_default
+		name: pokemon?.name,
+		src: pokemon?.sprites?.front_default,
+		found: seen.includes(id)
 	};
 };

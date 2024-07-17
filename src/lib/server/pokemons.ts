@@ -1,5 +1,5 @@
-import { getRandomNb } from './utils';
-import pokemons from './pokemons.json';
+import { getRandomNb } from '../utils';
+import pokemons from '../pokemons.json';
 
 export function fetchPokemon(id: number) {
 	return Promise.resolve(pokemons[id - 1]);

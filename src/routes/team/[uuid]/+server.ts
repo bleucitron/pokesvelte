@@ -1,4 +1,4 @@
-import { readTeam, removeFromTeam } from '$lib/team';
+import { readTeam, removeFromTeam } from '$lib/server/team';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ params }) {

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { team } from '$lib/stores/index.svelte';
-
 	const { data } = $props();
 
 	async function fire(uuid: number) {
@@ -14,7 +12,7 @@
 <h1>Team</h1>
 
 <ul>
-	{#each team.members as { id, uuid }}
+	{#each data.team as { id, uuid }}
 		{@const pokemon = data.pokemons[id - 1]}
 		<li>
 			<img src={pokemon?.sprites.front_default} alt={pokemon?.name} />

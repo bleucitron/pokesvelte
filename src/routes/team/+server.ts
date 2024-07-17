@@ -1,4 +1,4 @@
-import { addToTeam } from '$lib/team';
+import { addToTeam } from '$lib/server/team';
 import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
