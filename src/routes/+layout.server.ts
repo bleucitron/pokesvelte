@@ -3,9 +3,7 @@ import { readSeen } from '$lib/server/seen';
 import { fetchPokemons } from '$lib/server/pokemons';
 
 export async function load() {
-	const pokemons = await fetchPokemons();
-	const seen = await readSeen();
-	const team = await readTeam();
+	const [pokemons, seen, team] = await Promise.all([fetchPokemons(), readSeen(), readTeam()]);
 
 	return {
 		found: seen.length,
