@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 
-import { read, write } from '../iorver/io';
+import { read, write } from './io';
 
 const COOKIE_DB = 'userIdByCookie';
 

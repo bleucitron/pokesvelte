@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
-import { read, write } from '../iorver/io';
-import { registerCookie } from './server/cookiess';
+import { read, write } from './io';
+import { registerCookie } from './cookies';
 
 export type Trainer = {
 	id: string;
