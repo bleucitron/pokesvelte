@@ -12,15 +12,16 @@
 	let wild = $state(25);
 
 	$effect(() => {
-		if (started) {
-			setInterval(() => {
-				const randomId = getRandomNb(151) + 1;
-				console.log('interval', randomId, pokemons?.[randomId - 1]?.name);
+		const intervalId = started
+			? setInterval(() => {
+					const randomId = getRandomNb(151) + 1;
+					console.log('interval', randomId, pokemons?.[randomId - 1]?.name);
 
-				wild = randomId;
-			}, 2000);
-		}
-		console.log(started);
+					wild = randomId;
+				}, 2000)
+			: undefined;
+
+		return () => clearInterval(intervalId);
 	});
 
 	function catchPokemon(id: number, name?: string) {
