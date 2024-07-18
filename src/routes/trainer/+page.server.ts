@@ -1,12 +1,13 @@
 import { fail } from '@sveltejs/kit';
 import { readTrainer, saveTrainer, checkTrainerPassword } from '$lib/server/trainer';
+import { registerCookie } from '$lib/server/cookies.js';
 
 export async function load() {
 	console.log('Loading trainer');
 }
 
 export const actions = {
-	signup: async ({ request }) => {
+	signup: async ({ request, cookies }) => {
 		const data = await request.formData();
 
 		const name = data.get('name');
@@ -40,10 +41,13 @@ export const actions = {
 		}
 
 		const trainer = await saveTrainer(name, password);
+		const cookie = await registerCookie(trainer.id);
+
+		cookies.set('session', cookie, { path: '/' });
 
 		return { success: true, trainer };
 	},
-	login: async ({ request }) => {
+	login: async ({ request, cookies }) => {
 		const data = await request.formData();
 
 		const login = data.get('login');
@@ -63,6 +67,11 @@ export const actions = {
 		}
 
 		const trainer = await readTrainer(login);
+
+		if (trainer) {
+			const cookie = await registerCookie(trainer.id);
+			cookies.set('session', cookie, { path: '/' });
+		}
 
 		return { success: true, trainer };
 	}

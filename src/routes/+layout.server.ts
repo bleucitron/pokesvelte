@@ -2,7 +2,7 @@ import { readTeam } from '$lib/server/team';
 import { readSeen } from '$lib/server/seen';
 import { fetchPokemons } from '$lib/pokemons';
 
-export async function load({ depends }) {
+export async function load({ depends, locals }) {
 	depends('team:update');
 
 	const [pokemons, team, seen] = await Promise.all([fetchPokemons(), readTeam(), readSeen()]);
@@ -10,6 +10,7 @@ export async function load({ depends }) {
 	return {
 		total: pokemons.length,
 		found: seen.length,
-		teamSize: team.length
+		teamSize: team.length,
+		user: locals.user
 	};
 }

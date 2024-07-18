@@ -26,8 +26,12 @@ export const actions = {
 	}
 };
 
-export async function load({ depends }) {
+export async function load({ depends, locals }) {
 	depends('team:update');
+
+	if (!locals.user) {
+		redirect(307, '/');
+	}
 
 	const [pokemons, team] = await Promise.all([fetchPokemons(), readTeam()]);
 	if (!team.length) {

@@ -2,13 +2,13 @@
 	import { page } from '$app/stores';
 	import { enhance } from '$app/forms';
 
-	const { form } = $props();
+	const { data, form } = $props();
 
 	const name = $derived(form?.inputName);
 </script>
 
-{#if form?.success}
-	<h1>Bienvenue {form?.trainer?.name}</h1>
+{#if data.user}
+	<h1>Bienvenue {data.user?.name}</h1>
 {:else}
 	<h1>Dresseur</h1>
 	<div class="forms">

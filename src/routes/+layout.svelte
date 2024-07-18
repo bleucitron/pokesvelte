@@ -3,7 +3,7 @@
 
 	const { children, data } = $props();
 
-	const { total, teamSize, found } = $derived(data);
+	const { total, teamSize, found, user } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived($page);
@@ -22,7 +22,9 @@
 				<a href="/team" class:current={pathname === '/team'}>Équipe({teamSize})</a>
 			</li>
 			<li>
-				<a href="/trainer" class:current={pathname === '/trainer'}>Dresseur</a>
+				<a href="/trainer" class:current={pathname === '/trainer'}
+					>{user ? user.name : 'Dresseur'}</a
+				>
 			</li>
 			<li><a href="/faq" class:current={pathname === '/faq'}>À propos</a></li>
 		</ul>
