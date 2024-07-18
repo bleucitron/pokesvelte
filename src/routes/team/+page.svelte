@@ -17,44 +17,32 @@
 
 <h1>Mon équipe</h1>
 
+{#snippet memberList(members)}
+	<ul>
+		{#each members as member}
+			{@const { id, uuid, main, name } = member}
+			{@const { sprites, name: speciesName } = pokemons[id - 1]}
+			{@const src = sprites.front_default}
+
+			<li>
+				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
+				<form action="?/rename" method="POST" use:enhance>
+					<input name="name" value={name} />
+					<input name="uuid" type="hidden" value={uuid} />
+					<button>Renommer</button>
+					<button class:main formaction="?/toggle">Titulariser</button>
+				</form>
+				<button onclick={() => release(uuid)}>x</button>
+			</li>
+		{/each}
+	</ul>
+{/snippet}
+
 <h2>Titulaires</h2>
-<ul>
-	{#each main as member}
-		{@const { id, uuid, main, name } = member}
-		{@const { sprites, name: speciesName } = pokemons[id - 1]}
-		{@const src = sprites.front_default}
+{@render memberList(main)}
 
-		<li>
-			<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
-			<form action="?/rename" method="POST" use:enhance>
-				<input name="name" value={name} />
-				<input name="uuid" type="hidden" value={uuid} />
-				<button>Renommer</button>
-				<button class:main formaction="?/toggle">Titulariser</button>
-			</form>
-			<button onclick={() => release(uuid)}>x</button>
-		</li>
-	{/each}
-</ul>
 <h2>Remplaçants</h2>
-<ul>
-	{#each other as member}
-		{@const { id, uuid, main, name } = member}
-		{@const { sprites, name: speciesName } = pokemons[id - 1]}
-		{@const src = sprites.front_default}
-
-		<li>
-			<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
-			<form action="?/rename" method="POST" use:enhance>
-				<input name="name" value={name} />
-				<input name="uuid" type="hidden" value={uuid} />
-				<button>Renommer</button>
-				<button class:main formaction="?/toggle">Titulariser</button>
-			</form>
-			<button onclick={() => release(uuid)}>x</button>
-		</li>
-	{/each}
-</ul>
+{@render memberList(other)}
 
 <style>
 	ul {
