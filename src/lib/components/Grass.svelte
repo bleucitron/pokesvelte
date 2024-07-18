@@ -3,11 +3,12 @@
 
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
-	type GrassProps = { pokemons: Pokemon[]; catchPokemon: (id: number) => void };
+	type GrassProps = { pokemons: Pokemon[]; catchPokemon: (id: number) => void; infos: Snippet };
 	type WildType = { id: number; appeared?: number; name: string; sprite: string };
 
-	const { pokemons, catchPokemon }: GrassProps = $props();
+	const { pokemons, catchPokemon, infos }: GrassProps = $props();
 
 	let wilds = $state<WildType[]>([]);
 
@@ -47,10 +48,12 @@
 			escape={() => removeFromWildList(appeared)}
 		/>
 	{/each}
+	{@render infos()}
 </div>
 
 <style>
 	.Grass {
+		position: relative;
 		display: flex;
 		flex-flow: column;
 		flex: 1 0;

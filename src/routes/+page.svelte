@@ -34,15 +34,18 @@
 			{/each}
 		</ul>
 	{:else}
-		<Grass {pokemons} {catchPokemon} />
+		<Grass {pokemons} {catchPokemon}>
+			{#snippet infos()}
+				<section>
+					{#await population}
+						<p>Scan de la zone...</p>
+					{:then nb}
+						<p>{nb} pokémons présents</p>
+					{/await}
+				</section>
+			{/snippet}
+		</Grass>
 	{/if}
-	<section>
-		{#await population}
-			<p>Scan de la zone...</p>
-		{:then nb}
-			<p>{nb} pokémons présents</p>
-		{/await}
-	</section>
 </div>
 
 <style>
