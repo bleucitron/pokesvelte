@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
+	import { flip } from 'svelte/animate';
+	import { crossfade } from 'svelte/transition';
 
 	const { data } = $props();
 
 	const { pokemons, team } = $derived(data);
 
 	const main = $derived(team.filter((p) => p.main));
+
+	const [send, receive] = crossfade({
+		duration: 700
+	});
 	const other = $derived(team.filter((p) => !p.main));
 
 	async function release(uuid: string) {
@@ -19,12 +25,16 @@
 
 {#snippet memberList(members)}
 	<ul>
-		{#each members as member}
+		{#each members as member (member.uuid)}
 			{@const { id, uuid, main, name } = member}
 			{@const { sprites, name: speciesName } = pokemons[id - 1]}
 			{@const src = sprites.front_default}
 
-			<li>
+			<li
+				animate:flip={{ duration: 700 }}
+				in:send={{ key: member.uuid }}
+				out:receive={{ key: member.uuid }}
+			>
 				<img {src} alt={speciesName} width="96" height="96" loading="lazy" />
 				<form action="?/rename" method="POST" use:enhance>
 					<input name="name" value={name} />

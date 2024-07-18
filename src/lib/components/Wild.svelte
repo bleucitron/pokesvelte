@@ -19,7 +19,7 @@
 	let left = $state(0);
 
 	onMount(() => {
-		const lifespan = getRandomNb(1_000, 3_000);
+		const lifespan = getRandomNb(1_000, 5_000);
 		const timeout = escape && setTimeout(escape, lifespan);
 
 		if (escape) {
