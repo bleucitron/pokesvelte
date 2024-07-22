@@ -61,7 +61,8 @@ Créer les pages suivantes, avec du contenu basique :
 
 - `/faq` (la page Foire à questions)
 
-En comptant la page d'accueil,  vous devriez maintenant avoir 4 pages.
+En comptant la page d'accueil, vous devriez maintenant avoir 4 pages.
+
 </fieldset>
 
 ---

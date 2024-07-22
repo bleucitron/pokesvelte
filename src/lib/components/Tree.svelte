@@ -1,0 +1,94 @@
+<script lang="ts">
+	import type { Node } from '$lib/typings';
+	import { slide } from 'svelte/transition';
+	import Tag from './Tag.svelte';
+	import Tree from './Tree.svelte';
+
+	interface Props {
+		folder: Node[];
+		current?: string;
+		depth?: number;
+	}
+	const { folder, current: currentId = '', depth = 0 }: Props = $props();
+	const start = $derived(parseInt(folder[0]?.id?.split('-')?.at(-1) ?? ''));
+
+	let tagsOn = $state(false);
+</script>
+
+<ol class="Tree" {start}>
+	{#each folder as { id, name, path, files, title, scope }}
+		{@const root = depth === 0}
+		{@const current = root ? id && currentId.startsWith(id) : id === currentId}
+		{@const previous = !current && id && id < currentId}
+		{@const next = id > currentId}
+		{@const tagOn = root && scope && (current || tagsOn)}
+
+		<li class={scope} class:root class:current class:previous class:next>
+			<a href={path}>{title || name}</a>
+
+			{#if scope && tagOn}
+				<Tag {scope} onclick={() => (tagsOn = !tagsOn)} />
+			{/if}
+
+			{#if current && files?.length}
+				<div transition:slide={{ duration: 300 }}>
+					<Tree current={currentId} folder={files} depth={depth + 1} />
+				</div>
+			{/if}
+		</li>
+	{/each}
+</ol>
+
+<style>
+	.Tree a {
+		color: unset;
+		&:focus,
+		&:hover {
+			color: var(--dark-grey);
+		}
+	}
+
+	ol:has(.root) {
+		padding-left: 2rem;
+	}
+
+	li {
+		margin-block: 0.8rem;
+		font-size: 0.9rem;
+		text-transform: none;
+
+		:global {
+			ol {
+				padding-left: 1rem;
+			}
+			li {
+				margin: 0;
+			}
+		}
+
+		font-weight: normal;
+		color: var(--grey);
+		transition-property: color, font-weight;
+
+		&.current {
+			color: black !important;
+
+			&.root > a:focus,
+			&.root > a:hover {
+				color: black !important;
+				cursor: default;
+			}
+		}
+
+		&.root {
+			font-size: 1rem;
+		}
+
+		:global {
+			.tag:hover {
+				opacity: 1;
+				cursor: pointer;
+			}
+		}
+	}
+</style>

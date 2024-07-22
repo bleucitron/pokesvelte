@@ -1,159 +1,308 @@
-@font-face {
-	font-family: 'PokemonGb';
-	src: url('/fonts/PokemonGb-RAeo.ttf');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+	scrollbar-width: thin;
+	/* transition: all 0.3s; */
 }
 
 html,
 body {
-	position: relative;
+	--light-blue: #00c3e31c;
+	--blue: #00c3e3;
+	--dark-blue: #008196;
+	--darker-blue: #13616e;
+	--light-pink: #fff1f3;
+	--pink: #ff49a8;
+	--dark-pink: #bf337c;
+	--darker-pink: #a2202b;
+	--light-orange: #d78e1412;
+	--orange: #ffba00;
+	--dark-orange: #ca8311;
+	--light-grey: #ebebeb;
+	--grey: #a5a5a5;
+	--dark-grey: #858585;
+	--darker-grey: #666;
+	--red: #e60012;
+	--light-green: #f2f8f3;
+	--green: #55c75a;
+	--dark-green: #08860d;
+
+	--topbar-height: 4rem;
+	--aside-width: max(12rem, 25vw);
+
+	font-family:
+		'Figtree',
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		Oxygen,
+		Ubuntu,
+		Cantarell,
+		'Fira Sans',
+		'Droid Sans',
+		'Helvetica Neue',
+		sans-serif;
+	font-weight: 400;
 	width: 100%;
 	height: 100%;
 }
-
-* {
-	box-sizing: border-box;
-	font-family: 'PokemonGb';
-}
-
 body {
-	display: flex;
-	flex-flow: column;
-	place-content: center;
-	color: #333;
-	background: #bbb;
-	margin: 0;
-	line-height: 1.5;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
-		'Helvetica Neue', sans-serif;
+	counter-reset: tasks;
+	overflow-y: scroll;
 }
 
-body > div {
-	width: 100%;
-}
-body > div > p {
-	text-align: center;
-}
-
-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 1rem;
-	height: 4rem;
-}
-
-nav ul {
-	display: flex;
-	gap: 1.5rem;
-}
-
-nav a {
-	padding-block: 0.5rem;
-}
-
-nav a.current {
-	color: black;
-	text-decoration: none;
-}
-
-main {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	overflow: auto;
-	flex: 1;
-	align-content: center;
-	align-items: center;
-	padding: 1rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 1.5rem;
+	margin-bottom: 1rem;
+	font-weight: inherit;
 }
 
 h1 {
-	margin: 0;
+	margin-block: 7rem 5rem;
 	text-align: center;
+	font-size: 2.7rem;
+
+	@media (max-width: 1024px) {
+		font-size: 2.4rem;
+		margin-bottom: 0;
+	}
+	@media (max-width: 600px) {
+		font-size: 2rem;
+	}
 }
 
-footer {
-	display: flex;
-	place-content: center;
-	font-size: 0.8rem;
+h2 {
+	border-bottom: 1px solid;
+}
+
+p {
+	font-size: 1.05rem;
+	margin-block: 1rem;
 }
 
 a {
-	color: #888;
+	color: black;
 	text-decoration: none;
+
+	&:focus,
+	&:hover {
+		color: var(--dark-grey);
+	}
+	&::visited {
+		color: inherit;
+	}
+}
+.course a,
+.Tree li:has(> a:hover),
+nav:last-of-type:not(:first-of-type) .next,
+.toc ol a {
+	color: var(--dark-pink);
+	padding: 0;
+	border-radius: 0;
+
+	&:hover,
+	&.active {
+		color: var(--pink);
+		background: none;
+	}
+}
+.course nav a,
+.course nav a.svelte,
+.course nav a.kit {
+	color: var(--dark-grey);
 }
 
-a:hover,
-a:focus-visible {
-	outline: none;
-	text-decoration: underline;
+span.svelte {
+	color: var(--dark-orange);
+}
+span.kit {
+	color: var(--dark-blue);
 }
 
-ul {
-	all: unset;
-	list-style: none;
+.button-link {
+	padding: 0.5rem;
+	border-radius: 6px;
+
+	&:hover,
+	&.active {
+		color: black;
+		background: var(--light-grey);
+	}
+}
+/* li:has(a:hover) { */
+/* 	color: var(--dark-grey); */
+/* } */
+
+h2,
+hr {
+	border-color: var(--pink);
 }
 
-label {
-	display: block;
+.svelte {
+	h2,
+	hr {
+		border-color: var(--orange);
+	}
+	blockquote {
+		color: var(--dark-orange);
+		border-color: var(--dark-orange);
+		background-color: var(--light-orange);
+	}
+}
+.kit {
+	h2,
+	hr {
+		border-color: var(--blue);
+	}
+	blockquote {
+		color: var(--dark-blue);
+		border-color: var(--dark-blue);
+		background-color: var(--light-blue);
+	}
 }
 
-input,
-button,
-select,
-textarea {
-	font-family: inherit;
+.svelte a,
+a.svelte,
+.Tree li.svelte:has(> a:hover),
+nav:last-of-type:not(:first-of-type) .next.svelte {
+	color: var(--dark-orange);
+
+	&:focus,
+	&:hover {
+		color: var(--orange);
+	}
+}
+.kit a,
+a.kit,
+.Tree li.kit:has(> a:hover),
+nav:last-of-type:not(:first-of-type) .next.kit {
+	color: var(--dark-blue);
+
+	&:focus,
+	&:hover {
+		color: var(--blue);
+	}
+}
+
+blockquote {
+	margin-block: 2rem;
+	padding: 0.5rem;
+	font-style: italic;
+	color: var(--dark-pink);
+	border-color: var(--dark-pink);
+	background-color: var(--light-pink);
+	border-left: 4px solid;
+	border-radius: 5px;
+
+	a {
+		color: var(--darker-pink);
+		text-decoration: underline;
+	}
+	a:hover,
+	a:focus {
+		color: black;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+code {
+	color: var(--darker-grey);
+	font-size: 0.9rem;
+}
+
+pre code,
+h1 code,
+h2 code {
 	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-	margin: 0;
 }
 
-input {
-	padding: 0 0.5rem;
-	padding-top: 0.3rem;
-	line-height: 1.7;
+h1,
+h2 {
+	code {
+		color: inherit;
+	}
 }
 
-input:disabled {
-	color: #ccc;
+pre {
+	margin-block: 1rem;
+	padding: 0.5rem 1rem;
+	tab-size: 4;
+
+	code {
+		color: inherit;
+		text-wrap: wrap;
+	}
 }
 
-input::placeholder {
-	overflow: visible;
-	opacity: 0.5;
+fieldset {
+	legend {
+		font-size: 1.5rem;
+	}
+}
+
+h2:has(+ .task) {
+	border: none;
+	margin-bottom: 0;
+}
+
+.task {
+	padding: 1rem;
+	border: 2px solid var(--green);
+	border-radius: 5px;
+
+	p:first-of-type {
+		margin-top: 0rem;
+	}
+
+	blockquote {
+		border-left-color: var(--green);
+		background-color: var(--light-green);
+		color: var(--dark-green);
+	}
+
+	li {
+		margin-block: 0.5rem;
+		counter-increment: tasks;
+
+		&::marker {
+			content: '#' counter(tasks) ' ';
+			font-size: 1.2rem;
+			color: var(--green);
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+
+	code {
+		color: var(--dark-green);
+		font-weight: 500;
+	}
 }
 
 button {
-	color: #333;
-	outline: none;
-	background-color: transparent;
 	border: none;
-	border-radius: 0;
-	cursor: pointer;
+	background: white;
+	box-shadow: none;
+	color: inherit;
+
+	&:hover {
+		cursor: pointer;
+	}
 }
 
-button:disabled {
-	color: #999;
-}
-
-button:not(:disabled):active {
-	background-color: #999;
-}
-
-button:focus,
-button:hover {
-	background-color: #777;
-	color: white;
-}
-
-#app {
-	display: flex;
-	height: 100vh;
-	flex-flow: column;
+hr {
+	margin-block: 2rem 1rem;
+	border: none;
+	border-bottom: 1px solid;
 }

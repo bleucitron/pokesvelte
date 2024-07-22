@@ -33,7 +33,7 @@ Le dossier `src` contient les fichiers sources de votre projet. Il contient nota
 - `lib/`: un dossier pour organiser vos fichiers de composants, vos utilitaires,... vous pouvez y
   faire référence depuis n'importe quel fichier du projet avec **l'alias `$lib` fourni par défaut**.
 - `routes/`: le dossier contenant vos fichiers de routes. **C'est ici que vous construisez vos
-pages** en vous servant du système de routing basé sur les noms de fichiers que SvelteKit fournit.
+  pages** en vous servant du système de routing basé sur les noms de fichiers que SvelteKit fournit.
 - `app.html`: la racine HTML de votre application.
 
 > Notez que vous pouvez ne pas utiliser le dossier `lib/` ou le supprimer sans conséquence. Vous
