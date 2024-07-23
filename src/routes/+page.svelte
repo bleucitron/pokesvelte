@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { Node } from '$lib/server';
+	import type { Node } from '$lib';
 
 	const { data } = $props();
 	const { tree } = $derived(data);
-	$inspect(tree);
 </script>
 
 {#snippet step(folder: Node[])}
