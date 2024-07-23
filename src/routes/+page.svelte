@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Node } from './+page.server.ts';
+	import type { Node } from '$lib/server';
+
 	const { data } = $props();
 	const { tree } = $derived(data);
 	$inspect(tree);

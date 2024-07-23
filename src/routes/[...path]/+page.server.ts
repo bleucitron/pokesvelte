@@ -1,8 +1,8 @@
-import { parse } from '$lib';
+import { parseMdFile } from '$lib/server';
 
 export async function load({ params: { path } }) {
-	console.log('PATH', path);
-	const { content, options } = await parse(path);
+	const { content, options } = await parseMdFile(path);
+
 	return {
 		content,
 		options
