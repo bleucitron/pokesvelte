@@ -6,6 +6,8 @@ import markdownit from 'markdown-it';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
 import Shiki from '@shikijs/markdown-it';
 
+import type { Node } from '$lib';
+
 const md = markdownit({ html: true })
 	.use(
 		await Shiki({
@@ -26,12 +28,6 @@ export async function parseMdFile(path: string) {
 	return { content: rendered, options: env.frontmatter };
 }
 
-export type Node = {
-	name: string;
-	path: string;
-	files?: Node[];
-};
-
 export async function readDir(path: string): Promise<Node[]> {
 	const dir = await readdir(path, { withFileTypes: true });
 
@@ -41,9 +37,10 @@ export async function readDir(path: string): Promise<Node[]> {
 			const path = join(parentPath, name);
 			const files = item.isDirectory() ? await readDir(path) : undefined;
 
+			const webPath = path.replace('.md', '').replace('course', '');
 			return {
 				name,
-				path: path.replace('.md', '').replace('course', ''),
+				path: webPath,
 				files
 			};
 		})
