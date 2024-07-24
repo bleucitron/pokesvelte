@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { findCurrent } from '$lib';
-
+	import type { Node } from '$lib/server';
 	const { data } = $props();
-	const { tree } = $derived(data);
-
-	const found = $derived(findCurrent($page.params.path, tree));
+	const { current, prev, next, localTree, parentLink } = $derived(data);
 </script>
 
-{#if found}
-	{@const { prev, next } = found}
+<a href={parentLink}>Parent</a>
+{#if current}
 	<nav>
 		{#if prev}
 			<a href={prev.path}>{prev.name}</a>
@@ -18,5 +14,21 @@
 			<a href={next.path}>{next.name}</a>
 		{/if}
 	</nav>
+	{@html data.content}
+{:else}
+	{#snippet step(folder: Node[])}
+		<ul>
+			{#each folder as { name, path, files }}
+				<li><a href={path}>{name}</a></li>
+				{#if files}
+					{@render step(files)}
+				{/if}
+			{/each}
+		</ul>
+	{/snippet}
+
+	{@render step(localTree)}
 {/if}
-{@html data.content}
+
+<style lang="postcss">
+</style>
