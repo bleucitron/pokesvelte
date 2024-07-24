@@ -5,8 +5,8 @@ import { join } from 'path';
 import markdownit from 'markdown-it';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
 import Shiki from '@shikijs/markdown-it';
-
-import type { Node } from '$lib';
+import { normalizePath } from '$lib/helpers';
+import { CONTENT_FOLDER } from '$lib/constants';
 
 const md = markdownit({ html: true })
 	.use(
@@ -20,12 +20,17 @@ const md = markdownit({ html: true })
 	.use(frontmatterPlugin);
 
 export async function parseMdFile(path: string) {
-	const content = (await readFile(join('course', `${path}.md`))).toString();
-	const env: MarkdownItEnv = {};
+	try {
+		const content = (await readFile(join(CONTENT_FOLDER, `${path}.md`))).toString();
 
-	const rendered = md.render(content, env);
+		const env: MarkdownItEnv = {};
 
-	return { content: rendered, options: env.frontmatter };
+		const rendered = md.render(content, env);
+
+		return { content: rendered, options: env.frontmatter };
+	} catch {
+		return null;
+	}
 }
 
 export async function readDir(path: string): Promise<Node[]> {
@@ -37,7 +42,7 @@ export async function readDir(path: string): Promise<Node[]> {
 			const path = join(parentPath, name);
 			const files = item.isDirectory() ? await readDir(path) : undefined;
 
-			const webPath = path.replace('.md', '').replace('course', '');
+			const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
 			return {
 				name,
 				path: webPath,
@@ -47,4 +52,26 @@ export async function readDir(path: string): Promise<Node[]> {
 	);
 
 	return entries;
+}
+
+export type Node = {
+	name: string;
+	path: string;
+	files?: Node[];
+};
+
+function flatten(tree: Node[]): Node[] {
+	return tree.flatMap((node) => (node.files ? flatten(node.files) : node));
+}
+
+export function findCurrent(path: string | undefined, tree: Node[]) {
+	if (!path) return undefined;
+
+	path = normalizePath(path);
+
+	const flatMap = flatten(tree);
+
+	const current = flatMap.findIndex((node) => node.path === path);
+
+	return { current: flatMap[current], prev: flatMap[current - 1], next: flatMap[current + 1] };
 }
