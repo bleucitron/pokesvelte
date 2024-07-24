@@ -61,7 +61,7 @@ export type Node = {
 };
 
 function flatten(tree: Node[]): Node[] {
-	return tree.flatMap((node) => (node.files ? flatten(node.files) : node));
+	return tree.flatMap((node) => (node.files ? [node, ...flatten(node.files)] : node));
 }
 
 export function findCurrent(path: string | undefined, tree: Node[]) {
@@ -71,7 +71,11 @@ export function findCurrent(path: string | undefined, tree: Node[]) {
 
 	const flatMap = flatten(tree);
 
-	const current = flatMap.findIndex((node) => node.path === path);
+	const currentPosition = flatMap.findIndex((node) => node.path === path);
 
-	return { current: flatMap[current], prev: flatMap[current - 1], next: flatMap[current + 1] };
+	let prev = flatMap[currentPosition - 1];
+	const current = flatMap[currentPosition];
+	const next = flatMap[currentPosition + 1];
+
+	return { current, prev, next };
 }
