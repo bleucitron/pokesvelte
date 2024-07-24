@@ -6,7 +6,7 @@ import { dirname, join } from 'path';
 export async function load({ params: { path }, parent }) {
 	const [mdContent, { tree }] = await Promise.all([parseMdFile(path), parent()]);
 
-	const found = mdContent && findCurrent(path, tree);
+	const found = findCurrent(path, tree);
 	const localTree = await readDir(join(CONTENT_FOLDER, mdContent ? dirname(path) : path));
 
 	return {
