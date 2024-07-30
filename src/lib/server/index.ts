@@ -11,10 +11,7 @@ import { CONTENT_FOLDER } from '$lib/constants';
 const md = markdownit({ html: true })
 	.use(
 		await Shiki({
-			themes: {
-				light: 'vitesse-light',
-				dark: 'vitesse-dark'
-			}
+			theme: 'monokai'
 		})
 	)
 	.use(frontmatterPlugin);

@@ -6,40 +6,76 @@
 	const parentName = $derived(parentLink === '/' ? 'Table des matières' : parentLink);
 </script>
 
-{#if current}
-	<!-- TODO: fil d'ariane -->
-	<a href={parentLink}>{parentName}</a>
-{/if}
+{#snippet nav()}
+	<nav>
+		{#if prev}
+			<a class:folder={!!prev.files} href={prev.path}>{prev.name}</a>
+		{:else}
+			<span></span>
+		{/if}
+		{#if next}
+			<a class:folder={!!next.files} href={next.path}>{next.name}</a>
+		{:else}
+			<span></span>
+		{/if}
+	</nav>
+{/snippet}
 
-<nav>
-	{#if prev}
-		<a class:folder={!!prev.files} href={prev.path}>{prev.name}</a>
-	{/if}
-	{#if next}
-		<a class:folder={!!next.files} href={next.path}>{next.name}</a>
-	{/if}
-</nav>
-{#if content}
-	{@html content}
-{:else}
-	{@const title = current?.name ?? 'Table des matières'}
-	{#snippet step(folder: Node[])}
-		<ul>
-			{#each folder as { name, path, files }}
-				<li><a href={path}>{name}</a></li>
-				{#if files}
-					{@render step(files)}
-				{/if}
-			{/each}
-		</ul>
-	{/snippet}
+{@render nav()}
 
-	<h1>{title}</h1>
-	{@render step(localTree)}
-{/if}
+<article>
+	{#if content}
+		<a class="parent" href={parentLink}>{parentName}</a>
+		{@html content}
+	{:else}
+		{@const title = current?.name ?? 'Table des matières'}
+
+		{#if current}
+			<!-- TODO: fil d'ariane -->
+			<a class="parent" href={parentLink}>{parentName}</a>
+		{/if}
+		{#snippet step(folder: Node[])}
+			<ol>
+				{#each folder as { name, path, files }}
+					<li class:folder={!!files}><a href={path}>{name}</a></li>
+					{#if files}
+						{@render step(files)}
+					{/if}
+				{/each}
+			</ol>
+		{/snippet}
+
+		<h1>{title}</h1>
+		{@render step(localTree)}
+	{/if}
+</article>
+
+{@render nav()}
 
 <style lang="postcss">
-	.folder {
+	nav {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	article {
+		margin-block: 5rem;
+		flex: 1;
+	}
+
+	.parent {
+		display: inline-block;
+		margin-top: 3rem;
+	}
+
+	a.folder {
 		font-weight: bold;
+	}
+	li {
+		font-size: 1.2rem;
+
+		&.folder {
+			font-size: 2rem;
+		}
 	}
 </style>
