@@ -6,18 +6,19 @@
 	const parentName = $derived(parentLink === '/' ? 'Table des matières' : parentLink);
 </script>
 
+{#snippet link(node: Node | undefined)}
+	{#if node}
+		{@const { files, path, name, title } = node}
+		<a class:folder={!!files} href={path}>{title ?? name}</a>
+	{:else}
+		<span></span>
+	{/if}
+{/snippet}
+
 {#snippet nav()}
 	<nav>
-		{#if prev}
-			<a class:folder={!!prev.files} href={prev.path}>{prev.name}</a>
-		{:else}
-			<span></span>
-		{/if}
-		{#if next}
-			<a class:folder={!!next.files} href={next.path}>{next.name}</a>
-		{:else}
-			<span></span>
-		{/if}
+		{@render link(prev)}
+		{@render link(next)}
 	</nav>
 {/snippet}
 
@@ -36,8 +37,8 @@
 		{/if}
 		{#snippet step(folder: Node[])}
 			<ol>
-				{#each folder as { name, path, files }}
-					<li class:folder={!!files}><a href={path}>{name}</a></li>
+				{#each folder as { name, path, files, title }}
+					<li class:folder={!!files}><a href={path}>{title ?? name}</a></li>
 					{#if files}
 						{@render step(files)}
 					{/if}

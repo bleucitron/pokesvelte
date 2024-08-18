@@ -4,6 +4,7 @@ import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import markdownit from 'markdown-it';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
+import { titlePlugin } from '@mdit-vue/plugin-title';
 import Shiki from '@shikijs/markdown-it';
 import { normalizePath } from '$lib/helpers';
 import { CONTENT_FOLDER } from '$lib/constants';
@@ -14,17 +15,18 @@ const md = markdownit({ html: true })
 			theme: 'monokai'
 		})
 	)
+	.use(titlePlugin)
 	.use(frontmatterPlugin);
 
-export async function parseMdFile(path: string) {
+export async function parseMdFile(path: string, parser = md) {
 	try {
 		const content = (await readFile(join(CONTENT_FOLDER, `${path}.md`))).toString();
 
 		const env: MarkdownItEnv = {};
 
-		const rendered = md.render(content, env);
+		const rendered = parser.render(content, env);
 
-		return { content: rendered, options: env.frontmatter };
+		return { ...env, content: rendered };
 	} catch {
 		return null;
 	}
@@ -40,10 +42,13 @@ export async function readDir(path: string): Promise<Node[]> {
 			const files = item.isDirectory() ? await readDir(path) : undefined;
 
 			const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
+			const parsed = await parseMdFile(webPath);
+
 			return {
 				name,
 				path: webPath,
-				files
+				files,
+				title: parsed?.title || name
 			};
 		})
 	);
@@ -54,6 +59,7 @@ export async function readDir(path: string): Promise<Node[]> {
 export type Node = {
 	name: string;
 	path: string;
+	title: string;
 	files?: Node[];
 };
 
