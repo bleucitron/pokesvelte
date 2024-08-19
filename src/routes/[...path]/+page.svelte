@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Node } from '$lib/server';
-	const { data } = $props();
-	const { content, current, prev, next, localTree, parentLink } = $derived(data);
 
-	const parentName = $derived(parentLink === '/' ? 'Table des matières' : parentLink);
+	const { data } = $props();
+	const { content, current, prev, next, localTree, parent } = $derived(data);
 </script>
 
 {#snippet link(node: Node | undefined)}
@@ -22,18 +21,25 @@
 	</nav>
 {/snippet}
 
+{#snippet parentLink(parent: Node | undefined)}
+	{@const path = parent?.path ?? '/'}
+	{@const title = parent?.title ?? 'Table des matières'}
+
+	<a class="parent" href={path}>{title}</a>
+{/snippet}
+
 {@render nav()}
 
 <article>
 	{#if content}
-		<a class="parent" href={parentLink}>{parentName}</a>
+		{@render parentLink(parent)}
 		{@html content}
 	{:else}
-		{@const title = current?.name ?? 'Table des matières'}
+		{@const title = current?.title ?? 'Table des matières'}
 
 		{#if current}
 			<!-- TODO: fil d'ariane -->
-			<a class="parent" href={parentLink}>{parentName}</a>
+			{@render parentLink(parent)}
 		{/if}
 		{#snippet step(folder: Node[])}
 			<ol>
