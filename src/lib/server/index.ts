@@ -24,15 +24,18 @@ export async function parseMdFile(path: string) {
 		if (!path.startsWith(CONTENT_FOLDER)) path = join(CONTENT_FOLDER, path);
 		if (!path.endsWith('.md')) path = `${path}.md`;
 
-		const content = (await readFile(path)).toString();
+		const fileContent = (await readFile(path)).toString();
 
 		const env: MarkdownItEnv = {};
 
-		const rendered = md.render(content, env);
+		const rendered = md.render(fileContent, env);
+		const { content, ...rest } = env;
 
-		return { ...env, content: rendered };
+		const output = { ...rest, markup: rendered };
+
+		return output;
 	} catch {
-		return null;
+		return;
 	}
 }
 
@@ -57,7 +60,7 @@ export async function readDir(path: string): Promise<Node[]> {
 					name,
 					path: webPath,
 					files,
-					title: parsed?.title || name
+					...parsed
 				};
 			})
 	);
@@ -67,6 +70,13 @@ export async function readDir(path: string): Promise<Node[]> {
 
 function flatten(tree: Node[]): Node[] {
 	return tree.flatMap((node) => (node.files ? [node, ...flatten(node.files)] : node));
+}
+
+function cleanNode(node: Node | undefined) {
+	if (!node) return;
+
+	const { files, markup, excerpt, frontmatter, ...cleaned } = node;
+	return cleaned;
 }
 
 export function findCurrent(
@@ -97,9 +107,10 @@ export function findCurrent(
 	const parentPath = dirname(path);
 	const parent = parentPath !== '/' ? findCurrent(parentPath, tree) : undefined;
 
-	delete prev?.files;
-	delete next?.files;
-	delete parent?.current?.files;
-
-	return { current, prev, next, parent: parent?.current };
+	return {
+		current,
+		prev: cleanNode(prev),
+		next: cleanNode(next),
+		parent: cleanNode(parent?.current)
+	};
 }

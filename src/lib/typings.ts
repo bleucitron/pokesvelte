@@ -1,7 +1,9 @@
-export type Node = {
+import type { MarkdownItEnv } from '@mdit-vue/types';
+
+export interface Node extends MarkdownItEnv {
 	id?: string;
 	name: string;
 	path: string;
-	title: string;
+	markup?: string;
 	files?: Node[];
-};
+}

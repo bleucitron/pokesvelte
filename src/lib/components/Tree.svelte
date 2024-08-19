@@ -5,11 +5,12 @@
 		folder: Node[];
 	}
 	const { folder }: Props = $props();
+	const start = parseInt(folder[0]?.id?.split('-')?.at(-1) ?? '');
 </script>
 
-<ol>
+<ol {start}>
 	{#each folder as { name, path, files, title }}
-		<li class:folder={!!files}><a href={path}>{title ?? name}</a></li>
+		<li class:folder={!!files}><a href={path}>{title || name}</a></li>
 		{#if files}
 			<svelte:self folder={files} />
 		{/if}
