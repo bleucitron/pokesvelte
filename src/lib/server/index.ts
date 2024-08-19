@@ -1,4 +1,5 @@
 import type { MarkdownItEnv } from '@mdit-vue/types';
+import type { Node } from '$lib/typings';
 
 import { readFile, readdir } from 'fs/promises';
 import { dirname, join } from 'path';
@@ -64,14 +65,6 @@ export async function readDir(path: string): Promise<Node[]> {
 	return entries;
 }
 
-export type Node = {
-	id?: string;
-	name: string;
-	path: string;
-	title: string;
-	files?: Node[];
-};
-
 function flatten(tree: Node[]): Node[] {
 	return tree.flatMap((node) => (node.files ? [node, ...flatten(node.files)] : node));
 }
@@ -81,7 +74,7 @@ export function findCurrent(
 	tree: Node[]
 ):
 	| {
-			current?: Node;
+			current: Node;
 			prev?: Node;
 			next?: Node;
 			parent?: Node;
@@ -95,8 +88,10 @@ export function findCurrent(
 
 	const currentPosition = flatMap.findIndex((node) => node.path === path);
 
-	let prev = flatMap[currentPosition - 1];
 	const current = flatMap[currentPosition];
+	if (!current) return undefined;
+
+	const prev = flatMap[currentPosition - 1];
 	const next = flatMap[currentPosition + 1];
 
 	const parentPath = dirname(path);

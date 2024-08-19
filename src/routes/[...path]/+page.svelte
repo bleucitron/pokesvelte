@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { Node } from '$lib/server';
+	import Tree from '$lib/components/Tree.svelte';
+	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
-	const { content, current, prev, next, localTree, parent } = $derived(data);
+	const { content, current, prev, next, parent, tree } = $derived(data);
 </script>
 
 {#snippet link(node: Node | undefined)}
@@ -41,19 +42,10 @@
 			<!-- TODO: fil d'ariane -->
 			{@render parentLink(parent)}
 		{/if}
-		{#snippet step(folder: Node[])}
-			<ol>
-				{#each folder as { name, path, files, title }}
-					<li class:folder={!!files}><a href={path}>{title ?? name}</a></li>
-					{#if files}
-						{@render step(files)}
-					{/if}
-				{/each}
-			</ol>
-		{/snippet}
 
 		<h1>{title}</h1>
-		{@render step(localTree)}
+
+		<Tree folder={current?.files ?? tree} />
 	{/if}
 </article>
 
@@ -77,12 +69,5 @@
 
 	a.folder {
 		font-weight: bold;
-	}
-	li {
-		font-size: 1.2rem;
-
-		&.folder {
-			font-size: 2rem;
-		}
 	}
 </style>
