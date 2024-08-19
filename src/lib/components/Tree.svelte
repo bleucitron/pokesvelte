@@ -3,16 +3,17 @@
 
 	interface Props {
 		folder: Node[];
+		depth?: number;
 	}
-	const { folder }: Props = $props();
+	const { folder, depth = 0 }: Props = $props();
 	const start = parseInt(folder[0]?.id?.split('-')?.at(-1) ?? '');
 </script>
 
 <ol {start}>
 	{#each folder as { name, path, files, title }}
-		<li class:folder={!!files}><a href={path}>{title || name}</a></li>
+		<li class:folder={depth === 0}><a href={path}>{title || name}</a></li>
 		{#if files}
-			<svelte:self folder={files} />
+			<svelte:self folder={files} depth={depth + 1} />
 		{/if}
 	{/each}
 </ol>
