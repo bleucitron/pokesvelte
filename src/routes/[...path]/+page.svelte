@@ -3,7 +3,10 @@
 	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
-	const { content, current, prev, next, parent, tree } = $derived(data);
+	const { current, prev, next, parent } = $derived(data);
+	const { markup, title, name, files } = $derived(current);
+
+	$inspect(data);
 </script>
 
 {#snippet link(node: Node | undefined)}
@@ -32,20 +35,18 @@
 {@render nav()}
 
 <article>
-	{#if content}
-		{@render parentLink(parent)}
-		{@html content}
-	{:else}
-		{@const title = current?.title ?? 'Table des matières'}
+	<!-- TODO: fil d'ariane -->
+	{@render parentLink(parent)}
 
-		{#if current}
-			<!-- TODO: fil d'ariane -->
-			{@render parentLink(parent)}
-		{/if}
+	{#if !title}
+		<h1>{name}</h1>
+	{/if}
+	{#if markup}
+		{@html markup}
+	{/if}
 
-		<h1>{title}</h1>
-
-		<Tree folder={current?.files ?? tree} />
+	{#if files?.length}
+		<Tree folder={files} />
 	{/if}
 </article>
 
