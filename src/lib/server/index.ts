@@ -1,7 +1,7 @@
 import type { MarkdownItEnv } from '@mdit-vue/types';
 
 import { readFile, readdir } from 'fs/promises';
-import { join } from 'path';
+import { dirname, join } from 'path';
 import markdownit from 'markdown-it';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
 import { titlePlugin } from '@mdit-vue/plugin-title';
@@ -18,13 +18,16 @@ const md = markdownit({ html: true })
 	.use(titlePlugin)
 	.use(frontmatterPlugin);
 
-export async function parseMdFile(path: string, parser = md) {
+export async function parseMdFile(path: string) {
 	try {
-		const content = (await readFile(join(CONTENT_FOLDER, `${path}.md`))).toString();
+		if (!path.startsWith(CONTENT_FOLDER)) path = join(CONTENT_FOLDER, path);
+		if (!path.endsWith('.md')) path = `${path}.md`;
+
+		const content = (await readFile(path)).toString();
 
 		const env: MarkdownItEnv = {};
 
-		const rendered = parser.render(content, env);
+		const rendered = md.render(content, env);
 
 		return { ...env, content: rendered };
 	} catch {
@@ -36,27 +39,33 @@ export async function readDir(path: string): Promise<Node[]> {
 	const dir = await readdir(path, { withFileTypes: true });
 
 	const entries = await Promise.all(
-		dir.map(async (item) => {
-			const { name, parentPath } = item;
-			const path = join(parentPath, name);
-			const files = item.isDirectory() ? await readDir(path) : undefined;
+		dir
+			.filter((item) => item.name !== 'index.md')
+			.map(async (item) => {
+				const { name, parentPath } = item;
+				const path = join(parentPath, name);
+				const isDirectory = item.isDirectory();
+				const files = isDirectory ? await readDir(path) : undefined;
 
-			const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
-			const parsed = await parseMdFile(webPath);
+				const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
+				const parsed = await parseMdFile(isDirectory ? join(path, 'index.md') : webPath);
 
-			return {
-				name,
-				path: webPath,
-				files,
-				title: parsed?.title || name
-			};
-		})
+				const id = path.match(/(\d\d)/g)?.join('-');
+				return {
+					id,
+					name,
+					path: webPath,
+					files,
+					title: parsed?.title || name
+				};
+			})
 	);
 
 	return entries;
 }
 
 export type Node = {
+	id?: string;
 	name: string;
 	path: string;
 	title: string;
@@ -67,7 +76,17 @@ function flatten(tree: Node[]): Node[] {
 	return tree.flatMap((node) => (node.files ? [node, ...flatten(node.files)] : node));
 }
 
-export function findCurrent(path: string | undefined, tree: Node[]) {
+export function findCurrent(
+	path: string | undefined,
+	tree: Node[]
+):
+	| {
+			current?: Node;
+			prev?: Node;
+			next?: Node;
+			parent?: Node;
+	  }
+	| undefined {
 	if (!path) return undefined;
 
 	path = normalizePath(path);
@@ -80,5 +99,12 @@ export function findCurrent(path: string | undefined, tree: Node[]) {
 	const current = flatMap[currentPosition];
 	const next = flatMap[currentPosition + 1];
 
-	return { current, prev, next };
+	const parentPath = dirname(path);
+	const parent = parentPath !== '/' ? findCurrent(parentPath, tree) : undefined;
+
+	delete prev?.files;
+	delete next?.files;
+	delete parent?.current?.files;
+
+	return { current, prev, next, parent: parent?.current };
 }
