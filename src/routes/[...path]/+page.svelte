@@ -85,6 +85,7 @@
 		display: block;
 		margin-top: 3rem;
 		margin-bottom: 0.5rem;
+		font-weight: bold;
 		text-align: center;
 		text-transform: uppercase;
 	}
@@ -92,7 +93,6 @@
 	h1 {
 		text-align: center;
 		line-height: 1.2;
-		border-bottom: 1px solid var(--blue);
 
 		span {
 			font-size: 1.8rem;
