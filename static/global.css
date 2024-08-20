@@ -51,6 +51,7 @@ h2 {
 }
 
 p {
+	font-size: 1rem;
 	margin-block: 1rem;
 }
 
@@ -68,6 +69,19 @@ a::visited {
 
 code {
 	color: var(--dark-blue);
+	font-size: 0.9rem;
+}
+
+a code,
+h1 code,
+h2 code {
+	color: inherit;
+}
+
+pre code,
+h1 code,
+h2 code {
+	font-size: inherit;
 }
 
 pre {
@@ -80,6 +94,7 @@ pre code {
 
 .task ul {
 	padding-block: 0.5rem;
+	padding-right: 1rem;
 	background-color: var(--darker-blue);
 	color: white;
 }
@@ -90,6 +105,7 @@ pre code {
 }
 
 hr {
+	margin-block: 2rem;
 	border: none;
 	border-bottom: 1px solid var(--blue);
 }
