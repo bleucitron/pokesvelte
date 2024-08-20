@@ -6,8 +6,10 @@ body {
 	--blue: #00c3e3;
 	--dark-blue: #008196;
 	--darker-blue: #166e7d;
+	--light-pink: #fff1f3;
 	--pink: #ff4554;
 	--dark-pink: #d63a47;
+	--darker-pink: #a2202b;
 	--light-orange: #ffdd92;
 	--light-grey: #aaaaaa;
 	--grey: #414548;
@@ -29,6 +31,9 @@ body {
 	font-weight: 400;
 	width: 100%;
 	height: 100%;
+}
+body {
+	counter-reset: tasks;
 }
 
 h1,
@@ -59,26 +64,28 @@ p {
 a {
 	color: var(--dark-pink);
 	text-decoration: none;
-}
-a:focus,
-a:hover {
-	text-decoration: underline;
-}
-a::visited {
-	color: inherit;
+
+	&:focus,
+	&:hover {
+		text-decoration: underline;
+	}
+	&::visited {
+		color: inherit;
+	}
 }
 
 blockquote {
 	margin-block: 1rem;
 	padding: 0.5rem;
 	font-style: italic;
-	border-left: 4px solid var(--blue);
-	background-color: var(--light-blue);
 	color: var(--dark-blue);
-}
+	border-left: 4px solid var(--blue);
+	border-radius: 5px;
+	background-color: var(--light-blue);
 
-blockquote p {
-	margin: 0;
+	p {
+		margin: 0;
+	}
 }
 
 code {
@@ -101,21 +108,48 @@ h2 code {
 pre {
 	padding: 1rem;
 	tab-size: 4;
-}
-pre code {
-	color: inherit;
+
+	code {
+		color: inherit;
+		text-wrap: wrap;
+	}
 }
 
-.task ul {
-	padding-block: 0.5rem;
-	padding-right: 1rem;
-	background-color: var(--darker-blue);
-	color: white;
+h2:has(+ .task) {
+	border: none;
+	margin-bottom: 0;
 }
 
-.task code {
-	color: var(--light-orange);
-	font-weight: bold;
+.task {
+	padding: 1rem;
+	border: 1px solid var(--pink);
+	border-radius: 5px;
+
+	blockquote {
+		border-left-color: var(--pink);
+		background-color: var(--light-pink);
+		color: var(--darker-pink);
+	}
+
+	li {
+		margin-block: 0.5rem;
+		counter-increment: tasks;
+
+		&::marker {
+			content: '#' counter(tasks) ' ';
+			font-size: 1.2rem;
+			color: var(--pink);
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+
+	code {
+		color: var(--dark-pink);
+		font-weight: 500;
+	}
 }
 
 hr {
