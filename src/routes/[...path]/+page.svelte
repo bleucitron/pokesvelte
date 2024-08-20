@@ -64,6 +64,7 @@
 	nav {
 		display: flex;
 		justify-content: space-between;
+		margin-block: 1rem;
 	}
 
 	.nav-link span,
@@ -72,7 +73,7 @@
 	}
 
 	article {
-		margin-block: 5rem;
+		margin-block: 3rem;
 		flex: 1;
 	}
 
