@@ -31,7 +31,8 @@ export async function parseMdFile(path: string) {
 		const rendered = md.render(fileContent, env);
 		const { content, ...rest } = env;
 
-		const output = { ...rest, markup: rendered };
+		const renderedWithoutTitle = rendered.replace(/<h1>.+<\/h1>/g, '');
+		const output = { ...rest, markup: renderedWithoutTitle };
 
 		return output;
 	} catch {
