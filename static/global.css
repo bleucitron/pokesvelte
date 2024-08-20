@@ -2,6 +2,7 @@
 
 html,
 body {
+	--light-blue: #00c3e31c;
 	--blue: #00c3e3;
 	--dark-blue: #008196;
 	--darker-blue: #166e7d;
@@ -65,6 +66,19 @@ a:hover {
 }
 a::visited {
 	color: inherit;
+}
+
+blockquote {
+	margin-block: 1rem;
+	padding: 0.5rem;
+	font-style: italic;
+	border-left: 4px solid var(--blue);
+	background-color: var(--light-blue);
+	color: var(--dark-blue);
+}
+
+blockquote p {
+	margin: 0;
 }
 
 code {
