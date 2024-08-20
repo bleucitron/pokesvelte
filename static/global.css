@@ -3,7 +3,9 @@
 html,
 body {
 	--blue: #00c3e3;
+	--dark-blue: #008196;
 	--pink: #ff4554;
+	--dark-pink: #d63a47;
 	--light-grey: #aaaaaa;
 	--grey: #414548;
 	--red: #e60012;
@@ -51,20 +53,27 @@ p {
 }
 
 a {
-	color: var(--pink);
+	color: var(--dark-pink);
 	text-decoration: none;
 }
 a:focus,
 a:hover {
-	color: var(--red);
+	text-decoration: underline;
 }
 a::visited {
 	color: inherit;
 }
 
+code {
+	color: var(--dark-blue);
+}
+
 pre {
 	padding: 1rem;
 	tab-size: 4;
+}
+pre code {
+	color: inherit;
 }
 
 hr {
