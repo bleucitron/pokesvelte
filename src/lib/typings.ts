@@ -1,9 +1,10 @@
 import type { MarkdownItEnv } from '@mdit-vue/types';
 
 export interface Node extends MarkdownItEnv {
-	id?: string;
+	id: string;
 	name: string;
 	path: string;
 	markup?: string;
 	files?: Node[];
+	isFolder?: boolean;
 }

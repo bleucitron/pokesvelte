@@ -54,12 +54,13 @@ export async function readDir(path: string): Promise<Node[]> {
 				const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
 				const parsed = await parseMdFile(isDirectory ? join(path, 'index.md') : webPath);
 
-				const id = path.match(/(\d\d)/g)?.join('-');
+				const id = path.match(/(\d\d)/g)?.join('-') ?? '';
 				return {
 					id,
 					name,
 					path: webPath,
 					files,
+					isFolder: !!files?.length,
 					...parsed
 				};
 			})
