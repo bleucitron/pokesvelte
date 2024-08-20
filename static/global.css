@@ -4,8 +4,10 @@ html,
 body {
 	--blue: #00c3e3;
 	--dark-blue: #008196;
+	--darker-blue: #166e7d;
 	--pink: #ff4554;
 	--dark-pink: #d63a47;
+	--light-orange: #ffdd92;
 	--light-grey: #aaaaaa;
 	--grey: #414548;
 	--red: #e60012;
@@ -74,6 +76,17 @@ pre {
 }
 pre code {
 	color: inherit;
+}
+
+.task ul {
+	padding-block: 0.5rem;
+	background-color: var(--darker-blue);
+	color: white;
+}
+
+.task code {
+	color: var(--light-orange);
+	font-weight: bold;
 }
 
 hr {
