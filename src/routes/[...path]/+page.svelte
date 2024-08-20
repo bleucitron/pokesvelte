@@ -4,15 +4,20 @@
 
 	const { data } = $props();
 	const { current, prev, next, parent } = $derived(data);
-	const { markup, title, name, files } = $derived(current);
+	const { id, markup, title, name, files, isFolder } = $derived(current);
 
 	$inspect(data);
 </script>
 
 {#snippet link(node: Node | undefined)}
 	{#if node}
-		{@const { files, path, name, title } = node}
-		<a class:folder={!!files} href={path}>{title ?? name}</a>
+		{@const { id, isFolder, path, name, title } = node}
+		{@const idText = title ? `${id.replaceAll('-', '/')}.` : ''}
+		{@const text = title || name}
+
+		<a class="nav-link" class:folder={isFolder} href={path}
+			><span>{idText}</span>{text}{isFolder ? '/' : ''}</a
+		>
 	{:else}
 		<span></span>
 	{/if}
@@ -27,9 +32,9 @@
 
 {#snippet parentLink(parent: Node | undefined)}
 	{@const path = parent?.path ?? '/'}
-	{@const title = parent?.title ?? 'Table des matières'}
+	{@const title = parent ? `${parent?.title}` : 'Table des matières'}
 
-	<a class="parent" href={path}>{title}</a>
+	<a class="parent" href={path}><span>{parent?.id}.</span>{title}/</a>
 {/snippet}
 
 {@render nav()}
@@ -42,6 +47,9 @@
 		<h1>{name}</h1>
 	{/if}
 	{#if markup}
+		{@const text = isFolder ? `${title}/` : title}
+
+		<h1 class:folder={isFolder}><span>{id.split('-').at(-1)}.</span>{text}</h1>
 		{@html markup}
 	{/if}
 
@@ -58,17 +66,37 @@
 		justify-content: space-between;
 	}
 
+	.nav-link span,
+	.parent span {
+		font-size: 0.8rem;
+	}
+
 	article {
 		margin-block: 5rem;
 		flex: 1;
 	}
 
+	.nav-link,
 	.parent {
-		display: inline-block;
-		margin-top: 3rem;
+		color: var(--light-grey);
 	}
 
-	a.folder {
-		font-weight: bold;
+	.parent {
+		display: block;
+		margin-top: 3rem;
+		margin-bottom: 0.5rem;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		text-align: center;
+		line-height: 1.2;
+		border-bottom: 1px solid var(--blue);
+
+		span {
+			font-size: 1.8rem;
+			color: black;
+		}
 	}
 </style>
