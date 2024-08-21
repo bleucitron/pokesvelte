@@ -77,11 +77,6 @@
 		flex: 1;
 	}
 
-	.nav-link,
-	.parent {
-		color: var(--light-grey);
-	}
-
 	.parent {
 		display: block;
 		margin-top: 3rem;
