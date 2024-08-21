@@ -15,6 +15,10 @@ body {
 	--grey: #757575;
 	--dark-grey: #54595c;
 	--red: #e60012;
+	--light-green: #f2f8f3;
+	--green: #55c75a;
+	--dark-green: #08860d;
+
 
 	font-family:
 		'Overpass',
@@ -90,7 +94,7 @@ blockquote {
 }
 
 code {
-	color: var(--grey);
+	color: var(--darker-blue);
 	font-size: 0.9rem;
 }
 
@@ -98,6 +102,12 @@ pre code,
 h1 code,
 h2 code {
 	font-size: inherit;
+}
+
+h1, h2 {
+	code {
+		color: inherit;
+	}
 }
 
 pre {
@@ -123,13 +133,13 @@ h2:has(+ .task) {
 
 .task {
 	padding: 1rem;
-	border: 2px solid var(--pink);
+	border: 2px solid var(--green);
 	border-radius: 5px;
 
 	blockquote {
-		border-left-color: var(--pink);
-		background-color: var(--light-pink);
-		color: var(--darker-pink);
+		border-left-color: var(--green);
+		background-color: var(--light-green);
+		color: var(--dark-green);
 	}
 
 	li {
@@ -139,7 +149,7 @@ h2:has(+ .task) {
 		&::marker {
 			content: '#' counter(tasks) ' ';
 			font-size: 1.2rem;
-			color: var(--pink);
+			color: var(--green);
 		}
 
 		p {
@@ -148,6 +158,7 @@ h2:has(+ .task) {
 	}
 
 	code {
+		color: var(--dark-green);
 		font-weight: 500;
 	}
 }
