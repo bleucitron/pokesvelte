@@ -19,11 +19,16 @@
 </ol>
 
 <style>
+	ol {
+		width: max-content;
+		margin: auto;
+	}
+
 	li {
 		font-size: 1.2rem;
 
 		&.folder {
-			font-size: 2rem;
+			font-size: 1.5rem;
 		}
 	}
 </style>
