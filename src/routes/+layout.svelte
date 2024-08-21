@@ -1,19 +1,76 @@
 <script lang="ts">
-	const { children } = $props();
+	import { page } from '$app/stores';
+	import Tree from '$lib/components/Tree.svelte';
+	import { fade } from 'svelte/transition';
+
+	const { data, children } = $props();
+	const current = $derived($page.data.current.id);
+
+	let on = $state(true);
 </script>
 
-<main>
-	{@render children()}
-</main>
+<div class="root">
+	<aside>
+		<button onclick={() => (on = !on)}>Toggle</button>
+		{#if on}
+			<div transition:fade>
+				<Tree {current} folder={data.tree} />
+			</div>
+		{/if}
+	</aside>
+
+	<main>
+		{@render children()}
+	</main>
+</div>
 
 <style>
+	.root {
+		display: flex;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	aside {
+		padding-block: 1rem;
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		:global {
+			a {
+				color: unset;
+			}
+			ol {
+				margin: 0;
+			}
+			li,
+			li.folder {
+				&:has(ol) {
+					margin-block: 1.5rem;
+				}
+
+				& > ol {
+					padding-left: 1.5rem;
+				}
+			}
+			li {
+				font-size: 1rem;
+				text-transform: none;
+			}
+			li.folder {
+				font-size: 1rem;
+				text-transform: uppercase;
+			}
+		}
+	}
 	main {
 		width: 100%;
-		min-height: 100%;
 		display: flex;
 		flex-flow: column;
 		padding: 1rem 1.5rem;
-		margin: auto;
+		margin-inline: auto;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 
 	@media (min-width: 1024px) {
