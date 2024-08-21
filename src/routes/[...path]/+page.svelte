@@ -30,26 +30,32 @@
 	</nav>
 {/snippet}
 
-{#snippet parentLink(parent: Node | undefined)}
-	{@const path = parent?.path ?? '/'}
-	{@const title = parent ? `${parent?.title}` : 'Table des matières'}
-
-	<a class="parent" href={path}><span>{parent?.id}.</span>{title}/</a>
+{#snippet parentLink({ path, title, id }: Node)}
+	{@const prefix = id ? `${id}.` : ''}
+	<a class="parent" href={path}><span>{prefix}</span>{title}</a>
 {/snippet}
 
 {@render nav()}
 
 <article>
 	<!-- TODO: fil d'ariane -->
-	{@render parentLink(parent)}
+	<header>
+		{#if parent}
+			{@render parentLink(parent)}
+		{:else}
+			<p>Chapitre {id}</p>
+		{/if}
 
-	{#if !title}
-		<h1>{name}</h1>
-	{/if}
+		{#if !title}
+			<h1>{name}</h1>
+		{/if}
+		{#if markup}
+			{@const prefix = !isFolder ? `${id.split('-').at(-1)}.` : ''}
+			<h1 class:folder={isFolder}><span>{prefix}</span>{title}</h1>
+		{/if}
+	</header>
+
 	{#if markup}
-		{@const text = isFolder ? `${title}/` : title}
-
-		<h1 class:folder={isFolder}><span>{id.split('-').at(-1)}.</span>{text}</h1>
 		{@html markup}
 	{/if}
 
@@ -67,8 +73,17 @@
 		margin-block: 1rem;
 	}
 
-	.nav-link span,
-	.parent span {
+	header {
+		margin-top: 3rem;
+
+		p {
+			font-size: 1.3rem;
+			margin: 0;
+			text-align: center;
+		}
+	}
+
+	.nav-link span {
 		font-size: 0.8rem;
 	}
 
@@ -79,11 +94,9 @@
 
 	.parent {
 		display: block;
-		margin-top: 3rem;
-		margin-bottom: 0.5rem;
-		font-weight: bold;
 		text-align: center;
-		text-transform: uppercase;
+		font-size: 1.1rem;
+		color: var(--grey);
 	}
 
 	h1 {
