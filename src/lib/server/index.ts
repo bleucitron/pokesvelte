@@ -46,7 +46,7 @@ export async function readDir(path: string): Promise<Node[]> {
 	const entries = await Promise.all(
 		dir
 			.filter((item) => item.name !== 'index.md')
-			.map(async (item) => {
+			.map(async (item, index) => {
 				const { name, parentPath } = item;
 				const path = join(parentPath, name);
 				const isDirectory = item.isDirectory();
@@ -55,7 +55,7 @@ export async function readDir(path: string): Promise<Node[]> {
 				const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
 				const parsed = await parseMdFile(isDirectory ? join(path, 'index.md') : webPath);
 
-				const id = path.match(/(\d\d)/g)?.join('-') ?? '';
+				const id = buildId(path, index + 1);
 				return {
 					id,
 					name,
@@ -68,6 +68,16 @@ export async function readDir(path: string): Promise<Node[]> {
 	);
 
 	return entries;
+}
+
+function buildId(path: string, position: number) {
+	let match = path.match(/(\d\d)/g);
+	if (match) return match?.join('-');
+
+	match = path.match(/(XX)/);
+	if (match) return [match[0], position].join('-');
+
+	return '';
 }
 
 function flatten(tree: Node[]): Node[] {
