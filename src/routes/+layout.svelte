@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 
 	const { data, children } = $props();
-	const current = $derived($page.data.current.id);
+	const current = $derived($page.data.current?.id);
 
 	let on = $state(true);
 </script>
