@@ -32,6 +32,7 @@
 	}
 
 	aside {
+		width: 35ch;
 		padding-block: 1rem;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -64,18 +65,12 @@
 		}
 	}
 	main {
-		width: 100%;
+		flex: 1;
 		display: flex;
 		flex-flow: column;
 		padding: 1rem 1.5rem;
 		margin-inline: auto;
 		overflow-x: hidden;
 		overflow-y: auto;
-	}
-
-	@media (min-width: 1024px) {
-		main {
-			width: 80ch;
-		}
 	}
 </style>
