@@ -7,6 +7,12 @@
 	const current = $derived($page.data.current?.id);
 
 	let on = $state(true);
+	let toc = $state<HTMLDivElement>();
+
+	$effect(() => {
+		console.log($page.url);
+		toc?.querySelector('.current')?.scrollIntoView({ block: 'center' });
+	});
 </script>
 
 <div class="root">
@@ -16,7 +22,7 @@
 			<button onclick={() => (on = !on)}>Menu</button>
 		</menu>
 		{#if on}
-			<div class="toc" transition:fly={{ x: -200, duration: 200 }}>
+			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>
 				<Tree {current} folder={data.tree} />
 			</div>
 		{/if}
@@ -89,10 +95,6 @@
 			li.folder {
 				font-size: 1rem;
 				text-transform: uppercase;
-
-				&.current {
-					font-weight: bold;
-				}
 			}
 		}
 	}
