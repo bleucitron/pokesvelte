@@ -43,9 +43,9 @@
 		{#if parent}
 			{@render parentLink(parent)}
 		{:else if isFolder}
-			<p>Chapitre {id}</p>
+			<a href="/">Chapitre {id}</a>
 		{:else}
-			<p>Aparté</p>
+			<a href="/">Aparté</a>
 		{/if}
 
 		{#if !title}
@@ -80,7 +80,10 @@
 	header {
 		margin-top: 3rem;
 
-		p {
+		p,
+		a {
+			display: block;
+			color: inherit;
 			font-size: 1.3rem;
 			margin: 0;
 			text-align: center;
