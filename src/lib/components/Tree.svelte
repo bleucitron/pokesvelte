@@ -13,8 +13,8 @@
 <ol {start}>
 	{#each folder as { id, name, path, files, title }}
 		{@const isFolder = depth === 0}
-		{@const current = isFolder ? currentId.startsWith(id) : id === currentId}
-		{@const previous = !current && id < currentId}
+		{@const current = isFolder ? id && currentId.startsWith(id) : id === currentId}
+		{@const previous = !current && id && id < currentId}
 		{@const next = id > currentId}
 
 		<li class:folder={isFolder} class:current class:previous class:next>
@@ -28,16 +28,11 @@
 </ol>
 
 <style>
-	ol {
-		width: max-content;
-		margin: auto;
-	}
-
 	li {
 		font-weight: normal;
 		color: var(--dark-grey);
 		font-size: 1.2rem;
-		transition-duration: 0.4s;
+		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
 		&.previous {
@@ -46,13 +41,17 @@
 
 		&.current {
 			font-weight: bold;
+			color: var(--dark-blue);
 		}
 
 		&.folder {
 			font-size: 1.5rem;
 
 			&.current {
-				font-weight: inherit;
+				&:has(.current) {
+					color: inherit;
+					font-weight: inherit;
+				}
 
 				&:not(:has(ol)) {
 					font-weight: bold;
