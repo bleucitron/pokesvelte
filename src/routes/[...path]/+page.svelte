@@ -70,7 +70,7 @@
 	nav {
 		display: flex;
 		justify-content: space-between;
-		margin: 1rem;
+		margin-block: 1rem;
 	}
 
 	header {
@@ -89,7 +89,7 @@
 
 	article {
 		margin-block: 3rem;
-		width: 70ch;
+		width: min(70ch, 100%);
 		margin-inline: auto;
 	}
 

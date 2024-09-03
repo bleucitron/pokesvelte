@@ -26,13 +26,17 @@
 
 <style>
 	.root {
-		display: flex;
 		height: 100%;
 		overflow: hidden;
+
+		--aside-width: max(15rem, 25vw);
 	}
 
 	aside {
-		width: 35ch;
+		position: fixed;
+		left: 0;
+		width: var(--aside-width);
+		height: 100svh;
 		padding-block: 1rem;
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -68,8 +72,7 @@
 		flex: 1;
 		display: flex;
 		flex-flow: column;
-		padding: 1rem 1.5rem;
-		margin-inline: auto;
+		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
