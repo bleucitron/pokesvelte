@@ -31,27 +31,29 @@
 {/snippet}
 
 {#snippet parentLink({ path, title, id }: Node)}
-	{@const prefix = id ? `${id}.` : ''}
+	{@const prefix = id ? `${id}. ` : ''}
 	<a class="parent" href={path}><span>{prefix}</span>{title}</a>
 {/snippet}
 
 {@render nav()}
 
-<article>
+<article class:folder={isFolder}>
 	<!-- TODO: fil d'ariane -->
 	<header>
 		{#if parent}
 			{@render parentLink(parent)}
-		{:else}
+		{:else if isFolder}
 			<p>Chapitre {id}</p>
+		{:else}
+			<p>Aparté</p>
 		{/if}
 
 		{#if !title}
 			<h1>{name}</h1>
 		{/if}
 		{#if markup}
-			{@const prefix = !isFolder ? `${id.split('-').at(-1)}.` : ''}
-			<h1 class:folder={isFolder}><span>{prefix}</span>{title}</h1>
+			{@const prefix = !isFolder ? `${id.split('-').at(-1)}. ` : ''}
+			<h1><span>{prefix}</span>{title}</h1>
 		{/if}
 	</header>
 
@@ -60,7 +62,9 @@
 	{/if}
 
 	{#if files?.length}
-		<Tree folder={files} />
+		<section>
+			<Tree folder={files} />
+		</section>
 	{/if}
 </article>
 
@@ -91,13 +95,29 @@
 		margin-block: 3rem;
 		width: min(70ch, 100%);
 		margin-inline: auto;
+
+		&.folder {
+			:global(p) {
+				text-align: center;
+			}
+
+			h1 {
+				text-transform: uppercase;
+			}
+		}
+
+		section {
+			width: max-content;
+			margin: auto;
+		}
 	}
 
 	.parent {
 		display: block;
 		text-align: center;
-		font-size: 1.1rem;
+		font-size: 1rem;
 		color: var(--grey);
+		text-transform: uppercase;
 	}
 
 	h1 {

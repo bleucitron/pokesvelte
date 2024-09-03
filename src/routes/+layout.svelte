@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Tree from '$lib/components/Tree.svelte';
-	import { fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	const { data, children } = $props();
 	const current = $derived($page.data.current?.id);
@@ -11,9 +11,12 @@
 
 <div class="root">
 	<aside>
-		<button onclick={() => (on = !on)}>Toggle</button>
+		<menu>
+			<a href="/">PokéSvelte</a>
+			<button onclick={() => (on = !on)}>Menu</button>
+		</menu>
 		{#if on}
-			<div transition:fade>
+			<div class="toc" transition:fly={{ x: -200, duration: 200 }}>
 				<Tree {current} folder={data.tree} />
 			</div>
 		{/if}
@@ -36,10 +39,24 @@
 		position: fixed;
 		left: 0;
 		width: var(--aside-width);
-		height: 100svh;
-		padding-block: 1rem;
-		overflow-x: hidden;
-		overflow-y: auto;
+
+		--topbar-height: 3rem;
+
+		menu {
+			position: sticky;
+			padding: 1rem;
+			height: var(--topbar-height);
+			top: 0;
+			background: white;
+			line-height: 1;
+		}
+
+		.toc {
+			padding-block: 1rem;
+			height: calc(100svh - var(--topbar-height));
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
 
 		:global {
 			a {
@@ -52,6 +69,13 @@
 			li.folder {
 				&:has(ol) {
 					margin-block: 1.5rem;
+
+					&:first-of-type {
+						margin-top: 0;
+					}
+					&:last-of-type {
+						margin-bottom: 0;
+					}
 				}
 
 				& > ol {
@@ -65,6 +89,10 @@
 			li.folder {
 				font-size: 1rem;
 				text-transform: uppercase;
+
+				&.current {
+					font-weight: bold;
+				}
 			}
 		}
 	}
@@ -72,6 +100,7 @@
 		flex: 1;
 		display: flex;
 		flex-flow: column;
+		height: 100%;
 		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
 		overflow-y: auto;
