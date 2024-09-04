@@ -1,16 +1,19 @@
-<script lang="ts">
-	import Tree from '$lib/components/Tree.svelte';
-
-	const { data } = $props();
-	const { tree } = $derived(data);
-</script>
-
-<h1>Table des matières</h1>
-
-<Tree folder={tree} />
+<main>
+	<h1>PokéSvelte</h1>
+	<a class="start" href="/00_introduction">Commencer</a>
+	<a href="/contents/">Programme</a>
+</main>
 
 <style>
-	h1 {
-		margin-top: 5rem;
+	main {
+		height: 100svh;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.start {
+		font-size: 1.5rem;
 	}
 </style>
