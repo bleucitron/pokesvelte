@@ -10,7 +10,6 @@
 	let toc = $state<HTMLDivElement>();
 
 	$effect(() => {
-		console.log($page.url);
 		toc?.querySelector('.current')?.scrollIntoView({ block: 'center' });
 	});
 </script>

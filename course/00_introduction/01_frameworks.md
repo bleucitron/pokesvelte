@@ -5,7 +5,9 @@ description: Définitions succintes de framework de composants et de framework d
 
 # WTF is a framework?
 
-On peut catégoriser les frameworks JavaScript modernes en 2 grandes familles :
+On peut catégoriser les [frameworks JavaScript
+modernes](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks)
+en 2 grandes familles :
 
 - les frameworks de composants
 - les frameworks d'application
