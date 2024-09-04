@@ -7,7 +7,7 @@ export async function load({ params: { path }, parent }) {
 	const { tree } = await parent();
 	const found = findCurrent(path, tree);
 
-	if (!found) redirect(307, '/');
+	if (!found) redirect(307, '/contents');
 
 	return { ...content, ...found };
 }
