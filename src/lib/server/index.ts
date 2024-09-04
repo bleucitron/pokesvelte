@@ -9,6 +9,7 @@ import { titlePlugin } from '@mdit-vue/plugin-title';
 import Shiki from '@shikijs/markdown-it';
 import { normalizePath } from '$lib/helpers';
 import { CONTENT_FOLDER } from '$lib/constants';
+import { createReadStream } from 'fs';
 
 const md = markdownit({ html: true })
 	.use(
@@ -19,12 +20,18 @@ const md = markdownit({ html: true })
 	.use(titlePlugin)
 	.use(frontmatterPlugin);
 
+function formatFilePath(path: string) {
+	if (!path.startsWith(CONTENT_FOLDER)) path = join(CONTENT_FOLDER, path);
+	if (!path.endsWith('.md')) path = `${path}.md`;
+
+	return path;
+}
 export async function parseMdFile(path: string) {
 	try {
-		if (!path.startsWith(CONTENT_FOLDER)) path = join(CONTENT_FOLDER, path);
-		if (!path.endsWith('.md')) path = `${path}.md`;
-
-		const fileContent = (await readFile(path)).toString();
+		const formattedPath = formatFilePath(path);
+		const fileContent = (
+			await readFile(formattedPath).catch(() => readFile(formatFilePath(`${path}/index.md`)))
+		).toString();
 
 		const env: MarkdownItEnv = {};
 
@@ -40,6 +47,28 @@ export async function parseMdFile(path: string) {
 	}
 }
 
+// see https://stackoverflow.com/a/28749643
+function readFirstLine(path: string) {
+	return new Promise<string>((resolve, reject) => {
+		const rs = createReadStream(path, { encoding: 'utf8' });
+		let acc = '';
+		let pos = 0;
+		let index: number;
+
+		rs.on('data', function (chunk) {
+			index = chunk.indexOf('\n');
+			acc += chunk;
+			index !== -1 ? rs.close() : (pos += chunk.length);
+		})
+			.on('close', function () {
+				resolve(acc.slice(0, pos + index));
+			})
+			.on('error', function (err) {
+				reject(err);
+			});
+	});
+}
+
 export async function readDir(path: string): Promise<Node[]> {
 	const dir = await readdir(path, { withFileTypes: true });
 
@@ -50,19 +79,25 @@ export async function readDir(path: string): Promise<Node[]> {
 				const { name, parentPath } = item;
 				const path = join(parentPath, name);
 				const isDirectory = item.isDirectory();
-				const files = isDirectory ? await readDir(path) : undefined;
 
 				const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
-				const parsed = await parseMdFile(isDirectory ? join(path, 'index.md') : webPath);
+				const filePath = isDirectory ? join(path, 'index.md') : path;
+
+				const [firstLine, files] = await Promise.all([
+					readFirstLine(filePath),
+					isDirectory ? readDir(path) : undefined
+				]);
+
+				const title = firstLine.replace('# ', '');
 
 				const id = buildId(path, index + 1);
 				return {
 					id,
 					name,
+					title,
 					path: webPath,
 					files,
-					isFolder: !!files?.length,
-					...parsed
+					isFolder: !!files?.length
 				};
 			})
 	);

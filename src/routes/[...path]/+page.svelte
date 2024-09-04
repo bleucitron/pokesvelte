@@ -3,10 +3,8 @@
 	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
-	const { current, prev, next, parent } = $derived(data);
-	const { id, markup, title, name, files, isFolder } = $derived(current);
-
-	$inspect(data);
+	const { title, markup, current, prev, next, parent } = $derived(data);
+	const { id, name, files, isFolder } = $derived(current);
 </script>
 
 {#snippet link(node: Node | undefined)}
@@ -80,7 +78,6 @@
 	header {
 		margin-top: 3rem;
 
-		p,
 		a {
 			display: block;
 			color: inherit;
