@@ -1,7 +1,8 @@
 import type { MarkdownItEnv } from '@mdit-vue/types';
 import type { Node } from '$lib/typings';
 
-import { readFile, readdir } from 'fs/promises';
+import { readFile, readdir, stat } from 'fs/promises';
+import readline from 'readline';
 import { dirname, join } from 'path';
 import markdownit from 'markdown-it';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
@@ -48,25 +49,25 @@ export async function parseMdFile(path: string) {
 }
 
 // see https://stackoverflow.com/a/28749643
-function readFirstLine(path: string) {
-	return new Promise<string>((resolve, reject) => {
-		const rs = createReadStream(path, { encoding: 'utf8' });
-		let acc = '';
-		let pos = 0;
-		let index: number;
+async function readTitle(path: string) {
+	const { size } = await stat(path);
 
-		rs.on('data', function (chunk) {
-			index = chunk.indexOf('\n');
-			acc += chunk;
-			index !== -1 ? rs.close() : (pos += chunk.length);
-		})
-			.on('close', function () {
-				resolve(acc.slice(0, pos + index));
-			})
-			.on('error', function (err) {
-				reject(err);
-			});
+	if (!size) return Promise.resolve(null);
+
+	const readable = createReadStream(path, { encoding: 'utf8' });
+	const reader = readline.createInterface({ input: readable });
+
+	const line = await new Promise<string>((resolve) => {
+		reader.on('line', (line) => {
+			// Avoid frontmatter section by looking for title
+			if (line.startsWith('# ')) {
+				reader.close();
+				resolve(line);
+			}
+		});
 	});
+	readable.close();
+	return line;
 }
 
 export async function readDir(path: string): Promise<Node[]> {
@@ -84,11 +85,11 @@ export async function readDir(path: string): Promise<Node[]> {
 				const filePath = isDirectory ? join(path, 'index.md') : path;
 
 				const [firstLine, files] = await Promise.all([
-					readFirstLine(filePath),
+					readTitle(filePath),
 					isDirectory ? readDir(path) : undefined
 				]);
 
-				const title = firstLine.replace('# ', '');
+				const title = firstLine?.replace('# ', '');
 
 				const id = buildId(path, index + 1);
 				return {
