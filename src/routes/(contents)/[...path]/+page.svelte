@@ -48,8 +48,7 @@
 
 		{#if !title}
 			<h1>{name}</h1>
-		{/if}
-		{#if markup}
+		{:else if markup}
 			{@const prefix = !isFolder ? `${id.split('-').at(-1)}. ` : ''}
 			<h1><span>{prefix}</span>{title}</h1>
 		{/if}
