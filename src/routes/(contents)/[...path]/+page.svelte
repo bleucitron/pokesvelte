@@ -3,7 +3,7 @@
 	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
-	const { title, markup, current, prev, next, parent } = $derived(data);
+	const { title, markup, options, current, prev, next, parent } = $derived(data);
 	const { id, name, files, isFolder } = $derived(current);
 </script>
 
@@ -36,7 +36,6 @@
 {@render nav()}
 
 <article class:folder={isFolder}>
-	<!-- TODO: fil d'ariane -->
 	<header>
 		{#if parent}
 			{@render parentLink(parent)}
@@ -51,6 +50,10 @@
 		{:else if markup}
 			{@const prefix = !isFolder ? `${id.split('-').at(-1)}. ` : ''}
 			<h1><span>{prefix}</span>{title}</h1>
+		{/if}
+
+		{#if options?.subtitle}
+			<p>{options.subtitle}</p>
 		{/if}
 	</header>
 
@@ -75,13 +78,20 @@
 	}
 
 	header {
-		margin-top: 3rem;
+		margin-block: 4rem 7rem;
 
 		a {
 			display: block;
 			color: inherit;
 			font-size: 1.3rem;
 			margin: 0;
+			text-align: center;
+		}
+
+		p {
+			margin: 0;
+			color: var(--grey);
+			font-style: italic;
 			text-align: center;
 		}
 	}

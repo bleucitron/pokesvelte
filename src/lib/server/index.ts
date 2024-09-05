@@ -37,10 +37,10 @@ export async function parseMdFile(path: string) {
 		const env: MarkdownItEnv = {};
 
 		const rendered = md.render(fileContent, env);
-		const { content, ...rest } = env;
+		const { content, frontmatter, ...rest } = env;
 
 		const renderedWithoutTitle = rendered.replace(/<h1>.+<\/h1>/g, '');
-		const output = { ...rest, markup: renderedWithoutTitle };
+		const output = { ...rest, markup: renderedWithoutTitle, options: frontmatter };
 
 		return output;
 	} catch {
