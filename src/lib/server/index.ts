@@ -5,6 +5,7 @@ import { readFile, readdir, stat } from 'fs/promises';
 import readline from 'readline';
 import { dirname, join } from 'path';
 import markdownit from 'markdown-it';
+import anchor from 'markdown-it-anchor';
 import { frontmatterPlugin } from '@mdit-vue/plugin-frontmatter';
 import { titlePlugin } from '@mdit-vue/plugin-title';
 import Shiki from '@shikijs/markdown-it';
@@ -19,7 +20,10 @@ const md = markdownit({ html: true })
 		})
 	)
 	.use(titlePlugin)
-	.use(frontmatterPlugin);
+	.use(frontmatterPlugin)
+	.use(anchor, {
+		permalink: anchor.permalink.headerLink()
+	});
 
 function formatFilePath(path: string) {
 	if (!path.startsWith(CONTENT_FOLDER)) path = join(CONTENT_FOLDER, path);
@@ -39,7 +43,7 @@ export async function parseMdFile(path: string) {
 		const rendered = md.render(fileContent, env);
 		const { content, frontmatter, ...rest } = env;
 
-		const renderedWithoutTitle = rendered.replace(/<h1>.+<\/h1>/g, '');
+		const renderedWithoutTitle = rendered.replace(/<h1.+<\/h1>/g, '');
 		const output = { ...rest, markup: renderedWithoutTitle, options: frontmatter };
 
 		return output;
