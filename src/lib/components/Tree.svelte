@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Node } from '$lib/typings';
+	import { slide } from 'svelte/transition';
 
 	interface Props {
 		folder: Node[];
@@ -20,8 +21,10 @@
 		<li class:folder={isFolder} class:current class:previous class:next>
 			<a href={path}>{title || name}</a>
 
-			{#if files}
-				<svelte:self current={currentId} folder={files} depth={depth + 1} />
+			{#if current && files?.length}
+				<div transition:slide={{ duration: 300 }}>
+					<svelte:self current={currentId} folder={files} depth={depth + 1} />
+				</div>
 			{/if}
 		</li>
 	{/each}
@@ -40,7 +43,6 @@
 		}
 
 		&.current {
-			font-weight: bold;
 			color: var(--dark-blue);
 		}
 
