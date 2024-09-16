@@ -138,4 +138,35 @@
 			color: black;
 		}
 	}
+
+	:global {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			position: relative;
+			transition: all 0.5s;
+
+			a {
+				color: inherit;
+				display: block;
+
+				&:hover,
+				&:focus {
+					text-decoration: none;
+				}
+			}
+
+			&:has(a:hover, a:focus) {
+				&::before {
+					content: '#';
+					position: absolute;
+					left: -1.3rem;
+					color: var(--dark-blue);
+				}
+			}
+		}
+	}
 </style>
