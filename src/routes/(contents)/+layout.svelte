@@ -6,7 +6,7 @@
 	const { data, children } = $props();
 	const current = $derived($page.data.current?.id);
 
-	let on = $state(true);
+	let on = $state(false);
 	let toc = $state<HTMLDivElement>();
 
 	$effect(() => {
@@ -18,7 +18,7 @@
 	<aside>
 		<menu>
 			<a href="/">PokéSvelte</a>
-			<button onclick={() => (on = !on)}>Menu</button>
+			<button class:active={on} onclick={() => (on = !on)}>{on ? 'Fermer' : 'Menu'}</button>
 		</menu>
 		{#if on}
 			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>
@@ -44,7 +44,7 @@
 		left: 0;
 		width: var(--aside-width);
 
-		--topbar-height: 3rem;
+		--topbar-height: 4rem;
 
 		menu {
 			position: sticky;
@@ -53,6 +53,33 @@
 			top: 0;
 			background: white;
 			line-height: 1;
+			display: flex;
+			gap: 0.5rem;
+			align-items: baseline;
+
+			a {
+				font-size: 1.5rem;
+			}
+
+			button {
+				background: white;
+				border-radius: 6px;
+				border: none;
+				box-shadow: none;
+				height: 100%;
+
+				&:focus,
+				&:hover {
+					cursor: pointer;
+					color: var(--dark-blue);
+				}
+
+				&.active {
+					background: var(--dark-blue);
+					color: white;
+					border-color: var(--dark-blue);
+				}
+			}
 		}
 
 		.toc {
@@ -68,12 +95,12 @@
 			}
 			ol {
 				margin: 0;
+				ol > li {
+					margin: 0;
+				}
 			}
-			li,
-			li.folder {
+			li {
 				&:has(ol) {
-					margin-block: 1.5rem;
-
 					&:first-of-type {
 						margin-top: 0;
 					}
@@ -87,6 +114,7 @@
 				}
 			}
 			li {
+				margin-block: 0.5rem;
 				font-size: 1rem;
 				text-transform: none;
 			}
