@@ -12,6 +12,7 @@ import Shiki from '@shikijs/markdown-it';
 import { normalizePath } from '$lib/helpers';
 import { CONTENT_FOLDER } from '$lib/constants';
 import { createReadStream } from 'fs';
+import slugify from '@sindresorhus/slugify';
 
 const md = markdownit({ html: true })
 	.use(
@@ -22,7 +23,8 @@ const md = markdownit({ html: true })
 	.use(titlePlugin)
 	.use(frontmatterPlugin)
 	.use(anchor, {
-		permalink: anchor.permalink.headerLink()
+		permalink: anchor.permalink.headerLink(),
+		slugify
 	});
 
 function formatFilePath(path: string) {
