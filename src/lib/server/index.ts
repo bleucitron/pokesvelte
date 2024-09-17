@@ -82,6 +82,7 @@ export async function readDir(path: string): Promise<Node[]> {
 	const entries = await Promise.all(
 		dir
 			.filter((item) => item.name !== 'index.md')
+			.filter((item) => !item.name.startsWith('XX'))
 			.map(async (item, index) => {
 				const { name, parentPath } = item;
 				const path = join(parentPath, name);
