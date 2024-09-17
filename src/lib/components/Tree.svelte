@@ -31,10 +31,35 @@
 </ol>
 
 <style>
+	a {
+		color: unset;
+	}
+
 	li {
+		margin-block: 0.8rem;
+		font-size: 0.9rem;
+		text-transform: none;
+
+		&:has(ol) {
+			&:first-of-type {
+				margin-top: 0;
+			}
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+
+		:global {
+			ol {
+				padding-left: 1rem;
+			}
+			li {
+				margin: 0;
+			}
+		}
+
 		font-weight: normal;
 		color: var(--dark-grey);
-		font-size: 1.2rem;
 		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
@@ -47,7 +72,7 @@
 		}
 
 		&.folder {
-			font-size: 1.5rem;
+			font-size: 1rem;
 
 			&.current {
 				&:has(.current) {

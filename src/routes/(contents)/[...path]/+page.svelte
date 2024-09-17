@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Tree from '$lib/components/Tree.svelte';
 	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
@@ -62,8 +61,13 @@
 	{/if}
 
 	{#if files?.length}
+		{@const start = parseInt(files[0]?.id?.split('-')?.at(-1) ?? '')}
 		<section>
-			<Tree folder={files} />
+			<ol {start}>
+				{#each files as { title, path }}
+					<li><a href={path}>{title}</a></li>
+				{/each}
+			</ol>
 		</section>
 	{/if}
 </article>
@@ -101,6 +105,7 @@
 	}
 
 	article {
+		flex: 1;
 		margin-block: 3rem;
 		width: min(70ch, 100%);
 		margin-inline: auto;
@@ -137,6 +142,10 @@
 			font-size: 1.8rem;
 			color: black;
 		}
+	}
+
+	ol {
+		font-size: 1.3rem;
 	}
 
 	:global {

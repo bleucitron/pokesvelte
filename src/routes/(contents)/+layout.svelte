@@ -34,6 +34,7 @@
 
 <style>
 	.root {
+		height: 100%;
 		overflow: hidden;
 
 		--aside-width: max(15rem, 25vw);
@@ -89,44 +90,13 @@
 			overflow-y: auto;
 		}
 
-		:global {
-			a {
-				color: unset;
-			}
-			ol {
-				margin: 0;
-				ol > li {
-					margin: 0;
-				}
-			}
-			li {
-				&:has(ol) {
-					&:first-of-type {
-						margin-top: 0;
-					}
-					&:last-of-type {
-						margin-bottom: 0;
-					}
-				}
-
-				& > ol {
-					padding-left: 1.5rem;
-				}
-			}
-			li {
-				margin-block: 0.5rem;
-				font-size: 1rem;
-				text-transform: none;
-			}
-			li.folder {
-				font-size: 1rem;
-				text-transform: uppercase;
-			}
+		a {
+			color: unset;
 		}
 	}
 	main {
-		flex: 1;
 		display: flex;
+		height: 100%;
 		flex-flow: column;
 		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
