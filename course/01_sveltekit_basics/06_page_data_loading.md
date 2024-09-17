@@ -65,13 +65,12 @@ SvelteKit va attendre que l'exécution de la fonction `load` se termine pour con
 
 > Attention à ne pas introduire de "cascades" de chargement. Si vous faites plusieurs appels asynchrones dans le même fichier, pensez à utiliser `Promise.all()`.
 
-## À vous !
-
-<section class='task'>
+<fieldset class='task'>
+<legend>À vous !</legend>
 
 - Charger les données des Pokémons sur la page `/pokedex` à l'aide de la fonction `fetchPokemons` dans `$lib/pokemons.ts` (`$lib` est un alias de `src/lib`)
 
 - Afficher les images des 3 premiers Pokémons. Utiliser le champ `.sprites.front_default` comme source de l'image.
-</section>
+</fieldset>
 
 [Plus de détails sur ce chapitre](https://kit.sveltefr.dev/docs/load#donn-es-de-page)
