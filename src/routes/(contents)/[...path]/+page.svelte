@@ -9,7 +9,7 @@
 {#snippet link(node: Node | undefined)}
 	{#if node}
 		{@const { id, isFolder, path, name, title } = node}
-		{@const idText = title ? `${id.replaceAll('-', '/')}.` : ''}
+		{@const idText = title ? `${id.split('-').map(Number).join('.')} ` : ''}
 		{@const text = title || name}
 
 		<a class="nav-link" class:folder={isFolder} href={path}
@@ -28,7 +28,7 @@
 {/snippet}
 
 {#snippet parentLink({ path, title, id }: Node)}
-	{@const prefix = id ? `${id}. ` : ''}
+	{@const prefix = id ? `${Number(id)}. ` : ''}
 	<a class="parent" href={path}><span>{prefix}</span>{title}</a>
 {/snippet}
 
@@ -47,7 +47,7 @@
 		{#if !title}
 			<h1>{name}</h1>
 		{:else if markup}
-			{@const prefix = !isFolder ? `${id.split('-').at(-1)}. ` : ''}
+			{@const prefix = !isFolder ? `${Number(id.split('-').at(-1))}. ` : ''}
 			<h1><span>{prefix}</span>{title}</h1>
 		{/if}
 

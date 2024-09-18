@@ -115,7 +115,8 @@ export async function readDir(path: string): Promise<Node[]> {
 
 function buildId(path: string, position: number) {
 	let match = path.match(/(\d\d)/g);
-	if (match) return match?.join('-');
+
+	if (match) return match.join('-');
 
 	match = path.match(/(XX)/);
 	if (match) return [match[0], position].join('-');
