@@ -34,9 +34,6 @@
 
 <style>
 	.root {
-		height: 100%;
-		overflow: hidden;
-
 		--aside-width: max(15rem, 25vw);
 	}
 
