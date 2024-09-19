@@ -81,8 +81,9 @@
 	nav {
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-end;
-		margin-block: 1rem;
+		align-items: center;
+		padding-block: 1rem;
+		height: var(--topbar-height);
 
 		:global {
 			a {
@@ -96,8 +97,6 @@
 		}
 
 		&:last-of-type:not(:first-of-type) {
-			margin-bottom: 3rem;
-
 			:global {
 				.nav-link {
 					display: block;

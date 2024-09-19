@@ -27,7 +27,8 @@
 
 <style>
 	h1 {
-		margin-top: 5rem;
+		margin-block: 5rem 3rem;
+		text-align: center;
 	}
 
 	a {
@@ -38,24 +39,42 @@
 			color: var(--orange);
 		}
 	}
+
 	ol {
-		margin-block: 1rem 4rem;
-		margin-inline: auto;
+		display: flex;
+		flex-wrap: wrap;
+		padding-left: 4rem;
+
+		&:not(:has(ol)) {
+			display: block;
+		}
+
+		:global {
+			ol {
+				padding-left: 2rem;
+
+				li {
+					margin: unset;
+				}
+			}
+		}
 	}
 
 	li {
+		flex: 1 0 50%;
 		font-weight: normal;
 		color: var(--dark-grey);
 		font-size: 1rem;
 		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
-		&.folder {
-			font-size: 1.2rem;
+		margin-block: 1rem;
+
+		&:has(li) {
 		}
 
-		:global(ol) {
-			margin: 0;
+		&.folder {
+			font-size: 1.2rem;
 		}
 	}
 </style>

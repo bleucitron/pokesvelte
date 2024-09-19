@@ -16,7 +16,7 @@ body {
 	--darker-pink: #a2202b;
 	--light-orange: #ffdd92;
 	--orange: #ffa000;
-	--dark-orange: #cb8919;
+	--dark-orange: #d78e14;
 	--light-grey: #d2d2d2;
 	--grey: #a5a5a5;
 	--dark-grey: #54595c;
@@ -24,6 +24,8 @@ body {
 	--light-green: #f2f8f3;
 	--green: #55c75a;
 	--dark-green: #08860d;
+
+	--topbar-height: 4rem;
 
 
 	font-family:

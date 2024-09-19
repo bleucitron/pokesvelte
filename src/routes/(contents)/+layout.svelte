@@ -46,8 +46,6 @@
 		left: 0;
 		width: var(--aside-width);
 
-		--topbar-height: 4rem;
-
 		menu {
 			position: sticky;
 			padding: 1rem;
@@ -111,6 +109,7 @@
 	main {
 		display: flex;
 		height: 100%;
+		padding-bottom: 3rem;
 		flex-flow: column;
 		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
