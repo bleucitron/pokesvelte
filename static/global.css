@@ -146,6 +146,10 @@ h2:has(+ .task) {
 	border: 2px solid var(--green);
 	border-radius: 5px;
 
+	p:first-of-type {
+		margin-top: 0rem;
+	}
+
 	blockquote {
 		border-left-color: var(--green);
 		background-color: var(--light-green);
