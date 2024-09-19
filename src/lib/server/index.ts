@@ -17,7 +17,7 @@ import slugify from '@sindresorhus/slugify';
 const md = markdownit({ html: true })
 	.use(
 		await Shiki({
-			theme: 'monokai'
+			theme: 'material-theme'
 		})
 	)
 	.use(titlePlugin)
