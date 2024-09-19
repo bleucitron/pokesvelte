@@ -59,16 +59,12 @@
 		}
 
 		font-weight: normal;
-		color: var(--dark-grey);
+		color: var(--grey);
 		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
-		&.previous {
-			color: var(--grey);
-		}
-
 		&.current {
-			color: var(--dark-blue);
+			color: black;
 		}
 
 		&.folder {
@@ -78,10 +74,6 @@
 				&:has(.current) {
 					color: inherit;
 					font-weight: inherit;
-				}
-
-				&:not(:has(ol)) {
-					font-weight: bold;
 				}
 			}
 		}

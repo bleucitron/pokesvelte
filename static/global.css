@@ -15,8 +15,9 @@ body {
 	--dark-pink: #d63a47;
 	--darker-pink: #a2202b;
 	--light-orange: #ffdd92;
+	--orange: #e3940f;
 	--light-grey: #d2d2d2;
-	--grey: #a5a5a5;
+	--grey: #999999;
 	--dark-grey: #54595c;
 	--red: #e60012;
 	--light-green: #f2f8f3;
@@ -71,7 +72,7 @@ p {
 }
 
 a {
-	color: var(--dark-pink);
+	color: var(--orange);
 	text-decoration: none;
 
 	&:focus,
@@ -87,7 +88,7 @@ blockquote {
 	margin-block: 1rem;
 	padding: 0.5rem;
 	font-style: italic;
-	color: var(--dark-blue);
+	color: var(--darker-blue);
 	border-left: 4px solid var(--blue);
 	border-radius: 5px;
 	background-color: var(--light-blue);
@@ -98,7 +99,7 @@ blockquote {
 }
 
 code {
-	color: var(--darker-blue);
+	color: var(--dark-blue);
 	font-size: 0.9rem;
 }
 
