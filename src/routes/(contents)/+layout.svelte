@@ -8,7 +8,7 @@
 
 	let on = $state(false);
 	let toc = $state<HTMLDivElement>();
-	let shouldShowMenu = $state($page.url.pathname !== '/contents');
+	let shouldShowMenu = $derived($page.url.pathname !== '/contents');
 
 	$effect(() => {
 		toc?.querySelector('.current')?.scrollIntoView({ block: 'center' });
