@@ -23,7 +23,6 @@ const md = markdownit({ html: true })
 	.use(titlePlugin)
 	.use(frontmatterPlugin)
 	.use(anchor, {
-		permalink: anchor.permalink.headerLink(),
 		slugify
 	});
 

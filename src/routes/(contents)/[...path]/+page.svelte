@@ -8,12 +8,13 @@
 
 {#snippet link(node: Node | undefined)}
 	{#if node}
-		{@const { id, isFolder, path, name, title } = node}
-		{@const idText = title ? `${id.split('-').map(Number).join('.')} ` : ''}
+		{@const { id, isFolder, path, name, title, files } = node}
+		{@const idText = title ? `${id.split('-').map(Number).join('.')}` : ''}
+		{@const noFiles = !files?.length}
 		{@const text = title || name}
 
 		<a class="nav-link" class:folder={isFolder} href={path}
-			><span>{idText}</span>{text}{isFolder ? '/' : ''}</a
+			><span>{idText}{isFolder || noFiles ? '.' : ''}</span>{text}</a
 		>
 	{:else}
 		<span></span>
@@ -72,13 +73,72 @@
 	{/if}
 </article>
 
-{@render nav()}
+{#if !isFolder}
+	{@render nav()}
+{/if}
 
 <style lang="postcss">
 	nav {
 		display: flex;
 		justify-content: space-between;
+		align-items: flex-end;
 		margin-block: 1rem;
+
+		:global {
+			a {
+				color: var(--grey);
+
+				&:hover,
+				&:focus {
+					color: var(--orange);
+				}
+			}
+		}
+
+		&:last-of-type:not(:first-of-type) {
+			margin-bottom: 3rem;
+
+			:global {
+				.nav-link {
+					display: block;
+					position: relative;
+					&::before {
+						content: 'suite';
+						position: absolute;
+						color: black;
+					}
+					&:first-of-type {
+						&::before {
+							content: 'retour';
+							bottom: 1.1rem;
+							left: 0;
+							font-size: 0.8rem;
+						}
+					}
+					&:last-of-type {
+						font-size: 1.5rem;
+						color: var(--dark-orange);
+						&:hover,
+						&:focus {
+							color: var(--orange);
+						}
+
+						&::before {
+							content: 'suite';
+							bottom: 1.6rem;
+							right: 0;
+							font-size: 1rem;
+						}
+					}
+				}
+			}
+		}
+		.nav-link {
+			span {
+				font-size: 0.8rem;
+				margin-right: 0.5ch;
+			}
+		}
 	}
 
 	header {
@@ -90,6 +150,11 @@
 			font-size: 1.3rem;
 			margin: 0;
 			text-align: center;
+
+			&:focus,
+			&:hover {
+				color: var(--orange);
+			}
 		}
 
 		p {
@@ -98,10 +163,6 @@
 			font-style: italic;
 			text-align: center;
 		}
-	}
-
-	.nav-link span {
-		font-size: 0.8rem;
 	}
 
 	article {
@@ -156,7 +217,7 @@
 		h5,
 		h6 {
 			position: relative;
-			transition: all 0.5s;
+			transition: all 0.4s;
 
 			a {
 				color: inherit;

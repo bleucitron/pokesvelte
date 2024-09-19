@@ -33,21 +33,17 @@
 <style>
 	a {
 		color: unset;
+
+		&:hover,
+		&:focus {
+			color: var(--orange);
+		}
 	}
 
 	li {
 		margin-block: 0.8rem;
 		font-size: 0.9rem;
 		text-transform: none;
-
-		&:has(ol) {
-			&:first-of-type {
-				margin-top: 0;
-			}
-			&:last-of-type {
-				margin-bottom: 0;
-			}
-		}
 
 		:global {
 			ol {

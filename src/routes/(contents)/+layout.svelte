@@ -8,6 +8,7 @@
 
 	let on = $state(false);
 	let toc = $state<HTMLDivElement>();
+	let shouldShowMenu = $state($page.url.pathname !== '/contents');
 
 	$effect(() => {
 		toc?.querySelector('.current')?.scrollIntoView({ block: 'center' });
@@ -18,11 +19,14 @@
 	<aside>
 		<menu>
 			<a href="/">PokéSvelte</a>
-			<button class:active={on} onclick={() => (on = !on)}>{on ? 'Fermer' : 'Menu'}</button>
+			{#if shouldShowMenu}
+				<button class:active={on} onclick={() => (on = !on)}>{on ? 'Fermer' : 'Menu'}</button>
+			{/if}
 		</menu>
-		{#if on}
+		{#if shouldShowMenu && on}
 			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>
 				<Tree {current} folder={data.tree} />
+				<a href="/contents">Programme complet</a>
 			</div>
 		{/if}
 	</aside>
@@ -65,30 +69,43 @@
 				border: none;
 				box-shadow: none;
 				height: 100%;
+				transition: all 0.4s;
 
-				&:focus,
 				&:hover {
 					cursor: pointer;
-					color: var(--dark-blue);
+					color: var(--orange);
 				}
 
 				&.active {
-					background: var(--dark-blue);
-					color: white;
-					border-color: var(--dark-blue);
+					color: var(--orange);
+					border-color: var(--orange);
 				}
 			}
 		}
 
 		.toc {
-			padding-block: 1rem;
+			display: flex;
+			flex-flow: column;
+			justify-content: space-between;
+			padding: 1rem;
 			height: calc(100svh - var(--topbar-height));
 			overflow-x: hidden;
 			overflow-y: auto;
+
+			a {
+				font-size: 0.9rem;
+				color: var(--grey);
+				text-align: center;
+			}
 		}
 
 		a {
-			color: unset;
+			color: inherit;
+
+			&:hover,
+			&:focus {
+				color: var(--orange);
+			}
 		}
 	}
 	main {

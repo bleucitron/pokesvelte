@@ -30,6 +30,14 @@
 		margin-top: 5rem;
 	}
 
+	a {
+		color: inherit;
+
+		&:focus,
+		&:hover {
+			color: var(--orange);
+		}
+	}
 	ol {
 		margin-block: 1rem 4rem;
 		margin-inline: auto;
