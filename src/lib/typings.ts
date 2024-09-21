@@ -7,4 +7,6 @@ export interface Node extends MarkdownItEnv {
 	markup?: string;
 	files?: Node[];
 	isFolder?: boolean;
+	scope?: 'svelte' | 'kit';
+	[k: string]: unknown;
 }

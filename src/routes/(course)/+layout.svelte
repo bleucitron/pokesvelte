@@ -86,6 +86,7 @@
 			flex-flow: column;
 			justify-content: space-between;
 			padding: 1rem;
+			padding-top: 0;
 			height: calc(100svh - var(--topbar-height));
 			overflow-x: hidden;
 			overflow-y: auto;

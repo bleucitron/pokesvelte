@@ -177,6 +177,14 @@ h2:has(+ .task) {
 	}
 }
 
+button {
+	border: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
 hr {
 	margin-block: 2rem;
 	border: none;

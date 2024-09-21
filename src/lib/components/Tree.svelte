@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Node } from '$lib/typings';
-	import { slide } from 'svelte/transition';
+	import { scale, slide } from 'svelte/transition';
 
 	interface Props {
 		folder: Node[];
@@ -9,17 +9,32 @@
 	}
 	const { folder, current: currentId = '', depth = 0 }: Props = $props();
 	const start = parseInt(folder[0]?.id?.split('-')?.at(-1) ?? '');
+
+	let tagsOn = $state(false);
 </script>
 
 <ol {start}>
-	{#each folder as { id, name, path, files, title }}
-		{@const isFolder = depth === 0}
-		{@const current = isFolder ? id && currentId.startsWith(id) : id === currentId}
+	{#each folder as { id, name, path, files, title, scope }}
+		{@const root = depth === 0}
+		{@const current = root ? id && currentId.startsWith(id) : id === currentId}
 		{@const previous = !current && id && id < currentId}
 		{@const next = id > currentId}
+		{@const tagOn = root && scope && (current || tagsOn)}
 
-		<li class:folder={isFolder} class:current class:previous class:next>
-			<a href={path}>{title || name}</a>
+		<li class:root class:current class:previous class:next>
+			<span
+				><a href={path}>{title || name}</a>
+
+				{#if tagOn}
+					<button
+						class="tag {scope}"
+						onclick={() => (tagsOn = !tagsOn)}
+						transition:scale={{ duration: 300 }}
+					>
+						{scope}
+					</button>
+				{/if}
+			</span>
 
 			{#if current && files?.length}
 				<div transition:slide={{ duration: 300 }}>
@@ -38,6 +53,30 @@
 		&:focus {
 			color: var(--orange);
 		}
+	}
+
+	.tag {
+		padding: 1px 3px;
+		color: white;
+		font-size: 0.7rem;
+		border-radius: 3px;
+		opacity: 0.5;
+		border: none;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		&.svelte {
+			background: var(--dark-orange);
+		}
+		&.kit {
+			background: var(--dark-blue);
+		}
+	}
+
+	ol:has(ol) {
+		padding-left: 2rem;
 	}
 
 	li {
@@ -63,7 +102,7 @@
 			color: black;
 		}
 
-		&.folder {
+		&.root {
 			font-size: 1rem;
 
 			&.current {

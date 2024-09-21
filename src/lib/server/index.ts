@@ -1,6 +1,7 @@
 import type { MarkdownItEnv } from '@mdit-vue/types';
 import type { Node } from '$lib/typings';
 
+import { parse as parseYaml } from 'yaml';
 import { readFile, readdir, stat } from 'fs/promises';
 import readline from 'readline';
 import { dirname, join } from 'path';
@@ -54,7 +55,7 @@ export async function parseMdFile(path: string) {
 }
 
 // see https://stackoverflow.com/a/28749643
-async function readTitle(path: string) {
+async function readMeta(path: string) {
 	const { size } = await stat(path);
 
 	if (!size) return Promise.resolve(null);
@@ -62,17 +63,37 @@ async function readTitle(path: string) {
 	const readable = createReadStream(path, { encoding: 'utf8' });
 	const reader = readline.createInterface({ input: readable });
 
-	const line = await new Promise<string>((resolve) => {
+	const meta = await new Promise<{ title: string; [k: string]: string }>((resolve) => {
+		let header: string;
+		let title = '';
+		let done = false;
+
 		reader.on('line', (line) => {
-			// Avoid frontmatter section by looking for title
 			if (line.startsWith('# ')) {
 				reader.close();
-				resolve(line);
+				title = line.replace('# ', '');
+				const options = header ? parseYaml(header) : null;
+				resolve({ title, ...options });
+				return;
+			}
+			// careful, 'line' events keep getting fired even after reader.close()
+			if (done) return;
+
+			if (line.startsWith('---')) {
+				if (header) {
+					done = true;
+					return;
+				}
+				header = '';
+				return;
+			}
+			if (header !== undefined) {
+				header += `\n${line}`;
 			}
 		});
 	});
 	readable.close();
-	return line;
+	return meta;
 }
 
 export async function readDir(path: string): Promise<Node[]> {
@@ -90,18 +111,16 @@ export async function readDir(path: string): Promise<Node[]> {
 				const webPath = path.replace('.md', '').replace(CONTENT_FOLDER, '');
 				const filePath = isDirectory ? join(path, 'index.md') : path;
 
-				const [firstLine, files] = await Promise.all([
-					readTitle(filePath),
+				const [meta, files] = await Promise.all([
+					readMeta(filePath),
 					isDirectory ? readDir(path) : undefined
 				]);
 
-				const title = firstLine?.replace('# ', '');
-
 				const id = buildId(path, index + 1);
 				return {
+					...meta,
 					id,
 					name,
-					title,
 					path: webPath,
 					files,
 					isFolder: !!files?.length
