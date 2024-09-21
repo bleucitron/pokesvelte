@@ -57,7 +57,6 @@
 			color: black;
 			line-height: 1;
 			display: flex;
-			gap: 0.5rem;
 			align-items: baseline;
 
 			a:first-child {
