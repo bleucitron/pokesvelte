@@ -115,6 +115,11 @@
 				}
 			}
 		}
+		&:first-of-type {
+			@media (max-width: 900px) {
+				display: none;
+			}
+		}
 	}
 
 	header {

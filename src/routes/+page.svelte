@@ -12,12 +12,13 @@
 	main {
 		height: 100svh;
 		display: flex;
+		padding: 2rem;
 		flex-flow: column;
 		justify-content: center;
 		align-items: center;
 	}
 	p {
-		color: var(--grey);
+		color: var(--dark-grey);
 	}
 
 	.start {

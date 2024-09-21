@@ -47,6 +47,12 @@
 		position: fixed;
 		left: 0;
 		width: var(--aside-width);
+		background-color: white;
+
+		@media (max-width: 900px) {
+			width: 100%;
+			border-bottom: 1px solid var(--dark-grey);
+		}
 
 		menu {
 			position: sticky;
@@ -56,6 +62,7 @@
 			background: white;
 			color: black;
 			line-height: 1;
+			gap: 0.3rem;
 			display: flex;
 			align-items: baseline;
 
@@ -88,5 +95,9 @@
 		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
 		overflow-y: auto;
+
+		@media (max-width: 900px) {
+			padding-inline: 2rem;
+		}
 	}
 </style>
