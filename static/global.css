@@ -49,6 +49,7 @@ body {
 }
 body {
 	counter-reset: tasks;
+	overflow-y: scroll;
 }
 
 h1,
