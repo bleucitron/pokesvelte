@@ -21,6 +21,8 @@
 			<a href="/">PokéSvelte</a>
 			{#if shouldShowMenu}
 				<button class:active={on} onclick={() => (on = !on)}>{on ? 'Fermer' : 'Menu'}</button>
+			{:else}
+				<button onclick={() => history.back()}>Retour</button>
 			{/if}
 		</menu>
 		{#if shouldShowMenu && on}
