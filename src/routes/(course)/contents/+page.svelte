@@ -10,10 +10,10 @@
 {#snippet Tree(tree: Node[], depth: number)}
 	{@const start = parseInt(tree[0]?.id?.split('-')?.at(-1) ?? '')}
 	<ol {start}>
-		{#each tree as { name, path, files, title }}
+		{#each tree as { name, path, files, title, scope }}
 			{@const isFolder = depth === 0}
 
-			<li class:folder={isFolder}>
+			<li class:folder={isFolder} class={scope}>
 				<a href={path}>{title || name}</a>
 
 				{#if files?.length}
@@ -30,15 +30,6 @@
 	h1 {
 		margin-block: 5rem 3rem;
 		text-align: center;
-	}
-
-	a {
-		color: inherit;
-
-		&:focus,
-		&:hover {
-			color: var(--orange);
-		}
 	}
 
 	ol {
@@ -66,13 +57,9 @@
 		font-weight: normal;
 		color: var(--dark-grey);
 		font-size: 1rem;
-		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
 		margin-block: 1rem;
-
-		&:has(li) {
-		}
 
 		&.folder {
 			font-size: 1.2rem;

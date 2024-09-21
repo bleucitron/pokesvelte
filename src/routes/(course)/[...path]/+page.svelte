@@ -3,17 +3,17 @@
 
 	const { data } = $props();
 	const { title, markup, options, current, prev, next, parent } = $derived(data);
-	const { id, name, files, isFolder } = $derived(current);
+	const { id, name, files, isFolder, scope } = $derived(current);
 </script>
 
 {#snippet link(node: Node | undefined)}
 	{#if node}
-		{@const { id, isFolder, path, name, title, files } = node}
+		{@const { id, isFolder, path, name, title, files, scope } = node}
 		{@const idText = title ? `${id.split('-').map(Number).join('.')}` : ''}
 		{@const noFiles = !files?.length}
 		{@const text = title || name}
 
-		<a class="nav-link" class:folder={isFolder} href={path}
+		<a class="nav-link {scope}" class:folder={isFolder} href={path}
 			><span>{idText}{isFolder || noFiles ? '.' : ''}</span>{text}</a
 		>
 	{:else}
@@ -28,14 +28,14 @@
 	</nav>
 {/snippet}
 
-{#snippet parentLink({ path, title, id }: Node)}
+{#snippet parentLink({ path, title, id, scope }: Node)}
 	{@const prefix = id ? `${Number(id)}. ` : ''}
-	<a class="parent" href={path}><span>{prefix}</span>{title}</a>
+	<a class="parent {scope}" href={path}><span>{prefix}</span>{title}</a>
 {/snippet}
 
 {@render nav()}
 
-<article class:folder={isFolder}>
+<article class={scope} class:folder={isFolder}>
 	<header>
 		{#if parent}
 			{@render parentLink(parent)}
@@ -83,17 +83,6 @@
 		padding-block: 1rem;
 		height: var(--topbar-height);
 
-		:global {
-			a {
-				color: var(--grey);
-
-				&:hover,
-				&:focus {
-					color: var(--orange);
-				}
-			}
-		}
-
 		&:last-of-type:not(:first-of-type) {
 			:global {
 				.nav-link {
@@ -114,11 +103,6 @@
 					}
 					&:last-of-type {
 						font-size: 1.5rem;
-						color: var(--dark-orange);
-						&:hover,
-						&:focus {
-							color: var(--orange);
-						}
 
 						&::before {
 							content: 'suite';
@@ -130,12 +114,6 @@
 				}
 			}
 		}
-		.nav-link {
-			span {
-				font-size: 0.8rem;
-				margin-right: 0.5ch;
-			}
-		}
 	}
 
 	header {
@@ -143,15 +121,9 @@
 
 		a {
 			display: block;
-			color: inherit;
 			font-size: 1.3rem;
 			margin: 0;
 			text-align: center;
-
-			&:focus,
-			&:hover {
-				color: var(--orange);
-			}
 		}
 
 		p {
@@ -188,7 +160,6 @@
 		display: block;
 		text-align: center;
 		font-size: 1rem;
-		color: var(--grey);
 		text-transform: uppercase;
 	}
 
@@ -214,16 +185,9 @@
 		h5,
 		h6 {
 			position: relative;
-			transition: all 0.4s;
 
 			a {
-				color: inherit;
 				display: block;
-
-				&:hover,
-				&:focus {
-					text-decoration: none;
-				}
 			}
 
 			&:has(a:hover, a:focus) {

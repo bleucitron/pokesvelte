@@ -67,7 +67,6 @@
 				border: none;
 				box-shadow: none;
 				height: 100%;
-				transition: all 0.4s;
 
 				&:hover {
 					cursor: pointer;

@@ -21,7 +21,7 @@
 		{@const next = id > currentId}
 		{@const tagOn = root && scope && (current || tagsOn)}
 
-		<li class:root class:current class:previous class:next>
+		<li class={scope} class:root class:current class:previous class:next>
 			<span
 				><a href={path}>{title || name}</a>
 
@@ -48,10 +48,9 @@
 <style>
 	a {
 		color: unset;
-
-		&:hover,
-		&:focus {
-			color: var(--orange);
+		&:focus,
+		&:hover {
+			color: var(--dark-grey);
 		}
 	}
 
@@ -95,11 +94,18 @@
 
 		font-weight: normal;
 		color: var(--grey);
-		transition-duration: 0.2s;
 		transition-property: color, font-weight;
 
 		&.current {
 			color: black;
+
+			.current {
+				a:focus,
+				a:hover {
+					color: black;
+					cursor: default;
+				}
+			}
 		}
 
 		&.root {

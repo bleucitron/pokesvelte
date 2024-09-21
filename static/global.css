@@ -2,6 +2,7 @@
 
 * {
 	scrollbar-width: thin;
+	/* transition: all 0.3s; */
 }
 
 html,
@@ -75,16 +76,34 @@ p {
 }
 
 a {
-	color: var(--dark-orange);
+	color: var(--grey);
 	text-decoration: none;
-	transition: all 0.4s;
+
+	&:focus,
+	&:hover {
+		color: var(--dark-grey);
+	}
+	&::visited {
+		color: inherit;
+	}
+}
+
+.svelte a,
+nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.svelte {
+	color: var(--dark-orange);
 
 	&:focus,
 	&:hover {
 		color: var(--orange);
 	}
-	&::visited {
-		color: inherit;
+}
+.kit a,
+nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.kit {
+	color: var(--dark-blue);
+
+	&:focus,
+	&:hover {
+		color: var(--blue);
 	}
 }
 
