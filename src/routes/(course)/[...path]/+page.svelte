@@ -40,7 +40,7 @@
 		{#if parent}
 			{@render parentLink(parent)}
 		{:else if isFolder}
-			<a href="/">Chapitre {id}</a>
+			<a href="/">Chapitre {Number(id)}</a>
 		{:else}
 			<a href="/">Aparté</a>
 		{/if}
