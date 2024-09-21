@@ -31,7 +31,7 @@
 		{/if}
 	</aside>
 
-	<main>
+	<main class="course">
 		{@render children()}
 	</main>
 </div>
@@ -48,35 +48,18 @@
 
 		menu {
 			position: sticky;
-			padding: 1rem;
+			padding: 0.5rem;
 			height: var(--topbar-height);
 			top: 0;
 			background: white;
+			color: black;
 			line-height: 1;
 			display: flex;
 			gap: 0.5rem;
 			align-items: baseline;
 
-			a {
+			a:first-child {
 				font-size: 1.5rem;
-			}
-
-			button {
-				background: white;
-				border-radius: 6px;
-				border: none;
-				box-shadow: none;
-				height: 100%;
-				color: var(--grey);
-
-				&:hover {
-					cursor: pointer;
-					color: black;
-				}
-
-				&.active {
-					color: black;
-				}
 			}
 		}
 
@@ -92,17 +75,7 @@
 
 			a {
 				font-size: 0.9rem;
-				color: var(--grey);
 				text-align: center;
-			}
-		}
-
-		a {
-			color: var(--grey);
-
-			&:hover,
-			&:focus {
-				color: black;
 			}
 		}
 	}

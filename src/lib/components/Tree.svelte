@@ -13,7 +13,7 @@
 	let tagsOn = $state(false);
 </script>
 
-<ol {start}>
+<ol class="Tree" {start}>
 	{#each folder as { id, name, path, files, title, scope }}
 		{@const root = depth === 0}
 		{@const current = root ? id && currentId.startsWith(id) : id === currentId}
@@ -46,11 +46,11 @@
 </ol>
 
 <style>
-	a {
+	.Tree a {
 		color: unset;
 		&:focus,
 		&:hover {
-			color: var(--darker-grey);
+			color: var(--dark-grey);
 		}
 	}
 
@@ -97,7 +97,7 @@
 		transition-property: color, font-weight;
 
 		&.current {
-			color: black;
+			color: black !important;
 
 			&.root > span > a:focus,
 			&.root > span > a:hover {

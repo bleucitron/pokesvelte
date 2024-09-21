@@ -4,16 +4,18 @@
 	const { data } = $props();
 	const { title, markup, options, current, prev, next, parent } = $derived(data);
 	const { id, name, files, isFolder, scope } = $derived(current);
+
+	type Link = (Node & { next?: boolean }) | undefined;
 </script>
 
-{#snippet link(node: Node | undefined)}
+{#snippet link(node: Link, next = false)}
 	{#if node}
 		{@const { id, isFolder, path, name, title, files, scope } = node}
 		{@const idText = title ? `${id.split('-').map(Number).join('.')}` : ''}
 		{@const noFiles = !files?.length}
 		{@const text = title || name}
 
-		<a class="nav-link {scope}" class:folder={isFolder} href={path}
+		<a class="nav-link {scope}" class:next class:folder={isFolder} href={path}
 			><span>{idText}{isFolder || noFiles ? '. ' : ' '}</span>{text}</a
 		>
 	{:else}
@@ -23,8 +25,8 @@
 
 {#snippet nav()}
 	<nav>
-		{@render link(prev)}
-		{@render link(next)}
+		{@render link(prev, false)}
+		{@render link(next, true)}
 	</nav>
 {/snippet}
 
@@ -84,29 +86,28 @@
 		height: var(--topbar-height);
 
 		&:last-of-type:not(:first-of-type) {
+			align-items: baseline;
+
 			:global {
 				.nav-link {
 					display: block;
 					position: relative;
+
 					&::before {
-						content: 'suite';
+						content: 'retour';
 						position: absolute;
 						color: black;
+						bottom: 1.3rem;
+						left: 0;
+						font-size: 0.8rem;
 					}
-					&:first-of-type {
-						&::before {
-							content: 'retour';
-							bottom: 1.1rem;
-							left: 0;
-							font-size: 0.8rem;
-						}
-					}
-					&:last-of-type {
+					&.next {
 						font-size: 1.5rem;
 
 						&::before {
 							content: 'suite';
-							bottom: 1.6rem;
+							left: unset;
+							bottom: 1.8rem;
 							right: 0;
 							font-size: 1rem;
 						}

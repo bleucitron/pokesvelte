@@ -77,7 +77,7 @@ p {
 }
 
 a {
-	color: var(--grey);
+	color: black;
 	text-decoration: none;
 
 	&:focus,
@@ -88,6 +88,35 @@ a {
 		color: inherit;
 	}
 }
+.course a,
+.toc ol a {
+	color: var(--grey);
+	padding: 0;
+	border-radius: 0;
+
+	&:hover,
+	&.active {
+		color: var(--dark-grey);
+		background: none;
+	}
+
+}
+
+a,
+button {
+	padding: 0.5rem;
+	border-radius: 6px;
+
+	&:hover,
+	&.active {
+		color: black;
+		background: var(--light-grey);
+	}
+}
+li:has(a:hover) {
+	color: var(--dark-grey);
+}
+
 
 h2, hr {
 	border-color: var(--grey);
@@ -121,6 +150,7 @@ h2, hr {
 }
 
 .svelte a,
+li.svelte,
 nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.svelte {
 	color: var(--dark-orange);
 
@@ -130,7 +160,8 @@ nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.svelte {
 	}
 }
 .kit a,
-nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.kit {
+li.kit,
+nav:last-of-type:not(:first-of-type) .next.kit {
 	color: var(--dark-blue);
 
 	&:focus,
@@ -236,6 +267,9 @@ h2:has(+ .task) {
 
 button {
 	border: none;
+	background: white;
+	box-shadow: none;
+	color: inherit;
 
 	&:hover {
 		cursor: pointer;

@@ -55,7 +55,7 @@
 	li {
 		flex: 1 0 50%;
 		font-weight: normal;
-		color: var(--dark-grey);
+		color: black;
 		font-size: 1rem;
 		transition-property: color, font-weight;
 
