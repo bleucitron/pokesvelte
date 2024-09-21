@@ -14,7 +14,7 @@
 		{@const text = title || name}
 
 		<a class="nav-link {scope}" class:folder={isFolder} href={path}
-			><span>{idText}{isFolder || noFiles ? '.' : ''}</span>{text}</a
+			><span>{idText}{isFolder || noFiles ? '. ' : ' '}</span>{text}</a
 		>
 	{:else}
 		<span></span>
@@ -175,29 +175,5 @@
 
 	ol {
 		font-size: 1.3rem;
-	}
-
-	:global {
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			position: relative;
-
-			a {
-				display: block;
-			}
-
-			&:has(a:hover, a:focus) {
-				&::before {
-					content: '#';
-					position: absolute;
-					left: -1.3rem;
-					color: var(--dark-blue);
-				}
-			}
-		}
 	}
 </style>

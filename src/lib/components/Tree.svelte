@@ -50,7 +50,7 @@
 		color: unset;
 		&:focus,
 		&:hover {
-			color: var(--dark-grey);
+			color: var(--darker-grey);
 		}
 	}
 
@@ -74,7 +74,7 @@
 		}
 	}
 
-	ol:has(ol) {
+	ol:has(.root) {
 		padding-left: 2rem;
 	}
 
@@ -99,10 +99,16 @@
 		&.current {
 			color: black;
 
+			&.root > span > a:focus,
+			&.root > span > a:hover {
+				color: black !important;
+				cursor: default;
+			}
+
 			.current {
 				a:focus,
 				a:hover {
-					color: black;
+					color: black !important;
 					cursor: default;
 				}
 			}
@@ -110,13 +116,6 @@
 
 		&.root {
 			font-size: 1rem;
-
-			&.current {
-				&:has(.current) {
-					color: inherit;
-					font-weight: inherit;
-				}
-			}
 		}
 	}
 </style>

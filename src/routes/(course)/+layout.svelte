@@ -67,15 +67,15 @@
 				border: none;
 				box-shadow: none;
 				height: 100%;
+				color: var(--grey);
 
 				&:hover {
 					cursor: pointer;
-					color: var(--orange);
+					color: black;
 				}
 
 				&.active {
-					color: var(--orange);
-					border-color: var(--orange);
+					color: black;
 				}
 			}
 		}
@@ -98,11 +98,11 @@
 		}
 
 		a {
-			color: inherit;
+			color: var(--grey);
 
 			&:hover,
 			&:focus {
-				color: var(--orange);
+				color: black;
 			}
 		}
 	}
