@@ -49,7 +49,7 @@
 		width: var(--aside-width);
 		background-color: white;
 
-		@media (max-width: 900px) {
+		@media (max-width: 1024px) {
 			width: 100%;
 			border-bottom: 1px solid var(--dark-grey);
 		}
@@ -96,7 +96,7 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 
-		@media (max-width: 900px) {
+		@media (max-width: 1024px) {
 			padding-inline: 2rem;
 		}
 	}
