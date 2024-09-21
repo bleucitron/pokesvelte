@@ -97,7 +97,7 @@
 						content: 'retour';
 						position: absolute;
 						color: black;
-						bottom: 1.3rem;
+						top: -1.1rem;
 						left: 0;
 						font-size: 0.8rem;
 					}
@@ -107,7 +107,6 @@
 						&::before {
 							content: 'suite';
 							left: unset;
-							bottom: 1.8rem;
 							right: 0;
 							font-size: 1rem;
 						}
