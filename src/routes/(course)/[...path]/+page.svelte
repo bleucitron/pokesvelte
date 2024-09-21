@@ -73,9 +73,7 @@
 	{/if}
 </article>
 
-{#if !isFolder}
-	{@render nav()}
-{/if}
+{@render nav()}
 
 <style lang="postcss">
 	nav {
