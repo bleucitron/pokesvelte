@@ -8,7 +8,8 @@
 <h1>Table des matières</h1>
 
 {#snippet Tree(tree: Node[], depth: number)}
-	<ol start={0}>
+	{@const start = parseInt(tree[0]?.id?.split('-')?.at(-1) ?? '')}
+	<ol {start}>
 		{#each tree as { name, path, files, title }}
 			{@const isFolder = depth === 0}
 
