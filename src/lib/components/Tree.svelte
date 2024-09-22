@@ -22,19 +22,17 @@
 		{@const tagOn = root && scope && (current || tagsOn)}
 
 		<li class={scope} class:root class:current class:previous class:next>
-			<span
-				><a href={path}>{title || name}</a>
+			<a href={path}>{title || name}</a>
 
-				{#if tagOn}
-					<button
-						class="tag {scope}"
-						onclick={() => (tagsOn = !tagsOn)}
-						transition:scale={{ duration: 300 }}
-					>
-						{scope}
-					</button>
-				{/if}
-			</span>
+			{#if tagOn}
+				<button
+					class="tag {scope}"
+					onclick={() => (tagsOn = !tagsOn)}
+					transition:scale={{ duration: 300 }}
+				>
+					{scope}
+				</button>
+			{/if}
 
 			{#if current && files?.length}
 				<div transition:slide={{ duration: 300 }}>
@@ -51,26 +49,6 @@
 		&:focus,
 		&:hover {
 			color: var(--dark-grey);
-		}
-	}
-
-	.tag {
-		padding: 1px 3px;
-		color: white;
-		font-size: 0.7rem;
-		border-radius: 3px;
-		opacity: 0.5;
-		border: none;
-
-		&:hover {
-			opacity: 1;
-		}
-
-		&.svelte {
-			background: var(--dark-orange);
-		}
-		&.kit {
-			background: var(--dark-blue);
 		}
 	}
 
@@ -99,8 +77,8 @@
 		&.current {
 			color: black !important;
 
-			&.root > span > a:focus,
-			&.root > span > a:hover {
+			&.root > a:focus,
+			&.root > a:hover {
 				color: black !important;
 				cursor: default;
 			}
@@ -116,6 +94,13 @@
 
 		&.root {
 			font-size: 1rem;
+		}
+
+		:global {
+			.tag:hover {
+				opacity: 1;
+				cursor: pointer;
+			}
 		}
 	}
 </style>

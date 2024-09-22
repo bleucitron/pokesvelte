@@ -15,6 +15,11 @@
 
 			<li class:folder={isFolder} class={scope}>
 				<a href={path}>{title || name}</a>
+				{#if isFolder}
+					<span class="tag {scope}">
+						{scope}
+					</span>
+				{/if}
 
 				{#if files?.length}
 					{@render Tree(files, depth + 1)}
@@ -33,10 +38,11 @@
 	}
 
 	ol {
-		display: flex;
-		flex-wrap: wrap;
-		padding-left: 4rem;
+		width: fit-content;
 
+		&:has(ol) {
+			margin: auto;
+		}
 		&:not(:has(ol)) {
 			display: block;
 		}
@@ -58,19 +64,27 @@
 		color: black;
 		font-size: 1rem;
 		transition-property: color, font-weight;
-
 		margin-block: 1rem;
 
 		&.folder {
 			font-size: 1.2rem;
 		}
+
+		&:hover:has(li) {
+			color: unset;
+		}
 	}
+
+	ol,
+	li {
+		&:hover {
+			color: black;
+		}
+	}
+
 	@media (max-width: 1024px) {
 		h1 {
 			margin-bottom: 0;
-		}
-		ol {
-			display: initial;
 		}
 	}
 </style>

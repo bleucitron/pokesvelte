@@ -108,8 +108,7 @@ a {
 
 }
 
-a,
-button {
+.button-link {
 	padding: 0.5rem;
 	border-radius: 6px;
 
@@ -119,9 +118,9 @@ button {
 		background: var(--light-grey);
 	}
 }
-li:has(a:hover) {
-	color: var(--dark-grey);
-}
+/* li:has(a:hover) { */
+/* 	color: var(--dark-grey); */
+/* } */
 
 
 h2, hr {
@@ -156,8 +155,9 @@ h2, hr {
 }
 
 .svelte a,
-li.svelte,
-nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.svelte {
+a.svelte,
+.Tree li.svelte:has(> a:hover),
+nav:last-of-type:not(:first-of-type) .next.svelte {
 	color: var(--dark-orange);
 
 	&:focus,
@@ -166,7 +166,8 @@ nav:last-of-type:not(:first-of-type) .nav-link:last-of-type.svelte {
 	}
 }
 .kit a,
-li.kit,
+a.kit,
+.Tree li.kit:has(> a:hover),
 nav:last-of-type:not(:first-of-type) .next.kit {
 	color: var(--dark-blue);
 
@@ -279,6 +280,23 @@ button {
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+.tag {
+	padding: 1px 3px;
+	color: white;
+	font-size: 0.7rem;
+	border-radius: 3px;
+	opacity: 0.5;
+	border: none;
+
+
+	&.svelte {
+		background: var(--dark-orange);
+	}
+	&.kit {
+		background: var(--dark-blue);
 	}
 }
 

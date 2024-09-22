@@ -18,17 +18,19 @@
 <div class="root">
 	<aside>
 		<menu>
-			<a href="/">PokéSvelte</a>
+			<a class="button-link" href="/">PokéSvelte</a>
 			{#if shouldShowMenu}
-				<button class:active={on} onclick={() => (on = !on)}>{on ? 'Fermer' : 'Menu'}</button>
+				<button class="button-link" class:active={on} onclick={() => (on = !on)}
+					>{on ? 'Fermer' : 'Menu'}</button
+				>
 			{:else}
-				<button onclick={() => history.back()}>Retour</button>
+				<button class="button-link" onclick={() => history.back()}>Retour</button>
 			{/if}
 		</menu>
 		{#if shouldShowMenu && on}
 			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>
 				<Tree {current} folder={data.tree} />
-				<a href="/contents">Programme complet</a>
+				<a class="button-link" href="/contents">Programme complet</a>
 			</div>
 		{/if}
 	</aside>
@@ -85,6 +87,7 @@
 			overflow-y: auto;
 
 			a {
+				align-self: center;
 				font-size: 0.9rem;
 				text-align: center;
 			}
