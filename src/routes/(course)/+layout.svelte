@@ -51,7 +51,6 @@
 
 		@media (max-width: 1024px) {
 			width: 100%;
-			border-bottom: 1px solid var(--dark-grey);
 		}
 
 		menu {
@@ -68,6 +67,10 @@
 
 			a:first-child {
 				font-size: 1.5rem;
+			}
+			@media (max-width: 1024px) {
+				width: 100%;
+				border-bottom: 1px solid var(--dark-grey);
 			}
 		}
 

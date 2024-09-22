@@ -114,12 +114,20 @@
 					}
 					&.next {
 						font-size: 1.5rem;
+						text-align: right;
 
 						&::before {
 							content: 'suite';
 							left: unset;
 							right: 0;
 							font-size: 1rem;
+						}
+						@media (max-width: 1024px) {
+							font-size: 1rem;
+
+							&::before {
+								font-size: 0.8rem;
+							}
 						}
 					}
 				}
@@ -134,6 +142,10 @@
 
 	header {
 		margin-block: 4rem 7rem;
+
+		@media (max-width: 1024px) {
+			margin-bottom: 1rem;
+		}
 
 		a {
 			display: block;
@@ -169,6 +181,10 @@
 		section {
 			width: max-content;
 			margin: auto;
+
+			@media (max-width: 1024px) {
+				width: unset;
+			}
 		}
 	}
 
@@ -191,5 +207,9 @@
 
 	ol {
 		font-size: 1.3rem;
+
+		@media (max-width: 1024px) {
+			font-size: 1.1rem;
+		}
 	}
 </style>

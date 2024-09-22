@@ -65,4 +65,12 @@
 			font-size: 1.2rem;
 		}
 	}
+	@media (max-width: 1024px) {
+		h1 {
+			margin-bottom: 0;
+		}
+		ol {
+			display: initial;
+		}
+	}
 </style>
