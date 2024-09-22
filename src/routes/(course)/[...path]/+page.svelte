@@ -3,7 +3,13 @@
 
 	const { data } = $props();
 	const { title, markup, options, current, prev, next, parent } = $derived(data);
-	const { id, name, files, isFolder, scope } = $derived(current);
+	const { id, name, files, isFolder, scope, description } = $derived(current);
+
+	const folderDescription = $derived(`Liste des chapitres de la partie ${Number(id)} (${title})`);
+	const metaDescription = $derived(
+		!description ? folderDescription : parent ? `${parent.title} | ${description}` : description
+	);
+	$inspect(data);
 
 	type Link = (Node & { next?: boolean }) | undefined;
 </script>
@@ -42,7 +48,7 @@
 		{#if parent}
 			{@render parentLink(parent)}
 		{:else if isFolder}
-			<a href="/">Chapitre {Number(id)}</a>
+			<a href="/">Partie {Number(id)}</a>
 		{:else}
 			<a href="/">Aparté</a>
 		{/if}
@@ -76,6 +82,11 @@
 </article>
 
 {@render nav()}
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={metaDescription} />
+</svelte:head>
 
 <style lang="postcss">
 	nav {
