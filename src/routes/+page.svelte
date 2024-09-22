@@ -14,9 +14,13 @@
 	</p>
 	<a class="start button-link" href="/00_introduction">Commencer</a>
 	<a class="button-link" href="/contents/">Programme</a>
+	<a class="button-link" href="https://github.com/bleucitron/pokesvelte" target="_blank">Github</a>
 </main>
 
 <style>
+	h1 {
+		margin: 0;
+	}
 	main {
 		height: 100svh;
 		display: flex;

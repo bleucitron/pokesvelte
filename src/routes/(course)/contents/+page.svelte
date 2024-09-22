@@ -32,11 +32,6 @@
 {@render Tree(tree, 0)}
 
 <style>
-	h1 {
-		margin-block: 5rem 3rem;
-		text-align: center;
-	}
-
 	ol {
 		width: fit-content;
 
@@ -81,10 +76,10 @@
 			color: black;
 		}
 	}
-
 	@media (max-width: 1024px) {
 		h1 {
 			margin-bottom: 0;
 		}
 	}
 </style>
+

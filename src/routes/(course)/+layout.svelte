@@ -26,6 +26,10 @@
 			{:else}
 				<button class="button-link" onclick={() => history.back()}>Retour</button>
 			{/if}
+
+			<a class="button-link" href="https://github.com/bleucitron/pokesvelte" target="_blank"
+				>Github</a
+			>
 		</menu>
 		{#if shouldShowMenu && on}
 			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>

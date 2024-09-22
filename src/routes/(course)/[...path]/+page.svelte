@@ -9,7 +9,6 @@
 	const metaDescription = $derived(
 		!description ? folderDescription : parent ? `${parent.title} | ${description}` : description
 	);
-	$inspect(data);
 
 	type Link = (Node & { next?: boolean }) | undefined;
 </script>
@@ -145,6 +144,9 @@
 
 		@media (max-width: 1024px) {
 			margin-bottom: 1rem;
+		}
+		h1 {
+			margin: initial;
 		}
 
 		a {

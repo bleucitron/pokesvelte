@@ -64,11 +64,13 @@ h6 {
 }
 
 h1 {
-	margin: 0;
+	margin-block: 5rem 3rem;
+	text-align: center;
 	font-size: 3rem;
 
 	@media(max-width: 1024px) {
 		font-size: 2rem;
+		margin-bottom: 0;
 	}
 }
 
