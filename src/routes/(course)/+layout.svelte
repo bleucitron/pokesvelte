@@ -1,42 +1,24 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Tree from '$lib/components/Tree.svelte';
-	import { fly } from 'svelte/transition';
+	import Icon from '$lib/components/Icon.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 
 	const { data, children } = $props();
 	const current = $derived($page.data.current?.id);
 
-	let on = $state(false);
-	let toc = $state<HTMLDivElement>();
-	let shouldShowMenu = $derived($page.url.pathname !== '/contents');
-
-	$effect(() => {
-		toc?.querySelector('.current')?.scrollIntoView({ block: 'center' });
-	});
+	let showMenu = $derived($page.url.pathname !== '/contents');
 </script>
 
 <div class="root">
 	<aside>
-		<menu>
-			<a class="button-link" href="/">PokéSvelte</a>
-			{#if shouldShowMenu}
-				<button class="button-link" class:active={on} onclick={() => (on = !on)}
-					>{on ? 'Fermer' : 'Menu'}</button
-				>
-			{:else}
-				<button class="button-link" onclick={() => history.back()}>Retour</button>
-			{/if}
+		<Menu {current} tree={data.tree} {showMenu} />
 
-			<a class="button-link" href="https://github.com/bleucitron/pokesvelte" target="_blank"
-				>Github</a
-			>
-		</menu>
-		{#if shouldShowMenu && on}
-			<div class="toc" transition:fly={{ x: -200, duration: 200 }} bind:this={toc}>
-				<Tree {current} folder={data.tree} />
-				<a class="button-link" href="/contents">Programme complet</a>
-			</div>
-		{/if}
+		<a
+			title="Github repository"
+			class="button-link"
+			href="https://github.com/bleucitron/pokesvelte"
+			target="_blank"><Icon name="github" /></a
+		>
 	</aside>
 
 	<main class="course">
@@ -45,56 +27,20 @@
 </div>
 
 <style>
-	.root {
-		--aside-width: max(15rem, 25vw);
-	}
-
 	aside {
 		position: fixed;
 		left: 0;
-		width: var(--aside-width);
+		width: 100%;
+		height: var(--topbar-height);
+		padding: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		background-color: white;
+		z-index: 1;
 
 		@media (max-width: 1024px) {
-			width: 100%;
-		}
-
-		menu {
-			position: sticky;
-			padding: 0.5rem;
-			height: var(--topbar-height);
-			top: 0;
-			background: white;
-			color: black;
-			line-height: 1;
-			gap: 0.3rem;
-			display: flex;
-			align-items: baseline;
-
-			a:first-child {
-				font-size: 1.5rem;
-			}
-			@media (max-width: 1024px) {
-				width: 100%;
-				border-bottom: 1px solid var(--dark-grey);
-			}
-		}
-
-		.toc {
-			display: flex;
-			flex-flow: column;
-			justify-content: space-between;
-			padding: 1rem;
-			padding-top: 0;
-			height: calc(100svh - var(--topbar-height));
-			overflow-x: hidden;
-			overflow-y: auto;
-
-			a {
-				align-self: center;
-				font-size: 0.9rem;
-				text-align: center;
-			}
+			border-bottom: 1px solid var(--dark-grey);
 		}
 	}
 	main {

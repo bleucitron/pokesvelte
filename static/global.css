@@ -28,6 +28,7 @@ body {
 	--dark-green: #08860d;
 
 	--topbar-height: 4rem;
+	--aside-width: max(15rem, 25vw);
 
 
 	font-family:

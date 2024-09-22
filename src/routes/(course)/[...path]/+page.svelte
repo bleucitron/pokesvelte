@@ -133,6 +133,7 @@
 			}
 		}
 		&:first-of-type {
+			z-index: 1;
 			@media (max-width: 1024px) {
 				display: none;
 			}
