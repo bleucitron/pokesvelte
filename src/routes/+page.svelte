@@ -1,3 +1,8 @@
+<script>
+	import Menu from '$lib/components/Menu.svelte';
+</script>
+
+<Menu />
 <main>
 	<h1>PokéSvelte</h1>
 	<p>
@@ -14,7 +19,6 @@
 	</p>
 	<a class="start button-link" href="/00_introduction">Commencer</a>
 	<a class="button-link" href="/contents/">Programme</a>
-	<a class="button-link" href="https://github.com/bleucitron/pokesvelte" target="_blank">Github</a>
 </main>
 
 <style>
@@ -25,6 +29,7 @@
 		height: 100svh;
 		display: flex;
 		padding: 2rem;
+		padding-bottom: 15rem;
 		flex-flow: column;
 		justify-content: center;
 		align-items: center;
@@ -35,5 +40,11 @@
 
 	.start {
 		font-size: 1.5rem;
+	}
+
+	@media (max-width: 600px) {
+		main {
+			padding-bottom: unset;
+		}
 	}
 </style>

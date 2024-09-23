@@ -91,7 +91,7 @@
 	nav {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-end;
 		padding-block: 1rem;
 		height: var(--topbar-height);
 
@@ -133,8 +133,10 @@
 			}
 		}
 		&:first-of-type {
-			z-index: 1;
 			@media (max-width: 1024px) {
+				margin-top: var(--topbar-height);
+			}
+			@media (max-width: 600px) {
 				display: none;
 			}
 		}
@@ -143,8 +145,8 @@
 	header {
 		margin-block: 4rem 7rem;
 
-		@media (max-width: 1024px) {
-			margin-bottom: 1rem;
+		@media (max-width: 600px) {
+			margin-bottom: 2rem;
 		}
 		h1 {
 			margin: initial;
@@ -184,10 +186,6 @@
 		section {
 			width: max-content;
 			margin: auto;
-
-			@media (max-width: 1024px) {
-				width: unset;
-			}
 		}
 	}
 
