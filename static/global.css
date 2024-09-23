@@ -101,6 +101,8 @@ a {
 	}
 }
 .course a,
+.course a.svelte,
+.course a.kit,
 .toc ol a {
 	color: var(--grey);
 	padding: 0;
