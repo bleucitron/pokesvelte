@@ -15,7 +15,7 @@ body {
 	--pink: #ff4554;
 	--dark-pink: #d63a47;
 	--darker-pink: #a2202b;
-	--light-orange: #d78e1422;
+	--light-orange: #d78e1412;
 	--orange: #ffba00;
 	--dark-orange: #d78e14;
 	--light-grey: #ebebeb;
@@ -136,29 +136,23 @@ h2, hr {
 }
 
 .svelte {
-	h2 {
-		border-color: var(--dark-orange);
+	h2, hr {
+		border-color: var(--orange);
 	}
 	blockquote {
 		color: var(--dark-orange);
 		border-color: var(--dark-orange);
 		background-color: var(--light-orange);
 	}
-	hr {
-		border-color: var(--dark-orange);
-	}
 }
 .kit {
-	h2 {
-		border-color: var(--dark-blue);
+	h2, hr {
+		border-color: var(--blue);
 	}
 	blockquote {
 		color: var(--dark-blue);
 		border-color: var(--dark-blue);
 		background-color: var(--light-blue);
-	}
-	hr {
-		border-color: var(--dark-blue);
 	}
 }
 
