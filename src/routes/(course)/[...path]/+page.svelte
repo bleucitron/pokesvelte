@@ -133,10 +133,9 @@
 			}
 		}
 		&:first-of-type {
+			z-index: 1;
+
 			@media (max-width: 1024px) {
-				margin-top: var(--topbar-height);
-			}
-			@media (max-width: 600px) {
 				display: none;
 			}
 		}

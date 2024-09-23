@@ -61,11 +61,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		background: white;
 		z-index: 1;
-	}
-	aside,
-	menu,
-	nav {
+
 		@media (max-width: 1024px) {
 			border-bottom: 1px solid var(--grey);
 			background: white;
@@ -82,7 +80,6 @@
 		padding: 0.5rem;
 		height: var(--topbar-height);
 		width: var(--aside-width);
-		background: white;
 		color: black;
 		line-height: 1;
 		gap: 0.3rem;
