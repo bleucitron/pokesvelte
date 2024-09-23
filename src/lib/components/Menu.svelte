@@ -89,7 +89,7 @@
 		z-index: 1;
 
 		a:first-child {
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 			@media (max-width: 600px) {
 				font-size: 1.1rem;
 			}

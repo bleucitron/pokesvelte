@@ -143,7 +143,7 @@
 	}
 
 	header {
-		margin-block: 4rem 7rem;
+		margin-block: 4rem 5rem;
 
 		@media (max-width: 600px) {
 			margin-bottom: 2rem;
@@ -174,10 +174,6 @@
 		margin-inline: auto;
 
 		&.folder {
-			:global(p) {
-				text-align: center;
-			}
-
 			h1 {
 				text-transform: uppercase;
 			}
@@ -186,6 +182,7 @@
 		section {
 			width: max-content;
 			margin: auto;
+			margin-top: 3rem;
 		}
 	}
 
