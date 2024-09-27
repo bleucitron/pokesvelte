@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Node } from '$lib/typings';
-	import { scale, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
+	import Tag from './Tag.svelte';
 
 	interface Props {
 		folder: Node[];
@@ -24,14 +25,8 @@
 		<li class={scope} class:root class:current class:previous class:next>
 			<a href={path}>{title || name}</a>
 
-			{#if tagOn}
-				<button
-					class="tag {scope}"
-					onclick={() => (tagsOn = !tagsOn)}
-					transition:scale={{ duration: 300 }}
-				>
-					{scope}
-				</button>
+			{#if scope && tagOn}
+				<Tag {scope} onclick={() => (tagsOn = !tagsOn)} />
 			{/if}
 
 			{#if current && files?.length}

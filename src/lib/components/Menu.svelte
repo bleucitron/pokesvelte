@@ -37,6 +37,7 @@
 		{/if}
 	</menu>
 	<nav>
+		<a title="à propos" class="button-link" href="/faq"><Icon name="question" /></a>
 		<a
 			title="Github repository"
 			class="button-link"

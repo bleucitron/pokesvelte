@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Tag from '$lib/components/Tag.svelte';
 	import type { Node } from '$lib/typings';
 
 	const { data } = $props();
@@ -15,10 +16,8 @@
 
 			<li class:folder={isFolder} class={scope}>
 				<a href={path}>{title || name}</a>
-				{#if isFolder}
-					<span class="tag {scope}">
-						{scope}
-					</span>
+				{#if scope && isFolder}
+					<Tag {scope} />
 				{/if}
 
 				{#if files?.length}
@@ -82,4 +81,3 @@
 		}
 	}
 </style>
-
