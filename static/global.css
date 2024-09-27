@@ -21,7 +21,7 @@ body {
 	--light-grey: #ebebeb;
 	--grey: #a5a5a5;
 	--dark-grey: #858585;
-	--darker-grey: #555;
+	--darker-grey: #666;
 	--red: #e60012;
 	--light-green: #f2f8f3;
 	--green: #55c75a;
@@ -215,7 +215,7 @@ blockquote {
 }
 
 code {
-	color: var(--dark-grey);
+	color: var(--darker-grey);
 	font-size: 0.9rem;
 }
 

@@ -117,7 +117,7 @@
 		}
 
 		a {
-			align-self: center;
+			align-self: flex-start;
 			font-size: 0.9rem;
 			text-align: center;
 		}

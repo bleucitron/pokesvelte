@@ -20,9 +20,11 @@
 	main {
 		display: flex;
 		height: 100%;
+		width: min(70ch, 100%);
+		margin-inline: auto;
 		padding-bottom: 3rem;
 		flex-flow: column;
-		padding-inline: calc(1rem + var(--aside-width));
+		/* padding-inline: calc(1rem + var(--aside-width)); */
 		overflow-x: hidden;
 		overflow-y: auto;
 

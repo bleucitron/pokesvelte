@@ -169,7 +169,6 @@
 	article {
 		flex: 1;
 		margin-block: 3rem;
-		width: min(70ch, 100%);
 		margin-inline: auto;
 
 		&.folder {
