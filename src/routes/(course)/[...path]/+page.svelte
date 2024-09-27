@@ -42,7 +42,7 @@
 
 {@render nav()}
 
-<article class={scope} class:folder={isFolder}>
+<section class={scope} class:folder={isFolder}>
 	<header>
 		{#if parent}
 			{@render parentLink(parent)}
@@ -78,7 +78,7 @@
 			</ol>
 		</section>
 	{/if}
-</article>
+</section>
 
 {@render nav()}
 
@@ -133,6 +133,7 @@
 			}
 		}
 		&:first-of-type {
+			position: relative;
 			z-index: 1;
 
 			@media (max-width: 1024px) {
@@ -142,7 +143,7 @@
 	}
 
 	header {
-		margin-block: 4rem 5rem;
+		margin-block: 6rem;
 
 		@media (max-width: 600px) {
 			margin-bottom: 2rem;
@@ -166,7 +167,7 @@
 		}
 	}
 
-	article {
+	section {
 		flex: 1;
 		margin-block: 3rem;
 		margin-inline: auto;

@@ -17,8 +17,10 @@
 		et
 		<a class="kit" href="https://kit.svelte.dev/" target="_blank">SvelteKit</a>.
 	</p>
-	<a class="start button-link" href="/00_introduction">Commencer</a>
-	<a class="button-link" href="/contents/">Programme</a>
+	<section>
+		<a class="start button-link" href="/00_introduction">Commencer</a>
+		<a class="button-link" href="/contents/">Programme</a>
+	</section>
 </main>
 
 <style>
@@ -36,6 +38,16 @@
 	}
 	p {
 		color: var(--dark-grey);
+		margin-inline: auto;
+		width: min(60ch, 100%);
+		text-align: center;
+	}
+	section {
+		padding-block: 2rem;
+		a {
+			display: block;
+			text-align: center;
+		}
 	}
 
 	.start {

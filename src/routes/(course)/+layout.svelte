@@ -12,7 +12,9 @@
 	<Menu {current} tree={data.tree} {withMenu} />
 
 	<main class="course">
-		{@render children()}
+		<article>
+			{@render children()}
+		</article>
 	</main>
 </div>
 
@@ -20,16 +22,21 @@
 	main {
 		display: flex;
 		height: 100%;
-		width: min(70ch, 100%);
 		margin-inline: auto;
 		padding-bottom: 3rem;
 		flex-flow: column;
-		/* padding-inline: calc(1rem + var(--aside-width)); */
+		padding-inline: calc(1rem + var(--aside-width));
 		overflow-x: hidden;
 		overflow-y: auto;
 
 		@media (max-width: 1024px) {
 			padding-inline: 2rem;
 		}
+	}
+	article {
+		flex: 1;
+		margin-bottom: 3rem;
+		margin-inline: auto;
+		width: min(70ch, 100%);
 	}
 </style>

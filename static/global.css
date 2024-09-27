@@ -28,7 +28,7 @@ body {
 	--dark-green: #08860d;
 
 	--topbar-height: 4rem;
-	--aside-width: max(15rem, 25vw);
+	--aside-width: max(12rem, 25vw);
 
 
 	font-family:
@@ -65,7 +65,7 @@ h6 {
 }
 
 h1 {
-	margin-block: 5rem 3rem;
+	margin-block: 7rem 5rem;
 	text-align: center;
 	font-size: 2.7rem;
 

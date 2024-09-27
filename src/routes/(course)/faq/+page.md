@@ -95,4 +95,9 @@ travailler à plein temps sur Svelte et SvelteKit.
 Je travaille actuellement pour [Radiofrance](https://www.radiofrance.fr/), dont la plateforme web
 est écrite en Svelte et SvelteKit.
 
-##
+## Comment puis-je te contacter ?
+
+Je zone de temps à autre sur le serveur [Discord de Svelte](https://discord.gg/fW4Ur4xZ), ainsi que
+sur le serveur [Discord Svelte francophone](https://discord.gg/N3UTWGt7).
+
+N'hésite pas à faire coucou !
