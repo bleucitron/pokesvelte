@@ -2,6 +2,15 @@
     import Tag from '$lib/components/Tag.svelte'
 </script>
 
+<svelte:head>
+
+<title>À propos</title>
+
+<meta name="description" content="Réponses aux questions que l'on peut se poser à propos de ce
+    tutoriel" />
+
+</svelte:head>
+
 # À propos
 
 ## C'est quoi PokéSvelte ?
@@ -38,32 +47,19 @@ IDE.
 
 Aucune connaissance de Svelte ou SvelteKit n'est en revanche nécessaire pour suivre ce tutoriel.
 
-## Pourquoi ce tutoriel commence par parler de SvelteKit, et pas Svelte ?
-
-Parce que je tente une approche différente de ce que j'ai pu faire en tant que formateur jusqu'ici.
-
-De la même manière qu'on n'apprend pas à conduire en commençant par apprendre comment marche un
-moteur, la progression de ce tutoriel n'est pas "linéaire" dans le sens où il ne vous propose pas
-d'"apprendre Svelte" puis d'"apprendre SvelteKit".
-
-À la place, ce contenu prend le parti de prioriser les besoins plutôt que les moyens. Les notions
-techniques sont donc présentées et illustrées au moment où le besoin les rend nécessaires. Comme
-mentionné plus haut, tout le contenu est orienté vers la construction d'une application web simple,
-du début à la fin. Toutes les mises en pratique se font dans le cadre de cet objectif. Il n'y a pas
-d'exercice "isolé", chaque exercice ajoute une brique supplémentaire à l'application que l'on
-construit.
-
-Il est important de noter que chaque partie est axée sur Svelte ou sur SvelteKit, en fonction de ce
-qui est le plus pertinent à ce moment là. Pour vous aider à vous y retrouver, les parties traitant
-de Svelte sont représentées par un badge <Tag scope="svelte" /> et une couleur dominante <span
-    class="svelte">orange</span> – celles traitant de SvelteKit sont représentées par un badge <Tag
-    scope="kit"/> et une couleur dominante <span class="kit">bleue</span>.
-
 ## C'est payant ?
 
 Non.
 
 Le contenu de PokéSvelte est open-source, tout le monde peut s'en servir gratuitement.
+
+## Comment faire si je suis bloqué•e ?
+
+Il existe une [correction exercice par
+exercice](https://github.com/bleucitron/pokesvelte/pull/1/commits).
+
+Je vous recommande d'essayer de vous en servir le moins possible, mais ça peut toujours débloquer
+les situations désespérées.
 
 ## Qu'est-ce que vous ne trouverez pas ici ?
 
@@ -85,6 +81,27 @@ sont en grande partie sanctuarisées. De légers changements seront peut-être p
 Je tiens tout de même à préciser qu'à l'heure où j'écris ces lignes (22:11), je n'ai pas eu encore
 l'occasion de pratiquer Svelte 5 en "conditions réelles".
 
+## Pourquoi ce tutoriel commence par parler de SvelteKit, et pas Svelte ?
+
+Parce que je tente une approche différente de ce que j'ai pu faire en tant que formateur jusqu'ici.
+
+De la même manière qu'on n'apprend pas à conduire en commençant par apprendre comment marche un
+moteur, la progression de ce tutoriel n'est pas "linéaire" dans le sens où il ne vous propose pas
+d'"apprendre Svelte" puis d'"apprendre SvelteKit".
+
+À la place, ce contenu prend le parti de prioriser les besoins plutôt que les moyens. Les notions
+techniques sont donc présentées et illustrées au moment où le besoin les rend nécessaires. Comme
+mentionné plus haut, tout le contenu est orienté vers la construction d'une application web simple,
+du début à la fin. Toutes les mises en pratique se font dans le cadre de cet objectif. Il n'y a pas
+d'exercice "isolé", chaque exercice ajoute une brique supplémentaire à l'application que l'on
+construit.
+
+Il est important de noter que chaque partie est axée sur Svelte ou sur SvelteKit, en fonction de ce
+qui est le plus pertinent à ce moment là. Pour vous aider à vous y retrouver, les parties traitant
+de Svelte sont représentées par un badge <Tag scope="svelte" /> et une couleur dominante <span
+    class="svelte">orange</span> – celles traitant de SvelteKit sont représentées par un badge <Tag
+    scope="kit"/> et une couleur dominante <span class="kit">bleue</span>.
+
 ## Qui a écrit ce contenu ?
 
 Je m'appelle [Romain](https://github.com/bleucitron).
@@ -100,4 +117,4 @@ est écrite en Svelte et SvelteKit.
 Je zone de temps à autre sur le serveur [Discord de Svelte](https://discord.gg/fW4Ur4xZ), ainsi que
 sur le serveur [Discord Svelte francophone](https://discord.gg/N3UTWGt7).
 
-N'hésite pas à faire coucou !
+N'hésitez pas à nous rendre visite et m'y faire un petit coucou !

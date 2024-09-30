@@ -4,9 +4,11 @@
 
 	const { data } = $props();
 	const { tree } = $derived(data);
+
+	const title = 'Table des matières';
 </script>
 
-<h1>Table des matières</h1>
+<h1>{title}</h1>
 
 {#snippet Tree(tree: Node[], depth: number)}
 	{@const start = parseInt(tree[0]?.id?.split('-')?.at(-1) ?? '')}
@@ -29,6 +31,12 @@
 {/snippet}
 
 {@render Tree(tree, 0)}
+
+<svelte:head>
+	<title>{title}</title>
+
+	<meta name="description" content="Programme complet du tutoriel" />
+</svelte:head>
 
 <style>
 	ol {
