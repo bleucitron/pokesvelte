@@ -133,9 +133,6 @@
 			}
 		}
 		&:first-of-type {
-			position: relative;
-			z-index: 1;
-
 			@media (max-width: 1024px) {
 				display: none;
 			}

@@ -81,6 +81,7 @@
 		padding: 0.5rem;
 		height: var(--topbar-height);
 		width: var(--aside-width);
+		background: white;
 		color: black;
 		line-height: 1;
 		gap: 0.3rem;

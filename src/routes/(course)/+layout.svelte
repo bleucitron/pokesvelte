@@ -34,9 +34,16 @@
 		}
 	}
 	article {
+		position: relative;
+		z-index: 1;
 		flex: 1;
 		margin-bottom: 3rem;
 		margin-inline: auto;
 		width: min(70ch, 100%);
+
+		@media (max-width: 1024px) {
+			position: unset;
+			z-index: 0;
+		}
 	}
 </style>
