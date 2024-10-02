@@ -28,7 +28,7 @@ my-project/
 
 ## `src/`
 
-Le dossier `src`contient les fichiers sources de votre projet. Il contient notamment:
+Le dossier `src` contient les fichiers sources de votre projet. Il contient notamment:
 
 - `lib/`: un dossier pour organiser vos fichiers de composants, vos utilitaires,... vous pouvez y
   faire référence depuis n'importe quel fichier du projet avec **l'alias `$lib` fourni par défaut**.
