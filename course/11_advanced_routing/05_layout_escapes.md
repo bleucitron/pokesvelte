@@ -1,5 +1,6 @@
 ---
 scope: kit
+subtitle: Layout break
 description: Choisir le layout parent dont une page va hériter dans une application SvelteKit
 ---
 
@@ -15,6 +16,8 @@ vraiment de sens.
 
 On pourrait sortir cette page du dossier `pokedex/` pour s'échapper de ce layout, mais on perdrait
 une certaine cohérence de nommage.
+
+On va devoir s'échapper du layout !
 
 ## Cibler un layout
 

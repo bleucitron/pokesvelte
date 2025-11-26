@@ -1,12 +1,12 @@
 ---
 scope: svelte
-description: Utiliser les transitions Svelte pour animer les apparitions ou disparations d'éléments
+description: Utiliser les transitions Svelte pour animer les apparitions ou disparitions d'éléments
 ---
 
 # Transitions
 
-Une des fonctionnalités de Svelte les plus appréciées est les transitions, car elles sont très
-simples à mettre en place.
+Les transitions sont une fonctionnalité de Svelte très appréciée, car elles sont à la fois très
+puissantes et très simples à mettre en place.
 
 Une "transition" est une petite animation jouée lorsqu'un élément entre ou sort du HTML, et
 uniquement dans l'un de ces deux cas-là.
@@ -54,8 +54,8 @@ Pour ajouter une transition, par exemple de type `fade`, il suffit de rajouter `
 <button onclick={toggle}>On/Off</button>
 ```
 
-> Notez que si vous interrompez la transition au milieu, l'élément inverse sa course depuis
-> l'endroit où il était au moment où vous avez cliqué sur l'interrupteur, et non depuis l'une des
+> Notez que si vous interrompez la transition au milieu, l'élément va inverser sa course depuis
+> l'endroit où il était au moment de l'interruption est les transitions, et non depuis l'une des
 > extrémités de son parcours.
 
 Il existe 7 transitions différentes prêtes à l'emploi : `fade`, `slide`, `blur`, `fly`, `scale`,
@@ -67,9 +67,9 @@ relativement simples à utiliser.
 
 ## `in` et `out`
 
-Utiliser `transition` signifie appliquer la même transition en entrée qu'en sortie. Mais vous pouvez
-différencier la transition d'entrée et de sortie sur un même élément, en utilisant `in` et `out` à
-la place :
+Utiliser `transition` signifie appliquer la même transition en entrée et en sortie. Mais il eil est
+possible de différencier la transition d'entrée et de sortie sur un même élément, en utilisant `in`
+et `out` à la place&nbsp;:
 
 ```svelte
 {#if displayed}
@@ -84,10 +84,10 @@ choisissez.
 
 Toutes ont a minima les paramètres `duration` (durée, en millisecondes), et `delay` (délai, en
 millisecondes). D'autres comme `fly` ont également un `x` et `y` représentant le point de départ de
-la transition.
+la transition (le point d'arrivée étant la position naturelle de l'élément).
 
 Par défaut, `duration` vaut `400` et `delay` vaut `0`, mais vous pouvez les modifier de cette façon
-:
+&nbsp;:
 
 ```svelte
 {#if displayed}
@@ -105,8 +105,8 @@ Par défaut, `duration` vaut `400` et `delay` vaut `0`, mais vous pouvez les mod
 ## Transitions globales
 
 Les transitions sont par défaut locales, ce qui signifie qu'elles ne sont jouées qui si le bloc
-`{#if}`, `{#each}`, ou autre le plus proche déclenche l'apparition ou la disparition de l'élément
-concerné.
+`{#if}`, `{#each}` (ou autre) le plus proche déclenche l'apparition ou la disparition de l'élément
+concerné. Elles ne seront pas jouées sinon.
 
 [Un exemple plus explicite est disponible
 ici](https://learn.svelte.dev/tutorial/global-transitions).
@@ -123,7 +123,11 @@ transition comme étant globale en utilisant `|global`.
 L'usage de `transition`, de `in` ou `out` est contraint par quelques règles :
 
 - les transitions ne sont pas jouées lors du montage initial d'une page
-- vous ne pouvez pas utiliser `transition`, `in` ou `out` directement sur un composant
+- vous ne pouvez pas utiliser `transition`, `in` ou `out` directement sur un composant, mais
+  uniquement sur des éléments HTML
+
+> Il peut être nécessaire de modifier son markup pour ajouter des éléments HTML autour de composants
+> afin de pouvoir leur fournir les transitions souhaitées.
 
 <fieldset class='task'>
 <legend>À vous !</legend>

@@ -6,7 +6,8 @@ description: Comment Svelte nous aide à améliorer l'accessibilité de nos appl
 
 # Warnings d'accessibilité
 
-Vous avez peut-être des warnings d'affichés au niveau d'une `<img />` ou d'un `onclick`.
+Au point où nous en sommes, vous avez peut-être remarqué des warnings d'affichés au niveau d'une
+`<img />` ou d'un `onclick`.
 
 C'est le compilateur de Svelte qui vous aide à améliorer l'accessibilité de votre composant.
 
@@ -14,7 +15,7 @@ De manière générale, c'est une bonne chose de ne pas ignorer ces warnings et 
 corriger. Cela permet à votre application d'être plus accessible pour les personnes utilisant des
 logiciels d'assistance.
 
-<fieldset class='task'>!
+<fieldset class='task'>
 <legend>À vous !</legend>
 
 Vous avez peut-être oublié un attribut `alt` sur une `<img />`. Cet attribut sert à donner une
@@ -26,6 +27,8 @@ Vous avez peut-être utilisé `onclick` sur un élément n'étant pas supposé i
 - soit utiliser un élément interactif comme `<button>`
 - soit déclarer votre élément comme interactif en ajoutant les attributs `role="button"
 tabindex="0"`
+
+Si d'autres warnings de type "a11y" sont présents, essayez de les régler !
 
 </fieldset>
 

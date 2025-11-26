@@ -4,8 +4,8 @@ description: Une liste de frameworks de composants et frameworks d'application �
 
 # Autres frameworks
 
-Nous l'avons [déjà mentionné](../00_introduction/01_frameworks.md) d'autres frameworks de composants
-et d'application.
+Nous l'avons [déjà mentionné](../00_introduction/01_frameworks), il existe d'autres frameworks de
+composants et d'application.
 
 Il est toujours intéressant de voir comment d'autres projets résolvent différemment les mêmes
 problématiques.

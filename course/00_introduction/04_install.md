@@ -5,7 +5,7 @@ description: Premières étapes pour commencer un projet Svelte ou SvelteKit
 
 # Se lancer avec Svelte(Kit)
 
-Il existe plusieurs façons d'utiliser Svelte avec ou sans SvelteKit.
+Il existe plusieurs façons d'utiliser Svelte, avec ou sans SvelteKit.
 
 ## Installation officielle
 
@@ -13,10 +13,12 @@ La [documentation officielle conseille](https://svelte.dev/docs/svelte/introduct
 d'installer Svelte avec SvelteKit, quitte à ce que vous ne vous serviez pas du tout des
 fonctionnalités de SvelteKit.
 
+C'est aussi la recommandation de ce tutoriel.
+
 Vous pouvez installer Svelte avec SvelteKit en lançant la commande :
 
 ```bash
-npx sv create my-svelte-app # puis suivre les indications
+pnpx sv create my-svelte-app # puis suivre les indications
 ```
 
 Vous pourrez alors choisir différentes options, selon vos besoins.
@@ -33,7 +35,7 @@ d'installation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) d
 clés-en-main, dont un avec Svelte (mais sans SvelteKit) :
 
 ```bash
-npm create vite@latest my-svelte-app -- --template svelte
+pnpm create vite@latest my-svelte-app -- --template svelte
 ```
 
 ## Installation du projet Pokésvelte
@@ -43,9 +45,9 @@ officielle de Svelte. Vous pouvez le retrouver
 [sur ce repo](https://github.com/bleucitron/pokesvelte).
 
 > Vous pouvez retrouver les différentes modifications que j'ai ajoutées à la configuration de base
-> [ici](https://github.com/bleucitron/pokesvelte/commit/05e6c524850af9f447828050c30ea22e3c167c4f).
+> [ici](https://github.com/bleucitron/pokesvelte/commit/49ef2c609f1a369803682c8252ac9f66d90f7275).
 
-Clonez (ou téléchargez) le projet.
+**Clonez** (ou téléchargez) le projet.
 
 ## Développer
 
@@ -56,9 +58,9 @@ certainement installer les dépendances liées à Svelte(Kit), puis lancer le se
 ```bash
 cd my-svelte-app
 
-npm install # installe les dépendances
+pnpm install # installe les dépendances
 
-npm run dev # lance le serveur de développement
+pnpm dev # lance le serveur de développement
 ```
 
 > Vous pouvez bien sûr faire toutes ces étapes avec d'autres package managers, comme Bun ou Yarn.

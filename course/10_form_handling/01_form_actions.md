@@ -44,8 +44,9 @@ export const actions = {
 L'objet `actions` permet de définir les différentes actions d'une page, et le plus souvent il n'y en
 a qu'une par page. Dans ce cas, il est recommandé de la nommer `default`.
 
-> Si vous ne définissez pas d'attribut `method`, la soumission du formulaire sera traitée comme un
-> clic sur un lien. Aucune `action` ne sera utilisée dans ce cas – c'est `load` qui sera exécutée.
+> Si la `method` est `"GET"` ou si vous ne définissez pas d'attribut `method`, la soumission du
+> formulaire sera traitée comme un clic sur un lien. Aucune `action` ne sera utilisée dans ce cas –
+> c'est `load` qui sera exécutée.
 
 ## Utiliser les données de formulaire
 
@@ -65,7 +66,7 @@ export const actions = {
 ```
 
 > Nous pourrions tout à fait utiliser les [endpoints
-> SvelteKit](../07_advanced_data_loading/01_building_an_api.md) pour faire quelque chose de
+> SvelteKit](../07_advanced_data_loading/01_building_an_api) pour faire quelque chose de
 > similaire, mais nous ne profiterions pas des avantages des formulaires. De même, les exercices
 > précédents utilisant des endpoints pourraient très certainement être adaptés pour utiliser des
 > formulaires.
@@ -75,20 +76,25 @@ export const actions = {
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/trainer`
+_Dans la page `/trainer`_
 
 - Supprimer le `throw` dans la fonction `load`, et remplacer temporairement par un `console.log()`
   de votre choix.
 
 - Ajouter un formulaire d'inscription demandant simplement :
-
   - Nom
   - Mot de passe
 
-- Créer une action permettant de gérer ces données en utilisant `db.trainer.register()` de
-  `$lib/server/db`.
+- Créer une action permettant d'utiliser ces données pour inscrire un joueur en utilisant
+  `db.trainer.register()` de `$lib/server/db`.
 
-Nous n'allons pas implémenter d'authentification dans ce chapitre, nous le ferons plus tard.
+> Nous n'allons pas implémenter de connexion dans ce chapitre, nous le ferons [plus
+> tard](./03_named_actions).
+
+> Ce cours n'est pas un cours sur la sécurité des applications web. Notamment, les utilitaires de
+> gestion de base de données fournis d'avance, comme `db.trainer.register`, sont naïvement simples,
+> et stockent les mots de passe utilisateur en clair par souci de simplicité.
+> Il est évidemment plus que recommandé de ne pas faire ceci dans la vraie vie.
 
 </fieldset>
 

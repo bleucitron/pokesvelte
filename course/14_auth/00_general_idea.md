@@ -21,7 +21,7 @@ un outil adapté pour authentifier automatiquement un utilisateur, sans que celu
 re-connecter.
 
 > Les cookies servent à bien d'autres choses que l'authentification. Ils sont notamment utilisés
-> pour le tracker les habitudes des gens.
+> pour enregistrer les comportements des gens sur internet, leurs habitudes...
 
 Dans le cadre d'une authentification, un cookie est simplement un _token_ – c'est-à-dire une chaîne
 de caractères unique – agissant à la fois comme un login et un mot de passe : la présence de ce
@@ -44,8 +44,8 @@ impliquant des cookies :
 - lors de la requête du navigateur, le cookie est envoyé au serveur
 - le serveur reçoit le cookie avec la requête, vérifie s'il est valide et à quelle personne il
   correspond, puis renvoie la réponse avec les informations de connexion de la personne
-- le navigateur reçoit la réponse : la personne est authentifiée sans avoir eu besoin de se
-  connecter
+- le navigateur reçoit la réponse : la personne est authentifiée sans avoir eu besoin de fournir
+  manuellement ses informations de connexion
 
 > Un processus plus solide d'authentification via cookies impliquerait ce qu'on appelle un `token`
 > et un `refreshToken`.
@@ -63,3 +63,7 @@ L'**autorisation** consiste à déterminer si une personne a le droit ou non d'a
 ressource, de la modifier ou de la supprimer.
 
 Nous allons mettre en pratique ces deux notions de manière simplifiée dans les chapitres à venir.
+
+> Souvenez-vous que ce cours n'est pas un cours d'authentification ou d'autorisation. Nous ne
+> faisons que survoler ces principes afin de pouvoir les mettre en pratique dans un contexte
+> SvelteKit.

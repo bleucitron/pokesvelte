@@ -11,28 +11,29 @@ Avant de parler des effets à proprement parler, intéressons-nous au concept de
 Le cycle de vie d'un composant décrit les étapes importantes auquel un composant Svelte est soumis
 au cours de sa vie.
 
+> Le concept de "cycle de vie", tout comme les autres définitions présentée ci-dessous, est commun à
+> à peu près tous les frameworks de composants modernes.
+
 ## Hydratation
 
 L'hydratation est un processus qui permet la "vie" des composants.
 
 Une fois le HTML arrivé sur le navigateur, l'interface n'est pas encore interactive. Pour cela, il
-faut que le code Javascript de Svelte soit téléchargé, puis exécuté : l'hydratation se produit à ce
+faut que le code JavaScript de Svelte soit téléchargé, puis exécuté : l'hydratation se produit à ce
 moment là.
 
-Le processus d'hydratation va "remplacer" les éléments HTML, "morts", par les instances de
-composants correspondantes, de créer toutes les liaisons réactives permettant de réagir aux
+Le processus d'hydratation va "remplacer" les éléments HTML, "inertes", par les instances de
+composants correspondantes et de créer toutes les liaisons réactives permettant de réagir aux
 éventuelles interactions à venir, rendant ainsi ces instances "vivantes".
 
 Une fois l'hydratation terminée, l'application Svelte est fonctionnelle, et l'interface est
 interactive.
 
-> Le concept d'hydratation est commun à la plupart des frameworks de composants modernes.
-
 > La "vie" d'un composant n'est possible que si Javascript est disponible côté client.
 >
 > En effet, le concept de "vie" d'un composant suppose qu'il y ait de l'interaction possible avec ce
-> composant, et qui dit "interaction" dit "Javascript". Il n'y a donc pas d'hydratation sur une page
-> sur laquelle on aurait désactivé Javascript.
+> composant, et qui dit "interaction" dit "JavaScript". Il n'y a donc pas d'hydratation sur une page
+> sur laquelle on aurait désactivé JavaScript, par exemple.
 
 ## Montage
 
@@ -50,7 +51,7 @@ l'hydratation). Enfin, les opérations ayant été déclarées comme devant se p
 
 Le composant vit ensuite sa meilleure vie, au gré des mises à jour qui lui sont demandées, soit par
 des évènements extérieurs – des props mises à jour lui seront fournies – soit via des évènements
-internes – dans ce cas le composant va mettre son état à jour.
+internes – la mise à jour de son propre état.
 
 Dans tous les cas, grâce à la chaîne de réactivité se propageant depuis un évènement jusqu'au DOM,
 les éléments du DOM le nécessitant sont mis à jour.
@@ -62,9 +63,9 @@ Quand un composant "sort" du DOM, on dit qu'il est _démonté_ ou détruit.
 Cela se produit lorsqu'un élément d'interface n'est plus affiché, par exemple lorsque l'on filtre
 des listes, ou lorsqu'une modale est fermée.
 
-Dans ce cas, les liaisons réactives sont supprimées, les éléments du DOM corresdants au composant
+Dans ce cas, les liaisons réactives sont supprimées, les éléments du DOM correspondants au composant
 sont supprimés. Puis, les opérations ayant été déclarées comme devant se produire au démontage –
 `onDestroy` – sont exécutées. Le démontage du composant est alors terminé.
 
-> Sans hydratation – donc si Javascript est désactivé par exemple – ni le montage, ni les mises à
+> Sans hydratation – donc si JavaScript est désactivé par exemple – ni le montage, ni les mises à
 > jour ni le démontage ne sont seront exécutés.

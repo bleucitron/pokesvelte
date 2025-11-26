@@ -26,7 +26,8 @@ export const POST = ({ cookies }) => {};
 
 Cet objet `cookies` possède plusieurs méthodes, dont `.get()`, `.set()`, `.delete()`.
 
-> `cookies` permet d'ajouter des headers de réponse à destination de votre navigateur.
+> `cookies` permet d'interagir avec les headers de réponse à destination de votre navigateur qui
+> impliquent des cookies.
 
 ```ts
 // +page.server.ts
@@ -53,20 +54,20 @@ export function load({ cookies }) {
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Lors de l'inscription et de la connexion
+_Lors de l'inscription et de la connexion_
 
 - Créer un `cookie` en utilisant `db.cookies.register()` du module `$lib/server/db`.
 - Sauvegarder ce `cookie` en tant que cookie `session`.
 - Vérifier que votre cookie est bien présent dans vos outils navigateur (onglet "Application").
 
-Dans le layout principal
+_Dans le layout principal_
 
 - Lire le `cookie` dans la fonction `load`, récupérer l'`id` du trainer correspond avec
   `db.cookies.check()` du module `$lib/server/db`.
 - Récupérer les infos du `user` avec `db.trainer.get()` du module `$lib/server/db`, et les
   renvoyer en tant que props globales avec les autres données.
 
-Ailleurs dans le site
+_Ailleurs dans le site_
 
 - servez-vous des infos du `user` maintenant accessibles partout pour afficher les infos du
   trainer dans le header, et dans la page `/trainer`, lorsque l'utilisateur est connecté.

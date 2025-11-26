@@ -7,17 +7,17 @@ description: Des informations pour construire le build d'une application SvelteK
 
 ## Build
 
-Pour build votre application, il vous suffit de lancer la commande `npm run build`.
+Pour compiler votre application, il vous suffit de lancer la commande `npm run build`.
 
 ```bash
-npm run build # pour générer votre build de production
+pnpm build # pour générer votre build de production
 ```
 
 Une fois le build généré, vous pouvez prévisualiser votre application de production avec `npm run
 preview`.
 
 ```bash
-npm run preview # pour visualiser votre application de production en local
+pnpm preview # pour visualiser votre application de production en local
 ```
 
 > Ne pas utiliser `npm run preview` pour lancer votre application "pour de vrai". Cette commande est
@@ -29,7 +29,7 @@ Pour préparer au mieux votre build de production, vous devez _adapter_ votre ap
 fait en installant un adaptateur...
 
 ```bash
-npm i -D @sveltejs/adapter-xxx # à modifier selon l'adaptateur choisi
+pnpm i -D @sveltejs/adapter-xxx # à modifier selon l'adaptateur choisi
 ```
 
 ... puis en le précisant dans votre configuration Svelte :
@@ -49,12 +49,13 @@ d'utiliser l'adaptateur adéquat lors du déploiement.
 C'est l'adaptateur installé par défaut.
 
 Pratique pour démarrer, car il ne nécessite pas de configuration particulière. Néanmoins, il est
-plutôt recommandé d'utiliser l'adaptateur prévu pour votre plateforme cible.
+plutôt recommandé d'utiliser l'adaptateur prévu pour votre plateforme cible, afin de profiter au
+maximum des capacités de la plateforme en question.
 
 ### `static`
 
 ```bash
-npm i -D @sveltejs/adapter-static
+pnpm i -D @sveltejs/adapter-static
 ```
 
 Si vous avez besoin de pré-rendre toute votre application – et donc faire du SSG –, vous pouvez
@@ -65,7 +66,7 @@ utiliser l'adaptateur `static` plutôt que d'utiliser les options de page sur ch
 Probablement le plus courant.
 
 ```bash
-npm i -D @sveltejs/adapter-node
+pnpm i -D @sveltejs/adapter-node
 ```
 
 Une fois votre build généré avec l'adaptateur `node`, vous pouvez déployer votre application en

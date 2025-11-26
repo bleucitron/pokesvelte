@@ -8,7 +8,7 @@ description: Rappel des différences entre Svelte et SvelteKit
 Bon, on a déjà écrit un peu de code, du SvelteKit... mais aussi du Svelte !
 
 Il y a bien quelques explications théoriques sur la différence entre les deux dans [ce
-chapitre](../00_introduction/02_svelte_and_sveltekit.md), mais il n'est pas toujours simple de
+chapitre](../00_introduction/02_svelte_and_sveltekit), mais il n'est pas toujours simple de
 savoir concrètement ce qui relève de l'un ou de l'autre.
 
 ## C'est quoi Svelte déjà ?
@@ -18,7 +18,7 @@ en fonction de données. Son scope relève donc du lien entre la donnée que l'o
 le HTML.
 
 Du coup, dès que vous écrivez du markup dans un fichier `.svelte`, vous faites de facto du Svelte.
-De même, le code à l'intérieur des `<script>` des fichiers `.svelte`, c'est Svelte qui le traite.
+De même, le code à l'intérieur des `<script>` des fichiers `.svelte` est traité par Svelte.
 
 Pour simplifier, **si vous travaillez dans un fichier `.svelte`, c'est Svelte qui est aux
 commandes**.
@@ -67,12 +67,12 @@ Oui.
 Les fichiers `*.server.ts` sont exclusivement utilisés par SvelteKit (ainsi que d'autres, dont
 l'usage est plus anecdotique).
 
-Les fichier `*.svelte` ne commencant pas par `+` – donc pas `+page.svelte`, `+layout.svelte` ou
+Les fichiers `*.svelte` ne commencant pas par `+` – donc pas `+page.svelte`, `+layout.svelte` ou
 `+error.svelte` – sont (presque) exclusivement gérés par Svelte (voir note ci-dessous).
 
-> Il est tout de même possible de servir de fonctionnalités SvelteKit au sein de n'importe quel
-> fichier `.svelte` – pas que les `+page` ou `+layout` – comme lorsque l'on a utilisé le [store de
-> page](../01_sveltekit_basics/05_page_store.md) importé depuis `$app/stores`. Dans ce cas, le
+> Il est tout de même possible de se servir de fonctionnalités SvelteKit au sein de n'importe quel
+> fichier `.svelte` – pas uniquement les `+page` ou `+layout` – comme lorsque l'on a utilisé le
+> [state de page](../01_sveltekit_basics/05_page_state) importé depuis `$app/state`. Dans ce cas, le
 > fichier a une dépendance envers SvelteKit.
 
 L'étude du fonctionnement des fichiers `.svelte` au sens large – et donc de Svelte – est abordée au

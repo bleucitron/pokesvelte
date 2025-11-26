@@ -14,8 +14,7 @@ variables qui dépendent d'un état pour, par exemple, afficher des informations
 **Pour créer une variable réactive dérivant d'une autre variable réactive, il faut utiliser la rune
 `$derived`**, en lui fournissant une expression dépendant d'une autre variable.
 
-La nouvelle variable ainsi créée fonctionne de la même manière qu'un état, mais ne peut pas être
-modifiée autrement qu'en modifiant la variable dont elle dépend.
+La nouvelle variable ainsi créée fonctionne de la même manière qu'un état.
 
 ```svelte
 <script>
@@ -27,6 +26,9 @@ modifiée autrement qu'en modifiant la variable dont elle dépend.
 
 <p>{money} € ({moneyInYens} ¥)</p>
 ```
+
+> Vous pouvez également réassigner une variable dérivée, si vous choisissez de la déclarer avec
+> `let`, ce qui peut être nécessaire dans certaines situations.
 
 Il est aussi possible de dériver de plusieurs variables à la fois.
 
@@ -48,7 +50,8 @@ Il est aussi possible de dériver de plusieurs variables à la fois.
 
 > Vous pouvez dériver de variables réactives dérivées.
 
-> L'expression utilisée dans `$derived` ne doit pas contenir d'effets de bord.
+> L'expression utilisée dans `$derived` ne doit pas contenir d'effets de bord, notamment la mise à
+> jour d'autres `$state`.
 
 ## Déstructurer
 
@@ -67,7 +70,7 @@ réactives pour simplifier l'écriture du code.
 
 ```svelte
 <script>
-	const { name, familName, address } = $derived(data);
+	const { name, familyName, address } = $derived(data);
 </script>
 ```
 
@@ -82,7 +85,7 @@ réactives pour simplifier l'écriture du code.
 - Utiliser `$derived` pour simplifier l'écriture de votre code lorsque vous estimez que c'est
   nécessaire.
 
-Sur la page d'accueil
+_Sur la page d'accueil_
 
 - Remplacer l'état `started` par un état dérivé de `foundSpecies` : si on n'a pas choisi un premier
   Pokémon, on n'a pas encore commencé le jeu.

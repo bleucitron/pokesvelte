@@ -52,9 +52,9 @@ variable.
 </button>
 ```
 
-> Il n'y a pas que les variables créées avec `$state` qui sont considérées "réactives". Les
-> variables créées avec la rune `$props` sont aussi des variables réactives, et vous pouvez donc
-> également utiliser `$inspect` pour suivre leur valeur.
+> Il n'y a pas que les variables créées avec `$state` qui sont réactives. Les variables créées avec
+> la rune `$props` sont aussi des variables réactives, et vous pouvez donc également utiliser
+> `$inspect` pour suivre leur valeur.
 
 Vous pouvez fournir plusieurs variables réactives à `$inspect`, pour suivre conjointement les
 évolutions de chacune des variables.
@@ -68,7 +68,7 @@ Vous pouvez fournir plusieurs variables réactives à `$inspect`, pour suivre co
 </script>
 ```
 
-> La rune `$insect` écoute chaque variable "profondément" : elle s'exécutera aussi lorsque des
+> La rune `$inspect` écoute chaque variable "profondément" : elle s'exécutera aussi lorsque des
 > changements profonds sont détectés au sein d'un objet ou d'un tableau.
 
 > La rune `$inspect` n'est utilisable qu'en mode développement.

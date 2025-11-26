@@ -5,8 +5,18 @@ description: Utiliser les directives de style dans un composant Svelte
 
 # Directives de style
 
-On a vu [ici](../03_svelte_components/04_class_directives.md) que l'on pouvait utiliser
-`class:truc={uneVariable}` pour donner des classes à des composants.
+Les directives d'éléments sont des attributs spéciaux que vous pouvez utiliser sur vos éléments
+HTML, et permettant certaines fonctionnalités de Svelte.
+
+```svelte
+<!-- Ici la directive de type "type" et de nom "nom" est appliquée à l'élément div avec la valeur
+"valeur" -->
+<div type:nom={valeur} />
+```
+
+> On a mentionné [ici](../03_svelte_components/04_class_powers) que l'on pouvait utiliser
+> `class:truc={uneVariable}` pour donner des classes à des composants, même si cela n'est plus
+> recommandé.
 
 Il est également possible de la même manière d'impacter le style des éléments, en utilisant la
 directive de style `style:type={valeur}` (ou la version raccourcie `style:type`).
@@ -31,18 +41,22 @@ faudra fournir des valeurs sous forme de texte.
 Dans notre application, le fait d'attraper des Pokémons sauvages est un peu trop facile, car ils
 apparaissent toujours au même endroit. Voyons comment rendre ça plus intéressant.
 
-Dans le composant `Wild`, uniquement si l'individu possède une prop `escape` (pour les différencier
-des Pokémons de départ),
+_Dans le composant `Wild`, uniquement si l'individu possède une prop `escape` (pour ne pas appliquer
+ce comportement aux Pokémons de départ)_,
 
 - définir deux nouveaux états `top` et `left`, qui seront des `number`.
 
 - au montage, utiliser les largeur et hauteur de `window` pour définir les valeurs de `top`
-  et `left` : `top` doit être entre 0 et `height` – `left` doit être entre 0 et `width`. Vous
-  pouvez utiliser l'utilitaire `getRandomNumber` de `$lib/helpers`.
+  et `left` :
+  - `top` doit être un nombre aléatoire entre 0 et `height`
+  - `left` doit être un nombre aléatoire entre 0 et `width`
+
+> Vous pouvez utiliser l'utilitaire `getRandomNumber` de `$lib/helpers`.
 
 - utiliser ces deux états `top` et `left` pour positionner l'instance de Wild au hasard sur la page.
   Vous aurez probablement besoin d'utiliser `position: fixed` dans le `<style>`. Vous pouvez
-  éventuellement utiliser une marge pour éviter que certains ne sortent de l'écran.
+  éventuellement utiliser une marge pour éviter que certains Pokémons ne sortent complètement de
+  l'écran.
 
 </fieldset>
 

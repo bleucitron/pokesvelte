@@ -10,7 +10,7 @@ Vous pouvez bien sûr utiliser `$state` pour déclarer un objet (`{...}`) ou un 
 
 ## Réactivité profonde
 
-Avec les objets et les tableaux, vous pouvez notamment muter variable déclarée avec `$state` et
+Avec les objets et les tableaux, vous pouvez notamment muter une variable déclarée avec `$state` et
 quand même bénéficier de la réactivité. C'est ce qu'on appelle la **réactivité profonde**.
 
 Par exemple, vous pouvez utiliser `delete` pour supprimer une clé d'un objet, ou encore `.push()`
@@ -126,7 +126,7 @@ Et son équivalent en Svelte 5 :
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page d'accueil
+_Sur la page d'accueil_
 
 - Créer un état `foundSpecies` représenant un tableau des `id` des espèces de Pokémons déjà
   découverts. Initialiser `foundSpecies` à `[]`.

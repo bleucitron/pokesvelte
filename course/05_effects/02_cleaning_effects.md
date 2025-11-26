@@ -6,7 +6,7 @@ description: Nettoyer les effets créés avec la rune $effect en Svelte 5
 
 # Nettoyer les effets
 
-L'utilisation d'effets est souvent risquée : elle est souvent source de bugs.
+L'utilisation d'effets est souvent risquée : elle est régulièrement source de bugs.
 
 C'est le cas pour notre application ! Essayer de changer de page, et observez la console... Le
 `console.log` d'apparition des Pokémons continue d'apparaître toutes les 2 secondes ! Pire, faites
@@ -108,9 +108,9 @@ En dehors de ces quelques cas, vous n'avez probablement pas besoin d'effets.
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page d'accueil
+_Dans la page d'accueil_
 
-- nettoyer l'effet déclenchant un `setInterval` en utilisant
+- Nettoyer l'effet déclenchant un `setInterval` en utilisant
   [`clearInterval`](https://developer.mozilla.org/fr/docs/Web/API/clearInterval).
 
 </fieldset>

@@ -24,15 +24,18 @@ d'évènement :
 
 ## Évènements de composant
 
-Une instance de composant Svelte n'est pas un élément HTML. Cela signifie que vous ne pouvez pas
-simplement écrire la chose suivante :
+**Une instance de composant Svelte n'est pas un élément HTML**.
+
+Cela signifie que vous ne pouvez pas simplement écrire la chose suivante, et espérer que cela
+fonctionne systématiquement :
 
 ```svelte
 <Paiement onclick={() => console.log('Vous avez payé')} />
 ```
 
-En effet, par défaut, si vous ne faites rien de spécial, rien n'est prévu pour gérer un clic, ou
-tout autre évènement HTML, sur une instance de composant, comme `<Paiement />` par exemple.
+En effet, si rien de particulier n'est prévu, une instance de composant comme `<Paiement />` n'est
+pas censée savoir comment gérer un clic ou tout autre évènement, car elle ne sait pas d'avance sur
+lequel de ses éléments appliquer le `onclick` (ou équivalent pour un autre type d'évènement).
 
 En revanche, vous pouvez très bien décider que `onclick` est une props de votre composant, en le
 déclarant explicitement, puis en l'utilisant comme gestionnaire d'évènement sur un élément HTML :
@@ -47,8 +50,8 @@ déclarant explicitement, puis en l'utilisant comme gestionnaire d'évènement s
 ```
 
 Parfois, il peut être pratique d'expliciter les noms de ces props de gestion d'évènement. Par
-exemple, ici, `onclick` n'est pas très parlant. Si vous avez envie, vous pouvez très bien décider de
-renommer cette props.
+exemple, ici, `onclick` n'est pas très parlant. Si cela vous arrange, vous pouvez très bien décider
+de renommer cette props.
 
 ```svelte
 <!-- Panier.svelte -->
@@ -73,7 +76,7 @@ renommer cette props.
 - Créer un composant `Wild` affichant uniquement l'image d'un Pokémon. Ce composant représente les
   Pokémons sauvages.
 
-Sur la page d'accueil
+_Sur la page d'accueil_
 
 - Fournir la liste des pokemons en `data` à notre page d'accueil, afin d'avoir accès aux données
   d'image des Pokémons, que vous devrez fournir aux instances de `Wild`.

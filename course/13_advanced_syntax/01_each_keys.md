@@ -15,13 +15,13 @@ aux données que nous avons supprimé de notre tableau : il supprime les éléme
 tableau, et ajuste les valeurs.
 
 Ce comportement par défaut permet de grandement faciliter le travail du navigateur pour mettre à
-jour le DOM. Mais pose problème dans certaines situations, où il est important de connaître
+jour le DOM. Mais cela pose problème dans certaines situations, où il est important de connaître
 précisément la position d'un élément dans le tableau.
 
 Pour corriger cela, **il faut préciser à chaque élément un identifiant unique, une clé (appelée
 `key`) qui identifie précisément et de manière unique l'élément pour toute la durée de sa présence
-sur la page**. Cet identifiant permet à Svelte de savoir avec précision ce qui a besoin d'être mis à
-jour dans le DOM ou non.
+sur la page**. Cet identifiant permet à Svelte de savoir avec précision ce qui a besoin d'être
+inséré ou supprimé dans le DOM lors des mises à jour de tableaux.
 
 ```svelte
 {#each person as person (person.id)}
@@ -29,7 +29,18 @@ jour dans le DOM ou non.
 {/each}
 ```
 
+> De manière générale, il est recommandé de systématiquement fournir une clé de boucle, même si cela
+> n'est pas strictement nécessaire.
+
 Notez que c'est différent de la syntaxe pour obtenir la position de l'élément dans le tableau :
+
+```svelte
+{#each person as person, position}
+	<p>{person.name}</p>
+{/each}
+```
+
+Vous pouvez faire les deux simultanément de cette manière :
 
 ```svelte
 {#each person as person, position (person.id)}

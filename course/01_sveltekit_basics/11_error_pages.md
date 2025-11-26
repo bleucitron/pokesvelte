@@ -21,8 +21,8 @@ En résumant à la truelle, il existe deux types d'erreurs nécessitant l'affich
 
 **SvelteKit est capable d'afficher une page d'erreur par défaut lorsque nécessaire**.
 
-Par exemple, si vous naviguez sur une page n'existant pas, vous devriez avoir une page affichant le
-message "404: Not Found".
+Par exemple, si vous naviguez sur une page qui n'existe pas, vous devriez avoir une page affichant
+le message "404: Not Found".
 
 De même, si quelque chose d'imprévu se produit sur le serveur, par exemple dans une page
 `+page.server.ts`, la page qui s'affiche devrait afficher le message "500: Internal error".
@@ -52,18 +52,18 @@ Pour cela, il suffit de créer un fichier `+error.svelte` dans le dossier `route
 Cette page manque un peu d'informations, comme le statut de l'erreur, ou un message un peu plus
 explicite.
 
-Vous trouverez ces informations dans le store de page, que nous avons déjà [croisé
-précédemment](./05_page_store.md). Il ne vous reste plus qu'à créer la page d'erreur de vos rêves.
+Vous trouverez ces informations dans le state de page, que nous avons déjà [croisé
+précédemment](./05_page_state). Il ne vous reste plus qu'à créer la page d'erreur de vos rêves.
 
 ```svelte
 <!-- +error.svelte -->
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 </script>
 
-<h1>Oh noooon !!! Erreur {$page.status}...</h1>
+<h1>Oh noooon !!! Erreur {page.status}...</h1>
 
-<p>({$page.error?.message})</p>
+<p>({page.error?.message})</p>
 ```
 
 Vous pouvez créer une page d'erreur pour chaque route de votre dossier `routes/`. Si un imprévu se

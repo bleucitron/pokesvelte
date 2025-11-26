@@ -16,10 +16,10 @@ application soit la plus fluide possible. SvelteKit utilise plusieurs stratégie
 
 ## Rendu côté serveur
 
-Par défaut, **SvelteKit construit la première page requêtée sur le serveur**, afin de fournir une
-page contenant tout le HTML nécessaire à l'affichage au navigateur. Cela permet d'afficher le
+Par défaut, **SvelteKit construit la première page requêtée sur le serveur**, afin de fournir au
+navigateur une page contenant tout le HTML nécessaire à l'affichage. Cela permet d'afficher le
 contenu même si les différents scripts nécessaires à la page ne sont pas encore chargés, et par
-conséquence d'améliorer l'expérience utilisateur ainsi que le référencement.
+conséquence d'améliorer l'expérience utilisateur, ainsi que le référencement.
 
 ## Routing client
 
@@ -39,7 +39,8 @@ commun.
 Cette stratégie a plusieurs avantages :
 
 - la page n'est jamais entièrement détruite (pas de "flash" entre deux pages)
-- le script et les ressources statiques d'une page ne seront toujours chargées qu'une seule fois
+- les scripts ainsi que les ressources statiques d'une page ne seront toujours chargées qu'une seule
+  fois
 - les données de page ne sont chargées que lorsque nécessaire
 
 On appelle ce type de stratégie du **routing client**, à opposer au routing serveur, où le
@@ -52,7 +53,7 @@ naviguer vers une autre page de l'application sans que le lecteur ne s'arrête.
 
 > Cette stratégie n'est pas propre à SvelteKit, d'autres frameworks proposent des choses similaires.
 
-Nous verrons [plus tard](../15_delivery/01_page_options.md) qu'il est possible de modifier le
+Nous verrons [plus tard](../15_delivery/01_page_options) qu'il est possible de modifier le
 comportement de SvelteKit concernant le routing.
 
 [Plus de détails sur ce sujet](https://svelte.dev/docs/kit/glossary#routing)

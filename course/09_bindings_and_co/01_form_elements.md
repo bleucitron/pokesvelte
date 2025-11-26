@@ -37,14 +37,14 @@ de l'état interne de l'élément HTML (`e.target.value`).
 
 ## Bindings d'inputs
 
-L'exemple ci-dessus fonctionnement parfaitement, et on pourrait tout à fait se satisfaire de cette
+L'exemple ci-dessus fonctionne parfaitement, et on pourrait tout à fait se satisfaire de cette
 écriture, un peu verbeuse mais acceptable.
 
 Mais souvent, vous avez plusieurs inputs sur une même page, et cette écriture peut vite se révéler
 fastidieuse.
 
 Pour éviter cela, Svelte propose une syntaxe permettant de faire "remonter" le flux de données : les
-bindings.
+bindings (ou "liaisons").
 
 ```svelte
 <script>
@@ -55,14 +55,14 @@ bindings.
 ```
 
 Dans ce cas, plus besoin d'écouter l'évènement `input` : le `bind:value={text}` garantit que lorsque
-l'élément HTML `<input>` change de valeur interne, on met à jour la variable `text`. Autrement dit,
-on fait "remonter" la valeur `value` de l'`<input>` dans son parent. Le flux de données est donc
-bien bi-directionnel.
+l'élément HTML `<input>` change de valeur interne, on met à jour la variable `text` avec la valeur
+de l'input. Autrement dit, on fait "remonter" la valeur `value` de l'`<input>` dans son parent. Le
+flux de données est donc bien bi-directionnel.
 
-On dit que la variable `value` est **liée** à l'état interne de l'`<input>`.
+On dit que la variable `text` est **liée** à l'état interne de l'`<input>`.
 
-Il existe une syntaxe raccourcie lorsque vous choisissez de nommer votre état de la même façon que
-la props utilisée sur l'élément – dans ce cas `value` :
+De plus, il existe une syntaxe raccourcie lorsque vous choisissez de donner à votre état le même nom
+que l'attribut ciblé sur l'élément – dans ce cas `value` :
 
 ```svelte
 <script>
@@ -87,7 +87,7 @@ choisie, les radio qui fonctionnent ensemble étant mutuellement exclusifs.
 
 ```svelte
 <script>
-	let color = 'blue';
+	let color = $state('blue');
 </script>
 
 <!-- Ces inputs radio sont mutuellement exclusifs -->
@@ -101,7 +101,7 @@ valeurs cochées.
 
 ```svelte
 <script>
-	let games = [];
+	let games = $state([]);
 </script>
 
 <!-- Ces inputs checkbox remplissent un même tableau -->
@@ -117,28 +117,31 @@ beaucoup de sens.
 
 ```svelte
 <script>
-	let active = true;
+	let active = $state(true);
 </script>
 
 <input type="checkbox" bind:checked={active} />
 ```
 
-> Il existe plein d'autres types d'éléments de formulaire avec parfois leurs spécificités. Le
-> fonctionnement avec Svelte peut être un peu différent parfois, mais reste globalement le même.
+> Il est possible d'utiliser les liaisons sur plein d'éléments différents, avec parfois leurs
+> spécificités, comme notamment [`select`](https://svelte.dev/docs/svelte/bind#select-bind:value).
+> Le fonctionnement avec Svelte peut être un peu différent parfois, mais reste globalement le même.
 
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/pokedex`
+Nous allons créer un système de filtre pour rechercher un Pokémon dans le Pokédex.
+
+_Dans la page `/pokedex`_
 
 - Ajouter un élément `<input>`.
 
 - Lier cet `<input>` à un état `search`, dont la valeur initiale est `''`.
 
 - Afficher la valeur `search` dans un `<p>` pour vérifier que tout fonctionne bien lorsque vous
-  tapez dans l'`<input>`
+  tapez dans l'`<input>`.
 
-- Supprimer le `<p>`
+- Supprimer le `<p>`, qui ne servait que pour l'étape précédente.
 
 - Créer un état dérivé qui contient un tableau de Pokémons dont le nom inclut la valeur `search`.
   Utiliser `pokemons.filter()`.

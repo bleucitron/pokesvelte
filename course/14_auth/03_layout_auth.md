@@ -71,13 +71,13 @@ chargées pour effectuer des opérations d'autorisation.
 
 ## La cascade de chargement
 
-SvelteKit permet de ne pas effectuer les appels de `load` en parallèle, en utilisant une méthode
-`parent`.
+SvelteKit permet de ne pas effectuer certains appels de `load` en parallèle, en utilisant une
+méthode `parent`.
 
 ```ts
 // +page.server.ts
 export async function load({ parent }) {
-	const { user } = await parent(); // permet d'accéder aux données du layout parent
+	const { user } = await parent(); // permet d'attendre pour accéder aux données des layouts parents
 
 	if (!user) error(403, { message: 'Non autorisé' }); // on autorise que si `user` existe
 
@@ -129,9 +129,9 @@ chargement de la page, alors qu'on n'a réellement besoin que des données du `u
 
 ## Sécuriser chaque endpoint
 
-La solution à ce problème est de charger les données de `user` à chaque entrée de votre application
-– layout, page, action, endpoint – nécessitant une autorisation, plutôt que de le faire dans un
-layout.
+La solution à ce problème est de **charger les données de `user` à chaque entrée de votre
+application – layout, page, action, endpoint – nécessitant une autorisation**, plutôt que de le
+faire dans un layout.
 
 ```ts
 // +page.server.ts
@@ -150,13 +150,13 @@ export async function load() {
 
 Néanmoins, ce n'est pas idéal :
 
-- les chargements des layouts et des pages se faisant en parallèle, il est toujours plausible de
-  charger les données d'un layout alors que finalement l'autorisation ne sera pas donnée, ce qui
-  implique des chargements inutiles
+- les chargements des layouts et des pages se faisant par défaut en parallèle, il est toujours
+  plausible de charger les données d'un layout alors que finalement l'autorisation ne sera pas donnée,
+  ce qui implique des chargements inutiles
 - il faut répéter le code de l'appel à `getUserData` dans chaque fonction le nécessitant, ce qui est
   un peu répétitif.
 
-SvelteKit offre une solution adaptée à ce genre de besoins : les _hooks_.
+Tout semble perdu ? Non, SvelteKit offre une solution adaptée à ce genre de besoins : les _hooks_.
 
 ---
 

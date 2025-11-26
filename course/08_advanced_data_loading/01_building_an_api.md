@@ -67,8 +67,8 @@ export function UPDATE() {}
 ```
 
 Il suffit ensuite de faire une requête HTTP classique vers le endpoint qui vous intéresse, comme
-vous le faites probablement dans d'autres contextes. Les fonctions alors définies seront exécutées
-pour traiter les requêtes correspondantes et renvoyer la réponse.
+vous le faites probablement déjà dans d'autres contextes. Les fonctions alors définies seront
+exécutées pour traiter les requêtes correspondantes et renvoyer la réponse.
 
 ## Données d'entrée
 
@@ -116,7 +116,7 @@ export async function POST({ url }) {
 > nécessaire de les traiter avant de s'en servir.
 
 On pourrait également extraire les paramètres de route de l'URL, mais cette information est
-directement fournie par SvelteKit en tant que paramètre de route.
+directement fournie par SvelteKit en tant que donnée de route.
 
 ### Données de route
 
@@ -170,7 +170,7 @@ export async function DELETE() {
 
 - Créer un endpoint POST `/team` permettant d'attraper un Pokémon. Vous pouvez utiliser l'utilitaire
   `db.team.addMember()` de `$lib/db`. Vous devrez fournir uniquement l'`id` du Pokémon en `payload`,
-  `addToTeam` fera le reste (notamment mettre à jour les données de Pokédex).
+  `.addMember()` fera le reste (notamment mettre à jour les données de Pokédex).
 
 - Créer un endpoint DELETE `/team/[uuid]` permettant de libérer un Pokémon en fonction de son
   `uuid`. Vous pouvez utiliser l'utilitaire `db.team.removeMember()` de `$lib/db`.
@@ -180,16 +180,21 @@ export async function DELETE() {
   Vous pouvez utiliser l'utilitaire `db.team.get()` de `$lib/db`. Tester ce endpoint dans votre
   navigateur.
 
-Sur la page d'accueil
+_Sur la page d'accueil_
 
-- Appeler le endpoint POST `/team` pour attraper un Pokémon, plutôt que d'utiliser `team.recruit`.
-  Pensez à `JSON.stringify()` votre payload.
+- Appeler le endpoint POST `/team` pour attraper un Pokémon, plutôt que d'utiliser `team.recruit` et
+  `pokedex.discover` (le endpoint se charge de mettre à jour le Pokédex via `.addMember`). Pensez à
+  `JSON.stringify()` votre payload.
 
 - Appeler le endpoint DELETE `/team/[id]` pour libérer un Pokémon, plutôt que d'utiliser
   `team.release`.
+
+> À ce stade, votre application ne devrait plus fonctionner correctement, car nous avons remplacé
+> des comportements purement front-end par des appels au serveur, sans avoir tout à fait terminé le
+> travail. Nous ferons cela dans les chapitres suivants.
 
 </fieldset>
 
 ---
 
-[Plus de détails sur ce chapitre](https://svelte.dev/docs/kit/routing#server)
+[](https://svelte.dev/docs/kit/routing#server)

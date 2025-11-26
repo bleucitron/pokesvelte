@@ -31,12 +31,11 @@ Vous devez fournir 2 choses à `redirect`:
 - un code d'erreur (généralement `301`, `302`, `307` ou `308`)
 - une URL cible
 
-> Utiliser `redirect()` revient à utiliser `throw`.
+> Utiliser `redirect()` revient à utiliser `throw`. Vous n'avez donc pas besoin d'écrire `throw`
+> explicitement.
 
-> Notez que ces redirections sont des redirections serveur : la redirection se fait avant
-> d'atteindre le navigateur. Il est également possible de rediriger depuis le routeur client
-> (c'est-à-dire depuis le navigateur), mais il faut utiliser une autre méthode :
-> [`goto`](https://svelte.dev/docs/kit/modules#$app-navigation-goto).
+> Notez que ces redirections sont des redirections serveur si vous les faites dans des fichiers
+> `*.server.*`, et client sinon.
 
 <fieldset class='task'>
 <legend>À vous !</legend>

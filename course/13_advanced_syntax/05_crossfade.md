@@ -12,7 +12,16 @@ Cette transition permet de "déplacer" des éléments d'un endroit vers un autre
 décrire l'effet que ça rend, allez plutôt voir
 [ici](https://svelte.dev/examples/deferred-transitions) pour mieux vous rendre compte.
 
-Pour créer cette transition :
+Elle fonctionne en "envoyant" un élément vers un autre, qui lui va "recevoir" celui qui a été
+envoyé.
+
+> Comme pour toutes les transitions, la transition `crossfade` doit s'appliquer sur des éléments qui
+> sont susceptibles d'être ajoutés ou supprimés par un bloc logique, comme un `{#if}` ou un
+> `{#each}`.
+
+## Utilisation
+
+Pour créer ce genre de transition :
 
 - vous devez d'abord créer `send` et `receive` en exécutant `crossfade` avec quelques paramètres,
   comme `duration`
@@ -49,9 +58,9 @@ remplaçants et vice-versa.
 
 - Créer une transition `crossfade`, et en extraire `send` et `receive`.
 
-- Utiliser `send` et `receive` couplés à `in` et `out` pour simuler le déplacement des membres. Si
-  besoin, supprimer une précédente transition, ou bien rajouter une `<div>` autour des éléments
-  concernés.
+- Utiliser `send` et `receive` couplés à `in` et `out` pour simuler le déplacement des membres d'une
+  liste à une autre. Si besoin, supprimer une précédente transition, ou bien rajouter une `<div>`
+  autour des éléments concernés.
 
 </fieldset>
 

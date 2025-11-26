@@ -67,7 +67,7 @@ Mais si les données de formulaire ne sont pas conformes, il est d'usage de renv
 un code `400` ou `422`, code signifiant que les données de requête sont invalides (ou un autre code
 HTTP si vous préférez). Vous pouvez faire cela en utilisant l'utilitaire `fail` de `@sveltejs/kit` :
 
-> Si besoin, vous pouvez accéder au code d'erreur via le store de page, avec `$page.status`.
+> Si besoin, vous pouvez accéder au code d'erreur via le state de page, avec `page.status`.
 
 ```ts
 // +page.server.ts
@@ -104,7 +104,8 @@ export const actions = {
 N'oubliez pas que le comportement par défaut du navigateur est de recharger la page après une
 soumission de formulaire. Donc la page sera remise dans son état initial, et les éventuelles valeurs
 d'`<input>` seront perdues si vous ne prévoyez rien. Une bonne façon d'éviter ça et de renvoyer les
-valeurs de formulaire soumises lorsqu'une erreur de formulaire se produit.
+valeurs de formulaire soumises lorsqu'une erreur de formulaire se produit, et de remplir les
+éléments concernés avec ces valeurs.
 
 > Évitez de renvoyer les mots de passe, qui sont des données sensibles.
 
@@ -116,7 +117,7 @@ valeurs de formulaire soumises lorsqu'une erreur de formulaire se produit.
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/trainer`
+_Dans la page `/trainer`_
 
 - Ajouter un champ "Confirmation de mot de passe"
 
@@ -126,7 +127,7 @@ Valider les différents champs du formulaire, et envoyer une erreur si :
 - si le mot de passe est manquant
 - si le mot de passe est trop court
 - si les mots de passe sont différents
-- si le nom est disponible avec `db.trainer.get(idOrName)` de `$lib/server/db`
+- si le nom existe déjà, en utilisant `db.trainer.get(idOrName)` de `$lib/server/db`
 
 - Renvoyer `{ success: true }` si tout va bien
 

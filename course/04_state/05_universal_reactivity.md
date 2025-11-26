@@ -45,7 +45,7 @@ Par exemple, si nous déclarons un état de cette manière :
 
 Nous avons ici trois choses concernant l'état : sa déclaration, sa mise à jour, et sa consommation.
 
-Nous pouvons tout à fait écrire la même de cette manière :
+Nous pouvons tout à fait écrire la même chose de cette manière :
 
 ```svelte
 <script>
@@ -135,9 +135,11 @@ Ainsi, nous pouvons créer des états sur un même modèle dans des composants d
 
 ## État global
 
-Si vous avez besoin de suivre une même valeur à plusieurs endroits de votre application, il vous
-suffit de créer une instance de cet état à l'extérieur de vos composants, et de l'importer là où il
-est nécessaire.
+Un "état global" est un état qui est défini une seule fois mais consommé ou modifié à différents
+endroits d'une application.
+
+Pour vous servir d'un état global, il vous suffit de créer une instance de cet état à l'extérieur de
+vos composants, et de l'importer là où il est nécessaire.
 
 ```js
 // points.svelte.ts
@@ -164,30 +166,104 @@ export const points = createCounter();
 <button onclick={points.increment}> Jouer </button>
 ```
 
+## Classes réactives
+
+Reprenons l'exemple de notre `createCounter` :
+
+```ts
+// createCounter.svelte.ts
+export function createCounter() {
+	let count = $state(0);
+
+	function increment() {
+		count += 1;
+	}
+
+	return {
+		get count() {
+			return count;
+		},
+		increment
+	};
+}
+```
+
+Même si techniquement valide et fonctionnelle, il est fort possible que cette façon d'écrire les
+choses paraisse complexe, notamment l'usage de `get count()`.
+
+Pour rappel, cette fonction `createCounter` permet de créer des instances d'un `counter`, afin que
+l'on puisse faire évoluer certaines quantités. C'est une "usine à `counter`", un peu comme un
+composant est une usine à instances... tout comme le concept de classe dans la Programmation
+Orientée Objet. Et il se trouve JavaScript permet de définir des classes !
+
+> Ne partez pas tout de suite en courant, je sais que les classes ont mauvaise presse dans
+> l'écosystème JavaScript. Mais je vous promets que ça va bien se passer.
+
+En utilisant donc la syntaxe de `class`, nous pouvons écrire la même chose de la manière suivante :
+
+```ts
+// Counter.svelte.ts
+export class Counter() {
+	count = $state(0);
+
+	increment = () => {
+		this.count += 1;
+	}
+}
+```
+
+Et l'utiliser de cette façon :
+
+```svelte
+<!-- Ailleurs.svelte -->
+<script>
+	import { Counter } from './Counter.svelte.ts';
+
+	const cars = new Counter();
+	const bikes = new Counter();
+</script>
+
+<button onclick={cars.increment}>{cars.count}</button>
+<button onclick={bikes.increment}>{bikes.count}</button>
+```
+
+Je sais pas vous, mais moi je trouve cette façon de définir des états plutôt claire.
+
+Vous pouvez choisir l'une ou l'autre des écritures à votre convenance. Dans la suite de ce cours,
+nous allons choisir l'usage des `class`.
+
+> Il est également possible de définir des états avec `$state` dans des fichiers `*.svelte.ts` sans
+> passer par une fonction ou par une classe. Mais cela est [généralement
+> déconseillé](https://svelte.dev/docs/svelte/$state#Passing-state-across-modules).
+
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans un nouveau fichier `$lib/stores/index.svelte.ts`
+Nous allons créer un état global représentant les Pokémons découverts.
 
-- Créer une fonction `createPokedex` qui crée un `$state` et renvoie un objet contenant la
-  valeur du state `found` ainsi qu'une méthode `discover` permettant d'ajouter des éléments au
-  state.
+_Dans un nouveau fichier `$lib/states/pokedex.svelte.ts`_
 
-- Utiliser `createPokedex` pour créer et exporter un état global `pokedex`.
+- Créer une classe `Pokedex` qui possède un `$state` `found` représentant un tableau des
+  identifiants des Pokémons que l'on a découvert.
 
-Dans la page d'accueil,
+- Ajouter une méthode `discover` permettant d'ajouter des éléments à `found`. Faites bien attention
+  à ne pas ajouter deux fois le même `id` à votre tableau.
+
+- Instancier `Pokedex` et exportez-le en tant que variable `pokedex`. C'est notre état global.
+
+_Dans la page d'accueil_
 
 - Remplacer l'état local `foundSpecies` par l'état global `pokedex`. N'oubliez pas d'utiliser
   `pokedex.discover` pour y ajouter de nouvelles espèces.
 
-Dans le header
+_Dans le header_
 
 - Utiliser la valeur de `pokedex` pour afficher le nombre de Pokémons attrapés.
 
-Dans les pages `/pokedex` et `/pokedex/[id]`
+_Dans les pages `/pokedex` et `/pokedex/[id]`_
 
 - Utilisez la valeur de `pokedex` pour différencier le style d'un composant en fonction de
-  s'il a été découvert ou non. </fieldset>
+  s'il a été découvert ou non.
 
 </fieldset>
 

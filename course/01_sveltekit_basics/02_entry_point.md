@@ -36,3 +36,5 @@ contenu spécifique à chaque page.
 
 Ce fichier vous permet d'ajouter des ressources communes à toute votre application, comme des
 feuilles de style ou des polices de caractères.
+
+> La plupart du temps, vous ne devriez pas avoir besoin de toucher à ce fichier.

@@ -52,9 +52,9 @@ export async function handle({ event, resolve }) {
 
 ## `locals`
 
-La propriété `locals` de `event` est un endroit que vous utiliser pour mettre ce que vous voulez à
-l'intérieur. Ces informations seront disponibles dans toutes les fonctions `load`, les `actions` et
-les endpoints.
+La propriété `locals` de `event` est un endroit que vous pouvez utiliser pour mettre tout ce que
+vous voulez à l'intérieur. Ces informations seront disponibles dans toutes les fonctions `load`, les
+`actions` et les endpoints.
 
 ```ts
 // hooks.server.ts
@@ -94,7 +94,8 @@ export async function handle({ event, resolve }) {
 ```
 
 Ainsi, vous aurez accès aux informations du `user` à tout moment, notamment au moment de faire des
-requêtes sensibles, nécessitant des vérifications particulières.
+requêtes sensibles, nécessitant des vérifications particulières. Tout ça sans avoir créé de cascade
+de chargement.
 
 <fieldset class='task'>
 <legend>À vous !</legend>
@@ -104,14 +105,14 @@ requêtes sensibles, nécessitant des vérifications particulières.
 - Se servir des `locals` pour remplir les props de layout avec les données du `user`. Supprimer
   le code obsolète.
 
-Dans les fonctions de serveur `/team`
+_Dans les fonctions de serveur `/team`_
 
 - à l'aide de `locals`, protéger toutes les opérations impactant sur la constitution de
   l'équipe, en levant une erreur si l'utilisateur n'est pas connecté.
 
 - dans le fichier `team/+page.server.ts`, supprimer la redirection un peu nulle lorsque la taille de
   l'équipe est à 0. À la place, rediriger vers la page `/trainer` si l'utilisateur n'est pas connecté,
-  en utilisant `locals` dans `team/+page.server.ts`. </fieldset>
+  en utilisant `locals` dans `team/+page.server.ts`.
 
 </fieldset>
 

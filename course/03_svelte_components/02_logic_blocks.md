@@ -10,7 +10,7 @@ On l'a vu, Svelte est un compilateur. C'est-à-dire que les fichiers `.svelte` s
 Svelte en du JavaScript équivalent.
 
 Cela permet notamment d'ajouter de la logique à notre markup, ce qui n'est pas possible avec du
-HTML. Cette logique sera transcrite par le compilateur en du JavaScript permettant de construire le
+HTML. Cette logique sera traduite par le compilateur en du JavaScript permettant de construire le
 HTML désiré.
 
 Cette "logique HTML" se concrétise par des **blocs de logique**.
@@ -72,12 +72,12 @@ Si vous le souhaitez, vous pouvez déstructurer votre élément de boucle (ici `
 ## `{#await}`
 
 Il est également possible de gérer des Promesses dans le markup avec un bloc `{#await}`. Nous en
-reparlerons [plus tard](../08_advanced_data_loading/04_async_loading.md).
+reparlerons [plus tard](../08_advanced_data_loading/04_async_loading).
 
 ## `{@const}`
 
 Vous pourriez avoir besoin de faire des calculs sur des variables au sein d'un bloc logique. Pour
-cela, vous pouvez utiliser `{@const}`.
+cela, vous pouvez utiliser un bloc `{@const}`.
 
 ```svelte
 {#each items as item}
@@ -94,14 +94,24 @@ cela, vous pouvez utiliser `{@const}`.
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-- Sur la page d'accueil, créer une variable `started` initialisée à `false`, et n'afficher le
-  `<Pokemon />` que si `started` vaut `false`, sinon, afficher un texte de votre choix
+_Sur la page d'accueil_
 
-- Sur la page du Pokédex, afficher les images des 151 Pokémons
+- Créer une variable `started` initialisée à `false`, et n'afficher le
+  `<Pokemon />` que si `started` vaut `false`, sinon, afficher un texte de votre choix (utilisez un
+  bloc `{#if}`).
 
-- Utiliser `{@const}` pour accéder aux champs de `pokemon` dans le bloc `{#each}`
+_Sur la page du Pokédex_
+
+- Remplacer le code existant par une boucle `{#each}` pour afficher les images des 151 Pokémons,
+  ainsi qu'un lien vers la page de chaque Pokémon.
+
+- Utiliser `{@const}` pour accéder aux champs de `pokemon` dans le bloc `{#each}`.
 
 Vous pouvez utiliser ce style sur la page `pokedex/` si vous le souhaitez :
+
+> Vous allez probablement avoir une erreur qui s'affiche dans votre code, concernant une `key`
+> manquante. Nous allons l'ignorer pour le moment, nous y reviendrons [plus
+> tard](../13_advanced_syntax/01_each_keys).
 
 ```css
 ul {

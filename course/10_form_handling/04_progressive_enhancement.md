@@ -9,7 +9,7 @@ Nous l'avons déjà vu, mais surtout nous l'avons subi : par défaut, la soumiss
 entraîne le rechargement la page par le navigateur.
 
 C'est pratique car on peut envoyer des données au serveur sans avoir besoin de JavaScript, en
-utilisant les fonctionnalités natives du navigateur, mais c'est aussi pénible car notre page est
+utilisant les fonctionnalités natives du navigateur ; mais c'est aussi pénible car notre page est
 complètement détruite par le rechargement, ce qui implique au mieux un "flash", au pire une perte
 des états de la page.
 
@@ -18,17 +18,24 @@ des états de la page.
 
 SvelteKit utilisant par défaut un routing client, donc utilisant JavaScript, les pages ne sont pas
 rechargées lors des navigations, [comme nous l'avons
-vu](../01_sveltekit_basics/09_navigation_philosophy.md). Mais elles le seront donc lors de la
+vu](../01_sveltekit_basics/10_navigation_philosophy). Mais elles le seront donc lors de la
 soumission de formulaires.
 
 À moins de surcharger cette fonctionnalité.
 
-L'"amélioration progressive" a pour objectif de faire marcher les fonctionnalités de formulaire quoi
-qu'il arrive, mais de les augmenter avec JavaScript si disponible pour profiter des technologies web
-modernes.
+L'"amélioration progressive" a pour objectif de fournir les informations et fonctionnalités
+principales d'une page même dans les conditions les plus dégradées, et d'améliorer la page en
+fonction des fonctionnalités disponibles. Typiquement, **une page HTML sans CSS ni JavaScript
+devrait être capable de fournir toutes les informations et fonctionnalités essentielles**, même si
+elle est moche et dure à utiliser.
 
-SvelteKit permet d'améliorer les formulaire en utilisant `use:enhance` en tant qu'attribut de
-`<form>`, en ayant importé `enhance` du module `"$app/forms"` :
+Les formulaires sont un exemple d'amélioration progressive : les fonctionnalités de formulaire
+devraient être disponibles sans JavaScript, l'expérience utilisateur dégradée mais pas impossible.
+Mais si JavaScript est disponible, il est alors possible de les augmenter pour fournir une
+expérience utilisateur moderne et plus agréable.
+
+SvelteKit permet d'améliorer les formulaires en utilisant `use:enhance` en tant qu'attribut de
+`<form>`, en ayant importé `enhance` du module `$app/forms` :
 
 ```svelte
 <script>
@@ -48,7 +55,7 @@ assurer un service minimum.
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans les pages `/trainer` et `/teams`
+_Dans les pages `/trainer` et `/teams`_
 
 - Améliorer progressivement les formulaires.
 

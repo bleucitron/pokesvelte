@@ -25,11 +25,13 @@ que quelques feuilles de style. Vous les trouverez pour la plupart dans :
 - `static`
 
 > Vous pouvez trouver le détail de ces modifications
-> [ici](https://github.com/bleucitron/pokesvelte/commit/56fb458424776eda7b9f0e9c728d12b59ab07fc2)
+> [ici](https://github.com/bleucitron/pokesvelte/commit/60e6221e4e785e28515a871786a16fb3f7a710df)
 
 ## Démarrer le projet
 
 La première fois que vous démarrez ce projet, vous avez besoin d'installer ses dépendances.
+
+> Il est recommandé de ne pas utiliser `npm` pour des raisons de sécurité.
 
 ```bash
 pnpm install

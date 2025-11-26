@@ -22,7 +22,7 @@ Ces fichiers protégés sont :
 - tous les fichiers se trouvant dans le dossier `$lib/server/`
 - tous les fichiers se terminant par `.server.ts`
 
-## Stores et serveur
+## States globaux et serveur
 
 Nous sommes capables de créer des états globaux grâce à la rune `$state`. Ceci est
 pratique car cela permet de partager de l'état au travers d'une application. Mais cela peut s'avérer
@@ -36,7 +36,7 @@ est très facile de créer un état global accessible sur le serveur sans s'en r
 De manière générale, **les états globaux devraient se cantonner à des données non sensibles et
 uniquement mises à jour sur le client**, n'ayant pas d'incidence sur le serveur.
 
-Nous détaillerons [plus tard](../14_auth/02_global_states_on_the_server.md) pourquoi les états
+Nous détaillerons [plus tard](../14_auth/02_global_states_on_the_server) pourquoi les états
 globaux sur le serveur peuvent être problématiques.
 
 > Vous pouvez bien sûr tout à fait utiliser des état globaux sur le serveur, mais en sachant ce que
@@ -46,49 +46,58 @@ globaux sur le serveur peuvent être problématiques.
 <legend>À vous !</legend>
 
 - Déplacer le dossier `$lib/db` dans le dossier `$lib/server`
-- Ajuster les paths des imports concernés.
+- Ajuster les paths des imports concernés (notamment l'import de `pokemons.json` du fichier
+  `team.ts`)
 - Essayer d'importer `$lib/server/db` dans un fichier `+page.svelte`, constater que c'est impossible
 
-Dans le layout
+_Dans le layout_
 
 - Charger les données `teamSize` et `found` en tant que données de layout dans
   `+layout.server.ts` en utilisant les utilitaires `db.team.get()` et `db.seen.get()` de
   `$lib/server/db`.
 
-- Utiliser les données de layout à la place des données de l'état global `pokedex` pour afficher le
-  nombre de Pokémon dans le header
+- Utiliser les données de layout à la place des données des états globaux `pokedex` et `team` pour
+  afficher le nombre de Pokémons découverts et la taille de l'équipe dans le header
 
-Dans la page `/team`
+_Dans la page `/team`_
 
-- Faire de même pour charger et afficher les données de `team` sur cette page
+- Faire de même pour charger et afficher les données `team` venant du serveur sur cette page
 
-Dans la page `/pokedex`
+_Dans les pages `/pokedex` et `/pokedex/[id]`_
 
-- Faire de même pour charger et utiliser les données de `seen` sur cette page
+- Faire de même pour charger et utiliser les données `seen` venant du serveur sur ces pages
 
-Dans la page d'accueil
+_Dans la page d'accueil_
 
-- Modifier le code pour que `started` ne dépende plus de `pokedex` mais bien de
+- Modifier le code pour que `started` ne dépende plus de l'état global `pokedex` mais bien de
   `teamSize`, venant des données de layout.
 
-> Vous devriez constater que, malgré le fait que vos endpoints fonctionnent, l'interface ne
-> se met plus correctement à jour, notamment les informations du layout. C'est tout à fait
-> normal, nous règlerons ça dans le prochain chapitre.
+> Vous devriez constater que, malgré le fait que vos endpoints fonctionnent, l'interface ne se met
+> plus correctement à jour, notamment les informations du layout. Il est nécessaire de recharger la
+> page pour voir les données de header se mettre à jour. C'est tout à fait normal, nous règlerons ça
+> dans le prochain chapitre.
 
-À ce stade, le code du fichier `$lib/stores/index.svelte.ts` ne devrait plus être utilisé. Nous
-allons nous en servir pour tenir à jour une liste des nouvelles espèces découvertes et nouveaux
+### Bonus
+
+À ce stade, les différents fichiers du dossier `$lib/states` ne devraient plus être utilisés. Nous
+allons nous les remodeler pour tenir à jour une liste des nouvelles espèces découvertes et nouveaux
 Pokémons attrapés lors de la session en cours.
 
-> Ces données n'ont pas besoin d'être stockées sur le serveur, ce qui nous permet d'utiliser
-> uniquement le concept d'état global pour les manipuler.
+> Ces données n'ont pas besoin d'être manipulées sur le serveur, ce qui nous permet d'utiliser des
+> états globaux sans risque.
 
-- Renommer l'état global `pokedex` en `recentSpecies`.
-- Renommer l'état global `team` en `recentMembers` et modifier son code pour qu'il représente des
-  `uuid`s de Pokémons et non des `TeamMember`.
-- Faites en sorte de différencier les nouvelles espèces sur la page `/pokedex` et les
-  nouveaux membres d'équipe sur la page `/team`.
-- Ajouter également un marqueur sur les liens vers `/pokedex` et `/team` du header lorsque
-  les états globaux `recentSpecies` et `recentMembers` ne sont pas vides.
+- Fusionner les états globaux `pokedex` et `team` en une instance `recent`, possédant 2 `$state` :
+  `members` qui représente une liste de `uuid` des membres récemment ajoutés à notre équipe, et
+  `found` qui représente les `id` des espèces récemment découvertes.
+
+- Mettre à jour `recent` lorsqu'un nouveau Pokémon est attrapé, en utilisant les données renvoyées
+  par le endpoint.
+
+- Faire en sorte de différencier les nouvelles espèces sur les pages `/pokedex` et les nouveaux
+  membres d'équipe sur la page `/team`.
+
+- Ajouter également un marqueur sur les liens vers `/pokedex` et `/team` du header lorsque les états
+  globaux `recent.species` et `recent.members` ne sont pas vides.
 
 </fieldset>
 

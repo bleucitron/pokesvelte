@@ -72,11 +72,11 @@ paramètre, et renvoyer les données nécessaires à la construction de ma page 
 ```ts
 export async function load({ params }) {
 	// notez que j'ai déstructuré juste au-dessus
-	const id = params.id;
+	const departement = params.departement;
 
 	return {
-		id,
-		name: await getName(id) // par exemple
+		code: departement,
+		name: await getName(departement) // par exemple
 	};
 }
 ```
@@ -88,10 +88,29 @@ Il ne reste plus qu'à construire le markup de la page, comme nous l'avons déj�
 
 - Créer la route dynamique `pokedex/[id]`
 
-- Charger les données d'un Pokémon sur sa page à l'aide de la fonction `fetchPokemon` dans
-  `$lib/pokemons.ts`
+_Dans la page `pokedex/[id]`_
 
-- Afficher sur sa page l'id, le nom et l'image (`sprites.front_default`) du Pokémon
+- Charger les données d'un Pokémon dans une fonction `load` à l'aide de la fonction `fetchPokemon`
+  dans `$lib/pokemons.ts`
+
+- Afficher l'id, le nom et l'image (`sprites.front_default`) du Pokémon
+
+_Dans la page `pokedex`_
+
+- Ajouter des liens vers la page de détail de chacun des 3 Pokemons affichés
+
+### Bonus
+
+Un léger bug est apparu : lorsque nous sommes sur une page `/pokedex/[id]`, plus aucun lien n'est
+actif dans le header, alors que nous sommes techniquement dans une sous-page de `/pokedex`.
+
+_Dans le layout_
+
+- Ajuster la condition permettant de donner la classe `current` au lien vers `/pokedex`, afin de
+  prendre aussi en compte les pages `/pokedex/[id]`.
+
+> Vous aurez probablement des erreurs dans votre éditeur mentionnant l'absence de `resolve`. Nous
+> règlerons ça dans [le chapitre suivant](./09_resolving_routes).
 
 </fieldset>
 

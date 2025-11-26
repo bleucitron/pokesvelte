@@ -17,7 +17,7 @@ bon de rappeler si vous avez des habitudes avec React.
 
 (lors de l'initialisation de l'instance)
 
-La mécanique par défaut de React impose que la function d'un composant soit ré-exécutée à chaque
+La mécanique par défaut de React impose que la fonction d'un composant soit ré-exécutée à chaque
 mise à jour de ses props ou de son state – c'est la boucle de rendu de React. En revanche, la
 réactivité de Svelte est "ciblée", c'est-à-dire que Svelte ne rejoue que les morceaux de `<script>`
 qui sont déclarés comme réactifs (avec des runes donc), et uniquement lorsque nécessaire.
@@ -52,11 +52,14 @@ function Counter() {
 }
 ```
 
+> Pour rendre `double` réactif dans l'exemple Svelte précédent, il faut bien sûr utiliser
+> [`$derived`](../04_state/04_derived_state).
+
 ## Vous ne pouvez définir qu'un seul composant par `.svelte`
 
 Alors que dans un fichier React, vous pouvez définir autant de composants que vous le souhaitez – il
-vous suffit de définir plusieurs fonctions –, en Svelte vous devrez créer obligatoirement créer un
-fichier par composant.
+vous suffit de définir plusieurs fonctions –, en Svelte chaque fichier que vous créez correspond à
+un seul composant.
 
 ```svelte
 <!-- Count.svelte -->
@@ -89,5 +92,5 @@ function Person() {
 }
 ```
 
-Il existe néanmoins une manière de définir des morceaux de markup réutilisables au sein d'un même
-composant, [nous en reparlerons bientôt](../13_advanced_syntax/02_snippets.md).
+> Il existe néanmoins une manière de définir des morceaux de markup réutilisables au sein d'un même
+> composant, [nous en reparlerons bientôt](../13_advanced_syntax/02_snippets).

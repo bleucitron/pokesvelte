@@ -7,17 +7,17 @@ description: Valider les paramètres pour discriminer plusieurs routes d'une app
 
 Supposons une route dynamique telle que `/name/[name]`.
 
-Nous avons vu [précédemment](../01_sveltekit_basics/08_dynamic_routing.md) que cette route sera
+Nous avons vu [précédemment](../01_sveltekit_basics/08_dynamic_routing) que cette route sera
 utilisée pour des URLs telles que `/name/romain` ou `/name/justine`.
 
 De plus, dans les fichiers de routes (`+page.server.ts`, `+page.svelte`, `+server.ts`, etc.), nous
-avons accès au paramètre de route `name` dont la valeur vaut `'romain'`, `'justine'`, ou bien une
-autre valeur correspondante.
+avons accès au paramètre de route `name` dont la valeur vaut `'romain'`, `'justine'`, ou tout autre
+prénom.
 
 Ça c'est dans le cas où tout se passe bien.
 
 Mais cette route `/name/[name]` va aussi être utilisée si j'essaie d'accéder à `/name/1` ou
-`/name/xoxoxo`. En réalité, une route dynamique n'a par défaut pas de critère défini pour
+`/name/xoxoxo`. En réalité, par défaut une route dynamique n'a pas de critère défini pour
 décider si le paramètre est valide. **Par défaut, tout paramètre dynamique est valide**.
 
 ## Matching
@@ -54,10 +54,10 @@ base. Mais on peut tout de même mettre n'importe quel `id`, comme `'xyz'`, qui 
 non un nombre. Dans notre cas, ce n'est pas très grave, mais vérifions tout de même qu'il s'agit
 d'un nombre positif. Si le paramètre `id` est valide, il peut tout de même ne correspondre à aucun
 Pokémon. Nous continuerons de vérifier que le Pokémon existe au sein de la function `load`, comme
-nous l'avons fait [au chapitre précédent](./02_errors.md).
+nous l'avons fait [au chapitre précédent](./02_errors).
 
 - Créer une vérification de paramètre pour vérifier que le paramètre `id` de la route
-  `/pokedex/[id]` est un nombre strictement plus grand que 0.
+  `/pokedex/[id]` est un nombre strictement plus grand que 0. Penser à ajuster les liens concernés.
 
 </fieldset>
 

@@ -14,6 +14,10 @@ leurs données**.
 Pour charger les données d'une page, il est nécessaire d'utiliser un fichier `+page.server.ts` au
 même niveau que le fichier `+page.svelte`.
 
+> Comme déjà mentionné, SvelteKit a récemment introduit une nouvelle manière de charger ses données
+> : les [fonctions distantes](https://svelte.dev/docs/kit/remote-functions). Ces outils sont
+> néanmoins encore expérimentaux, et ne seront pas traités dans cette formation.
+
 Par exemple, pour charger les données de la route `/profile`, il faut créer l'arborescence suivante
 :
 
@@ -57,9 +61,11 @@ correspondant, en utilisant la `props` `data` :
 <p>Occupation: {data.occupation}</p>
 ```
 
+> Nous verrons très bientôt ce que sont les `props`.
+
 Bien sûr, dans la vraie vie il est courant de venir charger des données depuis une base de données
-ou une API externe. Il est alors indispensable d'utiliser `async/await` pour attendre la résolution
-des appels asynchrones correspondants.
+ou une API externe. Il est alors indispensable d'utiliser `async/await` (ou bien la syntaxe
+`.then()`) pour attendre la résolution des appels asynchrones correspondants.
 
 ```ts
 // +page.server.ts
