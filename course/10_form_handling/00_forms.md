@@ -39,7 +39,7 @@ Pour définir un formulaire HTML, un élément `<form>` est nécessaire, contena
 		Prénom
 		<input name="firstName" />
 	</label>
-	<button>Envoyer</button>
+	<button type="submit">Envoyer</button>
 </form>
 ```
 
@@ -59,6 +59,5 @@ Deux attributs sont importants (mais non obligatoires) sur un élément `<form>`
 De plus, les attributs `name` des `<input>` vont permettre d'identifier les données une fois
 arrivées sur le serveur.
 
-Enfin, l'élément `<button>` vous permet de soumettre le formulaire, même s'il n'est pas strictement
-obligatoire. Peu importe la manière de soumettre un formulaire, **le navigateur va recharger
-automatiquement la page une fois les données envoyées**.
+Enfin, l'élément `<button>` vous permet de soumettre le formulaire. Lors de la soumission du
+formulaire, **le navigateur va recharger automatiquement la page une fois les données envoyées**.

@@ -16,7 +16,8 @@ export const myPageOption = 'some-value';
 ```
 
 Si vous définissez des options de page dans un `+layout.server.ts`, celles-ci seront appliquées pour
-toutes les pages concernées par ce layout.
+toutes les pages concernées par ce layout, à moins qu'une page enfant de ce layout ne définisse
+elle-même ses options de page.
 
 ## `prerender`
 
@@ -60,10 +61,11 @@ export const csr = false; // ou true
 ```
 
 Si vous désactivez `csr`, aucun JavaScript ne sera envoyé au client, allégeant ainsi le coût de
-chargement de la page. Néanmoins vous perdrez tous les bénéfices d'une application web modernes.
+chargement de la page. Néanmoins vous perdrez tous les bénéfices d'une application web moderne.
 
 > Si vous désactivez à la fois `ssr` et `csr` sur une même page, cela revient à refuser tous les
-> rendus. Celle-ci sera donc affichée entièrement vide.
+> rendus. Celle-ci sera donc affichée entièrement vide, à moins que vous ne l'ayez générée de
+> manière statique.
 
 > Il existe d'autres options de page.
 

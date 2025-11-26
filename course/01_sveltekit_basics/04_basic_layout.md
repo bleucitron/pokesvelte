@@ -51,9 +51,11 @@ manière suivante :
 {@render children()}
 ```
 
-Ce layout permet d'afficher correctement le contenu de toutes nos pages, mais rien de plus. Nous
-pouvons ajouter du contenu commun à toutes nos pages en rajoutant des éléments HTML avant, après, ou
-autour de notre `@render`.
+Ce layout permet d'afficher correctement le contenu de toutes nos pages, mais rien de plus. En
+l'état, avoir ajouté ce fichier `+layout.svelte` ne change rien à notre application.
+
+Néanmoins, nous pouvons désormais ajouter du contenu commun à toutes nos pages en rajoutant des
+éléments HTML avant, après, ou autour de notre `@render`.
 
 Par exemple :
 

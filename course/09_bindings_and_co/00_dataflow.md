@@ -5,10 +5,10 @@ description: Réflexions autour du flux de données d'une application web
 
 # Flux de données
 
-Comme nous l'avons mentionné dans [un des premiers chapitres](../00_introduction/01_frameworks.md),
-le flux de données dans une application Svelte – comme pour la plupart des frameworks de composants
-modernes – est un **flux unidirectionnel descendant**, en opposition aux flux bi-directionnels
-(_two-way data binding_).
+Comme nous l'avons mentionné dans [un des premiers chapitres](../00_introduction/01_frameworks), le
+flux de données dans une application Svelte – comme pour la plupart des frameworks de composants
+modernes – est un **flux unidirectionnel descendant** (_one-way data binding_), en opposition aux
+flux bi-directionnels (_two-way data binding_).
 
 ## Dans les deux sens
 
@@ -20,7 +20,8 @@ de l'enfant vers le parent.
 
 Bien que pratique, cette architecture de flux a apporté son lot de problématiques, rendant difficile
 le suivi du parcours des données dans une application un peu complexe. On ne sait plus qui est
-responsable d'une mise-à-jour, ce qui rend compliqué le debug.
+responsable d'une mise-à-jour de données, ce qui provoque des comportements parfois imprévisibles et
+rend compliqué le debug.
 
 ## Sens unique vers le bas
 

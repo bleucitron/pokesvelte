@@ -14,12 +14,12 @@ La structure suivante représente un projet SvelteKit de base. C'est celle de ce
 my-project/
 ├ src/
 │ ├ lib/
-│ │ └ [your lib files]
+│ │ └ [vos fichiers utilitaires]
 │ ├ routes/
-│ │ └ [your routes]
+│ │ └ [vos routes]
 │ ├ app.html
 ├ static/
-│ └ [your static assets]
+│ └ [vos assets statiques]
 ├ package.json
 ├ svelte.config.js
 ├ tsconfig.json
@@ -32,8 +32,8 @@ Le dossier `src` contient les fichiers sources de votre projet. Il contient nota
 
 - `lib/`: un dossier pour organiser vos fichiers de composants, vos utilitaires,... vous pouvez y
   faire référence depuis n'importe quel fichier du projet avec **l'alias `$lib` fourni par défaut**.
-- `routes/`: le dossier contenant vos fichiers de routes. C'est ici que vous construisez vos pages
-  en vous servant du système de routing basé sur les noms de fichiers que SvelteKit fournit.
+- `routes/`: le dossier contenant vos fichiers de routes. **C'est ici que vous construisez vos
+pages** en vous servant du système de routing basé sur les noms de fichiers que SvelteKit fournit.
 - `app.html`: la racine HTML de votre application.
 
 > Notez que vous pouvez ne pas utiliser le dossier `lib/` ou le supprimer sans conséquence. Vous
@@ -42,8 +42,8 @@ Le dossier `src` contient les fichiers sources de votre projet. Il contient nota
 
 ## `static/`
 
-Le dossier pour stocker vos fichiers statiques, tels que vos images, feuilles de styles, polices de
-caractères...
+Le dossier pour stocker vos fichiers statiques, tels que vos images, feuilles de styles globales,
+polices de caractères...
 
 ## Fichiers de configuration
 
@@ -58,11 +58,12 @@ caractères...
 
 Un dossier `.svelte-kit/` est généré lorsque vous utilisez les commandes `npm run dev` ou `npm run
 build`. Il contient des fichiers nécessaires au fonctionnement de votre serveur de développement, ou
-nécessaires au build de votre projet.
+nécessaires à la compilation de votre projet.
 
 Vous pouvez supprimer ce dossier sans conséquence, il sera regénéré automatiquement.
 
-> Vous pouvez jeter un oeil dans ce dossier, mais vous devriez probablement l'ignorer.
+> Ce dossier n'est pas conçu pour être lu par des humains. Vous pouvez y jeter un oeil par
+> curiosité, mais vous devriez probablement l'ignorer.
 
 ---
 

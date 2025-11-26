@@ -2,45 +2,44 @@
 scope: kit
 ---
 
+On a [précédemment](./01_cookies) utilisé les données de layout pour rendre les informations du user
+disponibles partout dans n'importe quelle page ou layout.
+
+Mais si l'on souhaite rendre ces données disponibles partout, c'est-à-dire dans n'importe quel
+composant et fichier `.ts` ou `.js` (et non juste les pages et layouts), il est naturel de vouloir
+utiliser un état global. Mais est-ce bien raisonnable ? (spoiler: non)
+
 # Le problème des états globaux sur le serveur
 
 Les états globaux sont pratiques car ils permettent de stocker des données réactives accessibles
 par tout composant d'une application Svelte.
 
-> Par _état global_ on désigne ici aussi bien un store de Svelte 4, ou qu'un état global `$state`
-> Svelte 5, comme [vu dans ce chapitre](../04_state/05_universal_reactivity.md),
+> Par _état global_, on désigne ici un état global `$state` défini dans un fichier `*.svelte.*`
+> comme [vu dans ce chapitre](../04_state/05_universal_reactivity),
 
 Mais cela peut se révéler problématique avec SvelteKit, car SvelteKit permet de travailler sur le
-serveur.
+serveur. Et l'usage d'états globaux peut causer de gros problèmes de sécurité lorsqu'ils cohabitent
+avec un serveur, même si en apparence ils n'interagissent pas.
 
-Voyons un piège classique lié à l'utilisation d'un état global avec SvelteKit : les données de user.
+Voyons un piège classique lié à l'utilisation d'un état global avec SvelteKit : les données de
+user, que l'on déjà mentionnées plus haut.
 
-On souhaite pouvoir accéder aux données du user partout dans notre application. Un état global
-`user` semble donc adapté.
+On souhaite pouvoir accéder aux données de l'utilisateur partout dans notre application. Un état
+global `user` semble donc adapté.
 
 ## 1. Je crée un état global
 
 Supposons que l'on crée un état global `user` contenant les informations d'une personne. Un état
-globale est pertinent car on souhaite afficher ces valeurs à différents endroits de la page.
+global est pertinent car on souhaite afficher ces valeurs à différents endroits de l'application.
 
 ```ts
 // stores.svelte.ts
-function createUser() {
-	let score = $state();
-
-	function set(u) {
-		user = u;
-	}
-
-	return {
-		get value() {
-			return score;
-		},
-		set
-	};
+class User() {
+	score = $state(0);
+	name = $state();
 }
 
-export const user = createUser(); // l'état `user` est instancié une fois pour toute l'application
+export const user = new User(); // l'état `user` est instancié une fois pour toute l'application
 ```
 
 Ce état global est accessible partout, dans tous les composants ainsi que dans tous les fichiers
@@ -61,11 +60,16 @@ car en général on met à jour ce genre de données sur le client lors d'intera
 </script>
 
 <!-- ici on est sûr de mettre à jour `user` uniquement sur le client -->
-<button onclick={() => user.set({ name: 'romain' })}>Remplir le store</button>
+<button
+	onclick={() => {
+		user.name = 'romain';
+	}}>Remplir les données user</button
+>
 ```
 
-La valeur du état global instancié sur le serveur reste donc à sa valeur initiale – `undefined` dans
-notre cas, ce qui ne pose pas vraiment de problème autre qu'un peu de mémoire inutilement allouée.
+La valeur `name` de l'état global instancié sur le serveur reste donc à sa valeur initiale –
+`undefined` dans notre cas – ce qui ne pose pas vraiment de problème autre qu'un peu de mémoire
+inutilement allouée.
 
 ## 3. Je récupère des données depuis le serveur
 
@@ -95,7 +99,7 @@ valeur dans votre état global dès que vous la recevez côté client, donc dans
 
 	const { data } = $props();
 
-	user.set(data.user);
+	user.name = data.user.name;
 </script>
 ```
 
@@ -103,10 +107,13 @@ Tout va bien, vous avez les données de la personne accessible partout côté cl
 également stocké ces données côté serveur**, car le fichier `+layout.svelte` est exécuté côté
 serveur lors de la première requête...
 
-## 5. J'ai perdu
+> En réalité, cet exemple précis est mauvais car la mise à jour de `user.name` n'est pas réactive.
+> Mais l'idée reste valide.
 
-Sans le savoir, **vous avez rendu accessibles des données personnelles à toute personne se connectant
-sur votre serveur SvelteKit** et qui tenterait de lire le contenu de ce état global.
+## 5. Oups...
+
+Sans le savoir, **vous avez rendu accessibles des données personnelles à toute personne se
+connectant sur votre serveur SvelteKit** et qui tenterait de lire le contenu de ce état global.
 
 > Même si le contenu de l'état global sur le serveur est écrasé à chaque nouvelle requête, cela pose
 > un problème de sécurité majeur, car une intrusion sur le serveur permettrait d'accéder à la valeur
@@ -122,7 +129,7 @@ Le problème vient du fait que l'on a mis à jour un état global depuis le serv
 attention à ne pas mettre à jour cet état depuis le serveur, tout va bien.
 
 Pour cela, on peut utiliser `onMount`, qui est une [méthode de cycle de
-vie](../05_effects/00_lifecycle.md) uniquement exécutée sur le client.
+vie](../05_effects/00_lifecycle) uniquement exécutée sur le client.
 
 ```svelte
 <!-- +layout.svelte -->
@@ -133,7 +140,7 @@ vie](../05_effects/00_lifecycle.md) uniquement exécutée sur le client.
 	const { data } = $props();
 
 	onMount(() => {
-		user.set(data.user); // tout va bien, je suis côté client
+		user.name = data.user.name; // tout va bien, je suis côté client
 	});
 </script>
 ```
@@ -141,16 +148,16 @@ vie](../05_effects/00_lifecycle.md) uniquement exécutée sur le client.
 Néanmoins, cela reste une mauvaise idée :
 
 - la possibilité de mettre à jour ailleurs cet état global tout en étant côté serveur reste ouverte
-- les éléments nécessitant les données du user ne sont pas rendus côté serveur, nécessitant un
+- les éléments nécessitant les données utilisateur ne sont pas rendus côté serveur, nécessitant un
   re-rendu côté client
 
 ### Les données de layout sont accessibles partout
 
 On souhaite rendre disponibles nos données de `user` dans toute notre application. Il se trouve que
-les données de [layout](../01_sveltekit_basics/07_layout_data_loading.md) sont rendues disponibles
+les données de [layout](../01_sveltekit_basics/07_layout_data_loading) sont rendues disponibles
 par SvelteKit dans toutes les pages concernées par le layout.
 
-En utilisant cette propriété sur le layout racine – qu'il est impossible d'esquiver –, il est donc
+En utilisant cette propriété sur le layout racine — qu'il est impossible d'esquiver —, il est donc
 possible de rendre disponibles des données dans toutes les pages de l'application.
 
 ```svelte
@@ -164,15 +171,17 @@ possible de rendre disponibles des données dans toutes les pages de l'applicati
 <p>{data.user.name}</p>
 ```
 
+> C'est cette solution que nous avons utilisé dans le chapitre précédent.
+
 Il faudra tout de même passer ces informations aux composants qui en ont besoin, ou bien utiliser
-le [store de page](../01_sveltekit_basics/05_page_store.md) qui contient également les données de
+le [state de page](../01_sveltekit_basics/05_page_state) qui contient également les données de
 layout, sans présenter de risque de fuites de données.
 
 Bien sûr cette dernière solution ne permet pas telle quelle de mettre à jour nos données dans toute
 l'application comme le ferait un état global. Néanmoins, on peut supposer que la mise à jour de
-telles données – celles de l'utilisateur dans notre cas – vont nécessiter une requête au serveur. En
+telles données — celles de l'utilisateur dans notre cas — vont nécessiter une requête au serveur. En
 utilisant les fonctionnalités des fonctions
-[`load`](../08_advanced_data_loading/03_load_functions.md), on peut assez facilement mettre à jour
+[`load`](../08_advanced_data_loading/03_load_functions), on peut assez facilement mettre à jour
 nos données globalement sans utiliser d'état global.
 
 ### État global et Contexte

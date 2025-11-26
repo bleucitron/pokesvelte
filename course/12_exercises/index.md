@@ -17,8 +17,8 @@ rôle est d'afficher des Pokémons à intervalles réguliers.
 <legend>À vous !</legend>
 
 - Créer un nouveau composant `Grass` qui va récupérer de la page d'accueil la logique et le markup
-  lié à l'affichage des Pokémons lorsque le jeu est lancé. `Grass` doit être avoir comme props
-  `pokemons` et `catchPokemon`, et comme état `wildId`.
+  lié à l'affichage des Pokémons lorsque le jeu est lancé. `Grass` doit avoir comme props `pokemons`
+  et `catchPokemon`, et comme état `wildId`.
 
 - Utiliser `<Grass />` sur la page d'accueil.
 
@@ -35,11 +35,14 @@ number, name: string, sprite: string}`. La valeur `appeared` correspond au momen
 
 - Lorsqu'un Pokémon est attrapé, penser aussi à le faire disparaître de l'écran.
 
-- Ajuster les valeurs d'intervalle d'apparition et de disparition de Pokémons sauvages pour éviter
-  que les Pokémons ne s'accumulent trop. Vous pouvez utiliser `getRandomNumber()` de `$lib/utils` pour
-  donner des durées de vie différentes à chaque Pokémon.
+- Ajuster la valeur de durée d'apparition de Pokémons sauvages pour que plusieurs Pokémons puissent
+  apparaître à l'écran en même temps, tout en évitant que les Pokémons ne s'accumulent trop. Vous
+  pouvez utiliser `getRandomNumber()` de `$lib/utils` pour donner des durées de vie différentes à
+  chaque Pokémon.
 
-Dans les pages `/team` et `/pokedex`,
+## Bonus
+
+Dans les pages `/team` et `/pokedex`, ainsi que dans le composant `Pokemon`,
 
 - Faire en sorte de supprimer les pastilles "nouveauté" au survol des éléments concernés.
 

@@ -3,7 +3,7 @@ scope: kit
 description: Mieux comprendre les fonctions load de SvelteKit
 ---
 
-# Fonctions `load`
+# Fonctions load
 
 Ok, notre application est capable de fournir des données au serveur, ainsi que les récupérer du
 serveur. Mais le fonctionnement actuel de notre application semble cassé : si on attrape un Pokémon,
@@ -15,16 +15,16 @@ des fonctions `load`.
 
 ## C'est quoi une fonction `load` ?
 
-Nous avons vu [ici](../01_sveltekit_basics/09_navigation_philosophy.md) le fonctionnement général de
+Nous avons vu [ici](../01_sveltekit_basics/10_navigation_philosophy) le fonctionnement général de
 la navigation dans SvelteKit.
 
 Pour rappel, à chaque navigation vers une URL gérée par SvelteKit, on charge les ressources de la
 page :
 
-- le code HTML de la page (uniquement au premier chargement)
+- le code HTML de la page
 - les ressources statiques (CSS, images, ...)
 - les scripts (notamment des composants)
-- les données de page (fichiers `.json`)
+- les données de page (fichiers `.json`, fournis par les fonctions `load`)
 
 Ces ressources ne sont chargées que si vous ne les avez pas déjà... sauf pour une : les données. Si
 vous observez bien l'onglet "Réseau" de vos outils de développement navigateur, vous verrez que même
@@ -38,13 +38,13 @@ Ce fichier `.json` contient les données de votre page, autrement dit ce fichier
 renvoie la fonction `load` de la page en question.
 
 Ce qui signifie que la fonction `load` est jouée à chaque navigation vers la page. On peut donc
-considérer que **la fonction `load` est le endpoint de la page**.
+considérer que **la fonction `load` agit comme le endpoint de la page**.
 
-De la même manière, les fonctions `load` associées à des layout sont un peu comme des endpoints de
+De la même manière, les fonctions `load` associées à des layouts agissent comme des endpoints de
 layout.
 
 Mais ici, la fonction `load` de layout ne se recharge pas, ce qui cause notre bug. C'est parce que
-SvelteKit ne recharge que les fonctions `load` qu'il estime ayant besoin d'être rechargées –
+SvelteKit ne recharge que les fonctions `load` dont il estime qu'elles doivent être rechargées –
 c'est-à-dire celles dont les dépendances ont changé. SvelteKit ne rechargera pas celles dont les
 dépendances n'ont pas changé. Ce qui est le cas de notre `load` de layout.
 
@@ -64,7 +64,7 @@ export function load({ params, url }) {
 ```
 
 > Les informations auxquelles vous avez accès dans une fonction `load` sont similaires à celles des
-> fonctions de endpoint qu'on a vues [ici](./01_building_an_api.md).
+> fonctions de endpoint qu'on a vues [ici](./01_building_an_api).
 
 Pour chaque page ou layout, SvelteKit est conscient des données `params` ou `url` dont vous avez
 besoin, et va les considérer comme dépendances de la fonction `load` en question.
@@ -88,19 +88,19 @@ export function load({ url }) {
 Donc, si une fonction `load` n'a pas de dépendances, (ou si ses dépendances n'ont pas changé lors
 d'une navigation), alors elle ne sera pas ré-exécutée.
 
-> C'est le cas de notre layout, sa fonction `load` n'a pas de dépendances, et donc n'est jamais
-> ré-exécutée.
+C'est le cas de notre layout, sa fonction `load` n'a pas de dépendances, et donc n'est jamais
+ré-exécutée.
 
 ## Forcer la ré-exécution
 
 Il y a des situations où des données ont besoin d'être mises à jour via une fonction `load`, mais
-celle-ci n'est pas ré-exécutée car SvelteKit de détecte pas de raison de le faire. La fonction
+celle-ci n'est pas ré-exécutée car SvelteKit ne détecte pas de raison de le faire. La fonction
 `load` a alors une (ou plusieurs) **dépendance implicite**.
 
 Dans ce cas, vous pouvez forcer la ré-exécution des fonctions `load` en utilisant l'utilitaire
 [`invalidateAll()`](https://svelte.dev/docs/kit/modules#$app-navigation-invalidateall) du module
-`$app/navigation`. Cette fonction permet de rejouter toutes les fonctions `load` dont dépend la page
-actuelle – celle de la page ainsi que celles de ses layouts éventuels.
+`$app/navigation`. Cette fonction permet de forcer l'execution de toutes les fonctions `load` dont
+dépend la page actuelle – celle de la page ainsi que celles de ses layouts éventuels.
 
 ```ts
 import { invalidateAll } from `$app/navigation`;

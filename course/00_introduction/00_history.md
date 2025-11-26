@@ -39,7 +39,7 @@ Celle qui a émergé comme la nouvelle référence du développement web front-e
 
 - [React](https://reactjs.org/) (2013)
 
-Depuis, plusieurs projets similaires sont apparus, comme Vue, ou ont évolués. Tous reprennent en
+Depuis, plusieurs projets similaires sont apparus, comme Vue, ou ont évolué. Tous reprennent en
 partie des grands principes de React.
 
 - [Vue](https://vuejs.org/) (2014)
@@ -54,7 +54,8 @@ React. Svelte est le plus connu d'entre eux.
 - [Qwik](https://qwik.dev) (2021)
 
 Les composants sont pratiques pour construire des interfaces, mais ils ne proposent pas réellement
-d'outils pour résoudre les problématiques liées à la nature même d'une application web.
+d'outils pour résoudre les problématiques liées à la nature même d'une application web, comme le
+chargement de données ou le routing.
 
 Alors, depuis 2016 commencent à apparaître une nouvelle classe d'outils : les meta-frameworks (ou
 frameworks d'application), qui s'appuient sur des composants tout en proposant des utilitaires pour

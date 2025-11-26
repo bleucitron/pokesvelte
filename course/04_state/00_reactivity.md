@@ -14,19 +14,19 @@ C'est quoi la réactivité ?
 > oxygénation, etc.) par une réaction, généralement favorable à sa survie et à son développement.
 > (Larousse)
 
-Bon, ok, si on adapte cette définition à un contexte web :
+Bon, ok, c'est très bien tout ça, mais dans un contexte web ?
 
 > **Réactivité** (n.f.)
 > Aptitude d'un élément d'interface à répondre à tout changement de données (internes ou externes)
 > par une réaction, généralement se traduisant par une modification visuelle de l'interface.
 > (PokéSvelte)
 
-Il s'agit donc de faire évoluer les éléments HTML d'une page en fonction de l'évolution de données.
+Il s'agit donc de faire changer les éléments HTML d'une page en fonction de l'évolution de données.
 
-Ce qui sur le papier peut sembler simple, est en réalité complexe dès lors qu'une application est un
+Ce qui sur le papier peut sembler simple est en réalité complexe dès lors qu'une application est un
 peu fournie en données et en éléments visuels les représentant. C'est ce qui a amené au
 développement de frameworks de composants comme Angular ou React, qui sont donc bien réactifs si
-l'on tient à la définition juste au-dessus, de même que leurs successeurs Vue, Svelte, Solid et
+l'on s'en tient à la définition juste au-dessus, de même que leurs successeurs Vue, Svelte, Solid et
 consorts.
 
 ## [_React is a terrible name for React_](https://x.com/johnlindquist/status/1109498707475488768)
@@ -50,22 +50,30 @@ function Composant(props) {
 ```
 
 La fonction d'un composant React est rejouée dès qu'elle reçoit des nouvelles props. C'est-à-dire
-que si `props.name` change, la fonction `Composant` va être rejouée, le log va s'afficher, et
-l'interface (définie par ce qui est après le `return`) va se mettre à jour. Mais ce sera le cas
-également si uniquement `props.address` change, toute la fonction `Composant` sera rejouée,
+que si `props.name` change, la fonction `Composant` va être rejouée, les logs vont s'afficher de
+nouveau, et l'interface (définie par ce qui est après le `return`) va se mettre à jour. Mais ce sera
+le cas également si uniquement `props.address` change, toute la fonction `Composant` sera rejouée,
 entraînant bien sûr la mise de l'interface, mais également les affichages des logs, même celui de
 `props.name`, qui dans ce cas n'aura pas évolué.
 
-De plus, React possède une mécanique appelée "DOM virtuel" permettant de ne modifier le vrai DOM que
-si celui-ci nécessite un changement, ce qui permet d'économiser des opérations sur le DOM. Mais
-cette mécanique est de facto ré-exécutée à chaque mise à jour des props, [entraînant de nombreux
-calculs pour souvent conclure qu'il n'y a rien à changer](https://youtu.be/AdNJ3fydeao?t=248).
+En parallèle, React possède une mécanique appelée "DOM virtuel" permettant de ne modifier le vrai
+DOM que si celui-ci nécessite un changement, ce qui permet d'économiser des opérations sur le DOM.
+Mais cette mécanique est de facto ré-exécutée à chaque mise à jour des props, [entraînant de
+nombreux calculs pour souvent conclure qu'il n'y a rien à
+changer](https://youtu.be/AdNJ3fydeao?t=248).
 
-Ces deux principes font que React en soi n'est pas réellement réactif.
+Ainsi, par défaut, le code React que l'on écrit n'est pas optimisé, et peut facilement conduire à
+des applications lentes et peu "réactives".
+
+On peut donc considérer que React en soi n'est pas réellement réactif.
 
 > Il y a plusieurs moyens d'optimiser les calculs que fait React, mais la plupart sont _opt-ins_,
 > c'est-à-dire qu'il faut être conscient du problème d'optimisation, connaître la solution
-> d'optimisation et écrire le code qui la met en oeuvre.
+> d'optimisation et écrire le code qui la met en oeuvre. Toutefois, l'arrivée récente du
+> [compilateur de React](https://react.dev/learn/react-compiler/introduction) permet d'optimiser
+> automatiquement notre code React, rendant mécaniquement les applications React plus simples à
+> écrire sans sacrifier les performances. On pourrait ainsi donc considérer que React est finalement
+> compatible avec une appellation "réactive".
 
 ## _Vraie_ réactivité
 
@@ -87,7 +95,7 @@ a = 3;
 
 Que vaut `b` à la fin du bloc de code ?
 
-`b` vaut toujours `10`, car JavaScript n'est **pas** un langage réactif par nature – comme la
+`b` vaut toujours `10`, car **JavaScript n'est pas un langage réactif par nature** – comme la
 plupart des langages de programmation.
 
 Une _vraie_ réactivité impliquerait que `b` se mette à jour automatiquement lorsque ses dépendances
@@ -108,5 +116,6 @@ le nom de **runes**.
 > Nous n'allons pas détailler le concept de signals, mais vous pouvez en apprendre plus dans cet
 > article : [_Signals from scratch_](https://dev.to/ratiu5/implementing-signals-from-scratch-3e4c).
 
-> Il est très possible que dans un futur proche, React change sa façon de fonctionner et devienne
-> réellement réactif, soit via des signals, soit via d'autres moyens.
+> Il existe une [proposition de standardisation pour implémenter les signaux comme primitive native
+> de JavaScript](https://github.com/tc39/proposal-signals), ce qui ferait de JavaScript un langage
+> réactif par nature.

@@ -1,6 +1,6 @@
 ---
 scope: kit
-description: Présentation des différents types d'applications web de leurs stratégies de rendu
+description: Présentation des différents types d'applications web et de leurs stratégies de rendu
 ---
 
 # Types d'applications et stratégies de rendu
@@ -16,7 +16,7 @@ Il s'agit de générer sur le serveur chaque page à chaque requête.
 Cela permet de construire entièrement la page sur le serveur avec les données personnalisées de la
 personne ayant fait la requête.
 
-De plus le routing est géré par le serveur, ce qui impose au navigateur de reconstruire
+De plus, le routing est géré par le serveur, ce qui impose au navigateur de reconstruire
 chaque page entièrement à chaque navigation.
 
 Souvent utilisé pour les applications nécessitant une authentification.
@@ -39,10 +39,10 @@ Souvent utilisé pour les applications nécessitant une authentification.
 Il s'agit de faire le rendu complet d'une application dans le navigateur. Le HTML initialement reçu
 par le navigateur est presque vide.
 
-Cela permet de créer des pages hautement interactives, et de gérer le routing au niveau du client,
-au prix d'un coût élevé en Javascript.
+Cette stratégie permet de créer des pages hautement interactives, et de gérer le routing au niveau
+du client, au prix d'un coût élevé en JavaScript.
 
-Souvent utilisé pour les visualisations de données ou les application de musique ou de vidéo.
+Souvent utilisé pour les visualisations de données ou les applications de musique ou de vidéo.
 
 #### Cool
 
@@ -53,7 +53,7 @@ Souvent utilisé pour les visualisations de données ou les application de musiq
 
 #### Pas cool
 
-- Tout le JavaScript à charger
+- Tout le JavaScript à charger et à exécuter
 - Lourd pour le client
 - Très mauvais pour le référencement
 
@@ -61,7 +61,8 @@ Souvent utilisé pour les visualisations de données ou les application de musiq
 
 Un site SSG est entièrement généré au moment du build.
 
-Souvent utilisé pour les blogs.
+Souvent utilisé pour les sites ayant du contenu principalement statique, c'est-à-dire qui change
+très peu, comme les blogs.
 
 #### Cool
 
@@ -87,7 +88,7 @@ MPA.
 
 ### Client-Side Rendering (CSR)
 
-Permet de générer côté client les éléments d'une page en utilisant Javascript. C'est la stratégie
+Permet de générer côté client les éléments d'une page en utilisant JavaScript. C'est la stratégie
 sous-jacente aux SPA.
 
 ### Pre-rendering
@@ -100,7 +101,7 @@ au SSG.
 Les dénominations SPA, MPA et SSG supposent que toute l'application soit gérée avec la même
 stratégie.
 
-Or avec les frameworks modernes comme SvelteKit, il est possible d'utiliser ces stratégies de
+Or, avec les frameworks modernes comme SvelteKit, il est possible d'utiliser ces stratégies de
 manière plus chirurgicale, selon les besoins de chaque page, voire même d'utiliser plusieurs
 stratégies pour une même page.
 

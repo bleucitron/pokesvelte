@@ -35,14 +35,14 @@ Au milieu des années 2000, le web était bien différent d'aujourd'hui, et l'im
 n'était pas encore évidente pour tout le monde.
 
 Quelques entreprises ont été confrontées avant les autres aux problématiques liées à **l'affichage
-massif de données dans une interface web**: Google (Angular) et Facebook (React).
+massif de données interactives dans une interface web** : Google (Angular) et Facebook (React).
 
-La complexité des données à afficher ainsi que les besoins fréquents de maintenance liés au volume
-d'utilisateurs mettent en valeur le fait que les pratiques de développement de l'époque ne sont pas
-adaptées à ce nouveau contexte.
+La quantité et la complexité des données à afficher ainsi que les besoins fréquents de maintenance
+liés au volume d'utilisateurs mettent en valeur le fait que les pratiques de développement de
+l'époque ne sont pas adaptées à ce nouveau contexte.
 
-La problématique principale est **comment rendre une application réactive de manière claire et
-efficace** ?
+La problématique principale est la suivante : **comment rendre une application réactive de manière
+claire et efficace** ?
 
 > La **réactivité** est le nerf de la guerre des frameworks de composants. Il s'agit d'être capable
 > de réagir automatiquement aux changements de valeur des variables.
@@ -65,14 +65,14 @@ les rôles et les designs.
 
 ### Flux de données uni-directionnel descendant
 
-Pour clarifier le parcours des données au sein de l'app, et éviter de perdre de vue qui a le
+Pour clarifier le parcours des données au sein de l'application, et éviter de perdre de vue qui a le
 contrôle sur la donnée, on a généralisé (voir imposé) le principe de flux unidirectionnel descendant
 : **les données vont (presque) toujours du parent vers les enfants**.
 
 ### Performances
 
-La manipulation du DOM peut s'avérer coûteuse pour le navigateur. Il s'agit alors d **faire faire le
-moins travail possible au navigateur**.
+La manipulation du DOM peut s'avérer coûteuse pour le navigateur. Il s'agit alors de **faire faire
+le moins travail possible au navigateur**.
 
 > Plusieurs approches existent : Virtual DOM, compilation, signaux...
 
@@ -87,7 +87,7 @@ moins travail possible au navigateur**.
 
 ## Frameworks d'application
 
-Les frameworks de composants – ou meta-frameworks – sont pratiques pour créer des interfaces
+Les frameworks de composants – ou *meta-frameworks* – sont pratiques pour créer des interfaces
 interactives. Mais ils ne répondent pas réellement aux problématiques inhérentes au contexte
 d'application web :
 

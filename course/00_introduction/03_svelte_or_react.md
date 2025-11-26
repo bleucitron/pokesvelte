@@ -13,27 +13,28 @@ Il y a des similarités et des différences entre React et Svelte, et la questio
 (ou un autre framework) est meilleur que React revient régulièrement.
 
 Nous n'allons pas répondre à cette question ici, mais plutôt vous donner des raisons qui font
-qu'apprendre Svelte est dans tous les cas une bonne idée.
+qu'apprendre Svelte est, quoi qu'il arrive, une bonne idée.
 
 ## Vous n'avez jamais fait de React ?
 
 Alors pas de panique ! React n'est pas un objectif en soi, même si une grande partie de l'industrie
 repose dessus.
 
-**Vous n'avez pas besoin de connaître React pour apprendre Svelte** : Svelte et React font des
-choses très similaires, et si vous connaissez Svelte (ou Vue ou autre), alors vous connaissez déjà
-une bonne partie de React (ou Vue ou autre).
+**Vous n'avez pas besoin de connaître React pour apprendre Svelte** : la raison d'être de Svelte et
+React est la même, ils font des choses très similaires, et si vous connaissez Svelte (ou Vue ou
+autre), alors vous connaissez déjà une bonne partie de React (ou Vue ou autre).
 
 L'avantage d'apprendre Svelte en premier est que la marche est moins haute, Svelte étant connu pour
-être beaucoup facile à utiliser que React.
+être beaucoup facile à utiliser que React. Apprendre Svelte avant React vous simplifiera très
+certainement la tâche le jour où vous apprendrez React.
 
 ## Vous connaissez déjà React ?
 
-Alors beaucoup de choses que l'on vient de voir devraient vous être familières, et vous ne devriez
-pas avoir trop de mal à comprendre le fonctionnement de Svelte.
+Alors beaucoup de choses que nous allons voir devraient vous être familières, et vous ne devriez pas
+avoir trop de mal à comprendre le fonctionnement de Svelte.
 
 **Apprendre un nouveau framework n'est jamais une mauvaise chose**, au contraire, cela vous permet
 de voir d'autres manières de faire, de comparer, de vous faire votre avis, et surtout, de mieux
-comprendre le fonctionnement général et les subtilités des frameworks front-end.
+comprendre le fonctionnement général et les subtilités de chaque framework front-end.
 
 Et qui sait ? Peut-être que Svelte est à deux doigts d'être votre nouveau framework préféré ^^ :p ?

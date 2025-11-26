@@ -60,31 +60,39 @@ sans créer un nouveau `<form>`. Pour cela, nous pouvons utiliser un `<button>` 
 
 Un même `<form>` peut donc envoyer ses données à des actions différentes !
 
+> N'oubliez pas : la soumission d'un formulaire HTML entraîne par défaut le rechargement de la
+> page. Avec SvelteKit, cela implique mécaniquement la ré-exécution des fonctions `load`
+> correspondantes, et donc la mise à jour automatique des données fournies par ces fonctions `load`.
+
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/trainer`
+_Dans la page `/trainer`_
 
-- Ajouter un formulaire de login permettant de lire les données de l'utilisateur avec
-  `db.trainer.get` de `$lib/server/db`.
+- Ajouter un formulaire de login, sur la même base que le formulaire d'inscription.
 
-- Ajouter une action `login`, en pensant bien à renommer celle qui s'appelait jusque là `default`.
+- Ajouter une action `login`, permettant de lire les données de l'utilisateur avec `db.trainer.get`
+  de `$lib/server/db`. Pensez bien à renommer celle qui s'appelait jusque là `default`.
 
-- Valider le formulaire, et renvoyer les informations du trainer.
+- Valider le formulaire, et renvoyer les informations du trainer. Vous pouvez utilisez l'utilitaire
+  `db.trainer.checkPassword` de `$lib/server/db`.
 
-Dans la page `/team`
+_Dans la page `/team`_
 
-- Ajouter un `<form>` pour chaque Pokémon de l'équipe permettant de renommer le Pokémon. Vous pouvez
+- Ajouter un `<form>` pour chaque Pokémon de l'équipe permettant de renommer le Pokémon. Utiliser
+  une action de formulaire `rename` pour sauvegarder cette information sur le serveur. Vous pouvez
   utiliser l'utilitaire `db.team.renameMember` de `$lib/server/db`.
 
-Sur cette page, nous pouvons titulariser un Pokémon, mais cette information n'est pas envoyée au
-serveur. Corrigeons cela en utilisant une nouvelle action de formulaire :
+On souhaite de plus pouvoir titulariser un Pokémon, afin qu'il puisse prendre part aux combats.
 
-- Supprimer le HTML `<label>` et `<input type="checkbox" />` de chaque Pokémon.
+- Remplacer l'unique liste affichant les Pokémons de l'équipe en deux listes distinctes affichant
+  les Pokémons titulaires (ceux ayant la propriété `main` à `true`) et les Pokémons remplaçants. Les
+  deux listes doivent être identiques en fonctionnalités et apparence.
 
-- Ajouter dans chaque `<form>` de Pokémon un nouveau `<button>` permettant d'envoyer les mêmes
-  données de formulaire à une action `toggle` définie sur la même page. Vous pouvez utiliser
-  l'utilitaire `db.team.toggleMember` du module `$lib/server/db`.
+- Ajouter dans chaque `<form>` de Pokémon un nouveau `<button>` permettant d'envoyer les données de
+  formulaire à une action `toggle` définie sur la même page et dont l'objectif est de titulariser ou
+  non un membre de l'équipe. Vous pouvez utiliser l'utilitaire `db.team.toggleMember` du module
+  `$lib/server/db`.
 
 - Styliser différemment les `<button>` de toggle en fonction de si le Pokémon est titulaire ou non.
 

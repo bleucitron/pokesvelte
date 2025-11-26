@@ -13,9 +13,11 @@ même.
 On souhaite donc fournir des données différentes à nos instances de composants. Pour cela, nous
 avons besoin de **props**.
 
-**Les props sont la donnée "ADN" d'une instance**. Elles viennent du parent, et ne peuvent pas être
-modifiées depuis l'intérieur du composant. Elles peuvent changer si le parent fournit de nouvelles
-valeurs.
+**Les props sont l'"ADN" d'une instance**.
+
+Elles viennent du parent, et ne devraient pas – dans la plupart des cas – être modifiées depuis
+l'intérieur du composant. En revanche, il est très courant que les props d'une instance de composant
+changent si le parent fournit de nouvelles valeurs.
 
 ## Fournir des props
 
@@ -51,11 +53,12 @@ facilement grâce à la syntaxe de _spread_ :
 
 ## Utiliser les props : la rune `$props`
 
-Pour pouvoir vous servir des props fournies à un composant, il faut les récupérer dans le composant
-à l'aide de **la rune `$props`**.
+Pour pouvoir vous servir des props fournies à un composant, il faut y avoir accès. Vous pouvez les
+récupérer dans le composant à l'aide de **la rune `$props`**, à utiliser impérativement dans le
+`<script>`.
 
-> Les runes sont le fondement de la réactivité de Svelte. Il en existe différents types. Nous en
-> reparlerons plus tard.
+> Les runes sont le fondement de la réactivité de Svelte. `$props` est la première que nous
+> rencontrons, nous en étudierons d'autres plus tard.
 
 ```svelte
 <!-- Person.svelte -->
@@ -80,7 +83,7 @@ optionnelles.
 ```
 
 > Si vous ne fournissez pas de valeur par défaut, la prop est à l'inverse considérée comme requise.
-> Un warning sera alors affiché par le compilateur.
+> Un warning sera alors affiché par le compilateur si vous ne la fournissez pas.
 
 ## TypeScript
 
@@ -104,15 +107,18 @@ Si vous utilisez TypeScript, vous pouvez définir les types de vos props de cett
 Nous pouvons donc maintenant créer plein de Pokémons différents à l'aide du composant `Pokemon`.
 Actuellement ce composant n'attend pas de props. Corrigeons cela.
 
-- Sur la page `pokedex/[id]`, remplacez le markup déjà présent par une instance de `Pokemon`
+_Sur la page `pokedex/[id]`_
+
+- Remplacez le markup déjà présent par une instance de `Pokemon`
 
 Vous devriez constater que toutes les pages `pokedex/[id]` affichent maintenant les mêmes données,
 c'est normal car notre composant `Pokemon` n'est pas encore paramétrable avec des props.
 
 - Adapter le composant `Pokemon` pour qu'il attende en props les données `id`, `name`, `src`
 
-- Sur la page `/pokedex/[id]` adaptez votre instance de `Pokemon` avec les données du Pokémon
-  correspondant
+_Sur la page `/pokedex/[id]`_
+
+- Adaptez votre instance de `Pokemon` avec les données du Pokémon correspondant
 
 - N'oubliez pas de mettre à jour l'instance de `Pokemon` qui est sur la page d'accueil
 

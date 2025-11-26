@@ -7,7 +7,7 @@ description: Utiliser les snippets de Svelte 5 pour mutualiser du markup sans cr
 # Snippets
 
 Lorsque le code commence à mécaniquement grossir, on voit apparaître du code dupliqué, qui – en
-grande quantité – rend tout projet difficile à maintenir. On commence alors naturellement à se poser
+grande quantité — rend tout projet difficile à maintenir. On commence alors naturellement à se poser
 la question de créer des fonctions utilitaires pour mutualiser du code ou des composants pour
 mutualiser du markup.
 
@@ -39,11 +39,11 @@ lorsqu'on ne réutilise jamais ce markup ailleurs.
 ## `{#snippet}` et `{@render}`
 
 Svelte propose la syntaxe des `{#snippet}` pour créer du markup réutilisable au sein d'un même
-composant. Une fois défini, un snippet s'utiliser en utilisant `{@render personne()}`.
+composant. Une fois défini, un snippet s'utiliser en utilisant `{@render nomDuSnippet()}`.
 
-Un snippet est conceptuellement similaire à composant local. Vous pouvez donc lui prévoir des
+Un snippet est conceptuellement similaire à un composant local. Vous pouvez donc lui prévoir des
 paramètres (similaires à des "props"), et lui en fournir lors de l'utilisation de `{@render
-personne(data)}`.
+nomDuSnippet(data)}`.
 
 ```svelte
 {#snippet figure(image)}
@@ -64,8 +64,8 @@ personne(data)}`.
 {/each}
 ```
 
-> Notez qu'en réalité les snippets sont des fonctions, et doivent être exécutées lorsqu'utilisées
-> avec `{@render}`.
+> Notez qu'en réalité les snippets sont des fonctions, qui sont exécutées lorsqu'utilisées avec
+> `{@render}`.
 
 À l'intérieur d'un snippet, vous pouvez utiliser toute la syntaxe Svelte que vous connaissez déjà,
 notamment déstructurer...

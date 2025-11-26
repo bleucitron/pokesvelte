@@ -6,7 +6,10 @@ description: Lier les éléments d'un tableau à des éléments de formulaire av
 # Bindings de boucle
 
 Parfois, votre formulaire contient plusieurs items, et plusieurs éléments `<input>` pour un même
-item. C'est le cas de la todo-list suivante :
+item. C'est souvent le cas des todo list.
+
+Dans ce cas, vous pouvez utiliser `bind:` pour lier les valeurs des `<input>` aux champs des items
+correspondants.
 
 ```svelte
 <script>
@@ -26,13 +29,10 @@ item. C'est le cas de la todo-list suivante :
 {/each}
 ```
 
-Dans ce cas, vous pouvez utiliser `bind:` pour lier les valeurs des `<input>` aux champs des items
-correspondants.
-
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/team`
+_Dans la page `/team`_
 
 - En utilisant `$derived` et `.filter` sur la variable `team`, faites en sorte d'afficher les
   Pokémons titulaires de l'équipe (ceux avec `main`) en premier dans la liste, suivis des autres.

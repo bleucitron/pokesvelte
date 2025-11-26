@@ -44,10 +44,10 @@ cet état, et de manière optimisée.
 </script>
 
 <button
-	onclick="{() => {
+	onclick={() => {
 		count = count + 1;
 		// ou count ++
-	}}}}}"
+	}}
 >
 	clicks: {count}
 </button>
@@ -71,7 +71,7 @@ Si vous utilisez TypeScript, vous pouvez utiliser cette syntaxe pour déclarer l
 Notre page d'accueil a 2 affichages différents, mais rien pour passer de l'un à l'autre sans
 modifier le code. Corrigeons ça !
 
-_Dans la page d'accueil_
+_Sur la page d'accueil_
 
 - Transformer la variable `started` par un état avec `$state`
 

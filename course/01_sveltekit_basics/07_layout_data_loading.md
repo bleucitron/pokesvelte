@@ -80,11 +80,11 @@ dépendant de ce layout.
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-- Charger des données de layout fictives
-
-  - nombre de Pokémons découverts
-  - nombre total de Pokémons
-  - nombre de Pokémons dans mon équipe
+- Charger des données de layout
+  - nombre de Pokémons découverts (choisissez un nombre arbitraire pour le moment)
+  - nombre total de Pokémons (vous pouvez utiliser la liste des Pokémons fournie par
+    `fetchPokemons`)
+  - nombre de Pokémons dans notre équipe (choisissez un nombre arbitraire pour le moment)
 
 - Afficher ces informations dans le header
 </fieldset>

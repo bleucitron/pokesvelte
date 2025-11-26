@@ -9,9 +9,9 @@ description: Animer les éléments qui ne transitionnent pas avec Svelte
 Jusque là nous n'avons vu que des transitions, c'est-à-dire des éléments qui entrent ou sortent du
 DOM avec un effet spécial.
 
-Mais si vous remarquez bien, quand nous supprimons un membre de notre équipe par exemple, les
-membres restants ajustent leur place instantanément une fois que l'élément supprimé est complètement
-disparu, créant un effet bizarre et peu intuitif.
+Mais si vous remarquez bien, quand nous titularisons un membre de notre équipe par exemple, les
+membres restants ajustent leur place instantanément une fois que l'élément supprimé a fini de
+transitionner, créant un effet bizarre et peu intuitif.
 
 Pour améliorer ça, Svelte utilise le concept d'[animation
 FLIP](https://aerotwist.com/blog/flip-your-animations).
@@ -45,9 +45,9 @@ Comme pour les transitions, vous pouvez personnaliser votre animation FLIP de di
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-Dans la page `/team`
+_Dans la page `/team`_
 
-- Utilisez l'animation `flip` pour fluidifier l'ajout ou la suppression des membres de l'équipe.
+- Utilisez l'animation `flip` pour fluidifier les mouvements des membres de l'équipe.
 
 - Faites en sorte d'avoir la même `duration` pour `flip` que pour les transitions affectant les
   éléments concernés.

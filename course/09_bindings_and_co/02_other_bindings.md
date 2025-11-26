@@ -5,8 +5,40 @@ description: Présentation de quelques liaisons possibles avec Svelte
 
 # Autres bindings
 
-Svelte propose plein d'autres bindings dans diverses situations, permettant notamment d'accéder à
-des informations sur les "vrais" éléments du DOM.
+Svelte propose plein d'autres bindings dans diverses situations, permettant notamment de simplifier
+les modifications d'objets dans un tableau, ou d'accéder à des informations sur les "vrais" éléments
+du DOM.
+
+## Bindings de boucle
+
+Parfois, votre formulaire contient plusieurs items, et plusieurs éléments `<input>` pour un même
+item. C'est souvent le cas des todo list.
+
+Dans ce cas, vous pouvez utiliser `bind:` pour lier les valeurs des `<input>` aux champs des items
+correspondants.
+
+```svelte
+<script>
+	let items = $state([
+		{ done: false, text: 'Peindre le studio' },
+		{ done: false, text: 'Tondre la pelouse' },
+		{ done: false, text: 'Dominer le monde' }
+	]);
+</script>
+
+{#each items as item}
+	<div>
+		<input type="checkbox" bind:checked={item.done} />
+
+		<input placeholder="Que reste t'il à faire ?" bind:value={item.text} disabled={item.done} />
+	</div>
+{/each}
+```
+
+> Attention : les bindings en général – et de boucle en particulier – ne fonctionneront pas si
+> utilisés sur des variables non "profondément réactives", et notamment des variables définies avec
+> uniquement `$derived`, car `$derived` ne crée pas de réactivité profonde. Il existe néanmoins des
+> [moyens de contourner ce genre de problème](https://github.com/sveltejs/svelte/issues/16189).
 
 ## Images
 
@@ -76,15 +108,18 @@ spécial.
 <svelte:window onvisibilitychange={doSomething} />
 ```
 
-> Il existe d'autres composants spéciaux comme `<svelte:document>` ou `<svelte:body>`, qui
-> fonctionnent un peu différemment.
+> Il existe d'autres composants spéciaux comme
+> [`<svelte:document>`](https://svelte.dev/docs/svelte/svelte-document) ou
+> [`<svelte:body>`](https://svelte.dev/docs/svelte/svelte-body), qui fonctionnent un peu
+> différemment.
 
 <fieldset class='task'>
 <legend>À vous !</legend>
 
-- Dans le composant `Wild`, afficher au moment du montage du composant les informations concernant
-  la hauteur et largeur de la fenêtre, en utilisant `console.log()`. N'oubliez pas de déclarer les
-  états associés en amont.
+_Dans le composant `Wild`_
+
+- afficher au moment du montage du composant les informations concernant la hauteur et largeur de la
+  fenêtre, en utilisant `console.log()`. N'oubliez pas de déclarer les états associés en amont.
 
 </fieldset>
 

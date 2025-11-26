@@ -16,15 +16,15 @@ Prenons cet exemple :
 
 ```ts
 async function doShopping() {
-	const fruits = await getFruits(); // prend 2s
-	const videogames = await getVideoGames(); // prend 2s
+	const fruits = await getFruits(); // prend 1s
+	const videogames = await getVideoGames(); // prend 1s
 
-	console.log('Les courses sont finies'); // s'affiche au bout de 4s
+	console.log('Les courses sont finies'); // s'affiche au bout de 2s
 }
 ```
 
 Supposons que les fonctions `getFruits` et `getVideoGames` sont indépendantes. Ici, le log
-s'affichera au bout de 4 secondes. Ce chargement est mal optimisé, car on attend la fin de
+s'affichera au bout de 2 secondes. Ce chargement est mal optimisé, car on attend la fin de
 `getFruits` pour commencer `getVideoGames`, alors que ces deux requêtes ne dépendent pas l'une de
 l'autre.
 
@@ -37,13 +37,18 @@ pouvez utiliser `Promise.all`.
 ```ts
 async function doShopping() {
 	const [fruits, videoGames] = await Promise.all([
-		getFruits(), // prend 2s
-		getVideoGames() // prend 2s
+		getFruits(), // prend 1s
+		getVideoGames() // prend 1s
 	];
 
-	console.log('Les courses sont finies'); // s'affiche au bout de 2s
+	console.log('Les courses sont finies'); // s'affiche au bout de 1s
 }
 ```
+
+> L'appellation "parallèle" peut amener de la confusion, car JavaScript n'est pas conçu pour
+> permettre les exécutions parallèles, mais les comportements non bloquants, ce qui permet de
+> déclencher des chargements de données qui eux sont bien parallèles. Vous pouvez en apprendre plus
+> [ici](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Execution_model#queue_de_t%C3%A2ches_et_boucle_d%C3%A9v%C3%A9nement).
 
 ## Chargement différé
 
@@ -58,8 +63,8 @@ ralentir le chargement d'une page toute entière.
 // +page.server.ts
 async function load() {
 	const [main, relevant, secondary] = await Promise.all([
-		getMainData(), // 2s
-		getRelevantData(), // 2s
+		getMainData(), // 1s
+		getRelevantData(), // 1s
 		getSecondaryData() // 20s
 	]);
 
@@ -73,9 +78,9 @@ async function load() {
 
 Ici, le chargement de `secondary` est moins important que les autres données, mais prend plus de
 temps. Même avec `Promise.all`, le temps de chargement total ne pourra pas être plus court que le
-temps maximal de chargement, donc 20s dans notre exemple.
+temps maximal de chargement, donc 20 secondes dans notre exemple.
 
-SvelteKit nous permet de résoudre ce problème en renvoyant des données en tant que Promesses.
+SvelteKit nous permet de résoudre ce problème en renvoyant des données en tant que promesse.
 
 ```ts
 // +page.server.ts
@@ -85,7 +90,7 @@ async function load() {
 		getRelevantData() // 2s
 	]);
 
-	const secondary = getSecondaryData(); // ici, on utilise pas 'await', 'secondary' est donc une Promesse
+	const secondary = getSecondaryData(); // ici, on n'utilise pas 'await', 'secondary' est donc une Promesse
 
 	return {
 		main,
@@ -120,9 +125,9 @@ page.
 > Nous avons ici un exemple d'utilisation du bloc logique `#await`.
 
 > Une autre option pour charger ces données non essentielles sans alourdir le premier rendu de page
-> serait de faire manuellement un requête côté client. C'est équivalent, même si le chargement dans
-> ce cas sera un peu plus lent, car il faut attendre d'être arrivé sur le client pour commencer le
-> chargement.
+> serait de faire manuellement un requête côté client, dans le `onMount` par exemple. C'est
+> équivalent, même si le chargement dans ce cas sera un peu plus lent, car il faut attendre d'être
+> arrivé sur le client pour commencer le chargement.
 
 <fieldset class='task'>
 <legend>À vous !</legend>
@@ -130,13 +135,15 @@ page.
 - Utiliser `Promise.all` dans les fonctions `load` qui chargent plusieurs données de manière
   indépendante pour optimiser la chargement de nos pages.
 
-- Utiliser la fonction `getTotalPopulation` de `$lib/pokemons` pour charger un nombre aléatoire
-  représentant le total de Pokémons présents dans les environs. Ce calcul prend entre 0.5s et 4s, et
-  risque d'alourdir le chargement normal de la page. Faire en sorte de charger cette information en
-  différé
+_Sur la page d'accueil_
+
+- Utiliser la fonction `fetchTotalPopulation` de `$lib/pokemons` dans la fonction `load` de la page
+  pour charger un nombre aléatoire représentant le total de Pokémons présents dans les environs. Ce
+  calcul – le scan des environs – prend entre 0.5s et 4s, et risque d'alourdir le chargement normal de
+  la page. Faire en sorte de charger cette information en différé.
 
 - Afficher le résultat du scan des environs dans la page, une fois que le chargement est terminé, en
-  utilisant `#await`.
+  utilisant `#await`. Vous pouvez également afficher un texte pour patienter lors du chargement.
 
 </fieldset>
 
@@ -144,5 +151,5 @@ page.
 
 Plus de détails sur ce chapitre :
 
-- [Streaming de Promesses](https://svelte.dev/docs/kit/load#streaming-with-promises)
+- [Streaming de promesses](https://svelte.dev/docs/kit/load#streaming-with-promises)
 - [`#await`](https://svelte.dev/docs/svelte/logic-blocks#await)

@@ -18,8 +18,8 @@ Nous avons étudié les fonctions `load` des fichiers `+page.server.ts` et `+lay
 il est aussi possible d'en déclarer dans des fichiers `+page.ts` ou `+layout.ts`, ce qui leur permet
 d'être aussi exécutées sur client. On les appelle _fonctions `load` universelles_.
 
-Nous avons également mentionné le fait qu'il était possible d'utiliser `await parent()`, même cela
-est généralement déconseillé.
+Nous avons également mentionné le fait qu'il était possible d'utiliser `await parent()`, même si
+cela est généralement déconseillé.
 
 Il est aussi possible de manipuler les headers au sein des `load`.
 
@@ -36,7 +36,7 @@ layout](https://svelte.dev/docs/kit/advanced-routing#advanced-layouts-group).
 
 SvelteKit permet d'interagir avec la navigation entre pages. Apprenez-en plus
 [ici](https://svelte.dev/docs/kit/$app-navigation) et
-[là](https://svelte.dev/docs/kit/$app-stores#navigating)
+[là](https://svelte.dev/docs/kit/$app-stores#navigating).
 
 ## Paramètres de reste et optionnels
 
@@ -59,7 +59,7 @@ SvelteKit propose plusieurs moyens de les rendre disponible dans votre applicati
 
 ## Autres hooks
 
-On a vu le [hook `handle`](../14_auth/04_hooks.md) permettant de réagir à toute requête arrivant sur
+On a vu le [hook `handle`](../14_auth/04_hooks) permettant de réagir à toute requête arrivant sur
 le serveur SvelteKit.
 
 Il existe d'[autres hooks](https://svelte.dev/docs/kit/hooks) pouvant être utiles pour gérer les
