@@ -22,6 +22,11 @@
 				>
 			</li>
 			<li>
+				<a href={resolve('/trainer')} class={page.url.pathname === '/trainer' ? 'current' : ''}
+					>Dresseur</a
+				>
+			</li>
+			<li>
 				<a href={resolve('/faq')} class={page.url.pathname === '/faq' ? 'current' : ''}>À propos</a>
 			</li>
 		</ul>
