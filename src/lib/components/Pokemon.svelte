@@ -1,12 +1,15 @@
 <script lang="ts">
-	const id = 133;
-	const name = 'Évoli';
-	const image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png';
+	type Pokemon = {
+		id: number;
+		name: string;
+		src: string;
+	};
+	const { id, name, src }: Pokemon = $props();
 </script>
 
 <div class="Pokemon">
 	<p>#{id}</p>
-	<img src={image} />
+	<img {src} />
 	<p>{name}</p>
 </div>
 

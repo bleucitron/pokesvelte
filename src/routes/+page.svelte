@@ -8,7 +8,11 @@
 <p>Gotta svelt'em all!</p>
 
 {#if !started}
-	<Pokemon />
+	<Pokemon
+		id={133}
+		name="Évoli"
+		src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"
+	/>
 {:else}
 	<p>Work in progress...</p>
 {/if}
