@@ -1,7 +1,7 @@
 <script lang="ts">
+	import Pokemon from '$lib/components/Pokemon.svelte';
+
 	const { data } = $props();
 </script>
 
-<h1>{data.name} (#{data.id})</h1>
-
-<img src={data.src} />
+<Pokemon id={data.id} name={data.name} src={data.src} />
