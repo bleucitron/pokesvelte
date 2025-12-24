@@ -8,11 +8,11 @@
 
 <ul>
 	{#each data.pokemons as pokemon}
-		{@const { id, sprites } = pokemon}
+		{@const { id, sprites, name } = pokemon}
 		{@const src = sprites.front_default}
 		<li class={{ found: id % 2 === 0 }}>
 			<a href={resolve('/pokedex/[id]', { id: id.toString() })}>
-				<img {src} width="96" height="96" loading="lazy" />
+				<img {src} width="96" height="96" loading="lazy" alt="Un {name}" />
 			</a>
 		</li>
 	{/each}

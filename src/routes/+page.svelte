@@ -21,6 +21,7 @@
 				{#if pokemon}
 					{@const { id, name, sprites } = pokemon}
 					<Wild
+						{name}
 						src={sprites.front_default}
 						catchPokemon={() => {
 							console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
