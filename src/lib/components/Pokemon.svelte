@@ -10,7 +10,7 @@
 
 <div class={['Pokemon', { found }]}>
 	<p>#{id}</p>
-	<img {src} />
+	<img {src} alt="Un {name}" />
 	<p>{name}</p>
 </div>
 
