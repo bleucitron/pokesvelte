@@ -8,26 +8,24 @@
 <header>
 	<nav>
 		<ul>
-			<li><a href={resolve('/')} class={page.url.pathname === '/' ? 'current' : ''}>Accueil</a></li>
+			<li><a href={resolve('/')} class={{ current: page.url.pathname === '/' }}>Accueil</a></li>
 			<li>
-				<a
-					href={resolve('/pokedex')}
-					class={page.url.pathname.startsWith('/pokedex') ? 'current' : ''}
+				<a href={resolve('/pokedex')} class={{ current: page.url.pathname.startsWith('/pokedex') }}
 					>Pokédex({data.found}/{data.total})</a
 				>
 			</li>
 			<li>
-				<a href={resolve('/team')} class={page.url.pathname === '/team' ? 'current' : ''}
+				<a href={resolve('/team')} class={{ current: page.url.pathname === '/team' }}
 					>Équipe({data.team})</a
 				>
 			</li>
 			<li>
-				<a href={resolve('/trainer')} class={page.url.pathname === '/trainer' ? 'current' : ''}
+				<a href={resolve('/trainer')} class={{ current: page.url.pathname === '/trainer' }}
 					>Dresseur</a
 				>
 			</li>
 			<li>
-				<a href={resolve('/faq')} class={page.url.pathname === '/faq' ? 'current' : ''}>À propos</a>
+				<a href={resolve('/faq')} class={{ current: page.url.pathname === '/faq' }}>À propos</a>
 			</li>
 		</ul>
 	</nav>
