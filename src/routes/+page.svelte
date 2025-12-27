@@ -11,12 +11,14 @@
 	const started = $derived(!!pokedex.found.length);
 
 	$effect(() => {
-		if (started) {
-			setInterval(() => {
-				wild = getRandomNb(1, 151);
-				console.log(data.pokemons[wild - 1]?.name);
-			}, 2000);
-		}
+		const interval = started
+			? setInterval(() => {
+					wild = getRandomNb(1, 151);
+					console.log(data.pokemons[wild - 1]?.name);
+				}, 2000)
+			: undefined;
+
+		return () => clearInterval(interval);
 	});
 
 	const choices = [1, 4, 7];
