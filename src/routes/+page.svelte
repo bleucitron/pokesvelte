@@ -1,15 +1,34 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 	import { pokedex } from '$lib/states/pokedex.svelte';
+	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
+
+	let wild = $state(25);
 
 	const { pokemons } = $derived(data);
 	const started = $derived(!!pokedex.found.length);
 
-	$inspect(started, pokedex.found);
+	$effect(() => {
+		if (started) {
+			setInterval(() => {
+				wild = getRandomNb(1, 151);
+				console.log(data.pokemons[wild - 1]?.name);
+			}, 2000);
+		}
+	});
 
 	const choices = [1, 4, 7];
+
+	function catchPokemon(id: number) {
+		const pokemon = data.pokemons[id - 1];
+
+		if (pokemon) {
+			console.log(`Vous avez capturé un ${pokemon.name} (id: ${id}) !`);
+			pokedex.discover(id);
+		}
+	}
 </script>
 
 <h1>Pokésvelte</h1>
@@ -24,19 +43,19 @@
 				{@const pokemon = pokemons[choice - 1]}
 				{#if pokemon}
 					{@const { id, name, sprites } = pokemon}
-					<Wild
-						{name}
-						src={sprites.front_default}
-						catchPokemon={() => {
-							console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
-							pokedex.discover(id);
-						}}
-					/>
+					<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id)} />
 				{/if}
 			{/each}
 		</ul>
 	{:else}
-		<p>Work in progress...</p>
+		{@const wildPokemon = data.pokemons[wild - 1]}
+		{#if wildPokemon}
+			<Wild
+				name={wildPokemon.name}
+				src={wildPokemon.sprites.front_default}
+				catchPokemon={() => catchPokemon(wild)}
+			/>
+		{/if}
 	{/if}
 </div>
 
