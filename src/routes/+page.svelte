@@ -3,7 +3,7 @@
 
 	const { data } = $props();
 
-	let started = false;
+	let started = $state(false);
 
 	const choices = [1, 4, 7];
 </script>
@@ -11,6 +11,17 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
+<button
+	onclick={() => {
+		started = !started;
+	}}
+>
+	{#if started}
+		Reset
+	{:else}
+		Start!
+	{/if}
+</button>
 <div class="grass">
 	{#if !started}
 		<p>Choisissez un Pokémon</p>
