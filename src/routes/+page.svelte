@@ -4,6 +4,7 @@
 	const { data } = $props();
 
 	let started = $state(false);
+	let foundSpecies = $state<number[]>([]);
 
 	const choices = [1, 4, 7];
 </script>
@@ -36,6 +37,9 @@
 						src={sprites.front_default}
 						catchPokemon={() => {
 							console.log(`Vous avez capturé un ${name} (id: ${id}) !`);
+							if (!foundSpecies.includes(id)) {
+								foundSpecies.push(id);
+							}
 						}}
 					/>
 				{/if}
@@ -44,6 +48,7 @@
 	{:else}
 		<p>Work in progress...</p>
 	{/if}
+	Espèces trouvées : {foundSpecies.length}
 </div>
 
 <style>
