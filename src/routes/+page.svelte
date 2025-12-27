@@ -3,8 +3,10 @@
 
 	const { data } = $props();
 
-	let started = $state(false);
 	let foundSpecies = $state<number[]>([]);
+
+	const { pokemons } = $derived(data);
+	const started = $derived(!!foundSpecies.length);
 
 	$inspect(started, foundSpecies);
 
@@ -14,24 +16,13 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
-<button
-	onclick={() => {
-		started = !started;
-	}}
->
-	{#if started}
-		Reset
-	{:else}
-		Start!
-	{/if}
-</button>
 <div class="grass">
 	{#if !started}
 		<p>Choisissez un Pokémon</p>
 
 		<ul>
 			{#each choices as choice}
-				{@const pokemon = data.pokemons[choice - 1]}
+				{@const pokemon = pokemons[choice - 1]}
 				{#if pokemon}
 					{@const { id, name, sprites } = pokemon}
 					<Wild
@@ -50,7 +41,6 @@
 	{:else}
 		<p>Work in progress...</p>
 	{/if}
-	Espèces trouvées : {foundSpecies.length}
 </div>
 
 <style>

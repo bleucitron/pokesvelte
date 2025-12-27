@@ -2,12 +2,14 @@
 	import { resolve } from '$app/paths';
 
 	const { data } = $props(); // l'heure n'est pas encore venue d'en apprendre plus sur $props
+
+	const { pokemons } = $derived(data);
 </script>
 
 <h1>Pokédex</h1>
 
 <ul>
-	{#each data.pokemons as pokemon}
+	{#each pokemons as pokemon}
 		{@const { id, sprites, name } = pokemon}
 		{@const src = sprites.front_default}
 		<li class={{ found: id % 2 === 0 }}>
