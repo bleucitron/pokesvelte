@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { pokedex } from '$lib/states/pokedex.svelte';
 
 	const { data } = $props(); // l'heure n'est pas encore venue d'en apprendre plus sur $props
 
@@ -12,7 +13,7 @@
 	{#each pokemons as pokemon}
 		{@const { id, sprites, name } = pokemon}
 		{@const src = sprites.front_default}
-		<li class={{ found: id % 2 === 0 }}>
+		<li class={{ found: pokedex.found.includes(id) }}>
 			<a href={resolve('/pokedex/[id]', { id: id.toString() })}>
 				<img {src} width="96" height="96" loading="lazy" alt="Un {name}" />
 			</a>

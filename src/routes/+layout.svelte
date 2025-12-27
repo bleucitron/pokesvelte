@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import { pokedex } from '$lib/states/pokedex.svelte';
 
 	const { children, data } = $props();
 
-	const { found, total, team } = $derived(data);
+	const { total, team } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived(page);
@@ -16,7 +17,7 @@
 			<li><a href={resolve('/')} class={{ current: pathname === '/' }}>Accueil</a></li>
 			<li>
 				<a href={resolve('/pokedex')} class={{ current: pathname.startsWith('/pokedex') }}
-					>Pokédex({data.found}/{data.total})</a
+					>Pokédex({pokedex.found.length}/{total})</a
 				>
 			</li>
 			<li>
