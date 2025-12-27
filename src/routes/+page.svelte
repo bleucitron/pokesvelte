@@ -6,6 +6,8 @@
 	let started = $state(false);
 	let foundSpecies = $state<number[]>([]);
 
+	$inspect(started, foundSpecies);
+
 	const choices = [1, 4, 7];
 </script>
 
