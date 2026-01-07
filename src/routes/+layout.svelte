@@ -2,10 +2,11 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { pokedex } from '$lib/states/pokedex.svelte';
+	import { team } from '$lib/states/team.svelte';
 
 	const { children, data } = $props();
 
-	const { total, team } = $derived(data);
+	const { total } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived(page);
@@ -21,7 +22,9 @@
 				>
 			</li>
 			<li>
-				<a href={resolve('/team')} class={{ current: pathname === '/team' }}>Équipe({team})</a>
+				<a href={resolve('/team')} class={{ current: pathname === '/team' }}
+					>Équipe({team.members.length})</a
+				>
 			</li>
 			<li>
 				<a href={resolve('/trainer')} class={{ current: pathname === '/trainer' }}>Dresseur</a>

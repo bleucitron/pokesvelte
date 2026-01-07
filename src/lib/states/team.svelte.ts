@@ -1,10 +1,13 @@
-type Member = { id: number; uuid: number };
+type Member = { id: number; uuid: number; name: string };
 
 class Team {
 	members = $state<Member[]>([]);
 
-	recruit = (member: Member) => {
-		this.members.push(member);
+	recruit = (id: number) => {
+		const uuid = Date.now();
+		const name = uuid.toString();
+
+		this.members.push({ id, uuid, name });
 	};
 
 	release = (uuid: number) => {
