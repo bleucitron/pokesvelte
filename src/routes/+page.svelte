@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 	import { pokedex } from '$lib/states/pokedex.svelte';
+	import { team } from '$lib/states/team.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
 
-	let wild = $state(25);
+	let wild = $state<number | undefined>(25);
 
 	const { pokemons } = $derived(data);
 	const started = $derived(!!pokedex.found.length);
@@ -29,7 +30,12 @@
 		if (pokemon) {
 			console.log(`Vous avez capturé un ${pokemon.name} (id: ${id}) !`);
 			pokedex.discover(id);
+			team.recruit(id);
 		}
+	}
+
+	function escape() {
+		wild = undefined;
 	}
 </script>
 
@@ -49,14 +55,11 @@
 				{/if}
 			{/each}
 		</ul>
-	{:else}
+	{:else if wild}
 		{@const wildPokemon = data.pokemons[wild - 1]}
 		{#if wildPokemon}
-			<Wild
-				name={wildPokemon.name}
-				src={wildPokemon.sprites.front_default}
-				catchPokemon={() => catchPokemon(wild)}
-			/>
+			{@const { id, name, sprites } = wildPokemon}
+			<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id)} {escape} />
 		{/if}
 	{/if}
 </div>
