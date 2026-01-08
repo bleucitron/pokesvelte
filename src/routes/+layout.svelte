@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { pokedex } from '$lib/states/pokedex.svelte';
-	import { team } from '$lib/states/team.svelte';
+	import { recent } from '$lib/states/recent.svelte.js';
 
 	const { children, data } = $props();
 
-	const { total } = $derived(data);
+	const { total, teamSize, found } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived(page);
@@ -18,13 +17,17 @@
 			<li><a href={resolve('/')} class={{ current: pathname === '/' }}>Accueil</a></li>
 			<li>
 				<a href={resolve('/pokedex')} class={{ current: pathname.startsWith('/pokedex') }}
-					>Pokédex({pokedex.found.length}/{total})</a
+					>Pokédex({found}/{total})</a
 				>
+				{#if recent.species.length}
+					<div class="new"></div>
+				{/if}
 			</li>
 			<li>
-				<a href={resolve('/team')} class={{ current: pathname === '/team' }}
-					>Équipe({team.members.length})</a
-				>
+				<a href={resolve('/team')} class={{ current: pathname === '/team' }}>Équipe({teamSize})</a>
+				{#if recent.members.length}
+					<div class="new"></div>
+				{/if}
 			</li>
 			<li>
 				<a href={resolve('/trainer')} class={{ current: pathname === '/trainer' }}>Dresseur</a>
@@ -41,3 +44,21 @@
 </main>
 
 <footer>Pokésvelte©</footer>
+
+<style>
+	li {
+		position: relative;
+	}
+	li .new {
+		width: 0.5rem;
+		height: 0.5rem;
+		background: orange;
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin-left: -0.25rem;
+		margin-top: -0.25rem;
+		outline: 1px solid grey;
+		border-radius: 50%;
+	}
+</style>
