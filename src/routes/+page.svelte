@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 	import { pokedex } from '$lib/states/pokedex.svelte';
-	import { team } from '$lib/states/team.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
@@ -24,13 +23,13 @@
 
 	const choices = [1, 4, 7];
 
-	function catchPokemon(id: number) {
+	async function catchPokemon(id: number) {
 		const pokemon = data.pokemons[id - 1];
 
 		if (pokemon) {
+			await fetch('/team', { method: 'POST', body: JSON.stringify({ id }) });
+
 			console.log(`Vous avez capturé un ${pokemon.name} (id: ${id}) !`);
-			pokedex.discover(id);
-			team.recruit(id);
 		}
 	}
 
