@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import Wild from '$lib/components/Wild.svelte';
 	import type { TeamMember } from '$lib/server/db/team';
 	import { recent } from '$lib/states/recent.svelte';
@@ -31,6 +32,7 @@
 			const member = (await fetch('/team', { method: 'POST', body: JSON.stringify({ id }) }).then(
 				(r) => r.json()
 			)) as TeamMember;
+			invalidate('team:update');
 			recent.add(member.id, member.uuid);
 
 			console.log(`Vous avez capturé un ${pokemon.name} (id: ${id}) !`);

@@ -1,8 +1,15 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import { recent } from '$lib/states/recent.svelte';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
+
+	async function release(uuid: string) {
+		await fetch(`/team/${uuid}`, { method: 'DELETE' });
+
+		invalidate('team:update');
+	}
 </script>
 
 <h1>Équipe</h1>
@@ -19,11 +26,7 @@
 			<li>
 				<img {src} width="96" height="96" loading="lazy" alt={name} />
 				<p>{name}</p>
-				<button
-					onclick={() => {
-						fetch(`/team/${uuid}`, { method: 'DELETE' });
-					}}>x</button
-				>{#if isRecent}
+				<button onclick={() => release(uuid)}>x</button>{#if isRecent}
 					<div class="new">new</div>
 				{/if}
 			</li>
