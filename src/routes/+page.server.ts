@@ -1,7 +1,9 @@
-import { fetchPokemons } from '$lib/pokemons';
+import { fetchPokemons, fetchTotalPopulation } from '$lib/pokemons';
 
 export async function load() {
 	const pokemons = await fetchPokemons();
 
-	return { pokemons };
+	const population = fetchTotalPopulation();
+
+	return { pokemons, population };
 }
