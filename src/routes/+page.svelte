@@ -9,7 +9,7 @@
 
 	let wild = $state<number | undefined>(25);
 
-	const { pokemons, teamSize } = $derived(data);
+	const { pokemons, teamSize, population } = $derived(data);
 	const started = $derived(!!teamSize);
 
 	$effect(() => {
@@ -67,6 +67,13 @@
 			<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id)} {escape} />
 		{/if}
 	{/if}
+	<aside>
+		{#await population}
+			<p>Scanning...</p>
+		{:then nb}
+			<p>{nb} Pokémons dans les environs</p>
+		{/await}
+	</aside>
 </div>
 
 <style>
@@ -84,5 +91,11 @@
 	ul {
 		display: flex;
 		justify-content: center;
+	}
+
+	aside {
+		position: absolute;
+		bottom: 1rem;
+		right: 1rem;
 	}
 </style>
