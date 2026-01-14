@@ -4,13 +4,22 @@
 
 	const { data } = $props(); // l'heure n'est pas encore venue d'en apprendre plus sur $props
 
+	let search = $state('');
+
 	const { pokedex, pokemons } = $derived(data);
+
+	const cleanSearch = $derived(search.toLowerCase());
+	const pokemonsToDisplay = $derived(
+		cleanSearch ? pokemons.filter((p) => p.name.includes(cleanSearch)) : pokemons
+	);
 </script>
 
 <h1>Pokédex</h1>
 
+<input bind:value={search} placeholder="recherche..." />
+
 <ul>
-	{#each pokemons as pokemon}
+	{#each pokemonsToDisplay as pokemon}
 		{@const { id, sprites, name } = pokemon}
 		{@const found = pokedex.includes(id)}
 		{@const isRecent = recent.species.includes(id)}
