@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getRandomNb } from '$lib/utils';
 	import { onMount } from 'svelte';
 
 	type WildProps = {
@@ -13,10 +14,17 @@
 	let height = $state(0);
 	let width = $state(0);
 
-	onMount(() => {
-		const timeout = escape ? setTimeout(escape, 1000) : undefined;
+	const MARGIN = 50;
+	let top = $state(0);
+	let left = $state(0);
 
-		console.log({ height, width });
+	onMount(() => {
+		if (!escape) return;
+
+		const timeout = setTimeout(escape, 1000);
+
+		top = getRandomNb(-MARGIN, height - MARGIN);
+		left = getRandomNb(-MARGIN, width - MARGIN);
 
 		return () => clearTimeout(timeout);
 	});
@@ -24,7 +32,12 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
-<button class="Wild" onclick={catchPokemon}>
+<button
+	class={['Wild', { 'in-grass': !!escape }]}
+	style:top="{top}px"
+	style:left="{left}px"
+	onclick={catchPokemon}
+>
 	<img {src} alt="Un {name} sauvage apparaît !" />
 </button>
 
@@ -32,6 +45,10 @@
 	.Wild {
 		width: 15rem;
 		background: inherit;
+	}
+
+	.in-grass {
+		position: fixed;
 	}
 
 	img {

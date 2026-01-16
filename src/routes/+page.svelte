@@ -7,7 +7,7 @@
 
 	const { data } = $props();
 
-	let wild = $state<number | undefined>(25);
+	let wild = $state<number | undefined>();
 
 	const { pokemons, teamSize, population } = $derived(data);
 	const started = $derived(!!teamSize);
