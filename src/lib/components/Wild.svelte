@@ -10,12 +10,19 @@
 
 	const { name, src, catchPokemon, escape }: WildProps = $props();
 
+	let height = $state(0);
+	let width = $state(0);
+
 	onMount(() => {
 		const timeout = escape ? setTimeout(escape, 1000) : undefined;
+
+		console.log({ height, width });
 
 		return () => clearTimeout(timeout);
 	});
 </script>
+
+<svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
 <button class="Wild" onclick={catchPokemon}>
 	<img {src} alt="Un {name} sauvage apparaît !" />
