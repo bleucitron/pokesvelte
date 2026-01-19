@@ -5,6 +5,9 @@
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
 
+	const main = $derived(team.filter((m) => m.main));
+	const bench = $derived(team.filter((m) => !m.main));
+
 	async function release(uuid: string) {
 		await fetch(`/team/${uuid}`, { method: 'DELETE' });
 
@@ -14,9 +17,11 @@
 
 <h1>Équipe</h1>
 
+<h2>Titulaires</h2>
+
 <ul>
-	{#each team as member}
-		{@const { id, uuid, name } = member}
+	{#each main as member}
+		{@const { id, uuid, name, main } = member}
 		{@const pokemon = pokemons[id - 1]}
 		{@const isRecent = recent.members.includes(uuid)}
 
@@ -25,7 +30,40 @@
 			{@const src = sprites.front_default}
 			<li>
 				<img {src} width="96" height="96" loading="lazy" alt={name} />
-				<p>{name}</p>
+				<form method="POST" action="?/rename">
+					<input name="name" value={name} />
+					<input type="hidden" name="uuid" value={uuid} />
+					<button>Renommer</button>
+					<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
+				</form>
+				<button onclick={() => release(uuid)}>x</button>{#if isRecent}
+					<div class="new">new</div>
+				{/if}
+			</li>
+		{/if}
+	{:else}
+		<p>Aucun membre</p>
+	{/each}
+</ul>
+
+<h2>Banc</h2>
+<ul>
+	{#each bench as member}
+		{@const { id, uuid, name, main } = member}
+		{@const pokemon = pokemons[id - 1]}
+		{@const isRecent = recent.members.includes(uuid)}
+
+		{#if pokemon}
+			{@const { sprites } = pokemon}
+			{@const src = sprites.front_default}
+			<li>
+				<img {src} width="96" height="96" loading="lazy" alt={name} />
+				<form method="POST" action="?/rename">
+					<input name="name" value={name} />
+					<input type="hidden" name="uuid" value={uuid} />
+					<button>Renommer</button>
+					<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
+				</form>
 				<button onclick={() => release(uuid)}>x</button>{#if isRecent}
 					<div class="new">new</div>
 				{/if}
@@ -48,6 +86,16 @@
 		position: relative;
 		display: flex;
 		align-items: center;
+		flex-direction: column;
+		flex-basis: 12rem;
+	}
+	li > button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	li input {
+		width: 100%;
 	}
 	li .new {
 		position: absolute;
@@ -61,5 +109,10 @@
 		font-size: 0.7rem;
 		border: 2px solid #888;
 		line-height: 0.8rem;
+	}
+
+	form button {
+		width: 100%;
+		text-align: center;
 	}
 </style>

@@ -1,4 +1,5 @@
 import db from '$lib/server/db';
+
 import { fail } from '@sveltejs/kit';
 
 export async function load() {
@@ -6,52 +7,90 @@ export async function load() {
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	signup: async ({ request }) => {
 		const data = await request.formData();
 
-		const name = data.get('name')?.toString();
-		const password = data.get('password')?.toString();
-		const passwordConfirmation = data.get('password-confirmation')?.toString();
+		const name = data.get('signup_name')?.toString();
+		const password = data.get('signup_password')?.toString();
+		const passwordConfirmation = data.get('signup_password-confirmation')?.toString();
 
 		if (!name) {
 			return fail(400, {
-				values: { name },
+				signup_name: name,
 				errorFields: ['signup_name'],
 				message: 'Le nom est manquant'
 			});
 		}
 		if (!password) {
 			return fail(400, {
-				values: { name },
-				errorFields: ['password'],
+				signup_name: name,
+				errorFields: ['signup_password'],
 				message: 'Le mot de passe est manquant'
 			});
 		}
 		if (password.length < 8) {
 			return fail(400, {
-				values: { name },
-				errorFields: ['password'],
+				signup_name: name,
+				errorFields: ['signup_password'],
 				message: 'Le mot de passe est trop court'
 			});
 		}
 		if (password !== passwordConfirmation) {
 			return fail(400, {
-				values: { name },
-				errorFields: ['password', 'password-confirmation'],
+				signup_name: name,
+				errorFields: ['signup_password', 'signup_password-confirmation'],
 				message: 'Les mots de passe ne correspondent pas'
 			});
 		}
 		const alreadyExists = await db.trainer.get(name);
 		if (alreadyExists) {
 			return fail(400, {
-				values: { name },
-				errorFields: ['name'],
+				signup_name: name,
+				errorFields: ['signup_name'],
 				message: 'Le nom est déjà utilisé'
 			});
 		}
 
 		const trainer = await db.trainer.register(name, password);
 
-		return { success: true, trainer };
+		return {
+			success: true,
+			trainer,
+			message: `Utilisateur ${trainer?.name} (${trainer?.id}) créé avec succès !`
+		};
+	},
+	login: async ({ request }) => {
+		const data = await request.formData();
+
+		const name = data.get('login_name')?.toString();
+		const password = data.get('login_password')?.toString();
+
+		if (!name) {
+			return fail(400, {
+				login_name: name,
+				errorFields: ['login_name'],
+				message: 'Le nom est manquant'
+			});
+		}
+		if (!password) {
+			return fail(400, {
+				login_name: name,
+				errorFields: ['login_password'],
+				message: 'Le mot de passe est manquant'
+			});
+		}
+
+		const valid = await db.trainer.checkPassword(name, password);
+
+		if (!valid) {
+			return fail(400, {
+				login_name: name,
+				errorFields: ['login_name', 'login_password'],
+				message: "Nom d'utilisateur ou mot de passe incorrect"
+			});
+		}
+
+		const trainer = await db.trainer.get(name);
+		return { success: true, trainer, message: 'Connexion réussie !' };
 	}
 };
