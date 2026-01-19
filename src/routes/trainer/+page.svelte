@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+
 	const { form } = $props();
 
 	const errorFields = $derived(form?.errorFields ?? []);
@@ -10,7 +12,7 @@
 	<div>
 		<h2>Inscription</h2>
 
-		<form method="POST" action="?/signup">
+		<form method="POST" action="?/signup" use:enhance>
 			<label class={{ error: errorFields.includes('signup_name') }}>
 				Nom
 				<input name="signup_name" value={form?.signup_name} />
@@ -29,7 +31,7 @@
 	<div>
 		<h2>Connexion</h2>
 
-		<form method="POST" action="?/login">
+		<form method="POST" action="?/login" use:enhance>
 			<label class={{ error: errorFields.includes('login_name') }}>
 				Nom
 				<input name="login_name" value={form?.login_name} />
