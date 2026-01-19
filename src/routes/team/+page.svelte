@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 	import { recent } from '$lib/states/recent.svelte';
 
@@ -30,7 +31,7 @@
 			{@const src = sprites.front_default}
 			<li>
 				<img {src} width="96" height="96" loading="lazy" alt={name} />
-				<form method="POST" action="?/rename">
+				<form method="POST" action="?/rename" use:enhance>
 					<input name="name" value={name} />
 					<input type="hidden" name="uuid" value={uuid} />
 					<button>Renommer</button>
@@ -58,7 +59,7 @@
 			{@const src = sprites.front_default}
 			<li>
 				<img {src} width="96" height="96" loading="lazy" alt={name} />
-				<form method="POST" action="?/rename">
+				<form method="POST" action="?/rename" use:enhance>
 					<input name="name" value={name} />
 					<input type="hidden" name="uuid" value={uuid} />
 					<button>Renommer</button>
