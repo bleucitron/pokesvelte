@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Pokedex from './Pokedex.svelte';
+	import Pokedex from '../Pokedex.svelte';
 
 	const { data } = $props();
 
