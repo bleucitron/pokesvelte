@@ -26,7 +26,7 @@
 		{@const src = sprites.front_default}
 
 		<li class={{ found, recent: isRecent }}>
-			<a href={resolve('/pokedex/[id]', { id: id.toString() })}>
+			<a href={resolve('/pokedex/[id=pokemonId]', { id: id.toString() })}>
 				<img {src} width="96" height="96" loading="lazy" alt="Un {name}" />
 			</a>
 			{#if isRecent}
