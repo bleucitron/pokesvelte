@@ -30,7 +30,14 @@
 			{@const { sprites } = pokemon}
 			{@const src = sprites.front_default}
 			<li>
-				<img {src} width="96" height="96" loading="lazy" alt={name} />
+				<img
+					{src}
+					width="96"
+					height="96"
+					loading="lazy"
+					alt={name}
+					onmouseenter={() => recent.remove(uuid)}
+				/>
 				<form method="POST" action="?/rename" use:enhance>
 					<input name="name" value={name} />
 					<input type="hidden" name="uuid" value={uuid} />
@@ -58,7 +65,14 @@
 			{@const { sprites } = pokemon}
 			{@const src = sprites.front_default}
 			<li>
-				<img {src} width="96" height="96" loading="lazy" alt={name} />
+				<img
+					{src}
+					width="96"
+					height="96"
+					loading="lazy"
+					alt={name}
+					onmouseenter={() => recent.remove(uuid)}
+				/>
 				<form method="POST" action="?/rename" use:enhance>
 					<input name="name" value={name} />
 					<input type="hidden" name="uuid" value={uuid} />

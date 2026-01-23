@@ -11,6 +11,14 @@ class Recent {
 			this.species.push(id);
 		}
 	};
+
+	remove = (id: number | string) => {
+		if (typeof id === 'number') {
+			this.species = this.species.filter((i) => i !== id);
+		} else {
+			this.members = this.members.filter((i) => i !== id);
+		}
+	};
 }
 
 export const recent = new Recent();

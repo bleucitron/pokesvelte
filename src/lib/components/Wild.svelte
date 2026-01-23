@@ -21,7 +21,8 @@
 	onMount(() => {
 		if (!escape) return;
 
-		const timeout = setTimeout(escape, 1000);
+		const lifespan = getRandomNb(1_000, 3_000);
+		const timeout = setTimeout(escape, lifespan);
 
 		top = getRandomNb(-MARGIN, height - MARGIN);
 		left = getRandomNb(-MARGIN, width - MARGIN);
