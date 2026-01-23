@@ -28,7 +28,14 @@
 
 		<li class={{ found, recent: isRecent }}>
 			<a href={resolve('/pokedex/[id=pokemonId]', { id: id.toString() })}>
-				<img {src} width="96" height="96" loading="lazy" alt="Un {name}" />
+				<img
+					{src}
+					width="96"
+					height="96"
+					loading="lazy"
+					alt="Un {name}"
+					onmouseenter={() => recent.remove(id)}
+				/>
 			</a>
 			{#if isRecent}
 				<div class="new">new</div>

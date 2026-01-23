@@ -1,27 +1,14 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
+	import Grass from '$lib/components/Grass.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 	import type { TeamMember } from '$lib/server/db/team';
 	import { recent } from '$lib/states/recent.svelte';
-	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
 
-	let wild = $state<number | undefined>();
-
 	const { pokemons, teamSize, population } = $derived(data);
 	const started = $derived(!!teamSize);
-
-	$effect(() => {
-		const interval = started
-			? setInterval(() => {
-					wild = getRandomNb(1, 151);
-					console.log(data.pokemons[wild - 1]?.name);
-				}, 2000)
-			: undefined;
-
-		return () => clearInterval(interval);
-	});
 
 	const choices = [1, 4, 7];
 
@@ -38,16 +25,12 @@
 			console.log(`Vous avez capturé un ${pokemon.name} (id: ${id}) !`);
 		}
 	}
-
-	function escape() {
-		wild = undefined;
-	}
 </script>
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
-<div class="grass">
+<div class="home">
 	{#if !started}
 		<p>Choisissez un Pokémon</p>
 
@@ -60,12 +43,8 @@
 				{/if}
 			{/each}
 		</ul>
-	{:else if wild}
-		{@const wildPokemon = data.pokemons[wild - 1]}
-		{#if wildPokemon}
-			{@const { id, name, sprites } = wildPokemon}
-			<Wild {name} src={sprites.front_default} catchPokemon={() => catchPokemon(id)} {escape} />
-		{/if}
+	{:else}
+		<Grass {pokemons} {catchPokemon} />
 	{/if}
 	<aside>
 		{#await population}
@@ -77,7 +56,7 @@
 </div>
 
 <style>
-	.grass {
+	.home {
 		display: flex;
 		flex-flow: column;
 		justify-content: center;

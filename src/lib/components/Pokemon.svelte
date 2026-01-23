@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { recent } from '$lib/states/recent.svelte';
+
 	type Pokemon = {
 		id: number;
 		name: string;
@@ -10,7 +12,13 @@
 
 <div class={['Pokemon', { found }]}>
 	<p>#{id}</p>
-	<img {src} alt="Un {name}" />
+	<img
+		{src}
+		alt="Un {name}"
+		onmouseenter={() => {
+			recent.remove(id);
+		}}
+	/>
 	<p>{name}</p>
 </div>
 
