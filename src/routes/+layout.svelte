@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { recent } from '$lib/states/recent.svelte.js';
+	import { scale } from 'svelte/transition';
 
 	const { children, data } = $props();
 
@@ -20,13 +21,13 @@
 					>Pokédex({found}/{total})</a
 				>
 				{#if recent.species.length}
-					<div class="new"></div>
+					<div class="new" transition:scale={{ duration: 300 }}></div>
 				{/if}
 			</li>
 			<li>
 				<a href={resolve('/team')} class={{ current: pathname === '/team' }}>Équipe({teamSize})</a>
 				{#if recent.members.length}
-					<div class="new"></div>
+					<div class="new" transition:scale={{ duration: 300 }}></div>
 				{/if}
 			</li>
 			<li>

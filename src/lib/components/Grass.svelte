@@ -3,6 +3,7 @@
 	import type { Pokemon } from '$lib/types';
 	import { getRandomNb } from '$lib/utils';
 	import type { Snippet } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	type Props = {
 		pokemons: Pokemon[];
@@ -45,16 +46,18 @@
 </script>
 
 <div class="grass">
-	{#each wilds as { id, name, sprite, appeared } (id)}
-		<Wild
-			{name}
-			src={sprite}
-			catchPokemon={async () => {
-				await catchPokemon(id);
-				escape(appeared);
-			}}
-			escape={() => escape(appeared)}
-		/>
+	{#each wilds as { id, name, sprite, appeared } (appeared)}
+		<div transition:fade>
+			<Wild
+				{name}
+				src={sprite}
+				catchPokemon={async () => {
+					await catchPokemon(id);
+					escape(appeared);
+				}}
+				escape={() => escape(appeared)}
+			/>
+		</div>
 	{/each}
 </div>
 
@@ -62,6 +65,7 @@
 
 <style>
 	.grass {
+		position: relative;
 		display: flex;
 		flex-flow: column;
 		justify-content: center;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Pokemon from '$lib/components/Pokemon.svelte';
 	import { recent } from '$lib/states/recent.svelte';
+	import { scale } from 'svelte/transition';
 
 	const { data } = $props();
 
@@ -12,7 +13,7 @@
 <div>
 	<Pokemon {id} {name} {src} {found} />
 	{#if isRecent}
-		<div class="new">new</div>
+		<div class="new" out:scale={{ duration: 300 }}>new</div>
 	{/if}
 </div>
 
