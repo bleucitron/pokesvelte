@@ -1,13 +1,10 @@
 import { fetchPokemons } from '$lib/pokemons';
 import db from '$lib/server/db';
 
-export async function load({ depends, cookies }) {
+export async function load({ depends, locals }) {
 	depends('team:update');
 
-	const cookie = cookies.get('session');
-	const trainerId = await db.cookies.check(cookie);
-
-	const trainer = trainerId ? await db.trainer.get(trainerId) : undefined;
+	const { trainer } = locals;
 
 	const [pokemons, team, pokedex] = await Promise.all([
 		fetchPokemons(),
