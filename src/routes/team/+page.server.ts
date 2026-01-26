@@ -2,18 +2,20 @@ import { fetchPokemons } from '$lib/pokemons';
 import db from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
 
-export async function load({ depends }) {
+export async function load({ depends, locals }) {
+	if (!locals.trainer) redirect(307, '/trainer');
+
 	depends('team:update');
 
 	const [pokemons, team] = await Promise.all([fetchPokemons(), db.team.get()]);
-
-	if (!team.length) redirect(307, '/');
 
 	return { team, pokemons };
 }
 
 export const actions = {
-	rename: async ({ request }) => {
+	rename: async ({ request, locals }) => {
+		if (!locals.trainer) return fail(403);
+
 		const data = await request.formData();
 
 		const name = data.get('name')?.toString();
@@ -25,7 +27,9 @@ export const actions = {
 
 		await db.team.renameMember(uuid, name);
 	},
-	toggle: async ({ request }) => {
+	toggle: async ({ request, locals }) => {
+		if (!locals.trainer) return fail(403);
+
 		const data = await request.formData();
 
 		const uuid = data.get('uuid')?.toString();

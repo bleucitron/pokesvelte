@@ -1,7 +1,9 @@
 import db from '$lib/server/db';
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 
-export async function GET({ params }) {
+export async function GET({ params, locals }) {
+	if (!locals.trainer) error(403);
+
 	const { uuid } = params;
 
 	const team = await db.team.get();
@@ -12,7 +14,9 @@ export async function GET({ params }) {
 	return json({ member });
 }
 
-export async function DELETE({ params }) {
+export async function DELETE({ params, locals }) {
+	if (!locals.trainer) error(403);
+
 	const { uuid } = params;
 
 	await db.team.removeMember(uuid);
