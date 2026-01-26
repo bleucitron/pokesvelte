@@ -14,7 +14,7 @@
 
 <nav>
 	<ul>
-		{#each types as type}
+		{#each types as type (type)}
 			{@const current = currentType === type}
 			<li>
 				{#if current}

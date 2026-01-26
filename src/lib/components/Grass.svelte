@@ -40,7 +40,7 @@
 </script>
 
 <div class="grass">
-	{#each wilds as { id, name, sprite, appeared }}
+	{#each wilds as { id, name, sprite, appeared } (id)}
 		<Wild
 			{name}
 			src={sprite}

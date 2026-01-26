@@ -35,7 +35,7 @@
 		<p>Choisissez un Pokémon</p>
 
 		<ul>
-			{#each choices as choice}
+			{#each choices as choice (choice)}
 				{@const pokemon = pokemons[choice - 1]}
 				{#if pokemon}
 					{@const { id, name, sprites } = pokemon}

@@ -21,7 +21,7 @@
 <h2>Titulaires</h2>
 
 <ul>
-	{#each main as member}
+	{#each main as member (member.uuid)}
 		{@const { id, uuid, name, main } = member}
 		{@const pokemon = pokemons[id - 1]}
 		{@const isRecent = recent.members.includes(uuid)}
@@ -56,7 +56,7 @@
 
 <h2>Banc</h2>
 <ul>
-	{#each bench as member}
+	{#each bench as member (member.uuid)}
 		{@const { id, uuid, name, main } = member}
 		{@const pokemon = pokemons[id - 1]}
 		{@const isRecent = recent.members.includes(uuid)}

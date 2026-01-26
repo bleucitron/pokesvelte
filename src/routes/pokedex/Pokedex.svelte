@@ -20,7 +20,7 @@
 <input bind:value={search} placeholder="recherche..." />
 
 <ul>
-	{#each pokemonsToDisplay as pokemon}
+	{#each pokemonsToDisplay as pokemon (pokemon.id)}
 		{@const { id, sprites, name } = pokemon}
 		{@const found = pokedex.includes(id)}
 		{@const isRecent = recent.species.includes(id)}
