@@ -7,7 +7,7 @@ export async function load() {
 }
 
 export const actions = {
-	signup: async ({ request }) => {
+	signup: async ({ request, cookies }) => {
 		const data = await request.formData();
 
 		const name = data.get('signup_name')?.toString();
@@ -52,6 +52,9 @@ export const actions = {
 		}
 
 		const trainer = await db.trainer.register(name, password);
+		const cookie = await db.cookies.register(trainer.id);
+
+		cookies.set('session', cookie, { path: '/' });
 
 		return {
 			success: true,
