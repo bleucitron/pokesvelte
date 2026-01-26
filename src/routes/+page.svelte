@@ -44,15 +44,16 @@
 			{/each}
 		</ul>
 	{:else}
-		<Grass {pokemons} {catchPokemon} />
+		<Grass {pokemons} {catchPokemon}>
+			<aside>
+				{#await population}
+					<p>Scanning...</p>
+				{:then nb}
+					<p>{nb} Pokémons dans les environs</p>
+				{/await}
+			</aside>
+		</Grass>
 	{/if}
-	<aside>
-		{#await population}
-			<p>Scanning...</p>
-		{:then nb}
-			<p>{nb} Pokémons dans les environs</p>
-		{/await}
-	</aside>
 </div>
 
 <style>
