@@ -3,6 +3,7 @@
 	import { invalidate } from '$app/navigation';
 	import { recent } from '$lib/states/recent.svelte';
 	import type { TeamMember } from '$lib/server/db/team';
+	import { scale } from 'svelte/transition';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
@@ -61,7 +62,7 @@
 				<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
 			</form>
 			<button onclick={() => release(uuid)}>x</button>{#if isRecent}
-				<div class="new">new</div>
+				<div class="new" out:scale={{ duration: 300 }}>new</div>
 			{/if}
 		</li>
 	{/if}

@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { recent } from '$lib/states/recent.svelte';
 	import type { Pokemon } from '$lib/types';
+	import { scale } from 'svelte/transition';
 
 	let search = $state('');
 
@@ -38,7 +39,7 @@
 				/>
 			</a>
 			{#if isRecent}
-				<div class="new">new</div>
+				<div class="new" out:scale={{ duration: 300 }}>new</div>
 			{/if}
 		</li>
 	{/each}
