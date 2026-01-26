@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
 	import { recent } from '$lib/states/recent.svelte';
+	import type { TeamMember } from '$lib/server/db/team';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
@@ -22,33 +23,7 @@
 
 <ul>
 	{#each main as member (member.uuid)}
-		{@const { id, uuid, name, main } = member}
-		{@const pokemon = pokemons[id - 1]}
-		{@const isRecent = recent.members.includes(uuid)}
-
-		{#if pokemon}
-			{@const { sprites } = pokemon}
-			{@const src = sprites.front_default}
-			<li>
-				<img
-					{src}
-					width="96"
-					height="96"
-					loading="lazy"
-					alt={name}
-					onmouseenter={() => recent.remove(uuid)}
-				/>
-				<form method="POST" action="?/rename" use:enhance>
-					<input name="name" value={name} />
-					<input type="hidden" name="uuid" value={uuid} />
-					<button>Renommer</button>
-					<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
-				</form>
-				<button onclick={() => release(uuid)}>x</button>{#if isRecent}
-					<div class="new">new</div>
-				{/if}
-			</li>
-		{/if}
+		{@render Member(member)}
 	{:else}
 		<p>Aucun membre</p>
 	{/each}
@@ -57,37 +32,40 @@
 <h2>Banc</h2>
 <ul>
 	{#each bench as member (member.uuid)}
-		{@const { id, uuid, name, main } = member}
-		{@const pokemon = pokemons[id - 1]}
-		{@const isRecent = recent.members.includes(uuid)}
-
-		{#if pokemon}
-			{@const { sprites } = pokemon}
-			{@const src = sprites.front_default}
-			<li>
-				<img
-					{src}
-					width="96"
-					height="96"
-					loading="lazy"
-					alt={name}
-					onmouseenter={() => recent.remove(uuid)}
-				/>
-				<form method="POST" action="?/rename" use:enhance>
-					<input name="name" value={name} />
-					<input type="hidden" name="uuid" value={uuid} />
-					<button>Renommer</button>
-					<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
-				</form>
-				<button onclick={() => release(uuid)}>x</button>{#if isRecent}
-					<div class="new">new</div>
-				{/if}
-			</li>
-		{/if}
+		{@render Member(member)}
 	{:else}
 		<p>Aucun membre</p>
 	{/each}
 </ul>
+
+{#snippet Member({ id, uuid, name, main }: TeamMember)}
+	{@const pokemon = pokemons[id - 1]}
+	{@const isRecent = recent.members.includes(uuid)}
+
+	{#if pokemon}
+		{@const { sprites } = pokemon}
+		{@const src = sprites.front_default}
+		<li>
+			<img
+				{src}
+				width="96"
+				height="96"
+				loading="lazy"
+				alt={name}
+				onmouseenter={() => recent.remove(uuid)}
+			/>
+			<form method="POST" action="?/rename" use:enhance>
+				<input name="name" value={name} />
+				<input type="hidden" name="uuid" value={uuid} />
+				<button>Renommer</button>
+				<button formaction="?/toggle">{!main ? 'Titulariser' : 'Sur le banc'}</button>
+			</form>
+			<button onclick={() => release(uuid)}>x</button>{#if isRecent}
+				<div class="new">new</div>
+			{/if}
+		</li>
+	{/if}
+{/snippet}
 
 <style>
 	ul {
