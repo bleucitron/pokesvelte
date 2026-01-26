@@ -2,10 +2,15 @@
 	import Wild from '$lib/components/Wild.svelte';
 	import type { Pokemon } from '$lib/types';
 	import { getRandomNb } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
-	type Props = { pokemons: Pokemon[]; catchPokemon: (id: number) => Promise<void> };
+	type Props = {
+		pokemons: Pokemon[];
+		catchPokemon: (id: number) => Promise<void>;
+		children: Snippet;
+	};
 
-	const { pokemons, catchPokemon }: Props = $props();
+	const { pokemons, catchPokemon, children }: Props = $props();
 
 	type WildPokemon = { id: number; appeared: number; name: string; sprite: string };
 	let wilds = $state<WildPokemon[]>([]);
@@ -52,6 +57,8 @@
 		/>
 	{/each}
 </div>
+
+{@render children()}
 
 <style>
 	.grass {
