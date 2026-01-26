@@ -3,13 +3,15 @@
 	import { invalidate } from '$app/navigation';
 	import { recent } from '$lib/states/recent.svelte';
 	import type { TeamMember } from '$lib/server/db/team';
-	import { scale } from 'svelte/transition';
+	import { crossfade, scale } from 'svelte/transition';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
 
 	const main = $derived(team.filter((m) => m.main));
 	const bench = $derived(team.filter((m) => !m.main));
+
+	const [send, receive] = crossfade({ duration: 300 });
 
 	async function release(uuid: string) {
 		await fetch(`/team/${uuid}`, { method: 'DELETE' });
@@ -24,7 +26,9 @@
 
 <ul>
 	{#each main as member (member.uuid)}
-		{@render Member(member)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render Member(member)}
+		</div>
 	{:else}
 		<p>Aucun membre</p>
 	{/each}
@@ -33,7 +37,9 @@
 <h2>Banc</h2>
 <ul>
 	{#each bench as member (member.uuid)}
-		{@render Member(member)}
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+			{@render Member(member)}
+		</div>
 	{:else}
 		<p>Aucun membre</p>
 	{/each}
@@ -76,12 +82,15 @@
 		gap: 1rem;
 	}
 
+	div {
+		flex-basis: 12rem;
+	}
+
 	li {
 		position: relative;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-		flex-basis: 12rem;
 	}
 	li > button {
 		position: absolute;
