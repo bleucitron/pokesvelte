@@ -6,7 +6,7 @@
 
 	const { children, data } = $props();
 
-	const { total, teamSize, found } = $derived(data);
+	const { total, teamSize, found, trainer } = $derived(data);
 	const {
 		url: { pathname }
 	} = $derived(page);
@@ -31,7 +31,9 @@
 				{/if}
 			</li>
 			<li>
-				<a href={resolve('/trainer')} class={{ current: pathname === '/trainer' }}>Dresseur</a>
+				<a href={resolve('/trainer')} class={{ current: pathname === '/trainer' }}
+					>{trainer?.name ?? 'Dresseur'}</a
+				>
 			</li>
 			<li>
 				<a href={resolve('/faq')} class={{ current: pathname === '/faq' }}>À propos</a>
