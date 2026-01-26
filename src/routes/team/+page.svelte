@@ -4,6 +4,7 @@
 	import { recent } from '$lib/states/recent.svelte';
 	import type { TeamMember } from '$lib/server/db/team';
 	import { crossfade, scale } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
@@ -11,7 +12,8 @@
 	const main = $derived(team.filter((m) => m.main));
 	const bench = $derived(team.filter((m) => !m.main));
 
-	const [send, receive] = crossfade({ duration: 300 });
+	const DURATION = { duration: 300 };
+	const [send, receive] = crossfade(DURATION);
 
 	async function release(uuid: string) {
 		await fetch(`/team/${uuid}`, { method: 'DELETE' });
@@ -26,7 +28,7 @@
 
 <ul>
 	{#each main as member (member.uuid)}
-		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }} animate:flip={DURATION}>
 			{@render Member(member)}
 		</div>
 	{:else}
@@ -37,7 +39,7 @@
 <h2>Banc</h2>
 <ul>
 	{#each bench as member (member.uuid)}
-		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
+		<div in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }} animate:flip={DURATION}>
 			{@render Member(member)}
 		</div>
 	{:else}
