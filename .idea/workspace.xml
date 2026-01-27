@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df209f3a-b439-409f-a6a5-1f53876fa332" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/pokedex/[id]/+page.server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/pokedex/[id]/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +27,13 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "litesoft",
-    "prettierjs.PrettierConfiguration.Package": "/Users/gael/Documents/GitLab/pokesvelte/node_modules/prettier",
-    "ts.external.directory.path": "/Users/gael/Documents/GitLab/pokesvelte/node_modules/typescript/lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;litesoft&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gael/Documents/GitLab/pokesvelte/node_modules/prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/gael/Documents/GitLab/pokesvelte/node_modules/typescript/lib&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

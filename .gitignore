@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 # Custom
 data/generated/*
 !data/generated/.gitkeep
+.idea/workspace.xml
