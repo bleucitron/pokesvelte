@@ -2,6 +2,7 @@
 	let started = $state(false);
 	const { data } = $props();
 	import Wild from '$lib/components/Wild.svelte';
+	let foundSpecies: number[] = $state([]);
 </script>
 
 <h1>Pokésvelte</h1>
@@ -21,6 +22,8 @@
 				src={sprites.front_default}
 				catchPokemon={() => {
 					console.log(id, name);
+					if (!foundSpecies.includes(id))
+						foundSpecies.push(id);
 				}}
 			/>
 		{/if}
@@ -28,3 +31,4 @@
 {:else}
 	<p>Le jeu n'a pas commencé !</p>
 {/if}
+<p> Nombre d'espèces trouvé : {foundSpecies.length}</p>
