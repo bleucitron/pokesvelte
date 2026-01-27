@@ -1,13 +1,15 @@
 <script lang="ts">
 	const { children } = $props();
+	import { page } from '$app/state';
 </script>
 
 <header>
 	<nav>
-		<a href="/">home</a>
-		<a href="/faq">faq</a>
-		<a href="/pokedex">pokedex</a>
-		<a href="/team">team</a>
+
+		<a class={page.url.pathname == '/' ? 'current' : ''} href="/">home</a>
+		<a class={page.url.pathname == '/faq' ? 'current' : ''} href="/faq">faq</a>
+		<a class={page.url.pathname == '/pokedex' ? 'current' : ''} href="/pokedex">pokedex</a>
+		<a class={page.url.pathname == '/team' ? 'current' : ''} href="/team">team</a>
 	</nav>
 </header>
 
