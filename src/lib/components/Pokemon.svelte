@@ -1,13 +1,18 @@
-<script>
-	const started = false;
+<script lang="ts">
+	type Props = {
+		name: string,
+		id:number,
+		src:string
+	}
+	const {name,id,src}: Props = $props();
 </script>
 
 <div class="Pokemon">
-	<p>Pikachu</p>
-	<p>#25</p>
+	<p>{name}</p>
+	<p>#{id}</p>
 	<img
-		src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-		alt="Pikachu"
+		{src}
+		alt={name}
 	/>
 </div>
 
