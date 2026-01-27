@@ -1,15 +1,19 @@
 <script lang="ts">
-	let started = $state(false);
-	const { data } = $props();
 	import Wild from '$lib/components/Wild.svelte';
+
+	let started = $state(false);
 	let foundSpecies: number[] = $state([]);
+
+	const { data } = $props();
+
+	$inspect(foundSpecies.length);
 </script>
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
-<button onclick={()=> started= !started}>
-	{!started? 'commencer': 'arreter'}
+<button onclick={() => (started = !started)}>
+	{!started ? 'commencer' : 'arreter'}
 </button>
 
 {#if started}
@@ -22,8 +26,7 @@
 				src={sprites.front_default}
 				catchPokemon={() => {
 					console.log(id, name);
-					if (!foundSpecies.includes(id))
-						foundSpecies.push(id);
+					if (!foundSpecies.includes(id)) foundSpecies.push(id);
 				}}
 			/>
 		{/if}
@@ -31,4 +34,4 @@
 {:else}
 	<p>Le jeu n'a pas commencé !</p>
 {/if}
-<p> Nombre d'espèces trouvé : {foundSpecies.length}</p>
+<p>Nombre d'espèces trouvé : {foundSpecies.length}</p>
