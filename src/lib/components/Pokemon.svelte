@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { pokedex } from '$lib/states/pokedex.svelte.js';
+	
 	type Props = {
 		name: string,
 		id:number,
@@ -7,7 +9,7 @@
 	const {name,id,src}: Props = $props();
 </script>
 
-<div class={["Pokemon",{ found:id%2 === 0 }]}>
+<div class={["Pokemon",{ found: pokedex.has(id) }]}>
 	<p>{name}</p>
 	<p>#{id}</p>
 	<img
