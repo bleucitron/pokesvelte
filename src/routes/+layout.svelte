@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
+	import { pokedex } from '$lib/states/pokedex.svelte.js';
 	const { children, data } = $props();
 	const { pathname } = $derived(page.url);
-	const { nombrePokemonDecouvert, nombrePokemonTotal, nombrePokemonEquipe } = $derived(data);
+	const { nombrePokemonTotal, nombrePokemonEquipe } = $derived(data);
 </script>
 
 <header>
@@ -11,7 +12,7 @@
 		<a class={{current: pathname === '/'}} href={resolve('/')}>home</a>
 		<a class={{current: pathname === '/faq'}} href={resolve('/faq')}>faq</a>
 		<a class={{current: pathname.startsWith('/pokedex')}} href={resolve('/pokedex')}
-			>pokedex({nombrePokemonDecouvert}/{nombrePokemonTotal})</a
+			>pokedex({pokedex.found.length}/{nombrePokemonTotal})</a
 		>
 		<a class={{current: pathname === '/team'}} href={resolve('/team')}
 			>team({nombrePokemonEquipe})</a

@@ -1,12 +1,11 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
+	import { pokedex } from '$lib/states/pokedex.svelte.js';
 
-	let foundSpecies: number[] = $state([]);
-
-	const started = $derived(foundSpecies.length > 0);
+	const started = $derived(pokedex.found.length > 0);
 	const { data } = $props();
 
-	$inspect(foundSpecies.length);
+	$inspect(pokedex.found.length);
 </script>
 
 <h1>Pokésvelte</h1>
@@ -22,7 +21,7 @@
 				src={sprites.front_default}
 				catchPokemon={() => {
 					console.log(id, name);
-					if (!foundSpecies.includes(id)) foundSpecies.push(id);
+					pokedex.discover(id)
 				}}
 			/>
 		{/if}
@@ -30,4 +29,4 @@
 {:else}
 	<p>Le jeu a commencé !</p>
 {/if}
-<p>Nombre d'espèces trouvé : {foundSpecies.length}</p>
+<p>Nombre d'espèces trouvé : {pokedex.found.length}</p>
