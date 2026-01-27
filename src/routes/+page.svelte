@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 
-	let started = $state(false);
 	let foundSpecies: number[] = $state([]);
 
+	const started = $derived(foundSpecies.length > 0);
 	const { data } = $props();
 
 	$inspect(foundSpecies.length);
@@ -12,11 +12,7 @@
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
-<button onclick={() => (started = !started)}>
-	{!started ? 'commencer' : 'arreter'}
-</button>
-
-{#if started}
+{#if !started}
 	{#each [1, 4, 7] as idpokemon (idpokemon)}
 		{@const pokemon = data.pokemons[idpokemon - 1]}
 		{#if pokemon}
@@ -32,6 +28,6 @@
 		{/if}
 	{/each}
 {:else}
-	<p>Le jeu n'a pas commencé !</p>
+	<p>Le jeu a commencé !</p>
 {/if}
 <p>Nombre d'espèces trouvé : {foundSpecies.length}</p>

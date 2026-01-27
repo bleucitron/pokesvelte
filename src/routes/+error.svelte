@@ -1,7 +1,8 @@
 <script>
 	import { page } from '$app/state';
+	const { status, error } = $derived(page);
 </script>
 
-<h1>Oh noooon !!! Erreur {page.status}...</h1>
+<h1>Oh noooon !!! Erreur {status}...</h1>
 
-<p>({page.error?.message})</p>
+<p>({error?.message})</p>

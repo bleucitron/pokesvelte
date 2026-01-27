@@ -1,11 +1,12 @@
 <script lang="ts">
 	const { data } = $props();
+	const { pokemons } = $derived(data);
 	import { resolve } from '$app/paths';
 </script>
 
 <h1>POKEDEX</h1>
 <ul>
-	{#each data.pokemons as pokemon (pokemon.id)}
+	{#each pokemons as pokemon (pokemon.id)}
 		{@const src = pokemon.sprites.front_default}
 		{@const found = pokemon.id%2 === 0}
 		<li class={{found}}>
