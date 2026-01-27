@@ -14,6 +14,8 @@
 		<a class={page.url.pathname === '/team' ? 'current' : ''} href={resolve('/team')}
 			>team({data.nombrePokemonEquipe})</a
 		>
+		<a class={page.url.pathname === '/trainer' ? 'current' : ''} href={resolve('/trainer')}
+			>trainer</a>
 	</nav>
 </header>
 
