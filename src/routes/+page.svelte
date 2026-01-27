@@ -1,7 +1,6 @@
 <script lang="ts">
 	const started = false;
 	const { data } = $props();
-	import Pokemon from '$lib/components/Pokemon.svelte';
 	import Wild from '$lib/components/Wild.svelte';
 </script>
 
@@ -9,13 +8,19 @@
 <p>Gotta svelt'em all!</p>
 
 {#if started === false}
-	{#each [1,4,7] as idpokemon}
-		{@const pokemon = data.pokemons[idpokemon-1]}
+	{#each [1, 4, 7] as idpokemon (idpokemon)}
+		{@const pokemon = data.pokemons[idpokemon - 1]}
 		{#if pokemon}
-			{@const {id, name, sprites} = pokemon}
-			<Wild id={id} name={name} src={sprites.front_default} catchPokemon={() => { console.log(id, name)}}/>
+			{@const { id, name, sprites } = pokemon}
+			<Wild
+				{name}
+				src={sprites.front_default}
+				catchPokemon={() => {
+					console.log(id, name);
+				}}
+			/>
 		{/if}
 	{/each}
-{:else }
+{:else}
 	<p>Le jeu n'a pas commencé !</p>
 {/if}
