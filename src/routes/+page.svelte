@@ -1,13 +1,21 @@
 <script lang="ts">
 	const started = false;
+	const { data } = $props();
 	import Pokemon from '$lib/components/Pokemon.svelte';
+	import Wild from '$lib/components/Wild.svelte';
 </script>
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
 
 {#if started === false}
-<Pokemon id={25} name="Pikachu" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
+	{#each [1,4,7] as idpokemon}
+		{@const pokemon = data.pokemons[idpokemon-1]}
+		{#if pokemon}
+			{@const {id, name, sprites} = pokemon}
+			<Wild id={id} name={name} src={sprites.front_default} catchPokemon={() => { console.log(id, name)}}/>
+		{/if}
+	{/each}
 {:else }
 	<p>Le jeu n'a pas commencé !</p>
 {/if}
