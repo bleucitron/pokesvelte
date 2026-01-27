@@ -7,7 +7,8 @@
 <ul>
 	{#each data.pokemons as pokemon (pokemon.id)}
 		{@const src = pokemon.sprites.front_default}
-		<li>
+		{@const found = pokemon.id%2 === 0}
+		<li class={{found}}>
 			<a
 				href={resolve('/pokedex/[id]', {
 					id: pokemon.id.toString()
@@ -24,7 +25,16 @@
 		margin-block: 1rem;
 		gap: 1rem;
 	}
+	li img {
+		filter: contrast(0%) brightness(200%);
+	}
 	li:hover img {
+		filter: contrast(0%) brightness(200%) drop-shadow(0px 0px 10px #333);
+	}
+	li.found img {
+		filter: none;
+	}
+	li.found:hover img {
 		filter: drop-shadow(0px 0px 10px #333);
 	}
 </style>
