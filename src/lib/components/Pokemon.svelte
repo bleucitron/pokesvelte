@@ -1,3 +1,7 @@
+<script>
+	const started = false;
+</script>
+
 <div class="Pokemon">
 	<p>Pikachu</p>
 	<p>#25</p>
