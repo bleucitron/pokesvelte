@@ -24,13 +24,14 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;litesoft&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/gael/Documents/GitLab/pokesvelte/node_modules/prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/gael/Documents/GitLab/pokesvelte/node_modules/typescript/lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "litesoft",
+    "prettierjs.PrettierConfiguration.Package": "/Users/gael/Documents/GitLab/pokesvelte/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/Applications/PhpStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
