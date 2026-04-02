@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df209f3a-b439-409f-a6a5-1f53876fa332" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/Wild.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/Wild.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
