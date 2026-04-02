@@ -4,11 +4,15 @@
 	const { pokemons , pokedex} = $derived(data);
 	import { resolve } from '$app/paths'
 
+	let valeurRecherche = $state('');
+	const pokemonRechercher = $derived(pokemons.filter((valeur) => valeur.name.includes(valeurRecherche)))
 </script>
 
 <h1>POKEDEX</h1>
+<input bind:value={valeurRecherche} placeholder="Rechercher un pokémon" />
+
 <ul>
-	{#each pokemons as pokemon (pokemon.id)}
+	{#each pokemonRechercher as pokemon (pokemon.id)}
 		{@const src = pokemon.sprites.front_default}
 		{@const found = pokedex.includes(pokemon.id)}
 		{@const pokemonRecent = recent.found.includes(pokemon.id)}
