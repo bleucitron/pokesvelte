@@ -24,7 +24,7 @@
 	function catchPokemon(id:number)
 	{
 		console.log(id);
-		team.addMember(id);
+		fetch("/team", {method:"POST", body: JSON.stringify({id: id})})
 		pokedex.discover(id);
 		wild = undefined;
 	}

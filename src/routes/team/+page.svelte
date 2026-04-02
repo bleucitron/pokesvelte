@@ -15,7 +15,9 @@
 				<p>{member.name}</p>
 				<button
 					onclick={() => {
-						team.removeMember(member.uuid);
+						// team.removeMember(member.uuid);
+								fetch("/team/"+ member.uuid, {method:"DELETE"})
+
 					}}>Free</button
 				>
 			</li>
