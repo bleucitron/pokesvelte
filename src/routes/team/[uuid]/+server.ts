@@ -1,4 +1,4 @@
-import db from '$lib/db';
+import db from '$lib/server/db';
 import { json, text } from '@sveltejs/kit';
 
 export async function DELETE({ params }) {

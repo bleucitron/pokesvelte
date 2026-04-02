@@ -1,15 +1,16 @@
 <script lang="ts">
 	const { data } = $props();
-	const { pokemons } = $derived(data);
+	const { pokemons , pokedex} = $derived(data);
 	import { resolve } from '$app/paths';
-	import { pokedex } from '$lib/states/pokedex.svelte.js';
+	// import { pokedex } from '$lib/states/pokedex.svelte.js';
+
 </script>
 
 <h1>POKEDEX</h1>
 <ul>
 	{#each pokemons as pokemon (pokemon.id)}
 		{@const src = pokemon.sprites.front_default}
-		{@const found = pokedex.has(pokemon.id)}
+		{@const found = pokedex.includes(pokemon.id)}
 		<li class={{found}}>
 			<a
 				href={resolve('/pokedex/[id]', {

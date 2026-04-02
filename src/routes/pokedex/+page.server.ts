@@ -1,6 +1,8 @@
 import { fetchPokemons } from '$lib/pokemons';
+import db from '$lib/server/db';
 
 export async function load() {
     const pokemons = await fetchPokemons();
-    return { pokemons };
+		const pokedex = await db.seen.get();
+    return { pokemons, pokedex };
 }

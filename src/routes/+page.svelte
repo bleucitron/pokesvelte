@@ -1,13 +1,14 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
-	import { pokedex } from '$lib/states/pokedex.svelte.js';
+	// import { pokedex } from '$lib/states/pokedex.svelte.js';
 	import { team } from '$lib/states/team.svelte.js';
 	import { getRandomNb } from '$lib/utils';
 
-	const started = $derived(pokedex.found.length > 0);
 	const { data } = $props();
+	const started = $derived(data.teamSize > 0);
 
-	$inspect(pokedex.found.length);
+
+	// $inspect(pokedex.found.length);
 
 	let wild = $state<number>();
 	$effect(() => {
@@ -25,7 +26,7 @@
 	{
 		console.log(id);
 		fetch("/team", {method:"POST", body: JSON.stringify({id: id})})
-		pokedex.discover(id);
+		// pokedex.discover(id);
 		wild = undefined;
 	}
 
