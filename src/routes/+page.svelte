@@ -7,7 +7,6 @@
 	const { data } = $props();
 	const started = $derived(data.teamSize > 0);
 
-
 	// $inspect(pokedex.found.length);
 
 	let wild = $state<number>();
@@ -36,7 +35,11 @@
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
-
+{#await data.scan}
+	<p> Recherche des pokémons aux alentours ...</p>
+{:then resultatScan}
+	<p> {resultatScan} pokémons aux alentours.</p>
+{/await}
 {#if !started}
 	{#each [1, 4, 7] as idpokemon (idpokemon)}
 		{@const pokemon = data.pokemons[idpokemon - 1]}

@@ -1,13 +1,18 @@
-import { fetchPokemons } from '$lib/pokemons';
+import { fetchPokemons, fetchTotalPopulation } from '$lib/pokemons';
 import db from '$lib/server/db';
 
 export async function load({depends}) {
+	depends('team:update');
 
-		depends("team:update")
-    const pokemons = await fetchPokemons()
-    return {
-			nombrePokemonTotal: pokemons.length,
-			teamSize: (await db.team.get()).length,
-			found: (await db.seen.get()).length
-		};
+	const [pokemons, team, pokedex] = await Promise.all([
+		fetchPokemons(),
+		db.team.get(),
+		db.seen.get()
+	]);
+
+	return {
+		nombrePokemonTotal: pokemons.length,
+		teamSize: team.length,
+		found: pokedex.length
+	};
 }

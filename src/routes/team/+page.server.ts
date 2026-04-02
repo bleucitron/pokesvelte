@@ -3,7 +3,6 @@ import db from '$lib/server/db';
 
 export async function load({depends}) {
 	depends('team:update');
-	const pokemons = await fetchPokemons();
-		const team = await db.team.get();
-    return { pokemons , team};
+	const [pokemons, team] = await Promise.all([fetchPokemons(), db.team.get()]);
+	return { pokemons, team };
 }
