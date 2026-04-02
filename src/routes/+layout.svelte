@@ -3,8 +3,11 @@
 	import { resolve } from '$app/paths';
 	import { pokedex } from '$lib/states/pokedex.svelte.js';
 	const { children, data } = $props();
+	import { team } from '$lib/states/team.svelte.js';
 	const { pathname } = $derived(page.url);
-	const { nombrePokemonTotal, nombrePokemonEquipe } = $derived(data);
+	const { nombrePokemonTotal} = $derived(data);
+
+	const nombrePokemonEquipe = $derived(team.members.length)
 </script>
 
 <header>

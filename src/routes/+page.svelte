@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
 	import { pokedex } from '$lib/states/pokedex.svelte.js';
+	import { team } from '$lib/states/team.svelte.js';
 	import { getRandomNb } from '$lib/utils';
 
 	const started = $derived(pokedex.found.length > 0);
@@ -20,6 +21,13 @@
 		return () => clearInterval(interval);
 	});
 
+	function catchPokemon(id:number)
+	{
+		console.log(id);
+		team.addMember(id);
+		pokedex.discover(id)
+	}
+
 
 </script>
 
@@ -34,10 +42,7 @@
 			<Wild
 				{name}
 				src={sprites.front_default}
-				catchPokemon={() => {
-					console.log(id, name);
-					pokedex.discover(id)
-				}}
+				catchPokemon={() => catchPokemon(id)}
 			/>
 		{/if}
 	{/each}
@@ -48,10 +53,7 @@
 		<Wild
 			{name}
 			src={sprites.front_default}
-			catchPokemon={() => {
-					console.log(id, name);
-					pokedex.discover(id)
-				}}
+			catchPokemon={() => catchPokemon(id)}
 		/>
 	{/if}
 {/if}

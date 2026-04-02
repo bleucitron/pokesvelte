@@ -3,7 +3,6 @@ import { fetchPokemons } from '$lib/pokemons';
 export async function load() {
     const pokemons = await fetchPokemons()
     return { 
-        nombrePokemonTotal: pokemons.length, 
-        nombrePokemonEquipe: 2 
+        nombrePokemonTotal: pokemons.length
     };
 }
