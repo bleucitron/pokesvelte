@@ -17,9 +17,18 @@
 			return () => clearTimeout(time);
 		}
 	})
+
+	let innerHeight = $state(0)
+	let innerWidth = $state(0)
+
+	$inspect(innerHeight)
+	$inspect(innerWidth)
+
 </script>
 
 <button class={['Wild']} onclick={catchPokemon}>
 	<img {src} alt={name} />
 </button>
+
+<svelte:window bind:innerWidth bind:innerHeight />
 
