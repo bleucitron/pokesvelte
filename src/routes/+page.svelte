@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Wild from '$lib/components/Wild.svelte';
-	// import { pokedex } from '$lib/states/pokedex.svelte.js';
-	import { team } from '$lib/states/team.svelte.js';
+	import { recent } from '$lib/states/recent.svelte';
 	import { getRandomNb } from '$lib/utils';
 
 	const { data } = $props();
@@ -22,11 +21,11 @@
 		return () => clearInterval(interval);
 	});
 
-	function catchPokemon(id:number)
+	async function catchPokemon(id:number)
 	{
 		console.log(id);
-		fetch("/team", {method:"POST", body: JSON.stringify({id: id})})
-		// pokedex.discover(id);
+		await fetch("/team", {method:"POST", body: JSON.stringify({id: id})})
+		recent.discover(id);
 		wild = undefined;
 	}
 

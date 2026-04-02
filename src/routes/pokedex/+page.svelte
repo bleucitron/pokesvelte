@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { recent } from '$lib/states/recent.svelte';
 	const { data } = $props();
 	const { pokemons , pokedex} = $derived(data);
-	import { resolve } from '$app/paths';
-	// import { pokedex } from '$lib/states/pokedex.svelte.js';
+	import { resolve } from '$app/paths'
 
 </script>
 
@@ -11,12 +11,16 @@
 	{#each pokemons as pokemon (pokemon.id)}
 		{@const src = pokemon.sprites.front_default}
 		{@const found = pokedex.includes(pokemon.id)}
+		{@const pokemonRecent = recent.found.includes(pokemon.id)}
 		<li class={{found}}>
 			<a
 				href={resolve('/pokedex/[id]', {
 					id: pokemon.id.toString()
 				})}><img {src} alt="pokémon img" /></a
 			>
+			{#if pokemonRecent}
+				<div class="pastille"></div>
+			{/if}
 		</li>
 	{/each}
 </ul>
@@ -27,6 +31,9 @@
 		flex-wrap: wrap;
 		margin-block: 1rem;
 		gap: 1rem;
+	}
+	li {
+			position: relative;
 	}
 	li img {
 		filter: contrast(0%) brightness(200%);
@@ -39,5 +46,12 @@
 	}
 	li.found:hover img {
 		filter: drop-shadow(0px 0px 10px #333);
+	}
+	.pastille {
+      position: absolute;
+			top: 20px;
+			width: 15px;
+			height: 15px;
+			background-color: red;
 	}
 </style>
