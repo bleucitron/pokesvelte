@@ -2,6 +2,7 @@
 	import Wild from '$lib/components/Wild.svelte';
 	import { recent } from '$lib/states/recent.svelte';
 	import { getRandomNb } from '$lib/utils';
+	import { invalidate } from '$app/navigation';
 
 	const { data } = $props();
 	const started = $derived(data.teamSize > 0);
@@ -27,6 +28,7 @@
 		await fetch("/team", {method:"POST", body: JSON.stringify({id: id})})
 		recent.discover(id);
 		wild = undefined;
+		invalidate("team:update");
 	}
 
 

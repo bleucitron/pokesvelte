@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
+
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
 	// import { team } from '$lib/states/team.svelte.js';
@@ -14,10 +16,10 @@
 				<img {src} alt="pokémon img" />
 				<p>{member.name}</p>
 				<button
-					onclick={() => {
+					onclick={async () => {
 						// team.removeMember(member.uuid);
-								fetch("/team/"+ member.uuid, {method:"DELETE"})
-
+								await fetch("/team/"+ member.uuid, {method:"DELETE"})
+								invalidate("team:update");
 					}}>Free</button
 				>
 			</li>
