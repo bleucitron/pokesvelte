@@ -9,14 +9,14 @@
 
 	$inspect(pokedex.found.length);
 
-	let wild = $state(getRandomNb(1, 151));
+	let wild = $state<number>();
 	$effect(() => {
 		const interval = started ?
 
 			setInterval(() => {
 				wild = getRandomNb(1, 151);
 				console.log('rencontre');
-			}, 2000) : undefined;
+			}, 3000) : undefined;
 
 		return () => clearInterval(interval);
 	});
@@ -25,7 +25,8 @@
 	{
 		console.log(id);
 		team.addMember(id);
-		pokedex.discover(id)
+		pokedex.discover(id);
+		wild = undefined;
 	}
 
 
@@ -47,14 +48,16 @@
 		{/if}
 	{/each}
 {:else}
-	{@const pokemon = data.pokemons[wild - 1]}
-	{#if pokemon}
-		{@const { id, name, sprites } = pokemon}
-		<Wild
-			{name}
-			src={sprites.front_default}
-			catchPokemon={() => catchPokemon(id)}
-		/>
+	{#if wild}
+		{@const pokemon = data.pokemons[wild - 1]}
+		{#if pokemon}
+			{@const { id, name, sprites } = pokemon}
+			<Wild
+				{name}
+				src={sprites.front_default}
+				catchPokemon={() => catchPokemon(id)}
+				escape={() => { wild = undefined }}
+			/>
+		{/if}
 	{/if}
 {/if}
-<p>Nombre d'espèces trouvé : {pokedex.found.length}</p>
