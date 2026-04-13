@@ -8,6 +8,7 @@
 	const started = $derived(data.teamSize > 0);
 
 	// $inspect(pokedex.found.length);
+	// TEST JV
 
 	let wild = $state<number>();
 	$effect(() => {
