@@ -2,12 +2,16 @@
 	import { invalidate } from '$app/navigation';
 	import { enhance } from '$app/forms';
 	import { type TeamMember } from '$lib/server/db/team';
-	import { fade, blur } from 'svelte/transition';
+	import { crossfade } from 'svelte/transition';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
 	const titulaire = $derived(team.filter((membre) => membre.main === true));
 	const remplacant = $derived(team.filter((membre) => !membre.main));
+
+	const [send, receive] = crossfade({
+		duration: 500
+	});
 </script>
 
 <h1>TEAM</h1>
@@ -20,7 +24,7 @@
 	<ul>
 		{#each members as member (member.uuid)}
 			{@const p = pokemons[member.id - 1]}
-			<li transition:blur={{ duration: 2000 }}>
+			<li in:send={{ key: member.uuid }} out:receive={{ key: member.uuid }}>
 				{#if p}
 					{@const src = p.sprites.front_default}
 					<img {src} alt="pokémon img" />
