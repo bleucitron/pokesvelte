@@ -20,11 +20,7 @@
 
 <h1>Pokésvelte</h1>
 <p>Gotta svelt'em all!</p>
-{#await data.scan}
-	<p> Recherche des pokémons aux alentours ...</p>
-{:then resultatScan}
-	<p> {resultatScan} pokémons aux alentours.</p>
-{/await}
+
 {#if !started}
 	{#each [1, 4, 7] as idpokemon (idpokemon)}
 		{@const pokemon = data.pokemons[idpokemon - 1]}
@@ -39,6 +35,14 @@
 	{/each}
 {:else}
 	<Grass pokemons={data.pokemons} {catchPokemon}>
-
+		{#snippet scanner() }
+			{#await data.scan}
+				<p> Recherche des pokémons aux alentours ...</p>
+			{:then resultatScan}
+				<p> {resultatScan} pokémons aux alentours.</p>
+			{/await}
+		{/snippet}
 	</Grass>
 {/if}
+
+

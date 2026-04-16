@@ -3,7 +3,7 @@
 	import Wild from '$lib/components/Wild.svelte';
 	import { getRandomNb } from '$lib/utils';
 
-	const { pokemons, catchPokemon } = $props();
+	const { pokemons, catchPokemon, scanner } = $props();
 
 	let wilds = $state< {id: number, appeared: number}[]>([]);
 
@@ -24,6 +24,8 @@
 	}
 
 </script>
+
+{@render scanner()}
 
 {#each wilds as wild (wild.appeared)}
 
