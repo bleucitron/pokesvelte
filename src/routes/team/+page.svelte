@@ -15,6 +15,18 @@
 			<li>
 				<img {src} alt="pokémon img" />
 				<p>{member.name}</p>
+
+				<form action="?/rename" method="POST">
+					<label for="nomPkm">
+						Nom
+					</label>
+					<input id="nomPkm" name="nomPkm" placeholder="..."/>
+					<input name="uuid" type="hidden" value="{member.uuid}"/>
+					<button type="submit">Valider</button>
+				</form>
+
+
+
 				<button
 					onclick={async () => {
 						// team.removeMember(member.uuid);
