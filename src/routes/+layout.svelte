@@ -5,7 +5,7 @@
 	const { children, data } = $props();
 	import { team } from '$lib/states/team.svelte.js';
 	const { pathname } = $derived(page.url);
-	const { nombrePokemonTotal, teamSize, found} = $derived(data);
+	const { nombrePokemonTotal, teamSize, found, user} = $derived(data);
 
 	// const nombrePokemonEquipe = $derived(team.members.length)
 </script>
@@ -21,7 +21,7 @@
 			>team({teamSize})</a
 		>
 		<a class={{current: pathname === '/trainer'}} href={resolve('/trainer')}
-			>trainer</a>
+			>{user? user.name: "Trainer"}</a>
 	</nav>
 </header>
 
