@@ -17,7 +17,7 @@
 		{@const pokemonRecent = recent.found.includes(pokemon.id)}
 		<li class={{found}}>
 			<a
-				href={resolve('/pokedex/[id]', {
+				href={resolve('/pokedex/[id=id]', {
 					id: pokemon.id.toString()
 				})}><img {src} alt="pokémon img" /></a
 			>
