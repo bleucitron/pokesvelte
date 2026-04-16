@@ -39,14 +39,14 @@ $inspect(innerHeight,innerWidth)
 
 </script>
 
-<button class={['Wild']} onclick={catchPokemon} style:top={top+"px"} style:left={left+"px"}>
+<button class={['Wild', {starter:!escape}]} onclick={catchPokemon} style:top={top+"px"} style:left={left+"px"}>
 	<img {src} alt={name} />
 </button>
 
 <svelte:window bind:innerWidth bind:innerHeight />
 
 <style>
-	button {
+	button:not(.starter) {
 			position: fixed;
 	}
 
