@@ -1,10 +1,17 @@
 import { fetchPokemons } from '$lib/pokemons';
 import db from '$lib/server/db';
 import { fail } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({depends}) {
+
 	depends('team:update');
 	const [pokemons, team] = await Promise.all([fetchPokemons(), db.team.get()]);
+
+	if (team.length === 0) {
+		redirect(307, '/');
+	}
+
 	return { pokemons, team };
 }
 
