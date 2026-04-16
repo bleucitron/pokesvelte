@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
+	import { enhance } from '$app/forms';
 
 	const { data } = $props();
 	const { pokemons, team } = $derived(data);
@@ -17,7 +18,7 @@
 				<img {src} alt="pokémon img" />
 				<p>{member.name}</p>
 
-				<form action="?/rename" method="POST">
+				<form action="?/rename" method="POST" use:enhance>
 					<label for="nomPkm">
 						Nom
 					</label>
@@ -26,7 +27,6 @@
 					<button type="submit">Valider</button>
 					<button formaction="?/titulaire">{member.main ? 'Mettre au dodo' : 'Mettre au boulot' }</button>
 				</form>
-
 				<button
 					onclick={async () => {
 						// team.removeMember(member.uuid);
@@ -38,6 +38,7 @@
 		{/if}
 	{/each}
 </ul>
+
 <h2>BANC</h2>
 <ul>
 	{#each remplacant as member (member.uuid)}
@@ -48,7 +49,7 @@
 				<img {src} alt="pokémon img" />
 				<p>{member.name}</p>
 
-				<form action="?/rename" method="POST">
+				<form action="?/rename" method="POST" use:enhance>
 					<label for="nomPkm">
 						Nom
 					</label>

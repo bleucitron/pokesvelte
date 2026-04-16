@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from '$app/forms';
 	const { form } = $props();
 </script>
 
@@ -10,7 +11,7 @@
 	<p>{form?.message}</p>
 {/if}
 <h2>Inscription</h2>
-<form action="?/inscription" method="POST">
+<form action="?/inscription" method="POST" use:enhance>
 	<label for="nom">
 		Nom
 	</label>
@@ -27,7 +28,7 @@
 </form>
 
 <h2>Connexion</h2>
-<form action="?/connexion" method="POST">
+<form action="?/connexion" method="POST" use:enhance>
 	<label for="nomCnx">
 		Nom
 	</label>
