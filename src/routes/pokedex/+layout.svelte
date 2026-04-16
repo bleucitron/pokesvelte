@@ -7,26 +7,26 @@
 </script>
 
 <ul>
-	{#each types as unType(unType)}
+	{#each types as unType (unType)}
 		{@const isCurrent = page.params.type === unType}
-		{@const lienArgs = isCurrent ? ["/pokedex"]: ['/pokedex/[type=pokemonType]', {
-				type: unType
-			}]
-		}
-		<a
-			class={{current: !page?.params.type || isCurrent}}
-			href={resolve(...lienArgs)}>{unType}</a
-		>
+		{#if isCurrent}
+			<a class={{ current: isCurrent }} href={resolve('/pokedex')}>{unType}</a>
+		{:else}
+			<a
+				class={{ current: !page?.params.type }}
+				href={resolve('/pokedex/[type=pokemonType]', { type: unType })}>{unType}</a
+			>
+		{/if}
 	{/each}
 </ul>
 <Pokedex {pokemons} {pokedex} />
 
-
 <style>
 	a {
-			padding: 10px;
+		padding: 10px;
 	}
 	a.current {
-		color:black;
+		color: black;
 	}
 </style>
+
