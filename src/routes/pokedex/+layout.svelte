@@ -8,13 +8,13 @@
 
 <ul>
 	{#each types as unType(unType)}
-		{@const isCurrent = !page?.params.type || page.params.type === unType}
+		{@const isCurrent = page.params.type === unType}
 		{@const lienArgs = isCurrent ? ["/pokedex"]: ['/pokedex/[type=pokemonType]', {
 				type: unType
 			}]
 		}
 		<a
-			class={{current: isCurrent}}
+			class={{current: !page?.params.type || isCurrent}}
 			href={resolve(...lienArgs)}>{unType}</a
 		>
 	{/each}
