@@ -6,7 +6,7 @@ export function load() {
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	inscription: async ({ request }) => {
 		const data = await request.formData();
 		const nom = data.get('nom')?.toString();
 		const mdp = data.get('password')?.toString();
@@ -37,5 +37,26 @@ export const actions = {
 		await db.trainer.register(nom,mdp);
 
 		return { success: true };
+	},
+	connexion: async ({ request }) => {
+		const data = await request.formData();
+		const nomCnx = data.get('nom')?.toString();
+		const mdpCnx = data.get('password')?.toString();
+
+		if (!nomCnx) {
+			return fail(400, { nomCnx, champ: 'nomCnx', message: 'Le nom est manquant.' });
+		}
+		if (!mdpCnx) {
+			return fail(400, { nomCnx, champ: 'passwordCnx', message: 'Le mot de passe est manquant.' });
+		}
+
+
+		const utilisateurValide = await db.trainer.checkPassword(nomCnx,mdpCnx);
+		if (!utilisateurValide) {
+			return fail(400, { nomCnx, champ: 'nomCnx', message: 'La connexion a échoué' });
+		}
+		const utilisateurExistant = await db.trainer.get(nomCnx);
+
+		return { success: true, user: utilisateurExistant };
 	}
 };
