@@ -15,7 +15,7 @@
 		{@const src = pokemon.sprites.front_default}
 		{@const found = pokedex.includes(pokemon.id)}
 		{@const pokemonRecent = recent.found.includes(pokemon.id)}
-		<li class={{found}}>
+		<li class={{found}} onmouseenter={() => {recent.found = recent.found.filter((pkmn) => pkmn !== pokemon.id)}}>
 			<a
 				href={resolve('/pokedex/[id=id]', {
 					id: pokemon.id.toString()

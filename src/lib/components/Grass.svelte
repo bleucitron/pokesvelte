@@ -12,7 +12,8 @@
 			setInterval(() => {
 				wilds.push({id: getRandomNb(1, 151), appeared: Date.now()});
 				console.log('rencontre');
-			}, 3000) ;
+
+			}, getRandomNb(500,3000)) ;
 
 		return () => clearInterval(interval);
 	});
@@ -24,7 +25,7 @@
 
 </script>
 
-{#each wilds as wild }
+{#each wilds as wild (wild.appeared)}
 
 		{@const pokemon = pokemons[wild.id - 1]}
 		{#if pokemon}

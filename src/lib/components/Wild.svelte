@@ -30,7 +30,7 @@ $inspect(innerHeight,innerWidth)
 
 			const time = setTimeout(() => {
 				escape();
-			}, 2000)
+			}, getRandomNb(200,4000))
 			return () => clearTimeout(time);
 		}
 	})
