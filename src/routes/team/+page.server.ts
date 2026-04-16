@@ -25,9 +25,16 @@ export const actions = {
 			return fail(400, {  message: 'Le uuid est manquant.' });
 		}
 
-		const renameResult = await db.team.renameMember(uuid, nom);
+		await db.team.renameMember(uuid, nom);
+	},
+	titulaire: async ({request})=> {
+		const data = await request.formData();
+		const uuid = data.get('uuid')?.toString();
 
+		if (!uuid) {
+			return fail(400, { message: 'Le uuid est manquant.' });
+		}
 
-
+		await db.team.toggleMember(uuid);
 	}
 };
